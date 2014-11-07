@@ -1,0 +1,43 @@
+<!--  -->
+<?xml version="1.0"?>
+<uberwar>
+  <wars>
+    <war>org.n52.metadata:smarteditor-webapp</war>
+  </wars>
+  <merges>
+
+    <merge>
+      <type>web.xml</type>
+      <parameters>
+        <default>
+          <tag name="display-name">
+            <strategy name="Overwrite"/>
+          </tag>
+          <tag name="welcome-file-list">
+            <strategy name="NodeMerge">
+              <welcome-file-list>
+                <welcome-file>$left:welcome-file</welcome-file>
+                <welcome-file>$right:welcome-file</welcome-file>
+              </welcome-file-list>
+            </strategy>
+          </tag>
+          <tag name="context-param">
+            <strategy name="ChooseByName">
+              <default>
+                <strategy name="Preserve"/>
+              </default>
+              <choice name="contextConfigLocation">
+                <strategy name="NodeMerge">
+                  <context-param>
+                    <param-name>$left:param-name</param-name>
+                    <param-value>$left:param-value,$right:param-value</param-value>
+                  </context-param>
+                </strategy>
+              </choice>
+            </strategy>
+          </tag>
+        </default>
+      </parameters>
+    </merge>
+  </merges>
+</uberwar>

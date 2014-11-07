@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+    See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    con terra GmbH licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+extended by Jana
+-->
+
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="editor.start" template="/WEB-INF/jsp/start/start.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+        <put-attribute name="new" value="/WEB-INF/jsp/start/new.jsp"/>
+        <put-attribute name="draft" value="/WEB-INF/jsp/start/draft.jsp"/>
+        <put-attribute name="template" value="/WEB-INF/jsp/start/template.jsp"/>
+        <put-attribute name="local" value="/WEB-INF/jsp/start/file.jsp"/>
+        <put-attribute name="service" value="/WEB-INF/jsp/start/service.jsp"/>
+    </definition>
+
+    <definition name="editor.publish" template="/WEB-INF/jsp/selectStates.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+    <definition name="editor.finished" template="/WEB-INF/jsp/finished.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+    <definition name="editor.exit" template="/WEB-INF/jsp/exit.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+    <!-- main tiles of the editor -->
+    <definition name="editor.main" template="/WEB-INF/jsp/main.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp"/>
+        <put-attribute name="main_body" value="editor.body"/>
+    </definition>
+
+    <!-- body tiles of the editor -->
+    <definition name="editor.body" template="/WEB-INF/jsp/body.jsp"
+                preparer="de.conterra.smarteditor.tiles.BodyViewPreparer">
+        <put-attribute name="body" value="editor.body.dataset"/>
+        <put-attribute name="alternateTitle" value="editor.body.alternateTitle" cascade="true"/>
+        <put-attribute name="abstract" value="/WEB-INF/jsp/elements/resourceAbstract.jsp" cascade="true"/>
+        <put-attribute name="browseGraphics" value="editor.body.graphics" cascade="true"/>
+        <put-attribute name="referenceSystem" value="editor.body.referenceSystem" cascade="true"/>
+        <put-attribute name="geodataLink" value="/WEB-INF/jsp/elements/geodataLink.jsp" cascade="true"/>
+        <put-attribute name="geographicExtent" value="editor.body.extent.geographic" cascade="true"/>
+        <put-attribute name="geographicIdentifier" value="editor.body.geographicIdentifier" cascade="true"/>
+        <put-attribute name="temporalExtent" value="editor.body.extent.temporal" cascade="true"/>
+        <put-attribute name="verticalExtent" value="editor.body.extent.vertical" cascade="true"/>
+        <put-attribute name="spatialRepresentationType" value="editor.body.spatialrepresentationtype" cascade="true"/>
+        <put-attribute name="spatialResolution" value="editor.body.spatialResolution" cascade="true"/>
+        <put-attribute name="resourceLanguage" value="editor.body.resource.language" cascade="true"/>
+        <put-attribute name="resourceMaintenance" value="editor.body.resource.maintenance" cascade="true"/>
+        <put-attribute name="resourceIdentifier" value="editor.body.resourceIdentifier" cascade="true"/>
+        <put-attribute name="resourceCharset" value="editor.body.resource.characterset" cascade="true"/>
+        <put-attribute name="resourceType" value="/WEB-INF/jsp/elements/resourceType.jsp" cascade="true"/>
+        <put-attribute name="resourceDate" value="editor.body.resource.date" cascade="true"/>
+        <put-attribute name="resourceParty" value="editor.body.resourceParty" cascade="true"/>
+        <put-attribute name="serviceType" value="/WEB-INF/jsp/elements/serviceType.jsp" cascade="true"/>
+        <put-attribute name="serviceTypeVersion" value="editor.body.serviceTypeVersion" cascade="true"/>
+        <put-attribute name="hierarchyLevelName" value="editor.body.hierarchyLevelName" cascade="true"/>
+        <put-attribute name="tree" value="editor.body.tree" cascade="true"/>
+        <put-attribute name="descriptiveKeywordsService" value="editor.body.keywords.service" cascade="true"/>
+        <put-attribute name="descriptiveKeywords" value="editor.body.keywords" cascade="true"/>
+        <put-attribute name="topicCategory" value="/WEB-INF/jsp/elements/topicCategory.jsp" cascade="true"/>
+        <put-attribute name="couplingType" value="/WEB-INF/jsp/elements/couplingType.jsp" cascade="true"/>
+        <put-attribute name="containsOperation" value="editor.body.containsOperation" cascade="true"/>
+        <put-attribute name="coupledResource" value="editor.body.coupledResource" cascade="true"/>
+        <put-attribute name="transferOptions" value="editor.body.transferOptions" cascade="true"/>
+        <put-attribute name="title" value="/WEB-INF/jsp/elements/resourceTitle.jsp" cascade="true"/>
+        <put-attribute name="useLimitations" value="editor.body.useLimitations" cascade="true"/>
+        <put-attribute name="otherConstraints" value="editor.body.otherConstraints" cascade="true"/>
+        <put-attribute name="accessConstraints" value="editor.body.accessConstraints" cascade="true"/>
+        <put-attribute name="useConstraints" value="editor.body.useConstraints" cascade="true"/>
+        <put-attribute name="classification" value="editor.body.classification" cascade="true"/>
+        <put-attribute name="distributorFormat" value="editor.body.distributorFormat" cascade="true"/>
+        <put-attribute name="distributorParty" value="editor.body.distributorParty" cascade="true"/>
+        <put-attribute name="lineage" value="/WEB-INF/jsp/elements/lineage.jsp" cascade="true"/>
+        <put-attribute name="conformity" value="editor.body.conformity" cascade="true"/>
+        <put-attribute name="dateStamp" value="/WEB-INF/jsp/elements/dateStamp.jsp" cascade="true"/>
+        <put-attribute name="metadataParty" value="editor.body.metadataParty" cascade="true"/>
+        <put-attribute name="fileIdentifier" value="/WEB-INF/jsp/elements/fileIdentifier.jsp" cascade="true"/>
+        <put-attribute name="parentIdentifier" value="/WEB-INF/jsp/elements/parentIdentifier.jsp" cascade="true"/>
+        <put-attribute name="metadataCharacterSet" value="/WEB-INF/jsp/elements/metadataCharacterSet.jsp"
+                       cascade="true"/>
+        <put-attribute name="metadataStandard" value="/WEB-INF/jsp/elements/metadataStandard.jsp" cascade="true"/>
+        <put-attribute name="metadataLanguage" value="/WEB-INF/jsp/elements/metadataLanguage.jsp" cascade="true"/>
+    </definition>
+    <definition name="editor.locked" template="/WEB-INF/jsp/locked.jsp">
+        <put-attribute name="editor.header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="editor.footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+    <definition name="editor.body.series" template="/WEB-INF/jsp/body_series.jsp"/>
+    <definition name="editor.body.service" template="/WEB-INF/jsp/body_service.jsp"/>
+    <definition name="editor.body.dataset" template="/WEB-INF/jsp/body_dataset.jsp"/>
+    <definition name="editor.body.sensor" template="/WEB-INF/jsp/body_sensor.jsp"/>
+</tiles-definitions>
