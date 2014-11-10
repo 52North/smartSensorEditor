@@ -67,7 +67,8 @@
 						</goals>
 						<configuration>
 							<files>
-								<!-- <file>${build.properties.project}</file> <file>${build.properties.local}</file> -->
+								<file>${build.properties.project}</file>
+								<file>${build.properties.local}</file>
 							</files>
 						</configuration>
 					</execution>
@@ -117,7 +118,7 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
-			</plugin> 
+			</plugin>
 		</plugins>
 	</build>
 
