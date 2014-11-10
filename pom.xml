@@ -66,6 +66,7 @@
 							<goal>read-project-properties</goal>
 						</goals>
 						<configuration>
+						<quiet>true</quiet>
 							<files>
 								<file>${build.properties.project}</file>
 								<file>${build.properties.local}</file>
