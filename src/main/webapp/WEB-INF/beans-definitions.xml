@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See the NOTICE file distributed with this work for additional information 
+	regarding copyright ownership. con terra GmbH licenses this file to You under 
+	the Apache License, Version 2.0 (the "License"); you may not use this file 
+	except in compliance with the License. You may obtain a copy of the License 
+	at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable 
+	law or agreed to in writing, software distributed under the License is distributed 
+	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+	express or implied. See the License for the specific language governing permissions 
+	and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<bean id="fileIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/FileIdentifier_iso.xslt" />
+		<property name="transformToBean" value="/xslt/FileIdentifier_bean.xslt" />
+	</bean>
+
+	<lang:groovy id="metadataCharset" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/MetadataCharset_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/MetadataCharset_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="geodataLink" script-source="classpath:groovy/GeodataLinkBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/GeodataLink_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/GeodataLink_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="metadataLanguage" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/MetadataLanguage_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/MetadataLanguage_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="metadataStandard"
+		script-source="classpath:groovy/MetadataStandardBean.groovy" scope="session">
+		<lang:property name="transformToISO" value="/xslt/MetadataStandard_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/MetadataStandard_bean.xslt" />
+	</lang:groovy>
+
+	<bean id="dateStamp" class="de.conterra.smarteditor.beans.DateBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/DateStamp_iso.xslt" />
+		<property name="transformToBean" value="/xslt/DateStamp_bean.xslt" />
+	</bean>
+
+	<lang:groovy id="resourceAbstract"
+		script-source="classpath:groovy/ResourceAbstractBean.groovy" scope="session">
+		<lang:property name="transformToISO" value="/xslt/ResourceAbstract_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/ResourceAbstract_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="resourceTitle" script-source="classpath:groovy/ResourceTitleBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/ResourceTitle_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/ResourceTitle_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="parentIdentifier"
+		script-source="classpath:groovy/ParentIdentifierBean.groovy" scope="session">
+		<lang:property name="transformToISO" value="/xslt/ParentIdentifier_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/ParentIdentifier_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="topicCategory" script-source="classpath:groovy/TopicCategoryBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/TopicCategory_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/TopicCategory_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="serviceType" script-source="classpath:groovy/ServiceTypeBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/ServiceType_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/ServiceType_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="serviceTypeVersion"
+		script-source="classpath:groovy/ServiceTypeVersionBean.groovy" scope="session" />
+	<bean id="multiServiceTypeVersion" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ServiceTypeVersion_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ServiceTypeVersion_bean.xslt" />
+		<property name="bean" ref="serviceTypeVersion" />
+	</bean>
+
+	<lang:groovy id="lineageStatement" script-source="classpath:groovy/LineageBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/Lineage_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/Lineage_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="couplingType" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/CouplingType_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/CouplingType_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="hierarchyLevel" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session" />
+	<bean id="multiHierarchyLevel" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/HierarchyLevel_iso.xslt" />
+		<property name="transformToBean" value="/xslt/HierarchyLevel_bean.xslt" />
+		<property name="bean" ref="hierarchyLevel" />
+	</bean>
+
+	<bean id="hierarchyLevelName" class="de.conterra.smarteditor.beans.HierarchyLevelNameBean"
+		scope="session" />
+
+	<bean id="multiHierarchyLevelName" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/HierarchyLevelName_iso.xslt" />
+		<property name="transformToBean" value="/xslt/HierarchyLevelName_bean.xslt" />
+		<property name="bean" ref="hierarchyLevelName" />
+	</bean>
+
+	<lang:groovy id="operation"
+		script-source="classpath:groovy/ContainsOperationsBean.groovy" scope="session" />
+	<bean id="multiOperations" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ContainsOperations_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ContainsOperations_bean.xslt" />
+		<property name="bean" ref="operation" />
+	</bean>
+
+	<lang:groovy id="resourceIdentifier" script-source="classpath:groovy/IdentifierBean.groovy"
+		scope="session" />
+	<bean id="multiResIdentifier" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceIdentifier_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceIdentifier_bean.xslt" />
+		<property name="bean" ref="resourceIdentifier" />
+	</bean>
+
+	<lang:groovy id="geographicIdentifier" script-source="classpath:groovy/IdentifierBean.groovy"
+		scope="session" />
+	<bean id="multiGeographicIdentifier" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/GeographicIdentifier_iso.xslt" />
+		<property name="transformToBean" value="/xslt/GeographicIdentifier_bean.xslt" />
+		<property name="bean" ref="geographicIdentifier" />
+	</bean>
+
+	<lang:groovy id="coupledResource"
+		script-source="classpath:groovy/CoupledResourceBean.groovy" scope="session" />
+	<bean id="multiCoupledResource" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/CoupledResource_iso.xslt" />
+		<property name="transformToBean" value="/xslt/CoupledResource_bean.xslt" />
+		<property name="bean" ref="coupledResource" />
+	</bean>
+
+	<lang:groovy id="geographicExtent"
+		script-source="classpath:groovy/GeographicExtentBean.groovy" scope="session" />
+	<bean id="multiBBox" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/GeographicExtent_iso.xslt" />
+		<property name="transformToBean" value="/xslt/GeographicExtent_bean.xslt" />
+		<property name="bean" ref="geographicExtent" />
+	</bean>
+
+	<lang:groovy id="distributorParty"
+		script-source="classpath:groovy/ResponsiblePartyBean.groovy" scope="session" />
+	<bean id="multiDistributorParty" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/DistributorResponsibleParty_iso.xslt" />
+		<property name="transformToBean" value="/xslt/DistributorResponsibleParty_bean.xslt" />
+		<property name="bean" ref="distributorParty" />
+	</bean>
+
+	<lang:groovy id="resourceParty"
+		script-source="classpath:groovy/ResponsiblePartyBean.groovy" scope="session" />
+	<bean id="multiResourceParty" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceResponsibleParty_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceResponsibleParty_bean.xslt" />
+		<property name="bean" ref="resourceParty" />
+	</bean>
+
+	<lang:groovy id="metadataParty"
+		script-source="classpath:groovy/ResponsiblePartyBean.groovy" scope="session" />
+	<bean id="multiMetadataParty" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/MetadataResponsibleParty_iso.xslt" />
+		<property name="transformToBean" value="/xslt/MetadataResponsibleParty_bean.xslt" />
+		<property name="bean" ref="metadataParty" />
+	</bean>
+
+	<lang:groovy id="browseGraphics"
+		script-source="classpath:groovy/BrowseGraphicsBean.groovy" scope="session" />
+	<bean id="multiBrowseGraphics" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/BrowseGraphics_iso.xslt" />
+		<property name="transformToBean" value="/xslt/BrowseGraphics_bean.xslt" />
+		<property name="bean" ref="browseGraphics" />
+	</bean>
+
+	<lang:groovy id="resourceCharset" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session" />
+	<bean id="multiResourceCharset" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceCharset_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceCharset_bean.xslt" />
+		<property name="bean" ref="resourceCharset" />
+	</bean>
+
+	<lang:groovy id="resourceLanguage" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session" />
+	<bean id="multiResourceLanguage" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceLanguage_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceLanguage_bean.xslt" />
+		<property name="bean" ref="resourceLanguage" />
+	</bean>
+
+	<lang:groovy id="spatialRepresentationType" script-source="classpath:groovy/CodeListBean.groovy"
+		scope="session" />
+	<bean id="multiSpatialRepresentationType" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/SpatialRepresentationType_iso.xslt" />
+		<property name="transformToBean" value="/xslt/SpatialRepresentationType_bean.xslt" />
+		<property name="bean" ref="spatialRepresentationType" />
+	</bean>
+
+	<bean id="resourceDate" class="de.conterra.smarteditor.beans.DateBean"
+		scope="session" />
+	<bean id="multiResourceDate" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceDate_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceDate_bean.xslt" />
+		<property name="bean" ref="resourceDate" />
+	</bean>
+
+	<lang:groovy id="referenceSystem" script-source="classpath:groovy/IdentifierBean.groovy"
+		scope="session" />
+	<bean id="multiReferenceSystem" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ReferenceSystem_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ReferenceSystem_bean.xslt" />
+		<property name="bean" ref="referenceSystem" />
+	</bean>
+
+	<lang:groovy id="transferOptions"
+		script-source="classpath:groovy/OnlineResourceBean.groovy" scope="session" />
+	<bean id="multiTransferOptions" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/TransferOptions_iso.xslt" />
+		<property name="transformToBean" value="/xslt/TransferOptions_bean.xslt" />
+		<property name="bean" ref="transferOptions" />
+	</bean>
+
+	<lang:groovy id="legalConstraints"
+		script-source="classpath:groovy/LegalConstraintsBean.groovy" scope="session">
+		<lang:property name="transformToISO" value="/xslt/LegalConstraints_iso.xslt" />
+		<lang:property name="transformToBean" value="/xslt/LegalConstraints_bean.xslt" />
+	</lang:groovy>
+
+	<lang:groovy id="securityConstraints"
+		script-source="classpath:groovy/SecurityConstraintsBean.groovy" scope="session" />
+	<bean id="multiClassification" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/Classification_iso.xslt" />
+		<property name="transformToBean" value="/xslt/Classification_bean.xslt" />
+		<property name="bean" ref="securityConstraints" />
+	</bean>
+
+	<lang:groovy id="keywords"
+		script-source="classpath:groovy/DescriptiveKeywordsBean.groovy" scope="session" />
+	<bean id="multiKeywords" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/DescriptiveKeywords_iso.xslt" />
+		<property name="transformToBean" value="/xslt/DescriptiveKeywords_bean.xslt" />
+		<property name="bean" ref="keywords" />
+	</bean>
+
+	<lang:groovy id="temporalExtent"
+		script-source="classpath:groovy/TemporalExtentBean.groovy" scope="session" />
+	<bean id="multiTemporalExtent" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/TemporalExtent_iso.xslt" />
+		<property name="transformToBean" value="/xslt/TemporalExtent_bean.xslt" />
+		<property name="bean" ref="temporalExtent" />
+	</bean>
+
+	<lang:groovy id="distributorFormat" script-source="classpath:groovy/FormatBean.groovy"
+		scope="session" />
+	<bean id="multiDistributorFormat" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/DistributorFormat_iso.xslt" />
+		<property name="transformToBean" value="/xslt/DistributorFormat_bean.xslt" />
+		<property name="bean" ref="distributorFormat" />
+	</bean>
+
+	<lang:groovy id="resourceFormat" script-source="classpath:groovy/FormatBean.groovy"
+		scope="session" />
+	<bean id="multiResourceFormat" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceFormat_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceFormat_bean.xslt" />
+		<property name="bean" ref="resourceFormat" />
+	</bean>
+
+	<lang:groovy id="spatialResolution"
+		script-source="classpath:groovy/SpatialResolutionBean.groovy" scope="session" />
+	<bean id="multiSpatialResolution" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/SpatialResolution_iso.xslt" />
+		<property name="transformToBean" value="/xslt/SpatialResolution_bean.xslt" />
+		<property name="bean" ref="spatialResolution" />
+	</bean>
+
+	<lang:groovy id="conformity" script-source="classpath:groovy/ConformityBean.groovy"
+		scope="session" />
+	<bean id="multiConformity" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/Conformity_iso.xslt" />
+		<property name="transformToBean" value="/xslt/Conformity_bean.xslt" />
+		<property name="bean" ref="conformity" />
+	</bean>
+
+	<lang:groovy id="resourceMaintenance"
+		script-source="classpath:groovy/ResourceMaintenanceBean.groovy" scope="session" />
+	<bean id="multiResourceMaintenance" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/ResourceMaintenance_iso.xslt" />
+		<property name="transformToBean" value="/xslt/ResourceMaintenance_bean.xslt" />
+		<property name="bean" ref="resourceMaintenance" />
+	</bean>
+
+	<lang:groovy id="alternateTitle"
+		script-source="classpath:groovy/AlternateTitleBean.groovy" scope="session" />
+	<bean id="multiAlternateTitle" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/AlternateTitle_iso.xslt" />
+		<property name="transformToBean" value="/xslt/AlternateTitle_bean.xslt" />
+		<property name="bean" ref="alternateTitle" />
+	</bean>
+
+	<lang:groovy id="name" script-source="classpath:groovy/NameBean.groovy"
+		scope="session" />
+	<bean id="multiName" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/Name_iso.xslt" />
+		<property name="transformToBean" value="/xslt/Name_bean.xslt" />
+		<property name="bean" ref="name" />
+	</bean>
+
+	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
+		scope="session">
+		<aop:scoped-proxy />
+		<property name="validatorId" value="isoValidator" />
+		<property name="stickyErrorMessages" value="false" />
+		<!-- default validator id -->
+		<property name="storage">
+			<map>
+				<entry key="resourceTitle" value-ref="resourceTitle" />
+				<entry key="resourceAbstract" value-ref="resourceAbstract" />
+				<entry key="resourceIdentifier" value-ref="multiResIdentifier" />
+				<entry key="resourceParty" value-ref="multiResourceParty" />
+				<entry key="resourceCharset" value-ref="multiResourceCharset" />
+				<entry key="resourceLanguage" value-ref="multiResourceLanguage" />
+				<entry key="resourceDate" value-ref="multiResourceDate" />
+				<entry key="dateStamp" value-ref="dateStamp" />
+				<entry key="metadataParty" value-ref="multiMetadataParty" />
+				<entry key="metadataCharset" value-ref="metadataCharset" />
+				<entry key="metadataLanguage" value-ref="metadataLanguage" />
+				<entry key="metadataStandard" value-ref="metadataStandard" />
+				<entry key="topicCategory" value-ref="topicCategory" />
+				<entry key="geographicExtent" value-ref="multiBBox" />
+				<entry key="browseGraphics" value-ref="multiBrowseGraphics" />
+				<entry key="spatialRepresentationType" value-ref="multiSpatialRepresentationType" />
+				<entry key="referenceSystem" value-ref="multiReferenceSystem" />
+				<entry key="geographicIdentifier" value-ref="multiGeographicIdentifier" />
+				<entry key="transferOptions" value-ref="multiTransferOptions" />
+				<entry key="serviceType" value-ref="serviceType" />
+				<entry key="serviceTypeVersion" value-ref="multiServiceTypeVersion" />
+				<entry key="couplingType" value-ref="couplingType" />
+				<entry key="legalConstraints" value-ref="legalConstraints" />
+				<entry key="classification" value-ref="multiClassification" />
+				<entry key="keywords" value-ref="multiKeywords" />
+				<entry key="temporalExtent" value-ref="multiTemporalExtent" />
+				<entry key="distributorFormat" value-ref="multiDistributorFormat" />
+				<entry key="distributorParty" value-ref="multiDistributorParty" />
+				<entry key="geodataLink" value-ref="geodataLink" />
+				<entry key="lineageStatement" value-ref="lineageStatement" />
+				<entry key="spatialResolution" value-ref="multiSpatialResolution" />
+				<entry key="conformity" value-ref="multiConformity" />
+				<entry key="fileIdentifier" value-ref="fileIdentifier" />
+				<entry key="parentIdentifier" value-ref="parentIdentifier" />
+				<entry key="hierarchyLevel" value-ref="multiHierarchyLevel" />
+				<entry key="hierarchyLevelNames" value-ref="multiHierarchyLevelName" />
+				<entry key="coupledResource" value-ref="multiCoupledResource" />
+				<entry key="containsOperation" value-ref="multiOperations" />
+				<entry key="resourceMaintenance" value-ref="multiResourceMaintenance" />
+				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
+				<entry key="name" value-ref="multiName" />
+			</map>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+    See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    con terra GmbH licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <!-- 1:n tiles of the editor -->
+    <definition name="editor.body.resourceIdentifier" template="/WEB-INF/jsp/elements/multiResourceIdentifier.jsp">
+        <put-attribute name="innerResourceIdentifier" value="/WEB-INF/jsp/elements/identifier.jsp"/>
+    </definition>
+
+    <definition name="editor.body.geographicIdentifier"
+                template="/WEB-INF/jsp/elements/multiGeographicIdentifier.jsp">
+        <put-attribute name="innerGeographicIdentifier" value="/WEB-INF/jsp/elements/identifier.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resourceParty" template="/WEB-INF/jsp/elements/multiResourceParty.jsp">
+        <put-attribute name="innerResourceParty" value="/WEB-INF/jsp/elements/resourceParty.jsp"/>
+    </definition>
+
+    <definition name="editor.body.metadataParty" template="/WEB-INF/jsp/elements/multiMetadataParty.jsp">
+        <put-attribute name="innerMetadataParty" value="/WEB-INF/jsp/elements/metadataParty.jsp"/>
+    </definition>
+
+    <definition name="editor.body.distributorParty" template="/WEB-INF/jsp/elements/multiDistributorParty.jsp">
+        <put-attribute name="innerDistributorParty" value="/WEB-INF/jsp/elements/distributorParty.jsp"/>
+    </definition>
+
+    <definition name="editor.body.extent.geographic" template="/WEB-INF/jsp/elements/multiBox.jsp">
+        <put-attribute name="innerGeographicExtent" value="/WEB-INF/jsp/elements/box.jsp"/>
+    </definition>
+
+    <definition name="editor.body.extent.temporal" template="/WEB-INF/jsp/elements/multiTemporalExtent.jsp">
+        <put-attribute name="innerTemporalExtent" value="/WEB-INF/jsp/elements/temporalExtent.jsp"/>
+    </definition>
+
+    <definition name="editor.body.extent.vertical" template="/WEB-INF/jsp/elements/multiVerticalExtent.jsp">
+        <put-attribute name="innerVerticalExtent" value="/WEB-INF/jsp/elements/verticalExtent.jsp"/>
+    </definition>
+
+    <definition name="editor.body.graphics" template="/WEB-INF/jsp/elements/multiBrowseGraphics.jsp">
+        <put-attribute name="innerBrowseGraphics" value="/WEB-INF/jsp/elements/browseGraphic.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resource.language" template="/WEB-INF/jsp/elements/multiResourceLanguage.jsp">
+        <put-attribute name="innerResourceLanguage" value="/WEB-INF/jsp/elements/codelist.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resource.characterset"
+                template="/WEB-INF/jsp/elements/multiResourceCharacterSet.jsp">
+        <put-attribute name="innerResourceCharset" value="/WEB-INF/jsp/elements/codelist.jsp"/>
+    </definition>
+
+    <definition name="editor.body.spatialrepresentationtype"
+                template="/WEB-INF/jsp/elements/multiSpatialRepresentationType.jsp">
+        <put-attribute name="innerSpatialRepresentationType" value="/WEB-INF/jsp/elements/codelist.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resource.date"
+                template="/WEB-INF/jsp/elements/multiResourceDate.jsp">
+        <put-attribute name="innerDate" value="/WEB-INF/jsp/elements/resourceDate.jsp"/>
+    </definition>
+
+    <definition name="editor.body.referenceSystem"
+                template="/WEB-INF/jsp/elements/multiReferenceSystem.jsp">
+        <put-attribute name="innerReferenceSystem" value="/WEB-INF/jsp/elements/referenceSystem.jsp"/>
+    </definition>
+
+    <definition name="editor.body.transferOptions"
+                template="/WEB-INF/jsp/elements/multiTransferOptions.jsp">
+        <put-attribute name="innerTransferOptions" value="/WEB-INF/jsp/elements/transferOptions.jsp"/>
+    </definition>
+
+    <definition name="editor.body.distributorFormat"
+                template="/WEB-INF/jsp/elements/multiDistributorFormat.jsp">
+        <put-attribute name="innerDistributorFormat" value="/WEB-INF/jsp/elements/format.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resourceFormat"
+                template="/WEB-INF/jsp/elements/multiResourceFormat.jsp">
+        <put-attribute name="innerResourceFormat" value="/WEB-INF/jsp/elements/format.jsp"/>
+    </definition>
+
+    <definition name="editor.body.keywords"
+                template="/WEB-INF/jsp/elements/multiDescriptiveKeywords.jsp">
+        <put-attribute name="innerKeywords" value="/WEB-INF/jsp/elements/keywords.jsp"/>
+    </definition>
+
+    <definition name="editor.body.keywords.service"
+                template="/WEB-INF/jsp/elements/multiDescriptiveKeywordsService.jsp">
+        <put-attribute name="innerKeywords" value="/WEB-INF/jsp/elements/keywords.jsp"/>
+    </definition>
+
+    <definition name="editor.body.tree" template="/WEB-INF/jsp/elements/hierarchyLevelNameTree.jsp"/>
+    <definition name="editor.body.hierarchyLevelName"
+                template="/WEB-INF/jsp/elements/multiHierarchyLevelNames.jsp">
+        <put-attribute name="innerHierarchyLevelName" value="/WEB-INF/jsp/elements/hierarchyLevelName.jsp"/>
+        <put-attribute name="tree" value="editor.body.tree"/>
+    </definition>
+
+    <definition name="editor.body.accessConstraints"
+                template="/WEB-INF/jsp/elements/multiAccessConstraints.jsp">
+        <put-attribute name="innerAccessConstraint" value="/WEB-INF/jsp/elements/accessConstraint.jsp"/>
+    </definition>
+
+    <definition name="editor.body.classification"
+                template="/WEB-INF/jsp/elements/multiClassification.jsp">
+        <put-attribute name="innerClassification" value="/WEB-INF/jsp/elements/classification.jsp"/>
+    </definition>
+
+    <definition name="editor.body.useLimitations"
+                template="/WEB-INF/jsp/elements/multiUseLimitations.jsp">
+        <put-attribute name="innerUseLimitation" value="/WEB-INF/jsp/elements/useLimitation.jsp"/>
+    </definition>
+
+    <definition name="editor.body.otherConstraints"
+                template="/WEB-INF/jsp/elements/multiOtherConstraints.jsp">
+        <put-attribute name="innerOtherConstraint" value="/WEB-INF/jsp/elements/otherConstraint.jsp"/>
+    </definition>
+
+    <definition name="editor.body.useConstraints"
+                template="/WEB-INF/jsp/elements/multiUseConstraints.jsp">
+        <put-attribute name="innerUseConstraint" value="/WEB-INF/jsp/elements/useConstraint.jsp"/>
+    </definition>
+
+    <definition name="editor.body.conformity"
+                template="/WEB-INF/jsp/elements/multiConformity.jsp">
+        <put-attribute name="innerConformity" value="/WEB-INF/jsp/elements/conformity.jsp"/>
+    </definition>
+
+    <definition name="editor.body.spatialResolution"
+                template="/WEB-INF/jsp/elements/multiSpatialResolution.jsp">
+        <put-attribute name="innerSpatialResolution" value="/WEB-INF/jsp/elements/spatialResolution.jsp"/>
+    </definition>
+
+    <definition name="editor.body.coupledResource"
+                template="/WEB-INF/jsp/elements/multiCoupledResource.jsp">
+        <put-attribute name="innerCoupledResource" value="/WEB-INF/jsp/elements/coupledResource.jsp"/>
+    </definition>
+
+    <definition name="editor.body.containsOperation"
+                template="/WEB-INF/jsp/elements/multiContainsOperation.jsp">
+        <put-attribute name="innerContainsOperation" value="/WEB-INF/jsp/elements/containsOperation.jsp"/>
+    </definition>
+
+    <definition name="editor.body.serviceTypeVersion"
+                template="/WEB-INF/jsp/elements/multiServiceTypeVersion.jsp">
+        <put-attribute name="innerServiceTypeVersion" value="/WEB-INF/jsp/elements/serviceTypeVersion.jsp"/>
+    </definition>
+
+    <definition name="editor.body.resource.maintenance" template="/WEB-INF/jsp/elements/multiResourceMaintenance.jsp">
+        <put-attribute name="innerResourceMaintenance" value="/WEB-INF/jsp/elements/resourceMaintenance.jsp"/>
+    </definition>
+
+    <definition name="editor.body.alternateTitle"
+                 template="/WEB-INF/jsp/elements/multiAlternateTitle.jsp">
+         <put-attribute name="innerAlternateTitle" value="/WEB-INF/jsp/elements/alternateTitle.jsp"/>
+    </definition>
+    <definition name="editor.body.name"
+                 template="/WEB-INF/jsp/elements/multiName.jsp">
+         <put-attribute name="innerName" value="/WEB-INF/jsp/elements/name.jsp"/>
+    </definition>
+</tiles-definitions>
