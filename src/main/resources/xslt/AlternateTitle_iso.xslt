@@ -26,8 +26,10 @@
     <xsl:include href="/xslt/BaseTemplates.xslt"/>
     <!-- parameter handed over by transformer -->
     <xsl:param name="beanDoc"/>
+    
     <!-- remove existing alternateTitles -->
     <xsl:template match="gmd:identificationInfo/*/gmd:citation/*/gmd:alternateTitle"/>
+    
     <!-- go through citation and copy nodes -->
     <xsl:template match="gmd:identificationInfo/*/gmd:citation/*">
         <xsl:copy>

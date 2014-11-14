@@ -20,19 +20,17 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:sml="http://schemas.opengis.net/sensorML/1.0.1/"
-	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
-                exclude-result-prefixes="gmd gco gml sml">
+                exclude-result-prefixes="xs xsi gmd">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-<!--      <xsl:template match="/">
+     <xsl:template match="/">
         <multi_container>
-            <xsl:for-each select="//sml:SensorML/sml:member/*/gml:name">
+            <xsl:for-each select="//gml:name/*">
                 <Name>
                     <title>
-                        <xsl:value-of select="."/>
+                        <xsl:value-of select="./text()"/>
                     </title>
                 </Name>
             </xsl:for-each>
         </multi_container>
-    </xsl:template>  -->
+    </xsl:template> 
 </xsl:stylesheet>

@@ -349,7 +349,7 @@
 		scope="session" />
 	<bean id="multiName" class="de.conterra.smarteditor.beans.MultipleElementBean"
 		scope="session">
-		<property name="transformToISO" value="/xslt/Name_iso.xslt" />
+		<property name="transformToISO" value="/xslt/Name_sml.xslt" />
 		<property name="transformToBean" value="/xslt/Name_bean.xslt" />
 		<property name="bean" ref="name" />
 	</bean>

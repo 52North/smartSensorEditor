@@ -16,23 +16,25 @@
     limitations under the License.
 
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xsl:stylesheet version="2.0"
                 xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:sml="http://schemas.opengis.net/sensorML/1.0.1/"
+                xmlns:gco="http://www.isotc211.org/2005/gco"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                 xmlns:sml="http://schemas.opengis.net/sensorML/1.0.1/"
 	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
                 exclude-result-prefixes="gmd gco gml sml">
-    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-<!--      <xsl:template match="/">
-        <multi_container>
-            <xsl:for-each select="//sml:SensorML/sml:member/*/gml:name">
-                <Name>
-                    <title>
-                        <xsl:value-of select="."/>
-                    </title>
-                </Name>
+
+    <!-- parameter handed over by transformer -->
+    <xsl:param name="beanDoc"/>
+    <!-- remove existing Names -->
+    <!-- go through citation and copy nodes -->
+    <xsl:template match="/">  
+			<xsl:for-each select="$beanDoc/*/Name">
+			<gml:name>              
+                        <xsl:value-of select="title"/>
+                </gml:name>
             </xsl:for-each>
-        </multi_container>
-    </xsl:template>  -->
+
+                
+    </xsl:template>
 </xsl:stylesheet>

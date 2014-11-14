@@ -276,6 +276,10 @@
             <resourceKey>codelist.scopecode[15]</resourceKey>
             <value>application</value> 
         </element>
+         <element>
+            <resourceKey>codelist.scopecode[17]</resourceKey>
+            <value>sensor</value>
+        </element>
     </list>
     <list>
         <identifier>MD_TopicCategoryCode</identifier>
