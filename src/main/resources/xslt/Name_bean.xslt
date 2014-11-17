@@ -18,21 +18,16 @@
 -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:gmd="http://www.isotc211.org/2005/gmd"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:sml="http://schemas.opengis.net/sensorML/1.0.1/"
+            xmlns:sml="http://www.opengis.net/sensorML/1.0"
 	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
                 exclude-result-prefixes="gmd gco gml sml">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-<!--      <xsl:template match="/">
-        <multi_container>
-            <xsl:for-each select="//sml:SensorML/sml:member/*/gml:name">
+     <xsl:template match="/">
                 <Name>
                     <title>
-                        <xsl:value-of select="."/>
+                        <xsl:value-of select="/sml:SensorML/sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:value"/>
                     </title>
-                </Name>
-            </xsl:for-each>
-        </multi_container>
-    </xsl:template>  -->
+                </Name>         
+    </xsl:template> 
 </xsl:stylesheet>

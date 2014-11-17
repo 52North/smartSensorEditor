@@ -15,21 +15,24 @@
 	exclude-result-prefixes="gmd gco gml sml">
 
 	<!-- parameter handed over by transformer -->
-	<!--<xsl:param name="beanDoc" />
-	 remove existing Names -->
-	<!-- <xsl:template
-		match="//sml:SensorML/sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[name='longName']" />
-	go through citation and copy nodes
-	<xsl:template
-		match="//sml:SensorML/sml:member/*/sml:identification/sml:IdentifierList/*">
-		<xsl:if select="$beanDoc/*/Name">
+	<xsl:param name="beanDoc" />
+	<!-- remove existing Names -->
+	<!-- <xsl:template match="//sml:SensorML/sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[name='longName']" 
+		/> -->
+	<!-- go through citation and copy nodes --><!-- -->
+	<xsl:template match="/">
+
+	
 			<sml:identifier name="longName">
 				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-					<xsl:value-of select="title" />
+					<sml:value>
+						<xsl:value-of select="$beanDoc/*/Name/title" />
+					</sml:value>
+
 				</sml:Term>
 			</sml:identifier>
-		</xsl:if>
+		
+	</xsl:template>
 
 
-	</xsl:template> -->
 </xsl:stylesheet>
