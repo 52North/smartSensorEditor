@@ -1,19 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.52North.metadata</groupId>
+	<groupId>org.52North.metadata</groupId>
 	<artifactId>Sensor_SmartEditor</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sensor_SmartEditor Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<packaging>pom</packaging>
+	<modules>
+		<module>Sensor_SmartEditor-api</module>
+		<module>Sensor_SmartEditor-webapp</module>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<build.properties.project>${basedir}/src/main/webapp/META-INF/build.properties</build.properties.project>
-		<build.properties.local>${user.home}/build.properties</build.properties.local>
-	</properties>
-
+	</modules>
 	<repositories>
 		<repository>
 			<id>n52-releases</id>
@@ -27,90 +25,8 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.n52.metadata</groupId>
-			<artifactId>smarteditor-api</artifactId>
-			<version>2.1.6</version>
-			<scope>compile</scope>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.n52.metadata</groupId>
-			<artifactId>smarteditor-webapp</artifactId>
-			<version>2.1.6</version>
-			<type>war</type>
-			<scope>runtime</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
-		<finalName>Sensor_SmartEditor</finalName>
-
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-						<quiet>true</quiet>
-							<files>
-								<file>${build.properties.project}</file>
-								<file>${build.properties.local}</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webResources>
-						<resource>
-							<directory>${basedir}/src/main/webapp</directory>
-							<filtering>true</filtering>
-						</resource>
-					</webResources>
-					<overlays>
-						<overlay>
-							<id>smarteditor-webapp filtered</id>
-							<groupId>org.n52.metadata</groupId>
-							<artifactId>smarteditor-webapp</artifactId>
-							<!-- <filtered>true</filtered> <includes> <include>WEB-INF/**/*.properties</include> 
-								<include>WEB-INF/**/*.xml</include> <include>WEB-INF/*.xml</include> </includes> 
-								<excludes> <exclude>**/postgresql-*.jar</exclude> </excludes> </overlay> 
-								<overlay> <id>smarteditor-webapp unfiltered</id> <groupId>org.n52.metadata</groupId> 
-								<artifactId>smarteditor-webapp</artifactId> <filtered>false</filtered> <excludes> 
-								<exclude>WEB-INF/**/*.properties</exclude> <exclude>WEB-INF/*.xml</exclude> 
-								<exclude>WEB-INF/**/*.xml</exclude> <exclude>**/postgresql-*.jar</exclude> 
-								</excludes> -->
-						</overlay>
-					</overlays>
-					<!-- <attachClasses>true</attachClasses> <archiveClasses>true</archiveClasses> -->
-				</configuration>
-			</plugin>
-			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
-				<version>1.4.10</version> <extensions>true</extensions> <configuration> <descriptor>src/main/resources/merge.xml</descriptor> 
-				<container> <containerId>tomcat7x</containerId> </container> <configuration> 
-				<type>existing</type> <home>C:\Users\JanaKlemp\Documents\Programme\apache-tomcat-7.0.56\apache-tomcat-7.0.56</home> 
-				</configuration> </configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -122,5 +38,16 @@
 			</plugin>
 		</plugins>
 	</build>
+
+		<dependencies>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+
+
 
 </project>

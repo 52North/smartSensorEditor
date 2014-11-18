@@ -20,7 +20,7 @@
 	<xsl:template match="//sml:SensorML/sml:member/*/gml:name" />
 
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="//sml:SensorML/sml:member/System/">
+	<xsl:template match="//sml:SensorML/sml:member/sml:System/">
 		<xsl:copy>
 		
 		alles elemente aus gml > screenshot
