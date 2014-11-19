@@ -28,6 +28,7 @@
 						<excludes>
 							<!-- These classes will be overridden by the ones inside the JAR -->
 							<exclude>de/conterra/smarteditor/tiles/BodyViewPreparer.class</exclude>
+								<exclude>de/conterra/smarteditor/service/BackendManagerService.class</exclude>
 						</excludes>
 					</filter>
 				</configuration>

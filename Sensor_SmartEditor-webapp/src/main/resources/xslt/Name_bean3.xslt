@@ -22,15 +22,15 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 exclude-result-prefixes="xs xsi gmd">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-     <xsl:template match="/">
+    <xsl:template match="/">
         <multi_container>
-            <xsl:for-each select="//gml:name/*">
-                <Name>
+            <xsl:for-each select="//gmd:citation/*/gmd:alternateTitle/*">
+                <AlternateTitle>
                     <title>
                         <xsl:value-of select="./text()"/>
                     </title>
-                </Name>
+                </AlternateTitle>
             </xsl:for-each>
         </multi_container>
-    </xsl:template> 
+    </xsl:template>
 </xsl:stylesheet>

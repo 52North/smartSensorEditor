@@ -31,6 +31,7 @@
             <artifact>org.n52.metadata:smarteditor-api</artifact>
             <excludes>
               <exclude>de/conterra/smarteditor/tiles/BodyViewPreparer.class</exclude>
+              <exclude>de/conterra/smarteditor/service/BackendManagerService.class</exclude>
             </excludes>
           </filter>
         </configuration>
