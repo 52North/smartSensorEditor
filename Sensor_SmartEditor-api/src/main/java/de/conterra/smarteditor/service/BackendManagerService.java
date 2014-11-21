@@ -339,10 +339,25 @@ public class BackendManagerService {
 		if (backend != null && backend.getStorage() != null
 				&& getMergeDocument() != null) {
 			Document newDoc = getMergeDocument();
+			String resourceType = getResourceType();
 			// iterate through map of beans
 			for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
 					.entrySet()) {
-				newDoc = beanTransformer.mergeToISO(lEntry.getValue(), newDoc);
+
+				if (resourceType == "sensor") {
+					if (lEntry.getKey().equals("name")) {
+						LOG.info("Name_sml Bean loaded");
+						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
+								newDoc);
+					}
+
+				} else {
+					if (!lEntry.getKey().equals("name")) {
+					
+						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
+								newDoc);
+					}
+				}
 			}
 			return newDoc;
 		}
@@ -402,8 +417,8 @@ public class BackendManagerService {
 				lUtil.setContext(sec);
 				String bool = lUtil.evaluateAsString("boolean(//sml:System)",
 						getMergeDocument());
-				if(bool.equals("true")){
-					resourceType="sensor";
+				if (bool.equals("true")) {
+					resourceType = "sensor";
 				}
 			}
 			return resourceType;

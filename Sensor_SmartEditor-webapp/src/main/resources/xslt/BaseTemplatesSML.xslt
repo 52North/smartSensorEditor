@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     See the NOTICE file distributed with
@@ -16,19 +15,20 @@
     limitations under the License.
 
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+
+<xsl:stylesheet version="2.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:gco="http://www.isotc211.org/2005/gco"
+                xmlns:gmd="http://www.isotc211.org/2005/gmd"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:sml="http://www.opengis.net/sensorML/1.0"
-	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
-                exclude-result-prefixes=" gml sml">
+                exclude-result-prefixes="gco gmd xsi">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-     <xsl:template match="/">
-                <Name>
-                    <title>
-                        <!-- <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']/sml:Term/sml:value"/> -->
-                    Name1234
-                    </title>
-                </Name>         
-    </xsl:template> 
+    <!-- creates an insatnce of MD_Identifier -->
+   
+    <!-- copy everything else -->
+    <xsl:template match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>

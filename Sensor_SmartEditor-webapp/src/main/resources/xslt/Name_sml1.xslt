@@ -13,37 +13,33 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sml="http://www.opengis.net/sensorML/1.0"
 	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
 	exclude-result-prefixes="gmd gco gml sml">
-	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
+
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing Names -->
 	<xsl:template
-		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']" />
-
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
+		match="//sml:member" />
+<!-- <xsl:template
+		match="//sml:member" /> -->
+	 <!-- go through citation and copy nodes -->
+<!-- 	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
 
 		<xsl:copy>
-			<xsl:apply-templates select="sml:identifier[@name='uniqueID']" />
+			<xsl:apply-templates select="sml:identifier[name='uniqueID']" />
 			<sml:identifier name="longName">
 				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-					<sml:value>			
-                        <xsl:value-of select="$beanDoc/*/Name/title"/>
+					<sml:value>
+						<xsl:value-of select="$beanDoc/*/Name/title" />
 					</sml:value>
 
 				</sml:Term>
 			</sml:identifier>
-			<xsl:apply-templates select="sml:identifier[@name='shortName']" />
+			<xsl:apply-templates select="sml:identifier[name='shortName']" />
 
 		</xsl:copy>
 
 
-	</xsl:template>
-	
+	</xsl:template> -->
 
 
 </xsl:stylesheet>
-
-
-
-
