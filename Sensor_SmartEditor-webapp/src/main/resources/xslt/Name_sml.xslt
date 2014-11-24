@@ -24,7 +24,8 @@
 	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
 
 		<xsl:copy>
-			<xsl:apply-templates select="sml:identifier[@name='uniqueID']" />
+			<xsl:apply-templates select="sml:identifier" />
+			
 			<sml:identifier name="longName">
 				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
 					<sml:value>			
@@ -33,17 +34,9 @@
 
 				</sml:Term>
 			</sml:identifier>
-			<xsl:apply-templates select="sml:identifier[@name='shortName']" />
-
 		</xsl:copy>
 
 
 	</xsl:template>
-	
-
 
 </xsl:stylesheet>
-
-
-
-

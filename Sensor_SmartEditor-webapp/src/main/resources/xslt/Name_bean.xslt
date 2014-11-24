@@ -23,12 +23,15 @@
 	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
                 exclude-result-prefixes=" gml sml">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-     <xsl:template match="/">
+     <xsl:template match="/">   
+     <multi_container>
+       <xsl:for-each select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']/sml:Term/sml:value">
                 <Name>
                     <title>
-                        <!-- <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']/sml:Term/sml:value"/> -->
-                    Name1234
+                        <xsl:value-of select="./text()"/>
                     </title>
-                </Name>         
+                </Name>  
+                </xsl:for-each>
+                </multi_container>       
     </xsl:template> 
 </xsl:stylesheet>

@@ -48,6 +48,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 /**
  * Service manages any access to and modification of the backend storage
@@ -76,6 +77,10 @@ public class BackendManagerService {
 	private boolean update;
 
 	private LockManager lockManager;
+	
+	private String activeBeanNamesRegex;
+	
+	private Pattern activeBeanNamesPattern = null;
 
 	public boolean isUpdate() {
 		return update;
@@ -131,6 +136,14 @@ public class BackendManagerService {
 
 	public void setMergeDocument(Document pMergeDocument) {
 		mergeDocument = pMergeDocument;
+	}
+
+	public String getActiveBeanNamesRegex() {
+		return activeBeanNamesRegex;
+	}
+
+	public void setActiveBeanNamesRegex(String activeBeanNamesRegex) {
+		this.activeBeanNamesRegex = activeBeanNamesRegex;
 	}
 
 	/**
@@ -345,6 +358,8 @@ public class BackendManagerService {
 					.entrySet()) {
 
 				if (resourceType == "sensor") {
+//					String beanName = lEntry.getKey();
+//					if (this.activeBeanNamesRegex.matches(beanName)) {
 					if (lEntry.getKey().equals("name")) {
 						LOG.info("Name_sml Bean loaded");
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
