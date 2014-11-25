@@ -50,6 +50,7 @@ http://schemas.opengis.net/sensorML/1.0.0/sensorML.xsd"
 				<gml:TimePeriod>
 					<gml:beginPosition></gml:beginPosition>
 					<gml:endPosition></gml:endPosition>
+					<!-- or <gml:begin></gml:begin> <gml:end></gml:end> -->
 				</gml:TimePeriod>
 			</sml:validTime>
 			<sml:capabilities>
@@ -104,11 +105,28 @@ http://schemas.opengis.net/sensorML/1.0.0/sensorML.xsd"
 					</sml:interface>
 				</sml:InterfaceList>
 			</sml:interfaces>
-			<sml:inputs/>
-			<sml:outputs/>
+			<sml:inputs>
+				<!-- sml:InputList is not mandatory -->
+				<sml:InputList>
+					<sml:input name="">
+						<swe:ObservableProperty definition=""></swe:ObservableProperty>
+					</sml:input>
+				</sml:InputList>
+			</sml:inputs>
+			<sml:outputs>
+				<!-- sml:OutputList is not mandatory -->
+				<sml:OutputList>
+					<sml:output name=""> <!-- Profile defines that the child elements of each output element shall 
+							possess a definition attribute. Example: <swe:Quantity definition="urn:ogc:def:property:OGC:1.0:temperature"> 
+							<swe:uom code="Cel"/> </swe:Quantity> oder: <swe:Category definition="http://www.52north.org/test/observableProperty/1"> 
+							<swe:codeSpace xlink:href="test_unit_1"/> </swe:Category> -->
+					</sml:output>
+				</sml:OutputList>
+			</sml:outputs>
 			<sml:components>
 				<sml:ComponentList>
-					<sml:component name="" xlink:href="" />
+					<sml:component name="" xlink:href="" /><!-- or <component 
+						name="" > <component> inline description of Component </component> </component> -->
 				</sml:ComponentList>
 			</sml:components>
 		</sml:System>

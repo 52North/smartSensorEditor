@@ -28,7 +28,10 @@
 		<li><a href="#tabs-6"><fmt:message key="section.metadata" /></a></li> --%>
 	</ul>
 	<div id="tabs-1">
-	<tiles:insertAttribute name="name" />
+	
+	
+	<tiles:insertAttribute name="smlLongName" />
+	<tiles:insertAttribute name="smlKeyword" />
 	<%-- 	<br>
 		<tiles:insertAttribute name="alternateTitle" />
 		<br>	    

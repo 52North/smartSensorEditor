@@ -20,8 +20,8 @@ package groovy;
 import com.thoughtworks.xstream.annotations.XStreamAlias
 import de.conterra.smarteditor.beans.BaseBean
 
-@XStreamAlias("Name")
-class NameBean extends BaseBean {
-  String title
+@XStreamAlias("SmlKeyword")
+class SmlKeywordBean extends BaseBean {
+  String keyword
 }
 

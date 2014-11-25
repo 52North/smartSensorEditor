@@ -360,15 +360,14 @@ public class BackendManagerService {
 				if (resourceType == "sensor") {
 //					String beanName = lEntry.getKey();
 //					if (this.activeBeanNamesRegex.matches(beanName)) {
-					if (lEntry.getKey().equals("name")) {
-						LOG.info("Name_sml Bean loaded");
+					if (lEntry.getKey().equals("smlKeyword")||lEntry.getKey().equals("smlLongName")) {
+						LOG.info("smlKeyword_sml Bean loaded");
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
 					}
 
 				} else {
-					if (!lEntry.getKey().equals("name")) {
-					
+					if (!lEntry.getKey().equals("smlKeyword")&&!lEntry.getKey().equals("smlLongName")) {					
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
 					}

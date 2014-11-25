@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     See the NOTICE file distributed with
@@ -16,22 +15,18 @@
     limitations under the License.
 
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:sml="http://www.opengis.net/sensorML/1.0"
+
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sml="http://www.opengis.net/sensorML/1.0"
 	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
-                exclude-result-prefixes=" gml sml">
+	exclude-result-prefixes=" gml sml">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-     <xsl:template match="/">   
-     <multi_container>
-       <xsl:for-each select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']/sml:Term/sml:value">
-                <Name>
-                    <title>
-                        <xsl:value-of select="./text()"/>
-                    </title>
-                </Name>  
-                </xsl:for-each>
-                </multi_container>       
-    </xsl:template> 
+    <xsl:template match="/">
+        <SmlLongName>
+            <longName>
+                <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longName']/sml:value"/>
+            </longName>
+        </SmlLongName>
+    </xsl:template>
 </xsl:stylesheet>

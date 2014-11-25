@@ -18,12 +18,22 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="editor" uri="http://www.52north.org/tags/editor" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<tiles:useAttribute name="counter" id="cnt"/>
 
-<editor:fragments modelAttribute="updateMetadata">
-    <form:input htmlEscape="true" path="storage['name'].items[${cnt}].title" size="100"
-                id="name_${cnt}"/><br>
-</editor:fragments>
+<table class="verticalTop">
+    <tr>
+        <td>
+            <label for="smlName" id="smlLongName" class="firstLabel width190 tooltip">
+                <fmt:message key="element.smlLongName.label"/>
+            </label>
+        </td>
+        <td>
+            <form:input htmlEscape="true" path="storage['smlLongName'].longName" size="100" id="smlName"/><br>
+            <form:errors path="storage['smlLongName'].longName" cssClass="ui-state-error-text"/>
+        </td>
+    </tr>
+</table>
+
+
+

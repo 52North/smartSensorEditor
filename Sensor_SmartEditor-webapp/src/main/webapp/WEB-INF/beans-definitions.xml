@@ -345,15 +345,21 @@
 		<property name="bean" ref="alternateTitle" />
 	</bean>
 
-	<lang:groovy id="name" script-source="classpath:groovy/NameBean.groovy"
+	<lang:groovy id="smlKeyword" script-source="classpath:groovy/SmlKeywordBean.groovy"
 		scope="session" />
-	<bean id="multiName" class="de.conterra.smarteditor.beans.MultipleElementBean"
+	<bean id="multiSmlKeyword" class="de.conterra.smarteditor.beans.MultipleElementBean"
 		scope="session">
-		<property name="transformToISO" value="/xslt/Name_sml.xslt" />
-		<property name="transformToBean" value="/xslt/Name_bean.xslt" />
-		<property name="bean" ref="name" />
+		<property name="transformToISO" value="/xslt/SmlKeyword_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlKeyword_bean.xslt" />
+		<property name="bean" ref="smlKeyword" />
 	</bean>
-
+	<lang:groovy id="smlLongName" script-source="classpath:groovy/SmlLongNameBean.groovy"
+		scope="session">
+		<lang:property name="transformToISO" value="/xslt/SmlLongName_sml.xslt" />
+		<lang:property name="transformToBean" value="/xslt/SmlLongName_bean.xslt" />
+	</lang:groovy>
+	
+	
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
 		scope="session">
 		<aop:scoped-proxy />
@@ -402,7 +408,8 @@
 				<entry key="containsOperation" value-ref="multiOperations" />
 				<entry key="resourceMaintenance" value-ref="multiResourceMaintenance" />
 				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
-				<entry key="name" value-ref="multiName" />
+				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
+				<entry key="smlLongName" value-ref="smlLongName" />
 			</map>
 		</property>
 	</bean>

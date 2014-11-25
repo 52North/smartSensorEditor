@@ -1,4 +1,4 @@
-<!--
+<%--
 
     See the NOTICE file distributed with
     this work for additional information regarding copyright ownership.
@@ -14,21 +14,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 
--->
+--%>
 
-<xsl:stylesheet version="2.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:gco="http://www.isotc211.org/2005/gco"
-                xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                exclude-result-prefixes="gco gmd xsi">
-    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-    <!-- creates an insatnce of MD_Identifier -->
-   
-    <!-- copy everything else -->
-     <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
-    </xsl:template>
-</xsl:stylesheet>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="editor" uri="http://www.52north.org/tags/editor" %>
+
+<tiles:useAttribute name="counter" id="cnt"/>
+
+<editor:fragments modelAttribute="updateMetadata">
+    <form:input htmlEscape="true" path="storage['smlKeyword'].items[${cnt}].keyword" size="100"
+                id="smlKeyword_${cnt}"/><br>
+</editor:fragments>

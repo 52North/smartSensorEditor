@@ -174,8 +174,8 @@
                  template="/WEB-INF/jsp/elements/multiAlternateTitle.jsp">
          <put-attribute name="innerAlternateTitle" value="/WEB-INF/jsp/elements/alternateTitle.jsp"/>
     </definition>
-    <definition name="editor.body.name"
-                 template="/WEB-INF/jsp/elements/multiName.jsp">
-         <put-attribute name="innerName" value="/WEB-INF/jsp/elements/name.jsp"/>
+    <definition name="editor.body.smlKeyword"
+                 template="/WEB-INF/jsp/elements/multiSmlKeyword.jsp">
+         <put-attribute name="innerSmlKeyword" value="/WEB-INF/jsp/elements/smlKeyword.jsp"/>
     </definition>
 </tiles-definitions>

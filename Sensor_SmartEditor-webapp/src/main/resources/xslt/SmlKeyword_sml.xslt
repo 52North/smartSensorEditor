@@ -17,25 +17,32 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing Names -->
-	<xsl:template
-		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']" />
+	<xsl:template match="//sml:member/*/sml:keywords" />
 
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
-
+	<xsl:template match="//sml:member/*">
 		<xsl:copy>
-			<xsl:apply-templates select="sml:identifier" />
-			
-			<sml:identifier name="longName">
-				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-					<sml:value>			
-                        <xsl:value-of select="$beanDoc/*/Name/title"/>
-					</sml:value>
-
-				</sml:Term>
-			</sml:identifier>
+			<xsl:apply-templates select="gmd:description" />
+			<sml:keywords>
+				<sml:KeywordList>
+					<xsl:for-each select="$beanDoc/*/SmlKeyword">
+						<sml:keyword>
+							<xsl:value-of select="keyword" />
+						</sml:keyword>
+					</xsl:for-each>
+				</sml:KeywordList>
+			</sml:keywords>
+			<xsl:apply-templates select="sml:identification" />
+			<xsl:apply-templates select="sml:classification" />
+			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:capabilities" />
+			<xsl:apply-templates select="sml:contact" />
+			<xsl:apply-templates select="sml:position" />
+			<xsl:apply-templates select="sml:interfaces" />
+			<xsl:apply-templates select="sml:inputs" />
+			<xsl:apply-templates select="sml:outputs" />
+			<xsl:apply-templates select="sml:components" />
 		</xsl:copy>
-
 
 	</xsl:template>
 
