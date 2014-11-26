@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
+
+
+ <lang:groovy id="smlLongName" script-source="classpath:groovy/SmlLongNameBean.groovy">
+		<lang:property name="transformToISO" value="/xslt/SmlLongName_sml.xslt" />
+		<lang:property name="transformToBean" value="/xslt/SmlLongName_bean.xslt" />
+	</lang:groovy>
+
+    <bean id="beanTransformerService" class="de.conterra.smarteditor.service.BeanTransformerService">
+        <property name="multiElementName" value="multi_container"/>
+        <property name="xsltTransformer" ref="xsltTransformerService"/>
+    </bean>
+
+     <bean id="xsltTransformerService" class="de.conterra.smarteditor.service.XSLTTransformerService" init-method="init">
+        <property name="transformerFactoryClassName" value="net.sf.saxon.TransformerFactoryImpl"/>
+        <property name="outputKeys">
+            <map>
+                <entry key="encoding" value="UTF-8"/>
+                <entry key="omit-xml-declaration" value="yes"/>
+                <entry key="indent" value="no"/>
+            </map>
+        </property>
+    </bean>
+</beans>

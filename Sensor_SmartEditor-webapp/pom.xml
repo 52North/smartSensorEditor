@@ -26,7 +26,11 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
 		<dependency>
 			<groupId>org.52North.metadata</groupId>
 			<artifactId>Sensor_SmartEditor-api</artifactId>
@@ -38,6 +42,16 @@
 			<artifactId>smarteditor-webapp</artifactId>
 			<type>war</type>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.xmlmatchers</groupId>
+			<artifactId>xml-matchers</artifactId>
+			<version>1.0-RC1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 
