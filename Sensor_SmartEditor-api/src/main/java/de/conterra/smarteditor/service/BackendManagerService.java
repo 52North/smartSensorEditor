@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -72,7 +73,7 @@ public class BackendManagerService {
 
 	private LockManager lockManager;
 	
-	private String activeBeanNamesRegex;
+	private Properties activeBeanNamesRegex;
 	
 	private Pattern activeBeanNamesPattern = null;
 
@@ -132,11 +133,11 @@ public class BackendManagerService {
 		mergeDocument = pMergeDocument;
 	}
 
-	public String getActiveBeanNamesRegex() {
+	public Properties getActiveBeanNamesRegex() {
 		return activeBeanNamesRegex;
 	}
 
-	public void setActiveBeanNamesRegex(String activeBeanNamesRegex) {
+	public void setActiveBeanNamesRegex(Properties activeBeanNamesRegex) {
 		this.activeBeanNamesRegex = activeBeanNamesRegex;
 	}
 
