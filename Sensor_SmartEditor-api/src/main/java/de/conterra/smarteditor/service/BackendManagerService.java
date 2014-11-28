@@ -16,6 +16,25 @@
 
 package de.conterra.smarteditor.service;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.log4j.Logger;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.w3c.dom.Document;
+
 import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.BaseBean;
 import de.conterra.smarteditor.beans.FileIdentifierBean;
@@ -24,31 +43,6 @@ import de.conterra.smarteditor.util.DOMUtil;
 import de.conterra.smarteditor.util.XPathUtil;
 import de.conterra.smarteditor.validator.SchematronValidator;
 import de.conterra.smarteditor.xml.EditorContext;
-import de.conterra.smarteditor.xml.SensorEditorContext;
-
-import org.apache.log4j.Logger;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.w3c.dom.Document;
-
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 
 /**
  * Service manages any access to and modification of the backend storage
@@ -360,14 +354,14 @@ public class BackendManagerService {
 				if (resourceType == "sensor") {
 //					String beanName = lEntry.getKey();
 //					if (this.activeBeanNamesRegex.matches(beanName)) {
-					if (lEntry.getKey().equals("smlKeyword")||lEntry.getKey().equals("smlLongName")) {
+					if (lEntry.getKey().equals("smlKeyword")||lEntry.getKey().equals("smlLongName")||lEntry.getKey().equals("smlShortName")||lEntry.getKey().equals("smlUniqueID")) {
 						LOG.info("smlKeyword_sml Bean loaded");
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
 					}
 
 				} else {
-					if (!lEntry.getKey().equals("smlKeyword")&&!lEntry.getKey().equals("smlLongName")) {					
+					if (!lEntry.getKey().equals("smlKeyword")&&!lEntry.getKey().equals("smlLongName")||!lEntry.getKey().equals("smlShortName")||!lEntry.getKey().equals("smlUniqueID")) {					
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
 					}
@@ -427,7 +421,7 @@ public class BackendManagerService {
 					.evaluateAsString("//gmd:hierarchyLevel/*/@codeListValue",
 							getMergeDocument());
 			if (resourceType == "") {
-				EditorContext sec = new SensorEditorContext();
+				EditorContext sec = new EditorContext();
 				lUtil.setContext(sec);
 				String bool = lUtil.evaluateAsString("boolean(//sml:System)",
 						getMergeDocument());

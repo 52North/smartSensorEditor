@@ -37,6 +37,10 @@ public class BeanXsltTest {
 
 	@Resource(name = "smlLongName")
 	BaseBean smlLongName;
+	@Resource(name = "smlShortName")
+	BaseBean smlShortName;
+	@Resource(name = "smlUniqueID")
+	BaseBean smlUniqueID;
 
 	Document mDatasetDocument = DOMUtil.createFromStream(
 			BeanXsltTest.class.getResourceAsStream("/sensor.xml"), true);
@@ -59,6 +63,42 @@ public class BeanXsltTest {
 			assertThat(
 					bean,
 					hasXPath("/SmlLongName/longName[text()='testname']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+	}
+	@Test
+	public void testShortName() throws Exception {
+		BaseBean lBean = beanTransformerService.initBean(smlShortName,
+				mDatasetDocument);
+		Assert.assertNotNull(lBean);
+
+		Document beanXML = beanTransformerService.toXML(lBean);
+		Source bean = new DOMSource(beanXML);
+		try {
+			assertThat(
+					bean,
+					hasXPath("/SmlShortName/shortName[text()='shortname']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+	}
+	@Test
+	public void testUniqueID() throws Exception {
+		BaseBean lBean = beanTransformerService.initBean(smlUniqueID,
+				mDatasetDocument);
+		Assert.assertNotNull(lBean);
+
+		Document beanXML = beanTransformerService.toXML(lBean);
+		Source bean = new DOMSource(beanXML);
+		try {
+			assertThat(
+					bean,
+					hasXPath("/SmlUniqueID/uniqueID[text()='testunique']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

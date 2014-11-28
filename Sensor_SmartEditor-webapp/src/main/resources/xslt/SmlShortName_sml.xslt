@@ -17,18 +17,18 @@
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	
 	<xsl:template
-		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longName']" />
+		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']" />
 	<xsl:template
-		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='longName']" />
+		match="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier[@name='shortName']" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
 		<xsl:copy>
 			<xsl:apply-templates select="sml:identifier" />
-			<sml:identifier name="longName">
-				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+			<sml:identifier name="shortName">
+				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
 					<sml:value>
-						<xsl:value-of select="$beanDoc/*/longName" />
+						<xsl:value-of select="$beanDoc/*/shortName" />
 					</sml:value>
 				</sml:Term>
 			</sml:identifier>

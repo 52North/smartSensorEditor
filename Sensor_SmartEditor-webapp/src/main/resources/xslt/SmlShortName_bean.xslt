@@ -17,18 +17,16 @@
 -->
 
 <xsl:stylesheet version="2.0"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:gco="http://www.isotc211.org/2005/gco"
-                xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                exclude-result-prefixes="gco gmd xsi">
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sml="http://www.opengis.net/sensorML/1.0"
+	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
+	exclude-result-prefixes=" gml sml">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
-    <!-- creates an insatnce of MD_Identifier -->
-   
-    <!-- copy everything else -->
-     <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
+    <xsl:template match="/">
+        <SmlShortName>
+            <shortName>
+                <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']/sml:value"/>
+            </shortName>
+        </SmlShortName>
     </xsl:template>
 </xsl:stylesheet>

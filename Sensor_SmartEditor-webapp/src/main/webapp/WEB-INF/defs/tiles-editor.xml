@@ -49,7 +49,11 @@
 	<!-- body tiles of the editor -->
 	<definition name="editor.body" template="/WEB-INF/jsp/body.jsp"
 		preparer="de.conterra.smarteditor.tiles.BodyViewPreparer">
-			<put-attribute name="smlLongName"
+		<put-attribute name="smlUniqueID"
+			value="/WEB-INF/jsp/elements/smlUniqueID.jsp" cascade="true" />
+		<put-attribute name="smlShortName"
+			value="/WEB-INF/jsp/elements/smlShortName.jsp" cascade="true" />
+		<put-attribute name="smlLongName"
 			value="/WEB-INF/jsp/elements/smlLongName.jsp" cascade="true" />
 		<put-attribute name="smlKeyword" value="editor.body.smlKeyword"
 			cascade="true" />

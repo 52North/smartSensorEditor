@@ -26,6 +26,8 @@ import java.util.Iterator;
  * @author kse
  * Date: 28.02.2010
  * Time: 13:19:20
+ * 
+ * TODO: make the EditorContext configurable
  */
 public class EditorContext implements NamespaceContext {
 

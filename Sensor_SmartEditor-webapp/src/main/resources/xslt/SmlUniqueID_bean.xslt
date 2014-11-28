@@ -23,10 +23,10 @@
 	exclude-result-prefixes=" gml sml">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
     <xsl:template match="/">
-        <SmlLongName>
-            <longName>
-                <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longName']/sml:value"/>
-            </longName>
-        </SmlLongName>
+        <SmlUniqueID>
+            <uniqueID>
+                <xsl:value-of select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value"/>
+            </uniqueID>
+        </SmlUniqueID>
     </xsl:template>
 </xsl:stylesheet>
