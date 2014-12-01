@@ -1,5 +1,5 @@
 <!--  -->
-<?xml version="1.0"?>
+<!-- <?xml version="1.0"?>
 <uberwar>
   <wars>
     <war>org.n52.metadata:smarteditor-webapp</war>
@@ -40,4 +40,4 @@
       </parameters>
     </merge>
   </merges>
-</uberwar>
+</uberwar> -->

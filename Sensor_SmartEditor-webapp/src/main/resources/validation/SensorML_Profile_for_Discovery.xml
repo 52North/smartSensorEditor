@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ﻿Copyright (C) 2012 52°North Initiative for Geospatial Open Source Software 
+	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you 
+	may not use this file except in compliance with the License. You may obtain 
+	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
+	required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!-- ========================================================================== 
+	SensorML Profile for Discovery of Sensor Platforms A Schematron (ISO 19757-3) 
+	Schema For SensorML 1.0.1 Version 0.1 =========================================================================== 
+	DESCRIPTION: This file comprises a Schematron[1] schema for the Sensor Model 
+	Language (SensorML) [2] defined by the OGC [3]. This profile can be considered 
+	as a means to create SensorML documents for the discovery of sensor platforms 
+	(e.g. weather stations). The platform is modelled as a 'System' while its 
+	attached sensors are described as 'Components'. The profile is especially 
+	intended to be applied to SensorML documents returned by the DescribeSensor 
+	operation of a Sensor Observation Service [4]. The flexible structure of 
+	SensorML is reduced by this profile. It restricts the SensorML schema to 
+	a sufficient subset which can be used to model sensor platforms with intention 
+	to be discoverable. It defines several "optional" elements and attributes 
+	as "required" for the definition of stations. So, the profile definition 
+	eases the use of SensorML on the client-side. If services comply to the profile 
+	restrictions the clients can refer to them. A client which has to make use 
+	of SensorML descriptions of stations doesn't have to support the whole SensorML 
+	schema, but just the restricted one defined by the profile. Please provide 
+	any comments or feedback on this validator to Daniel Nüst (d.nuest@52north.org). 
+	REFERENCES: [1] http://www.schematron.com/iso/Schematron.html [2] http://www.opengeospatial.org/standards/sensorml 
+	[3] http://www.opengeospatial.org [4] http://www.opengeospatial.org/standards/sos -->
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd" schemaVersion="ISO19757-3">
+	<ns prefix="sml" uri="http://www.opengis.net/sensorML/1.0.1" />
+	<ns prefix="gml" uri="http://www.opengis.net/gml" />
+	<ns prefix="swe" uri="http://www.opengis.net/swe/1.0.1" />
+	<ns prefix="xlink" uri="http://www.w3.org/1999/xlink" />
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- System Validation -->
+	<!-- This pattern validates the parts of the SensorML document which are 
+		specific for a System. -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<pattern id="SystemValidation">
+		<!-- A SensorML document contains one "member" element. Each "member" contains 
+			a "Process" instance (either a "Component" or a "System") which shall be 
+			discoverable. -->
+		<!-- <rule context="/">
+			<assert test="count(sml:SensorML/sml:member) = 1">errors.validation.SML.member
+			</assert>
+			<assert test="count(sml:SensorML/sml:member/sml:System) = 1">errors.validation.SML.system
+			</assert> 
+		</rule>-->
+	</pattern>
+	<pattern id="GeneralValidation">
+		<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:uniqueID". 
+			The value of its contained "Term" element uniquely identifies the instance. 
+			One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:longName". 
+			The value of its contained "Term" element represents a human understandable 
+			name for the instance. One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:shortName". 
+			The value of its contained "Term" element represents a short representation 
+			of the human understandable name for the instance. -->
+
+		<!-- Each "identifier/Term" element contained in the "IdentifierList" must 
+			have a "definition" attribute. This attribute links to the semantics of the 
+			identifier. -->
+		<rule context="//sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
+			<assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition
+			</assert>
+		</rule>
+		<rule context="//sml:identification">
+			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:uniqueID']) = 1">errors.validation.SML.identification.uniqueID
+			</assert>
+			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:longName']) = 1">errors.validation.SML.identification.longName
+			</assert>
+			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:shortName']) = 1">errors.validation.SML.identification.shortName
+			</assert>
+		</rule>
+		<!-- A "description", "keywords", "contact", "inputs" and "outputs" element 
+			has to be present. -->
+		<rule context="//sml:System">
+			<assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
+			</assert>
+		</rule>
+	</pattern>
+</schema>

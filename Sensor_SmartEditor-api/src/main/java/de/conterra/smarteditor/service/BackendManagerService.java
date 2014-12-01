@@ -72,9 +72,9 @@ public class BackendManagerService {
 	private boolean update;
 
 	private LockManager lockManager;
-	
+
 	private Properties activeBeanNamesRegex;
-	
+
 	private Pattern activeBeanNamesPattern = null;
 
 	public boolean isUpdate() {
@@ -348,24 +348,14 @@ public class BackendManagerService {
 				&& getMergeDocument() != null) {
 			Document newDoc = getMergeDocument();
 			String resourceType = getResourceType();
+			String prefix = this.activeBeanNamesRegex.getProperty(resourceType);
 			// iterate through map of beans
 			for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
 					.entrySet()) {
-
-				if (resourceType == "sensor") {
-//					String beanName = lEntry.getKey();
-//					if (this.activeBeanNamesRegex.matches(beanName)) {
-					if (lEntry.getKey().equals("smlKeyword")||lEntry.getKey().equals("smlLongName")||lEntry.getKey().equals("smlShortName")||lEntry.getKey().equals("smlUniqueID")) {
-						LOG.info("smlKeyword_sml Bean loaded");
+				String beanName = lEntry.getKey();
+				if (beanName.matches(prefix + "\\w+")) {
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
-					}
-
-				} else {
-					if (!lEntry.getKey().equals("smlKeyword")&&!lEntry.getKey().equals("smlLongName")||!lEntry.getKey().equals("smlShortName")||!lEntry.getKey().equals("smlUniqueID")) {					
-						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
-								newDoc);
-					}
 				}
 			}
 			return newDoc;

@@ -370,7 +370,7 @@
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
 		scope="session">
 		<aop:scoped-proxy />
-		<property name="validatorId" value="isoValidator" />
+		<property name="validatorId" value="smlValidator" />
 		<property name="stickyErrorMessages" value="false" />
 		<!-- default validator id -->
 		<property name="storage">

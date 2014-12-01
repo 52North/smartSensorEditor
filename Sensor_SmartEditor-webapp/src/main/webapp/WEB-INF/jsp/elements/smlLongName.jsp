@@ -24,12 +24,12 @@
 <table class="verticalTop">
     <tr>
         <td>
-            <label for="smlName" id="smlLongName" class="firstLabel width190 tooltip">
+            <label for="smlLongName" id="smlLongName" class="firstLabel width190 tooltip">
                 <fmt:message key="element.smlLongName.label"/>
             </label>
         </td>
         <td>
-            <form:input htmlEscape="true" path="storage['smlLongName'].longName" size="100" id="smlName"/><br>
+            <form:input htmlEscape="true" path="storage['smlLongName'].longName" size="100" id="smlLongName"/><br>
             <form:errors path="storage['smlLongName'].longName" cssClass="ui-state-error-text"/>
         </td>
     </tr>
