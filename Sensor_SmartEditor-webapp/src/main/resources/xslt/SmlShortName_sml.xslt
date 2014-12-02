@@ -25,13 +25,13 @@
 	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
 		<xsl:copy>
 			<xsl:apply-templates select="sml:identifier" />
-			<sml:identifier name="shortName">
+		<!-- 	<sml:identifier name="shortName">
 				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
 					<sml:value>
 						<xsl:value-of select="$beanDoc/*/shortName" />
 					</sml:value>
 				</sml:Term>
-			</sml:identifier>
+			</sml:identifier> -->
 		</xsl:copy>
 	</xsl:template>
 </xsl:stylesheet>

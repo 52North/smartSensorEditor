@@ -26,11 +26,11 @@
 		<xsl:copy>
 			<xsl:apply-templates select="sml:identifier" />
 			<sml:identifier name="longName">
-				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+				<!-- <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
 					<sml:value>
 						<xsl:value-of select="$beanDoc/*/longName" />
 					</sml:value>
-				</sml:Term>
+				</sml:Term> -->
 			</sml:identifier>
 		</xsl:copy>
 	</xsl:template>

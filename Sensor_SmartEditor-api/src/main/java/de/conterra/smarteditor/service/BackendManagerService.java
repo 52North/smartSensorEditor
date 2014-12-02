@@ -19,6 +19,7 @@ package de.conterra.smarteditor.service;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
@@ -32,6 +33,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
+import org.dom4j.dom.DOMDocument;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.w3c.dom.Document;
@@ -350,12 +352,28 @@ public class BackendManagerService {
 			String resourceType = getResourceType();
 			String prefix = this.activeBeanNamesRegex.getProperty(resourceType);
 			// iterate through map of beans
-			for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
-					.entrySet()) {
-				String beanName = lEntry.getKey();
-				if (beanName.matches(prefix + "\\w+")) {
+			if (!prefix.equals("")) {
+				for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
+						.entrySet()) {
+					String beanName = lEntry.getKey();
+					if (beanName.matches(prefix + "\\w+")) {
 						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
 								newDoc);
+					}
+				}
+			} else {
+				Properties prop=this.activeBeanNamesRegex;
+				Collection<Object> prefixCollection=prop.values();
+				String [] prefixArray=(String[]) prefixCollection.toArray(new String[0]);
+				for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
+						.entrySet()) {
+					String beanName = lEntry.getKey();
+					for(String prefixElement :prefixArray){
+					if (!prefixElement.equals("")&&!beanName.matches(prefixElement + "\\w+")) {
+						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
+								newDoc);
+					}
+					}
 				}
 			}
 			return newDoc;
@@ -382,6 +400,8 @@ public class BackendManagerService {
 				try {
 					Document lReport = DOMUtil.newDocument(true);
 					Source lSource = new DOMSource(mergeBackend());
+					LOG.debug("mergedBackend for validation: "
+							+ DOMUtil.convertToString(mergeBackend(), true));
 					Result lResult = new DOMResult(lReport);
 					// set ruleset Id AFTER merging the document
 					xsltTransformer.setRulesetSystemID(lCurrent

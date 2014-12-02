@@ -22,8 +22,8 @@
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>
-				<!-- <entry key="isoValidator" value-ref="isoValidator" />
-				<entry key="inspireValidator" value-ref="inspireValidator" /> -->
+				<entry key="isoValidator" value-ref="isoValidator" />
+				<entry key="inspireValidator" value-ref="inspireValidator" />
 				<entry key="smlValidator" value-ref="smlValidator" />
 			</map>
 		</property>
