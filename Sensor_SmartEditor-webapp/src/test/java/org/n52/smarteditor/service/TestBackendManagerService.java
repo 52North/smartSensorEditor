@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,72 +26,48 @@ import static org.hamcrest.Matchers.not;
 public class TestBackendManagerService {
 	@Resource(name = "backendSetupService")
 	BackendManagerService backendManagerService;
-
+	
+	@Before
+public void before(){
+		backendManagerService.setMergeDocument(DOMUtil
+				.createDocumentFromSystemID("classpath:/test-sensor.xml", true));
+}
+	/**
+	 * Tests if all needed beans are used in mergeBackend. If that is true all 
+	 * values "test" have to be overwritten by the beans.
+	 */
 	@Test
 	public void testMergeBackend() {
-		backendManagerService.setMergeDocument(DOMUtil
-				.createDocumentFromSystemID("/templates/sensor.xml", true));
-		Document doc = backendManagerService.mergeBackend();
-		String docString = DOMUtil.convertToString(
+		
+		String docString1 = DOMUtil.convertToString(backendManagerService.getMergeDocument()
+				, false);
+		assertThat(docString1,containsString("test"));
+	
+		String docString2 = DOMUtil.convertToString(
 				backendManagerService.mergeBackend(), false);
-		assertThat(docString, containsString("longName"));
+		assertThat(docString2, not(containsString("test")));
 	}
 
-	@Test 
+	@Test
 public void testRegexSML(){
-	backendManagerService.setMergeDocument(DOMUtil.createDocumentFromSystemID(
-			"/templates/sensor.xml", true));
-    String prefix="sml";
-	if (!prefix.equals("")) {
-		for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
-				.entrySet()) {
-			String beanName = lEntry.getKey();
-			if (beanName.matches(prefix + "\\w+")) {
-				assertThat(beanName,containsString("sml"));
-			}
+		
+	for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
+			.entrySet()) {
+		// check if bean should be merged
+		if (backendManagerService.isBeanActive(lEntry.getKey())) {
+			 assertThat(lEntry.getKey(),containsString("sml"));
 		}
-	} else {
-		fail();
-		Properties prop=backendManagerService.getActiveBeanNamesRegex();
-		Collection<Object> prefixCollection=prop.values();
-		String [] prefixArray=(String[]) prefixCollection.toArray(new String[0]);
-		for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
-				.entrySet()) {
-			String beanName = lEntry.getKey();
-			for(String prefixElement :prefixArray){
-			if (!prefixElement.equals("")&&!beanName.matches(prefixElement + "\\w+")) {
-				
-			}
-			}
-		}
-	}
+	}	
 	}
 @Test 
 public void testRegexNOSML(){
-	backendManagerService.setMergeDocument(DOMUtil.createDocumentFromSystemID(
-			"/templates/sensor.xml", true));
-    String prefix="";
-	if (!prefix.equals("")) {fail();
-		for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
-				.entrySet()) {
-			String beanName = lEntry.getKey();
-			if (beanName.matches(prefix + "\\w+")) {
-				assertThat(beanName,containsString("sml"));
-			}
-		}
-	} else {
-	
-		Properties prop=backendManagerService.getActiveBeanNamesRegex();
-		Collection<Object> prefixCollection=prop.values();
-		String [] prefixArray=(String[]) prefixCollection.toArray(new String[0]);
-		for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
-				.entrySet()) {
-			String beanName = lEntry.getKey();
-			for(String prefixElement :prefixArray){
-			if (!prefixElement.equals("")&&!beanName.matches(prefixElement + "\\w+")) {
-				assertThat(beanName,not(containsString("sml")));
-			}
-			}
+	backendManagerService.setMergeDocument(DOMUtil
+			.createDocumentFromSystemID("classpath:/dataset.xml", true));
+	for (Map.Entry<String, BaseBean> lEntry : backendManagerService.getBackend().getStorage()
+			.entrySet()) {
+		// check if bean should be merged
+		if (backendManagerService.isBeanActive(lEntry.getKey())) {
+			 assertThat(lEntry.getKey(),not(containsString("sml")));
 		}
 	}
 }

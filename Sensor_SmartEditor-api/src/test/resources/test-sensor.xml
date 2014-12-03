@@ -9,8 +9,9 @@ http://schemas.opengis.net/sensorML/1.0.0/sensorML.xsd"
 		<sml:System>
 			<gml:description></gml:description>
 			<sml:keywords>
+			
 				<sml:KeywordList>
-					<sml:keyword></sml:keyword>
+					<sml:keyword>testkeyword</sml:keyword>
 				</sml:KeywordList>
 			</sml:keywords>
 			<sml:identification>

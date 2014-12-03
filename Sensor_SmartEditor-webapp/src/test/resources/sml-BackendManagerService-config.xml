@@ -29,6 +29,12 @@
         <property name="id" value="smlValidator"/>
         <property name="rulessetSystemID" value="/validation/SensorML_Profile_for_Discovery.xslt"/>
     </bean>
+    	<bean id="validationService" class="de.conterra.smarteditor.service.ValidatorService"
+		init-method="compile">
+		<property name="path" value="/validation" />
+		<property name="svrlFilename" value="iso_svrl_for_xslt2.xsl" />
+		<property name="xsltService" ref="xsltTransformerService" />
+	</bean>
     	<bean id="backendSetupService" class="de.conterra.smarteditor.service.BackendManagerService">
 		<aop:scoped-proxy />
 		<property name="validators">
@@ -42,8 +48,8 @@
 		<!-- <property name="activeBeanNamesRegex" ref="sensor_"/> -->
 		<property name="activeBeanNamesRegex">
 			<props>
-				<prop key="sensor">sml</prop>
-				<prop key="dataset"></prop>
+				<prop key="sensor">(sml\w+)|(\w+sml)</prop>
+				<prop key="dataset">!(sml)</prop>
 			</props>
 		</property>
 	</bean>

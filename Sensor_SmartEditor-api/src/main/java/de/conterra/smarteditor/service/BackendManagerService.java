@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -349,36 +350,31 @@ public class BackendManagerService {
 		if (backend != null && backend.getStorage() != null
 				&& getMergeDocument() != null) {
 			Document newDoc = getMergeDocument();
-			String resourceType = getResourceType();
-			String prefix = this.activeBeanNamesRegex.getProperty(resourceType);
-			// iterate through map of beans
-			if (!prefix.equals("")) {
-				for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
-						.entrySet()) {
-					String beanName = lEntry.getKey();
-					if (beanName.matches(prefix + "\\w+")) {
-						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
-								newDoc);
-					}
-				}
-			} else {
-				Properties prop=this.activeBeanNamesRegex;
-				Collection<Object> prefixCollection=prop.values();
-				String [] prefixArray=(String[]) prefixCollection.toArray(new String[0]);
-				for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
-						.entrySet()) {
-					String beanName = lEntry.getKey();
-					for(String prefixElement :prefixArray){
-					if (!prefixElement.equals("")&&!beanName.matches(prefixElement + "\\w+")) {
-						newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
-								newDoc);
-					}
-					}
+
+			for (Map.Entry<String, BaseBean> lEntry : backend.getStorage()
+					.entrySet()) {
+				// check if bean should be merged
+				if (isBeanActive(lEntry.getKey())) {
+					newDoc = beanTransformer.mergeToISO(lEntry.getValue(),
+							newDoc);
 				}
 			}
+
 			return newDoc;
 		}
 		return null;
+	}
+
+	public boolean isBeanActive(String beanName) {
+		String resourceType = getResourceType();
+		String regex = this.activeBeanNamesRegex.getProperty(resourceType);
+		// iterate through map of beans
+		if (!regex.equals("")) {
+				if (beanName.matches(regex)) {
+					return true;
+				}	
+		}
+		return false;
 	}
 
 	/**
@@ -432,8 +428,6 @@ public class BackendManagerService {
 					.evaluateAsString("//gmd:hierarchyLevel/*/@codeListValue",
 							getMergeDocument());
 			if (resourceType == "") {
-				EditorContext sec = new EditorContext();
-				lUtil.setContext(sec);
 				String bool = lUtil.evaluateAsString("boolean(//sml:System)",
 						getMergeDocument());
 				if (bool.equals("true")) {
