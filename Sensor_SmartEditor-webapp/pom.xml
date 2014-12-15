@@ -11,7 +11,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>Sensor_SmartEditor-webapp</name>
 	<url>http://maven.apache.org</url>
-
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<build.properties.project>${basedir}/src/main/webapp/META-INF/build.properties</build.properties.project>

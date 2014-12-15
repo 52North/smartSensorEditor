@@ -63,7 +63,7 @@ public class EditorContext implements NamespaceContext {
     //config
     protected static String sNS_TC = "http://www.conterra.de/catalog/config/common";
 
-    protected static String sNS_SML="http://www.opengis.net/sensorML/1.0";
+    protected static String sNS_SML="http://www.opengis.net/sensorML/1.0.1";
     /**
      * Maps a prefix to a uri
      *

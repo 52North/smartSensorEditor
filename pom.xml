@@ -12,6 +12,13 @@
 		<module>Sensor_SmartEditor-webapp</module>
 
 	</modules>
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<properties>
 		<spring.version>3.0.6.RELEASE</spring.version>
 		<currentYear>2014</currentYear> <!-- manual setting -->
@@ -55,10 +62,10 @@
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<version>2.6</version>
-				<!-- <inherited>false</inherited> -->
+				<inherited>false</inherited>
 				<configuration>
 					<header>${license.header.file}</header>
-				<!-- 	<aggregate>true</aggregate> -->
+					<aggregate>true</aggregate>
 					<properties>
 						<inceptionYear>${project.inceptionYear}</inceptionYear>
 						<latestYearOfContribution>${currentYear}</latestYearOfContribution>
@@ -86,12 +93,13 @@
 			<plugin>
 				<groupId>org.jasig.maven</groupId>
 				<artifactId>maven-notice-plugin</artifactId>
-				<version>1.0.6</version>
+				<version>1.0.6.1</version>
 				<configuration>
 					<noticeTemplate>misc/NOTICE.template</noticeTemplate>
 					<licenseMapping>
 						<param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
 						<param>https://source.jasig.org/licenses/license-mappings.xml</param>
+						<param>misc/license-mappings.xml</param>
 					</licenseMapping>
 					<generateChildNotices>false</generateChildNotices>
 				</configuration>
@@ -107,13 +115,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	<licenses>
-		<license>
-			<name>Apache Software License 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -176,6 +178,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

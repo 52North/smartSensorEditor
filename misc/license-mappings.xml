@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<license-lookup
+	xmlns="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup https://source.jasig.org/schemas/maven-notice-plugin/license-lookup/license-lookup-v1.0.xsd">
+
+	<artifact>
+		<groupId>com.jenkov</groupId>
+		<artifactId>prizetags</artifactId>
+		<version>3.4.0</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+
+	<artifact>
+		<groupId>org.aopalliance</groupId>
+		<artifactId>com.springsource.org.aopalliance</artifactId>
+		<version>1.0.0</version>
+		<license>Public Domain</license>
+	</artifact>
+	<artifact>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+		<version>1.1.1</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.aop</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.asm</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.transaction</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context.support</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId></groupId>
+		<artifactId></artifactId>
+		<version></version>
+		<license></license>
+	</artifact>
+	<artifact>
+		<groupId></groupId>
+		<artifactId></artifactId>
+		<version></version>
+		<license></license>
+	</artifact>
+</license-lookup>

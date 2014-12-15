@@ -9,6 +9,13 @@
 	<packaging>jar</packaging>
 	<artifactId>Sensor_SmartEditor-api</artifactId>
 	<modelVersion>4.0.0</modelVersion>
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<build>
 		<plugins>
 			<plugin>

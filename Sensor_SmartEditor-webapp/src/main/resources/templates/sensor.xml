@@ -29,12 +29,12 @@
     Public License for more details.
 
 -->
-<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0"
-	xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:gml="http://www.opengis.net/gml"
+<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+	xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:gml="http://www.opengis.net/gml"
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.opengis.net/sensorML/1.0 
-http://schemas.opengis.net/sensorML/1.0.0/sensorML.xsd"
-	version="1.0">
+	xsi:schemaLocation="http://www.opengis.net/sensorML/1.0.1 
+http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
+	version="1.0.1">
 	<sml:member>
 		<sml:System>
 			<gml:description></gml:description>
