@@ -71,7 +71,7 @@ public class BeanXsltTest {
 	BaseBean smlUniqueID;
 
 	Document mDatasetDocument = DOMUtil.createFromStream(
-			BeanXsltTest.class.getResourceAsStream("/sensor.xml"), true);
+			BeanXsltTest.class.getResourceAsStream("/validation/input/testBeanXSLT_SmlXSLT.xml"), true);
 
 	@Before
 	public void before() {

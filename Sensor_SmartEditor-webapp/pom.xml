@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<groupId>org.52North.metadata</groupId>
+		<groupId>org.n52.metadata</groupId>
 		<artifactId>Sensor_SmartEditor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -23,9 +23,6 @@
 		<build.properties.project>${basedir}/src/main/webapp/META-INF/build.properties</build.properties.project>
 		<build.properties.local>${user.home}/build.properties</build.properties.local>
 	</properties>
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -38,7 +35,7 @@
 			<version>1.2.16</version>
 		</dependency>
 		<dependency>
-			<groupId>org.52North.metadata</groupId>
+			<groupId>org.n52.metadata</groupId>
 			<artifactId>Sensor_SmartEditor-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

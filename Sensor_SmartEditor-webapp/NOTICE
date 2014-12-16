@@ -1,0 +1,62 @@
+Copyright (C) ${inceptionYear}-${latestYearOfContribution} 52�North Initiative for Geospatial Open Source
+Software GmbH
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License version 2 as published
+by the Free Software Foundation.
+
+If the program is linked with libraries which are licensed under one of
+the following licenses, the combination of the program with the linked
+library is not considered a "derivative work" of the program:
+
+    - Apache License, version 2.0
+    - Apache Software License, version 1.0
+    - GNU Lesser General Public License, version 3
+    - Mozilla Public License, versions 1.0, 1.1 and 2.0
+    - Common Development and Distribution License (CDDL), version 1.0
+
+Therefore the distribution of the program linked with libraries licensed
+under the aforementioned licenses, is permitted by the copyright holders
+if the distribution is compliant with both the GNU General Public
+License version 2 and the aforementioned licenses.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
+
+This project includes:
+
+  Apache Log4j under The Apache Software License, Version 2.0
+  com.springsource.org.aopalliance under Public Domain
+  dom4j under DOM4J license, http://dom4j.sourceforge.net/dom4j-1.6.1/license.html (BSD style)
+  Groovy under Apache License, Version 2.0
+  Hamcrest All under New BSD License
+  Hamcrest Core under New BSD License
+  JDOM under Apache License
+  Jodd under The New BSD License
+  JUnit under Common Public License Version 1.0
+  Logging under The Apache Software License, Version 2.0
+  MXP1: Xml Pull Parser 3rd Edition (XPP3) under Indiana University Extreme! Lab Software License, vesion 1.1.1 or Public Domain
+  org.springframework.aop under The Apache Software License, Version 2.0
+  org.springframework.asm under The Apache Software License, Version 2.0
+  org.springframework.beans under The Apache Software License, Version 2.0
+  org.springframework.context under The Apache Software License, Version 2.0
+  org.springframework.core under The Apache Software License, Version 2.0
+  org.springframework.expression under The Apache Software License, Version 2.0
+  Saxon-HE under Mozilla Public License Version 1.0
+  Sensor_SmartEditor-api under Apache Software License 2.0
+  Sensor_SmartEditor-webapp under Apache Software License 2.0
+  servlet-api under CDDL 1.1 or GPL2 w/ CPE
+  smarteditor-webapp under Apache Software License 2.0
+  spring-test under Apache License, Version 2.0
+  xalan under The Apache Software License, Version 2.0
+  Xerces2 Java Parser under The Apache Software License, Version 2.0
+  XML Commons Resolver Component under The Apache Software License, Version 2.0
+  XML Pull Parsing API under Public Domain
+  xml-apis under The Apache Software License, Version 2.0
+  xml-matchers under Apache License, Version 2.0
+  XMLUnit for Java under BSD License
+  XOM under The GNU Lesser General Public License, Version 2.1
+  XStream Core under BSD style
+

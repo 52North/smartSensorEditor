@@ -62,7 +62,7 @@ public class SmlXsltTest {
 	BeanTransformerService beanTransformerService;
 
 	Document mRefDatasetDocument = DOMUtil.createFromStream(
-			SmlXsltTest.class.getResourceAsStream("/sensor.xml"), true);
+			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanXSLT_SmlXSLT.xml"), true);
 
 	@Resource(name = "smlLongName")
 	BaseBean smlLongName;
@@ -75,7 +75,7 @@ public class SmlXsltTest {
 	@Before
 	public void before() {
 		usingNamespaces = new SimpleNamespaceContext().withBinding("sml",
-				"http://www.opengis.net/sensorML/1.0");
+				"http://www.opengis.net/sensorML/1.0.1");
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class SmlXsltTest {
 	}
 	@Test
 	public void testShortName() {
-		BeanUtil.setProperty(smlShortName, "shortName", "shortName");
+		BeanUtil.setProperty(smlShortName, "shortName", "shortname");
 		Document doc = beanTransformerService.mergeToISO(smlShortName,
 				mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
@@ -106,7 +106,7 @@ public class SmlXsltTest {
 			assertThat(
 					beanSource,
 					hasXPath(
-							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']/sml:value[text()='shortName']",
+							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']/sml:value[text()='shortname']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

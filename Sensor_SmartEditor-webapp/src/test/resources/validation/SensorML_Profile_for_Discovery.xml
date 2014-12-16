@@ -62,8 +62,6 @@
 		</sch:rule>
 	</sch:pattern>
 	<sch:pattern id="GeneralValidation">
-		<!-- A "description", "keywords", "contact", "inputs" and "outputs" element 
-			has to be present. -->
 		<sch:rule context="//sml:System">
 			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
 			</sch:assert>

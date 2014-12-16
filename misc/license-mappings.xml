@@ -3,7 +3,7 @@
 	xmlns="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="https://source.jasig.org/schemas/maven-notice-plugin/license-lookup https://source.jasig.org/schemas/maven-notice-plugin/license-lookup/license-lookup-v1.0.xsd">
-
+ 
 	<artifact>
 		<groupId>com.jenkov</groupId>
 		<artifactId>prizetags</artifactId>
@@ -55,15 +55,51 @@
 		<license>The Apache Software License, Version 2.0</license>
 	</artifact>
 	<artifact>
-		<groupId></groupId>
-		<artifactId></artifactId>
-		<version></version>
-		<license></license>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.beans</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
 	</artifact>
 	<artifact>
-		<groupId></groupId>
-		<artifactId></artifactId>
-		<version></version>
-		<license></license>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.core</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
 	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.expression</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.jdbc</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.orm</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.web.servlet</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		   <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.web</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact>
+	<artifact>
+		<groupId>org.springframework.webflow</groupId>
+		<artifactId>org.springframework.js.resources</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<license>The Apache Software License, Version 2.0</license>
+	</artifact> 
 </license-lookup>

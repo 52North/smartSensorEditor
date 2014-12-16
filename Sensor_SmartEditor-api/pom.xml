@@ -2,13 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<groupId>org.52North.metadata</groupId>
+		<groupId>org.n52.metadata</groupId>
 		<artifactId>Sensor_SmartEditor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
 	<artifactId>Sensor_SmartEditor-api</artifactId>
 	<modelVersion>4.0.0</modelVersion>
+	
 	<licenses>
 		<license>
 			<name>Apache Software License 2.0</name>
@@ -57,8 +58,6 @@
 			<groupId>org.n52.metadata</groupId>
 			<artifactId>smarteditor-api</artifactId>
 			<version>2.1.6</version>
-			<scope>compile</scope>
-			<type>jar</type>
 		</dependency>
 	</dependencies>
 </project>
