@@ -382,9 +382,9 @@ public class BackendManagerService {
 		String regex = this.activeBeanNamesRegex.getProperty(resourceType);
 		// iterate through map of beans
 		if (!regex.equals("")) {
-				if (beanName.matches(regex)) {
-					return true;
-				}	
+			if (beanName.matches(regex)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -457,9 +457,18 @@ public class BackendManagerService {
 	 * @return
 	 */
 	public String getFileIdentifier() {
-		Object o = getBackend().getStorage().get("fileIdentifier");
-		if (o != null) {
-			return ((FileIdentifierBean) o).getId();
+		String resource = backend.getResourceType();
+		if (!resource.equals("sensor")) {
+			Object o = getBackend().getStorage().get("fileIdentifier");
+			if (o != null) {
+				return ((FileIdentifierBean) o).getId();
+			}
+		} else {
+			Object o = getBackend().getStorage().get("smlUniqueID");
+			if (o != null) {
+				return ((FileIdentifierBean) o).getId();
+
+			}
 		}
 		return null;
 	}
@@ -468,14 +477,26 @@ public class BackendManagerService {
 	 * Generates a new UUID as a metadata identifier
 	 */
 	public void newMetadataIdentifier() {
-		Object o = getBackend().getStorage().get("fileIdentifier");
-		if (o != null) {
-			LOG.info("Updating metadata identifier...");
-			String newID = UUID.randomUUID().toString();
-			((FileIdentifierBean) o).setId(newID);
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("New identifier is: " + newID);
+		String newID = UUID.randomUUID().toString();
+		
+			Object o = getBackend().getStorage().get("fileIdentifier");
+			if (o != null) {
+				LOG.info("Updating metadata identifier fileIdentifier...");
+				((FileIdentifierBean) o).setId(newID);
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("New identifier is: " + newID);
+				}
 			}
-		}
+		
+			 o = getBackend().getStorage().get("smlUniqueID");
+			if (o != null) {
+				LOG.info("Updating metadata identifier smlUniqueID...");
+				((FileIdentifierBean) o).setId(newID);
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("New identifier is: " + newID);
+				}
+			}
+		
+
 	}
 }

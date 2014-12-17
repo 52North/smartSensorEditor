@@ -28,7 +28,7 @@
 			<sml:identifier name="uniqueID">
 				<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
 					<sml:value>
-						<xsl:value-of select="$beanDoc/*/uniqueID" />
+						<xsl:value-of select="$beanDoc/FileIdentifier/identifier" />
 					</sml:value>
 				</sml:Term>
 			</sml:identifier>

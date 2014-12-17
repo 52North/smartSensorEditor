@@ -116,7 +116,7 @@ public class SmlXsltTest {
 	}
 	@Test
 	public void testUniqueID() {
-		BeanUtil.setProperty(smlUniqueID, "uniqueID", "testunique");
+		BeanUtil.setProperty(smlUniqueID, "id", "testunique");
 		Document doc = beanTransformerService.mergeToISO(smlUniqueID,
 				mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);

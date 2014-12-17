@@ -15,10 +15,10 @@
 		<lang:property name="transformToISO" value="/xslt/SmlShortName_sml.xslt" />
 		<lang:property name="transformToBean" value="/xslt/SmlShortName_bean.xslt" />
 	</lang:groovy>
-	 <lang:groovy id="smlUniqueID" script-source="classpath:groovy/SmlUniqueIDBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
-	</lang:groovy>
+<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
+		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
+	</bean>
 
     <bean id="beanTransformerService" class="de.conterra.smarteditor.service.BeanTransformerService">
         <property name="multiElementName" value="multi_container"/>

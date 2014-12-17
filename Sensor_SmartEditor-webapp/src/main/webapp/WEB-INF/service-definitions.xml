@@ -45,12 +45,12 @@
 				<entry key="isoValidator" value-ref="isoValidator" />
 				<entry key="inspireValidator" value-ref="inspireValidator" />
 				<entry key="smlValidator" value-ref="smlValidator" />
+				<entry key="extendedSmlValidator" value-ref="extendedSmlValidator" />
 			</map>
 		</property>
 		<property name="backend" ref="backendBean" />
 		<property name="beanTransformer" ref="beanTransformerService" />
 		<property name="xsltTransformer" ref="xsltTransformerService" />
-		<!-- <property name="activeBeanNamesRegex" ref="sensor_"/> -->
 		<property name="activeBeanNamesRegex">
 			<props>
 				<prop key="sensor">(sml\w+)|(\w+sml)</prop>

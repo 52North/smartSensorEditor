@@ -29,8 +29,8 @@
             </label>
         </td>
         <td>
-            <form:input htmlEscape="true" path="storage['smlUniqueID'].uniqueID" size="100" id="resTitle"/><br>
-            <form:errors path="storage['smlUniqueID'].uniqueID" cssClass="ui-state-error-text"/>
+            <form:input htmlEscape="true" path="storage['smlUniqueID'].id" size="100" id="resTitle"/><br>
+            <form:errors path="storage['smlUniqueID'].id" cssClass="ui-state-error-text"/>
         </td>
     </tr>
 </table>

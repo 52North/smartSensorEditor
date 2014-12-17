@@ -126,7 +126,7 @@ public class BeanXsltTest {
 		try {
 			assertThat(
 					bean,
-					hasXPath("/SmlUniqueID/uniqueID[text()='testunique']",
+					hasXPath("/FileIdentifier/identifier[text()='testunique']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
