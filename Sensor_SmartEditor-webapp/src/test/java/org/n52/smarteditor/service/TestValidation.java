@@ -125,7 +125,7 @@ public class TestValidation {
 	 */
 	@Test
 	public void testOneMemberExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: member not recognized",
@@ -136,13 +136,13 @@ public class TestValidation {
 	@Test
 	public void testOneMemberNOTExistsOrMoreThanOne() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noMember.xml");
+		String resultString = validateResource("classpath:/validation/input/noMember.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing member not identified ",
 				resultString,
 				containsString("<svrl:text>errors.validation.SML.member</svrl:text>"));
-		 resultString = validateResource("/validation/input/manyMembers.xml");
+		 resultString = validateResource("classpath:/validation/input/manyMembers.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: too many members not identified ",
@@ -153,7 +153,7 @@ public class TestValidation {
 	
 	@Test
 	public void testOneSystemExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: system not recognized",
@@ -164,7 +164,7 @@ public class TestValidation {
 	@Test
 	public void testOneSystemNOTExistsOrMoreThanOne() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noSystem.xml");
+		String resultString = validateResource("classpath:/validation/input/noSystem.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing system not identified ",
@@ -180,7 +180,7 @@ public class TestValidation {
 	}
 	@Test
 	public void testKeywordListExistsSystem() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: keywordList not recognized",
@@ -191,7 +191,7 @@ public class TestValidation {
 	@Test
 	public void testKeywordListNOTExistsSystem() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noKeywordList.xml");
+		String resultString = validateResource("classpath:/validation/input/noKeywordList.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing keywordList not identified ",
@@ -200,7 +200,7 @@ public class TestValidation {
 	}
 	@Test
 	public void testDefinitionInTermExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: definition in one or more Term elements within //sml:identification/sml:IdentifierList/sml:identifier/sml:Term  not recognized",
@@ -211,7 +211,7 @@ public class TestValidation {
 	@Test
 	public void testDefinitionInTermNotExists() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noDefinitionInTerm.xml");
+		String resultString = validateResource("classpath:/validation/input/noDefinitionInTerm.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing definition in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term  not identified ",
@@ -220,7 +220,7 @@ public class TestValidation {
 	}
 	@Test
 	public void testDefinitionLongNameExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: definition urn:ogc:def:identifier:OGC:1.0:longName in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term not recognized",
@@ -231,7 +231,7 @@ public class TestValidation {
 	@Test
 	public void testDefinitionLongNameNotExists() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noDefinitionLongName.xml");
+		String resultString = validateResource("classpath:/validation/input/noDefinitionLongName.xml");
 		 //System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing definition urn:ogc:def:identifier:OGC:1.0:longName in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term  not identified ",
@@ -240,7 +240,7 @@ public class TestValidation {
 	}
 	@Test
 	public void testDefinitionShortNameExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: definition urn:ogc:def:identifier:OGC:1.0:shortName in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term not recognized",
@@ -251,7 +251,7 @@ public class TestValidation {
 	@Test
 	public void testDefinitionShortNameNotExists() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noDefinitionShortName.xml");
+		String resultString = validateResource("classpath:/validation/input/noDefinitionShortName.xml");
 		 //System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing definition urn:ogc:def:identifier:OGC:1.0:shortName in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term  not identified ",
@@ -260,7 +260,7 @@ public class TestValidation {
 	}
 	@Test
 	public void testDefinitionUniqueIDExists() throws SAXException, IOException {
-		String resultString = validateResource("/templates/sensor.xml");
+		String resultString = validateResource("classpath:/templates/sensor.xml");
 		// System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: definition urn:ogc:def:identifier:OGC:1.0:uniqueID in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term not recognized",
@@ -271,7 +271,7 @@ public class TestValidation {
 	@Test
 	public void testDefinitionUniqueIDNotExists() throws SAXException,
 			IOException {
-		String resultString = validateResource("/validation/input/noUniqueID.xml");
+		String resultString = validateResource("classpath:/validation/input/noUniqueID.xml");
 		 //System.out.println(resultString);
 		assertThat(
 				"Validation incorrect: missing definition urn:ogc:def:identifier:OGC:1.0:uniqueID in //sml:identification/sml:IdentifierList/sml:identifier/sml:Term  not identified ",

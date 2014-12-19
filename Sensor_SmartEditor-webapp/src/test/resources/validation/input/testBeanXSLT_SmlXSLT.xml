@@ -11,7 +11,7 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 			<sml:keywords>
 			
 				<sml:KeywordList>
-					<sml:keyword>testkeyword</sml:keyword>
+					<sml:keyword />
 				</sml:KeywordList>
 			</sml:keywords>
 			<sml:identification>

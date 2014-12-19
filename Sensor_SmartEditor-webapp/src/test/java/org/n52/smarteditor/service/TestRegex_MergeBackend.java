@@ -46,7 +46,7 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/sml-BackendManagerService-config.xml")
+@ContextConfiguration(locations = "/sml-BackendManagerService-config.xml")
 public class TestRegex_MergeBackend {
 	@Resource(name = "backendSetupService")
 	BackendManagerService backendManagerService;
@@ -55,7 +55,7 @@ public class TestRegex_MergeBackend {
 	public void before() {
 		backendManagerService.setMergeDocument(DOMUtil
 				.createDocumentFromSystemID(
-						"classpath:/validation/input/regexAndMerge.xml", true));
+						"/validation/input/regexAndMerge.xml", true));
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class TestRegex_MergeBackend {
 	@Test
 	public void testRegexNOSML() {
 		backendManagerService.setMergeDocument(DOMUtil
-				.createDocumentFromSystemID("classpath:/templates/dataset.xml",
+				.createDocumentFromSystemID("/templates/dataset.xml",
 						true));
 		for (Map.Entry<String, BaseBean> lEntry : backendManagerService
 				.getBackend().getStorage().entrySet()) {

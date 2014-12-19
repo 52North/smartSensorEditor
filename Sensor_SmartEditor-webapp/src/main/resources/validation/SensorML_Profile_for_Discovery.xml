@@ -65,20 +65,17 @@
 		<!-- A "description", "keywords", "contact", "inputs" and "outputs" element 
 			has to be present. -->
 		<sch:rule context="//sml:System">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
 		<sch:rule context="//sml:Component">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
 		<!-- Each "identifier/Term" element contained in the "IdentifierList" must 
 			have a "definition" attribute. This attribute links to the semantics of the 
 			identifier. -->
 		<sch:rule
 			context="//sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
-			<sch:assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition
-			</sch:assert>
+			<sch:assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition</sch:assert>
 		</sch:rule>
 		<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:uniqueID". 
 			The value of its contained "Term" element uniquely identifies the instance. 

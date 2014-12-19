@@ -22,6 +22,7 @@ import de.conterra.smarteditor.beans.BaseBean
 
 @XStreamAlias("SmlKeyword")
 class SmlKeywordBean extends BaseBean {
+@XStreamAlias("keyword")
   String keyword
 }
 

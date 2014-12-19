@@ -65,20 +65,17 @@
 		<!-- A "description", "keywords", "contact", "inputs" and "outputs" element 
 			has to be present. -->
 		<sch:rule context="//sml:System">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
 		<sch:rule context="//sml:Component">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
 		<!-- Each "identifier/Term" element contained in the "IdentifierList" must 
 			have a "definition" attribute. This attribute links to the semantics of the 
 			identifier. -->
 		<sch:rule
 			context="//sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
-			<sch:assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition
-			</sch:assert>
+			<sch:assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition</sch:assert>
 		</sch:rule>
 		<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:uniqueID". 
 			The value of its contained "Term" element uniquely identifies the instance. 
@@ -99,38 +96,33 @@
 
 
 
-	<sch:pattern id="GeneralValidationExtended">
+	 <sch:pattern id="GeneralValidationExtended">
 
 		<sch:rule context="//sml:identification">
 			<sch:let name="uniqueIDExtended_Text"
 				value="sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value/text()" />
-			<sch:assert test="$uniqueIDExtended_Text"
-				id="storage[&quot;FileIdentifier&quot;].identifier">errors.validation.SML.identification.uniqueID
-			</sch:assert>
+			<sch:assert test="$uniqueIDExtended_Text != ''"
+				id="storage[&quot;FileIdentifier&quot;].identifier">errors.validation.SML.identification.uniqueID</sch:assert>
 
 			<sch:let name="longNameExtended_Text"
 				value="sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:longName']/sml:value/text()" />
 			<sch:assert test="$longNameExtended_Text"
-				id="storage[&quot;SmlLongName&quot;].longName">errors.validation.SML.identification.longName
-			</sch:assert>
+				id="storage[&quot;smlLongName&quot;].longName">errors.validation.SML.identification.longName</sch:assert>
 
 			<sch:let name="shortNameExtended_Text"
 				value="sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:shortName']/sml:value/text()" />
 			<sch:assert test="$shortNameExtended_Text"
-				id="storage[&quot;SmlShortName&quot;].shortName">errors.validation.SML.identification.shortName
-			</sch:assert>
+				id="storage[&quot;smlShortName&quot;].shortName">errors.validation.SML.identification.shortName</sch:assert>
 		</sch:rule>
 
 		<sch:rule context="//sml:System">
 			<sch:let name="oneKeywordSystem" value="//sml:keywords/sml:KeywordList/sml:keyword/text()" />
-			<sch:assert test="$oneKeywordSystem">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="$oneKeywordSystem" id="storage[&quot;smlKeyword&quot;].items">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
 
 		<sch:rule context="//sml:Component">
 			<sch:let name="oneKeywordComponent" value="//sml:keywords/sml:KeywordList/sml:keyword/text()" />
-			<sch:assert test="$oneKeywordComponent">errors.validation.SML.KeywordList
-			</sch:assert>
+			<sch:assert test="$oneKeywordComponent" id="storage[&quot;smlKeyword&quot;].items">errors.validation.SML.KeywordList</sch:assert>
 		</sch:rule>
-	</sch:pattern>
+	</sch:pattern> 
 </sch:schema>
