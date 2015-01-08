@@ -54,7 +54,7 @@ import de.conterra.smarteditor.util.DOMUtil;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/sml-transformer-config.xml")
+@ContextConfiguration(locations = "/sml-transformer-config.xml")
 public class SmlXsltTest {
 	static private Logger LOG = Logger.getRootLogger();
 	NamespaceContext usingNamespaces;

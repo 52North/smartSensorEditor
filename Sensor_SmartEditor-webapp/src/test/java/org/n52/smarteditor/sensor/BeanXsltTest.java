@@ -55,7 +55,7 @@ import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/sml-transformer-config.xml")
+@ContextConfiguration(locations = "/sml-transformer-config.xml")
 public class BeanXsltTest {
 	NamespaceContext usingNamespaces;
 	static private Logger LOG = Logger.getRootLogger();
