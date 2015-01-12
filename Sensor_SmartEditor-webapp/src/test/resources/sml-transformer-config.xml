@@ -19,7 +19,14 @@
 		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
 	</bean>
-
+<lang:groovy id="smlKeyword" script-source="classpath:groovy/SmlKeywordBean.groovy"
+		 />
+	<bean id="multiSmlKeyword" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		>
+		<property name="transformToISO" value="/xslt/SmlKeyword_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlKeyword_bean.xslt" />
+		<property name="bean" ref="smlKeyword" />
+	</bean>
     <bean id="beanTransformerService" class="de.conterra.smarteditor.service.BeanTransformerService">
         <property name="multiElementName" value="multi_container"/>
         <property name="xsltTransformer" ref="xsltTransformerService"/>
@@ -35,4 +42,17 @@
             </map>
         </property>
     </bean>
+    <bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean">
+		<property name="validatorId" value="smlValidator" />
+		<property name="stickyErrorMessages" value="false" />
+		<!-- default validator id -->
+		<property name="storage">
+			<map>
+				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
+				<entry key="smlLongName" value-ref="smlLongName" />
+				<entry key="smlShortName" value-ref="smlShortName" />
+				<entry key="smlUniqueID" value-ref="smlUniqueID" />
+			</map>
+		</property>
+	</bean>
 </beans>

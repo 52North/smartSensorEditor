@@ -48,7 +48,7 @@ import org.w3c.dom.Document;
 import org.xmlmatchers.namespace.SimpleNamespaceContext;
 
 import de.conterra.smarteditor.beans.BaseBean;
-
+import de.conterra.smarteditor.beans.MultipleElementBean;
 import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
@@ -62,25 +62,36 @@ public class SmlXsltTest {
 	BeanTransformerService beanTransformerService;
 
 	Document mRefDatasetDocument = DOMUtil.createFromStream(
-			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanXSLT_SmlXSLT.xml"), true);
+			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT.xml"), true);
 
 	@Resource(name = "smlLongName")
 	BaseBean smlLongName;
 	
 	@Resource(name = "smlShortName")
 	BaseBean smlShortName;
-
+     
 	@Resource(name = "smlUniqueID")
 	BaseBean smlUniqueID;
+	
+	@Resource(name = "smlKeyword")
+	BaseBean smlKeyword;
+
+	@Resource(name = "multiSmlKeyword")
+    MultipleElementBean multiSmlKeyword;
 	@Before
 	public void before() {
 		usingNamespaces = new SimpleNamespaceContext().withBinding("sml",
 				"http://www.opengis.net/sensorML/1.0.1");
 	}
 
+	/**
+	 * This method tests, if the test-value for longName is copied into the xml document.
+	 */
 	@Test
 	public void testLongName() {
+		//
 		BeanUtil.setProperty(smlLongName, "longName", "testname");
+		//
 		Document doc = beanTransformerService.mergeToISO(smlLongName,
 				mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
@@ -117,6 +128,7 @@ public class SmlXsltTest {
 	@Test
 	public void testUniqueID() {
 		BeanUtil.setProperty(smlUniqueID, "id", "testunique");
+		
 		Document doc = beanTransformerService.mergeToISO(smlUniqueID,
 				mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
@@ -125,6 +137,26 @@ public class SmlXsltTest {
 					beanSource,
 					hasXPath(
 							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value[text()='testunique']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	@Test
+	public void testKeyword() {
+	
+		BeanUtil.setProperty(smlKeyword, "keyword","testkeyword");
+		multiSmlKeyword.getItems().add(smlKeyword);
+		Document doc = beanTransformerService.mergeToISO(multiSmlKeyword,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"//sml:member/sml:System/sml:keywords/sml:KeywordList/sml:keyword[text()='testkeyword']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

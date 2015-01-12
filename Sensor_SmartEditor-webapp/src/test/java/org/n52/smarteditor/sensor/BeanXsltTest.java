@@ -33,9 +33,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import javax.annotation.Resource;
 import javax.xml.namespace.NamespaceContext;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+
 
 
 import org.apache.log4j.Logger;
@@ -46,10 +46,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
-
 import org.xmlmatchers.namespace.SimpleNamespaceContext;
 
 import de.conterra.smarteditor.beans.BaseBean;
+import de.conterra.smarteditor.beans.MultipleElementBean;
 /*import de.conterra.smarteditor.edit.services.BeanTransformerTest;*/
 import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
@@ -70,21 +70,28 @@ public class BeanXsltTest {
 	@Resource(name = "smlUniqueID")
 	BaseBean smlUniqueID;
 
+	@Resource(name = "multiSmlKeyword")
+	BaseBean multiSmlKeyword;
+	
 	Document mDatasetDocument = DOMUtil.createFromStream(
-			BeanXsltTest.class.getResourceAsStream("/validation/input/testBeanXSLT_SmlXSLT.xml"), true);
+			BeanXsltTest.class.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"), true);
 
 	@Before
 	public void before() {
 		usingNamespaces = new SimpleNamespaceContext().withBinding("sml",
-				"http://www.opengis.net/sensorML/1.0");
+				"http://www.opengis.net/sensorML/1.0.1");
 	}
-
+/**
+ * This method tests, if the test-value for longName within the xml document is copied into the bean.
+ * @throws Exception
+ */
 	@Test
 	public void testLongName() throws Exception {
+		//copy test-value into bean
 		BaseBean lBean = beanTransformerService.initBean(smlLongName,
 				mDatasetDocument);
 		Assert.assertNotNull(lBean);
-
+       //transform to xml for testing
 		Document beanXML = beanTransformerService.toXML(lBean);
 		Source bean = new DOMSource(beanXML);
 		try {
@@ -97,12 +104,17 @@ public class BeanXsltTest {
 			throw e;
 		}
 	}
+	/**
+	 * This method tests, if the test-value for shortName within the xml document is copied into the bean.
+	 * @throws Exception
+	 */
 	@Test
 	public void testShortName() throws Exception {
+		//copy test-value into bean
 		BaseBean lBean = beanTransformerService.initBean(smlShortName,
 				mDatasetDocument);
 		Assert.assertNotNull(lBean);
-
+		 //transform to xml for testing
 		Document beanXML = beanTransformerService.toXML(lBean);
 		Source bean = new DOMSource(beanXML);
 		try {
@@ -115,12 +127,17 @@ public class BeanXsltTest {
 			throw e;
 		}
 	}
+/**
+ * This method tests, if the test-value for uniqueID within the xml document is copied into the bean.
+ * @throws Exception
+ */
 	@Test
 	public void testUniqueID() throws Exception {
+		//copy test-value into bean
 		BaseBean lBean = beanTransformerService.initBean(smlUniqueID,
 				mDatasetDocument);
 		Assert.assertNotNull(lBean);
-
+		//transform to xml for testing
 		Document beanXML = beanTransformerService.toXML(lBean);
 		Source bean = new DOMSource(beanXML);
 		try {
@@ -133,5 +150,27 @@ public class BeanXsltTest {
 			throw e;
 		}
 	}
-
+	/**
+	 * This method tests, if the test-value for uniqueID within the xml document is copied into the bean.
+	 * @throws Exception
+	 */
+		@Test
+		public void testKeyword() throws Exception {
+			//copy test-value into bean
+			BaseBean lBean = beanTransformerService.initBean(multiSmlKeyword,
+					mDatasetDocument);
+			Assert.assertNotNull(lBean);
+			//transform to xml for testing
+			Document beanXML = beanTransformerService.toXML(lBean);
+			Source bean = new DOMSource(beanXML);
+			try {
+				assertThat(
+						bean,
+						hasXPath("//SmlKeyword/keyword[text()='testkeyword']",
+								usingNamespaces));
+			} catch (NoSuchMethodError e) {
+				LOG.error("Possibly XPath is invalid with compared source", e);
+				throw e;
+			}
+		}
 }
