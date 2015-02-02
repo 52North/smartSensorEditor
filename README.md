@@ -45,7 +45,7 @@ The smartEditor uses the Spring Framework. For functionalities which should be e
 If only one of the sub modules should be build with maven, then go to the main folder of the whole project. With the attribute -pl a specific modul can be selected, like:
 <pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp
 </code></pre>
-With the following command also all sub projects on which the project Sensor\_SmartEditor-webapp depends are also built: 
+With the following command also all sub projects on which the sub project Sensor\_SmartEditor-webapp depends are also built: 
 <pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp -am
 </code></pre>
 In this case the whole project is build and this command is the same like: mvn clean install.
