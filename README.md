@@ -15,7 +15,16 @@ smartEditor: 2.1.6 <br>
 
 2. Installation
 -------------
+To run the software the project has to be downloaded using git. You can do it using the console, choose a folder for the download via the command cd. 
+The download can be done using HTTPS:
+<pre><code>git clone https://github.com/janaGit/Sensor_SmartEditor.git
+</code></pre>
 
+Next you have to make sure that the needed software (Java, Maven and Tomcat) are installed. Then the code can be compiled and built using maven:
+<pre><code>mvn clean package
+</code></pre>
+
+After that the created file Sensor\_SmartEditor.war in Sensor\_SmartEditor\Sensor_SmartEditor-webapp\target has to be put into the webapp 
 
 
 
