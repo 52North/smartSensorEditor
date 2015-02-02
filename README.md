@@ -57,7 +57,18 @@ Here the specific identifier has to be discovered to name the file which should 
 - EditorContext.java within the package de.conterra.smarteditor.xml
   - method "public String getNamespaceURI(String prefix)" and method public String getPrefix(String namespace) for sml     namespace adopted
 
+The following files of the smartEditor-webapp sub project are needed to be modified or created:
 
+ - create new groovy beans in resources/groovy
+ - create new file SimpleCopy.xslt in resources/internal
+ - create new template sensor.xml in resources/templates
+ - create new XML file for validation in resources/validation
+ - create new XSLT files to transform between bean and document in resources/xslt
+ - adapt codelist_enumeration.xml for a new sensor button in resources/
+ - adapt isolist_de.properties for a new sensor button in resources/
+ - adapt isolist.properties for a new sensor button in resources/
+ - adapt messages_de.properties for error messages, element labels and text about validation in resources/
+ - - adapt messages.properties for error messages, element labels and text about validation in resources/
 
 4. How To
 -------
