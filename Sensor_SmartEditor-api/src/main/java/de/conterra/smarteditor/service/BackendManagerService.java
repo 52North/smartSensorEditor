@@ -90,7 +90,6 @@ public class BackendManagerService {
 
 	private Properties activeBeanNamesRegex;
 
-	private Pattern activeBeanNamesPattern = null;
 
 	public boolean isUpdate() {
 		return update;
@@ -246,7 +245,7 @@ public class BackendManagerService {
 		// set new beans
 		backend.setStorage(lNewBackend);
 		LOG.info("Backend successfully initialized");
-		// set resource typ
+		// set resource type
 		backend.setResourceType(getResourceType());
 	}
 
