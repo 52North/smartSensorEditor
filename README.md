@@ -39,6 +39,21 @@ To mix the files of the smartEditor project with the one of this project two dif
 
 The smartEditor uses the Spring Framework. For functionalities which should be easily adapted and extended the smartEditor uses XML and XSLT files. So the most added files are XML, XSLT, .properties and .groovy files. For the front end java server pages (jsp) are used. The back end runs on java. To test the implemented code several JUnit tests were written. 
 
+The following files of the smartEditor project needed to be modified:
+
+- SaveLocalController.java within the package de.conterra.smarteditor.controller 
+ " lFileId=lUtil.evaluateAsString("//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Te  rm[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value/text()", lDoc); "
+Here the specific identifier has to be discovered to name the file which should be stored locally.
+
+- BackendManagerService.java within the package de.conterra.smarteditor.service
+  - method "public String getResourceType()" adapted to get to know if the resource type is== sensor.
+  - new method "public boolean isBeanActive(String beanName)" created to get sure that only the needed beans for the  
+    actual form are merged with the document.
+  - method "public String getFileIdentifier()" adapted to get the Id from the BaseBean "smlUniqueID" when the sensorML     form is used.
+  - method "public void newMetadataIdentifier()" to set the new ID for the smlUniqueID bean.
+
+
+
 4. How To
 -------
 ###How to build the sub modules of the project with maven ?###
