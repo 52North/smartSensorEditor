@@ -68,7 +68,7 @@ The following files of the smartEditor-webapp sub project are needed to be modif
  - adapt isolist_de.properties for a new sensor button in resources/
  - adapt isolist.properties for a new sensor button in resources/
  - adapt messages_de.properties for error messages, element labels and text about validation in resources/
- - - adapt messages.properties for error messages, element labels and text about validation in resources/
+ - adapt messages.properties for error messages, element labels and text about validation in resources/
 
 4. How To
 -------
