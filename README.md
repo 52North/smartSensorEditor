@@ -20,9 +20,10 @@ The download can be done using HTTPS:
 <pre><code>git clone https://github.com/janaGit/Sensor_SmartEditor.git
 </code></pre>
 
-Next you have to make sure that the needed software (Java, Maven and Tomcat) are installed. Then the code can be compiled and built using maven:
+Next you have to make sure that the needed software (Java, Maven and Tomcat) are installed. Then the code can be compiled and built using maven. You have to perform the following instruction within the main folder of the Sensor\_SmartEditor project. 
 <pre><code>mvn clean package
 </code></pre>
+||  So both modules, the Sensor\_SmartEditor-api and the Sensor\_SmartEditor-webapp are build. Within the section "How two" it is explained how only one of the submodules can be built with maven.  ||
 
 After that the created file "Sensor\_SmartEditor.war" which is located in the folder "Sensor\_SmartEditor\Sensor_SmartEditor-webapp\target" has to be put into the webapp folder of the tomcat project.
 Then you can start Tomcat, open the browser and go to: http://localhost:8080/Sensor_SmartEditor/
@@ -40,7 +41,16 @@ The smartEditor uses the Spring Framework. For functionalities which should be e
 
 4. How To
 -------
-###submodule bauen dokumentieren:###
+###How to build the sub modules of the project with maven ?###
+If only one of the sub modules should be build with maven, then go to the main folder of the whole project. With the attribute -pl a specific modul can be selected, like:
+<pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp
+</code></pre>
+With the following command also all sub projects on which the project Sensor\_SmartEditor-webapp depends are also built: 
+<pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp -am
+</code></pre>
+In this case the whole project is build and this command is the same like: mvn clean install.
+(see: http://blog.sonatype.com/2009/10/maven-tips-and-tricks-advanced-reactor-options)
+
 
 5. Known Bugs AND To-Dos
 -----------
