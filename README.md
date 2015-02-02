@@ -8,6 +8,11 @@ Next to the functionalities of the smartEditor the Sensor\_SmartEditor provides 
 
 1. Version Notes
 --------------
+Java: jdk 1.7.0_71 <br>
+Apache Maven: 3.2.3 <br>
+Apache Tomcat: 7.0.56 <br>
+smartEditor: 2.1.6 <br>
+
 
 
 
