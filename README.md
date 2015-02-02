@@ -51,6 +51,9 @@ With the following command also all sub projects on which the sub project Sensor
 In this case the whole project is build and this command is the same like: mvn clean install.
 (see: http://blog.sonatype.com/2009/10/maven-tips-and-tricks-advanced-reactor-options)
 
+###How to create my own form ?###
+In the future there will be a website which explains which different files have to modified and created to build new forms and form elements and make it possible to validate them against an arbitrary standard.
+
 
 5. Known Bugs AND To-Dos
 -----------
