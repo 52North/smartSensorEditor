@@ -24,8 +24,10 @@ Next you have to make sure that the needed software (Java, Maven and Tomcat) are
 <pre><code>mvn clean package
 </code></pre>
 
-After that the created file Sensor\_SmartEditor.war in Sensor\_SmartEditor\Sensor_SmartEditor-webapp\target has to be put into the webapp 
+After that the created file "Sensor\_SmartEditor.war" which is located in the folder "Sensor\_SmartEditor\Sensor_SmartEditor-webapp\target" has to be put into the webapp folder of the tomcat project.
+Then you can start Tomcat, open the browser and go to: http://localhost:8080/Sensor_SmartEditor/
 
+The form for SensorML can be opened by clicking on the button "sensor".
 
 
 3. Structure
