@@ -63,10 +63,10 @@ Here the specific identifier has to be discovered to name the file which should 
 -------
 ###How to build the sub modules of the project with maven ?###
 If only one of the sub modules should be build with maven, then go to the main folder of the whole project. With the attribute -pl a specific modul can be selected, like:
-<pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp
+<pre><code>mvn clean package -pl Sensor_SmartEditor-webapp
 </code></pre>
 With the following command also all sub projects on which the sub project Sensor\_SmartEditor-webapp depends are also built: 
-<pre><code>mvn clean package -pl Sensor\_SmartEditor-webapp -am
+<pre><code>mvn clean package -pl Sensor_SmartEditor-webapp -am
 </code></pre>
 In this case the whole project is build and this command is the same like: mvn clean install.
 (see: http://blog.sonatype.com/2009/10/maven-tips-and-tricks-advanced-reactor-options)
