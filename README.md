@@ -13,7 +13,7 @@ Apache Maven: 3.2.3 <br>
 Apache Tomcat: 7.0.56 <br>
 smartEditor: 2.1.6 <br>
 
-2. Installation
+2. Run Sensor_SmartEditor
 -------------
 To run the software the project has to be downloaded using git. You can do it using the console, choose a folder for the download via the command cd. 
 The download can be done using HTTPS:
