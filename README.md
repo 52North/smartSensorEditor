@@ -13,16 +13,19 @@ Apache Maven: 3.2.3 <br>
 Apache Tomcat: 7.0.56 <br>
 smartEditor: 2.1.6 <br>
 
-
-
-
-2. Structure
----------
-
-
-
-3. Installation
+2. Installation
 -------------
+
+
+
+
+3. Structure
+---------
+The Sensor\_SmartEditor uses maven to get the code of the smartEditor. The Sensor\_SmartEditor uses two components of the smartEditor: The smartEditor-api and the smartEditor-webapp. New files and files from the smartEditor which were needed to be modified are within the folders of this project.
+
+To mix the files of the smartEditor project with the one of this project two different ways are used. For the smartEditor-webapp the maven-war-plugin with its overlay functionality is used. Because the smartEditor-api is a war-file the overlay could not be used. Instead the maven-shade-plugin mixes the .class files.
+
+The smartEditor uses the Spring Framework. For functionalities which should be easily adapted and extended the smartEditor uses XML and XSLT files. So the most added files are XML, XSLT, .properties and .groovy files. For the front end java server pages (jsp) are used. The back end runs on java. To test the implemented code several JUnit tests were written. 
 
 4. How To
 -------
