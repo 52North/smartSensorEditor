@@ -71,7 +71,18 @@ The following files of the smartEditor-webapp sub project are needed to be modif
  - adapt messages.properties for error messages, element labels and text about validation in resources/
  - create new javascript file for highlighting the form fields in webapp/js/validation
  - create build.properties to declare the database connection in webapp/META-INF
- - create file log4j.xml to define the logging variables
+ - create file log4j.xml to define the logging variables in webapp/WEB-INF/classes
+ - adapt tiles-editor.xml to declare the .jsp files for each form element and body_sensor.jsp in webapp/WEB-INF/defs
+ - adapt tiles-elements.xml to define the .jsp files for multi form elements in webapp/WEB-INF/defs
+ - create new jsp-files for the different form elements in webapp/WEB-INF/jsp/elements
+ - (adapt start.jsp for the title Sensor_SmartEditor in webapp/WEB-INF/jsp/start)
+ - create new body_sensor.jsp to define which elements should contain the form in webapp/WEB-INF/jsp
+ - adapt menu.jsp to show the right error message (title or UniqueID is missing in method 
+   "uniqueID\_or\_Title_missing()") in webapp/WEB-INF/jsp
+ - adapt beans-definitions.xml to define the beans of the form elements and declare them in backendBean in 
+   webapp/WEB-INF
+ - adapt service-definitions.xml to declare the validator and set the activeBeanNamesRegex in webapp/WEB-INF
+ - adapt validator-definitions.xml to define the validator in webapp/WEB-INF
 
 4. How To
 -------
