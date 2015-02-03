@@ -105,6 +105,11 @@ In the future there will be a website which explains which different files have 
 
 6. Known Bugs AND To-Dos
 -----------
-###fehler, wenn unique Id gelöscht wurde###
+###No error messages, when uniqueID element is empty###
+Situation: The form element for the key value uniqueID is empty and the form is validated by the extended sml metadata validator.
+Action: Clicking on the button "publish".
+Error: No error messages are shown and all boxes are highlighted by a red box. (But a new uniqueID was created. When clicking a second time on the "publish"-button (uniqueID exists) then there is no error anymore.)
+
+
 ###newMetadataIdentifier Methode überarbeiten###
 ### ISO Formular funktioniert nicht###
