@@ -112,13 +112,27 @@ In the future there will be a website which explains which different files have 
 <td>  The form element for the key value uniqueID is empty and the form is validated by the extended sml metadata validator. </td>
 </tr>
 <tr>
-<td>Action: </td>
+<td>Action </td>
 <td> Clicking on the button "publish".  </td>
 </tr>
 <tr>
-<td>Error: </td>
+<td>Error </td>
 <td> No error messages are shown and all boxes are highlighted by a red box. (But a new uniqueID was created.) </td>
 </tr>
 </table>
 ###newMetadataIdentifier Methode überarbeiten###
-### ISO Formular funktioniert nicht###
+### The other forms don't work###
+<table>
+<tr>
+<td>Situation</td>
+<td> When another form than that for SensorML is opened.  </td>
+</tr>
+<tr>
+<td>Action </td>
+<td> Clicking on the button "save locally" </td>
+</tr>
+<tr>
+<td>Error </td>
+<td> Either nothing happens (like the form " or no values are inserted into the XML document.   </td>
+</tr>
+</table>
