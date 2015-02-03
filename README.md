@@ -108,11 +108,17 @@ In the future there will be a website which explains which different files have 
 ###No error messages, when uniqueID element is empty###
 <table>
 <tr>
-<td>Situation:</td><td>  The form element for the key value uniqueID is empty and the form is validated by the extended sml metadata validator. <td></tr>
+<td>Situation</td>
+<td>  The form element for the key value uniqueID is empty and the form is validated by the extended sml metadata validator. </td>
+</tr>
 <tr>
-<td>Action: </td><td> Clicking on the button "publish".  </td></tr>
-<td>Error: </td><td> No error messages are shown and all boxes are highlighted by a red box. (But a new uniqueID was created.) </td>
-
+<td>Action: </td>
+<td> Clicking on the button "publish".  </td>
+</tr>
+<tr>
+<td>Error: </td>
+<td> No error messages are shown and all boxes are highlighted by a red box. (But a new uniqueID was created.) </td>
+</tr>
 </table>
 ###newMetadataIdentifier Methode überarbeiten###
 ### ISO Formular funktioniert nicht###
