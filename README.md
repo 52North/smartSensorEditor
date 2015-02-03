@@ -15,7 +15,7 @@ smartEditor: 2.1.6 <br>
 
 2. License
 ----------------
-
+The software is released under the Apache License version 2. (http://www.apache.org/licenses/LICENSE-2.0)
 3. Run Sensor_SmartEditor
 -------------
 To run the software the project has to be downloaded using git. You can do it using the console, choose a folder for the download via the command cd. 
