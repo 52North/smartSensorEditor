@@ -102,37 +102,3 @@ In this case the whole project is build and this command is the same like: mvn c
 ###How to create my own form ?###
 In the future there will be a website which explains which different files have to modified and created to build new forms and form elements and make it possible to validate them against an arbitrary standard.
 
-
-6. Known Bugs AND To-Dos
------------
-###No error messages, when uniqueID element is empty###
-<table>
-<tr>
-<td>Situation</td>
-<td>  The form element for the key value uniqueID is empty and the form is validated by the extended sml metadata validator. </td>
-</tr>
-<tr>
-<td>Action </td>
-<td> Clicking on the button "publish".  </td>
-</tr>
-<tr>
-<td>Error </td>
-<td> No error messages are shown and all boxes are highlighted by a red box. (But a new uniqueID was created.) </td>
-</tr>
-</table>
-###newMetadataIdentifier Methode überarbeiten###
-### The other forms don't work###
-<table>
-<tr>
-<td>Situation</td>
-<td> When another form than that for SensorML is opened.  </td>
-</tr>
-<tr>
-<td>Action </td>
-<td> Clicking on the button "save locally" </td>
-</tr>
-<tr>
-<td>Error </td>
-<td> Either nothing happens (like the form " or no values are inserted into the XML document.   </td>
-</tr>
-</table>
