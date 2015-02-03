@@ -13,7 +13,10 @@ Apache Maven: 3.2.3 <br>
 Apache Tomcat: 7.0.56 <br>
 smartEditor: 2.1.6 <br>
 
-2. Run Sensor_SmartEditor
+2. License
+----------------
+
+3. Run Sensor_SmartEditor
 -------------
 To run the software the project has to be downloaded using git. You can do it using the console, choose a folder for the download via the command cd. 
 The download can be done using HTTPS:
@@ -31,7 +34,7 @@ Then you can start Tomcat, open the browser and go to: http://localhost:8080/Sen
 The form for SensorML can be opened by clicking on the button "sensor".
 
 
-3. Structure
+4. Structure
 ---------
 The Sensor\_SmartEditor uses maven to get the code of the smartEditor. The Sensor\_SmartEditor uses two components of the smartEditor: The smartEditor-api and the smartEditor-webapp. New files and files from the smartEditor which were needed to be modified are within the folders of this project.
 
@@ -84,7 +87,7 @@ The following files of the smartEditor-webapp sub project are needed to be modif
  - adapt service-definitions.xml to declare the validator and set the activeBeanNamesRegex in webapp/WEB-INF
  - adapt validator-definitions.xml to define the validator in webapp/WEB-INF
 
-4. How To
+5. How To
 -------
 ###How to build the sub modules of the project with maven ?###
 If only one of the sub modules should be build with maven, then go to the main folder of the whole project. With the attribute -pl a specific modul can be selected, like:
@@ -100,7 +103,7 @@ In this case the whole project is build and this command is the same like: mvn c
 In the future there will be a website which explains which different files have to modified and created to build new forms and form elements and make it possible to validate them against an arbitrary standard.
 
 
-5. Known Bugs AND To-Dos
+6. Known Bugs AND To-Dos
 -----------
 ###fehler, wenn unique Id gelöscht wurde###
 ###newMetadataIdentifier Methode überarbeiten###
