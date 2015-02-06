@@ -14,33 +14,15 @@
  * limitations under the License.
  */
 
-package de.conterra.smarteditor.beans;
+package groovy;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import java.util.UUID;
+import com.thoughtworks.xstream.annotations.XStreamAlias
+import de.conterra.smarteditor.beans.BaseBean
 
-/**
- * FileId bean
- * @author kse
- * Date: 18.03.2010
- * Time: 12:50:53
- */
-@XStreamAlias("FileIdentifier")
-public class FileIdentifierBean extends BaseBean {
-    @XStreamAlias("identifier")
-    private String id;
+@XStreamAlias("SmlAcousticSensorWeight")
+class SmlAcousticSensorWeightBean extends BaseBean {
 
-    public String getId() {
-        if (id == null || id.equals("")) {
-            id = UUID.randomUUID().toString();
-        }
-        return id;
-    }
-
-    public void setId(String pId) {
-        id = pId;
-    }
+  @XStreamAlias("weight")
+  String weight
 }
-
-

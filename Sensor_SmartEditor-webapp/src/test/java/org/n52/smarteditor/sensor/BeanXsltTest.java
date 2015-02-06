@@ -55,7 +55,8 @@ import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/sml-transformer-config.xml")
+@ContextConfiguration( {"/sml-transformer-config.xml","/sml-transformer-config_AcousticSensor.xml"})
+
 public class BeanXsltTest {
 	NamespaceContext usingNamespaces;
 	static private Logger LOG = Logger.getRootLogger();
@@ -69,13 +70,22 @@ public class BeanXsltTest {
 	BaseBean smlShortName;
 	@Resource(name = "smlUniqueID")
 	BaseBean smlUniqueID;
-
+	
+	@Resource(name = "smlAcousticSensorLength")
+	BaseBean smlAcousticSensorLength;
+	@Resource(name = "smlAcousticSensorWeight")
+	BaseBean smlAcousticSensorWeight;
+	@Resource(name = "smlAcousticSensorHeight")
+	BaseBean smlAcousticSensorHeight;
+	
+	
 	@Resource(name = "multiSmlKeyword")
 	BaseBean multiSmlKeyword;
 	
 	Document mDatasetDocument = DOMUtil.createFromStream(
 			BeanXsltTest.class.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"), true);
-
+	Document mDatasetDocument_AcousticSensor = DOMUtil.createFromStream(
+			BeanXsltTest.class.getResourceAsStream("/validation/input/testSmlToBeanXSLT_AcousticSensor.xml"), true);
 	@Before
 	public void before() {
 		usingNamespaces = new SimpleNamespaceContext().withBinding("sml",
@@ -173,4 +183,74 @@ public class BeanXsltTest {
 				throw e;
 			}
 		}
+		/**
+		 * This method tests, if the test-value for smlAcousticSensor_Length within the xml document is copied into the bean.
+		 * @throws Exception
+		 */
+			@Test
+			public void testSmlAcousticSensor_Length() throws Exception {
+				//copy test-value into bean
+				BaseBean lBean = beanTransformerService.initBean(smlAcousticSensorLength,
+						mDatasetDocument_AcousticSensor);
+				Assert.assertNotNull(lBean);
+		       //transform to xml for testing
+				Document beanXML = beanTransformerService.toXML(lBean);
+				Source bean = new DOMSource(beanXML);
+				try {
+					assertThat(
+							bean,
+							hasXPath("/SmlAcousticSensorLength/length[text()='32']",
+									usingNamespaces));
+				} catch (NoSuchMethodError e) {
+					LOG.error("Possibly XPath is invalid with compared source", e);
+					throw e;
+				}
+			}
+			/**
+			 * This method tests, if the test-value for smlAcousticSensor_Weight within the xml document is copied into the bean.
+			 * @throws Exception
+			 */
+				@Test
+				public void testSmlAcousticSensorWeight() throws Exception {
+					//copy test-value into bean
+					BaseBean lBean = beanTransformerService.initBean(smlAcousticSensorWeight,
+							mDatasetDocument_AcousticSensor);
+					Assert.assertNotNull(lBean);
+			       //transform to xml for testing
+					Document beanXML = beanTransformerService.toXML(lBean);
+					Source bean = new DOMSource(beanXML);
+					try {
+						assertThat(
+								bean,
+								hasXPath("/SmlAcousticSensorWeight/weight[text()='128']",
+										usingNamespaces));
+					} catch (NoSuchMethodError e) {
+						LOG.error("Possibly XPath is invalid with compared source", e);
+						throw e;
+					}
+				}
+				/**
+				 * This method tests, if the test-value for smlAcousticSensor_Height within the xml document is copied into the bean.
+				 * @throws Exception
+				 */
+					@Test
+					public void testSmlAcousticSensorHeight() throws Exception {
+						//copy test-value into bean
+						BaseBean lBean = beanTransformerService.initBean(smlAcousticSensorHeight,
+								mDatasetDocument_AcousticSensor);
+						Assert.assertNotNull(lBean);
+				       //transform to xml for testing
+						Document beanXML = beanTransformerService.toXML(lBean);
+						Source bean = new DOMSource(beanXML);
+						try {
+							assertThat(
+									bean,
+									hasXPath("/SmlAcousticSensorHeight/height[text()='6.5']",
+											usingNamespaces));
+						} catch (NoSuchMethodError e) {
+							LOG.error("Possibly XPath is invalid with compared source", e);
+							throw e;
+						}
+					}
+
 }

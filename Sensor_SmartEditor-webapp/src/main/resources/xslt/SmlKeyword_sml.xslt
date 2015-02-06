@@ -35,6 +35,7 @@
 			<xsl:apply-templates select="sml:identification" />
 			<xsl:apply-templates select="sml:classification" />
 			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:characteristics" />
 			<xsl:apply-templates select="sml:capabilities" />
 			<xsl:apply-templates select="sml:contact" />
 			<xsl:apply-templates select="sml:position" />

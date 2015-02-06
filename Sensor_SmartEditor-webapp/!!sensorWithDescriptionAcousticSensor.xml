@@ -69,6 +69,32 @@ http://schemas.opengis.net/sensorML/1.0.0/sensorML.xsd"
 					<!-- or <gml:begin></gml:begin> <gml:end></gml:end> -->
 				</gml:TimePeriod>
 			</sml:validTime>
+			<sml:characteristics>
+				<swe:DataRecord definition="urn:ogc:def:property:OGC:physicalProperties">
+					<swe:field name="physicalProperties">
+						<swe:DataRecord>
+							<swe:field name="weight">
+								<swe:Quantity definition="urn:ogc:def:property:OGC:weight">
+									<swe:uom code="g" />
+									<swe:value>128</swe:value>
+								</swe:Quantity>
+							</swe:field>
+							<swe:field name="height">
+								<swe:Quantity definition="urn:ogc:def:property:OGC:height">
+									<swe:uom code="mm" />
+									<swe:value>6.5</swe:value>
+								</swe:Quantity>
+							</swe:field>
+							<swe:field name="length">
+								<swe:Quantity definition="urn:ogc:def:property:OGC:length">
+									<swe:uom code="mm" />
+									<swe:value>32</swe:value>
+								</swe:Quantity>
+							</swe:field>
+						</swe:DataRecord>
+					</swe:field>
+				</swe:DataRecord>
+			</sml:characteristics>
 			<sml:capabilities>
 				<swe:DataRecord>
 					<swe:field name="">

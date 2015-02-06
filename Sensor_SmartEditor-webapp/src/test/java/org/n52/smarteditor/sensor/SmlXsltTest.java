@@ -31,6 +31,8 @@ package org.n52.smarteditor.sensor;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.xmlmatchers.XmlMatchers.hasXPath;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.Source;
@@ -54,16 +56,18 @@ import de.conterra.smarteditor.util.DOMUtil;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/sml-transformer-config.xml")
+@ContextConfiguration(locations = {"/sml-transformer-config.xml" , "/sml-transformer-config_AcousticSensor.xml"})
 public class SmlXsltTest {
 	static private Logger LOG = Logger.getRootLogger();
-	NamespaceContext usingNamespaces;
+	SimpleNamespaceContext usingNamespaces;
 	@Resource(name = "beanTransformerService")
 	BeanTransformerService beanTransformerService;
 
 	Document mRefDatasetDocument = DOMUtil.createFromStream(
 			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT.xml"), true);
-
+	
+	Document mRefDatasetDocument_AcousticSensor = DOMUtil.createFromStream(
+			BeanXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT_AcousticSensor.xml"), true);
 	@Resource(name = "smlLongName")
 	BaseBean smlLongName;
 	
@@ -75,13 +79,24 @@ public class SmlXsltTest {
 	
 	@Resource(name = "smlKeyword")
 	BaseBean smlKeyword;
+	
+	@Resource(name = "smlAcousticSensorLength")
+	BaseBean smlAcousticSensorLength;
+	@Resource(name = "smlAcousticSensorWeight")
+	BaseBean smlAcousticSensorWeight;
+	@Resource(name = "smlAcousticSensorHeight")
+	BaseBean smlAcousticSensorHeight;
+	
 
 	@Resource(name = "multiSmlKeyword")
     MultipleElementBean multiSmlKeyword;
 	@Before
 	public void before() {
-		usingNamespaces = new SimpleNamespaceContext().withBinding("sml",
-				"http://www.opengis.net/sensorML/1.0.1");
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("sml", "http://www.opengis.net/sensorML/1.0.1");
+		map.put("swe", "http://www.opengis.net/swe/1.0.1");
+		usingNamespaces = new SimpleNamespaceContext();
+		usingNamespaces.setBindings(map);
 	}
 
 	/**
@@ -157,6 +172,77 @@ public class SmlXsltTest {
 					beanSource,
 					hasXPath(
 							"//sml:member/sml:System/sml:keywords/sml:KeywordList/sml:keyword[text()='testkeyword']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	/**
+	 * This method tests, if the test-value for SmlAcousticSensorLength is copied into the xml document.
+	 */
+	@Test
+	public void testSmlAcousticSensorLength() {
+		//
+		BeanUtil.setProperty(smlAcousticSensorLength, "length", "10");
+		//
+		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorLength,
+				mRefDatasetDocument_AcousticSensor);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:length']/swe:value[text()='10']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	 * This method tests, if the test-value for SmlAcousticSensorHeight is copied into the xml document.
+	 */
+	@Test
+	public void testSmlAcousticSensorHeight() {
+		//
+		BeanUtil.setProperty(smlAcousticSensorHeight, "height", "15");
+		//
+		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorHeight,
+				mRefDatasetDocument_AcousticSensor);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:height']/swe:value[text()='15']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	 * This method tests, if the test-value for SmlAcousticSensorWeight is copied into the xml document.
+	 */
+	@Test
+	public void testSmlAcousticSensorWeight() {
+		//
+		BeanUtil.setProperty(smlAcousticSensorWeight, "weight", "20");
+		//
+		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorWeight,
+				mRefDatasetDocument_AcousticSensor);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:weight']/swe:value[text()='20']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
