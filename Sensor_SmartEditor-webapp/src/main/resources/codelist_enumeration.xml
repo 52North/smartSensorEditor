@@ -204,7 +204,11 @@
 		</element>
 		<element>
 			<resourceKey>codelist.scopecode[17]</resourceKey>
-			<value>sensorProfile</value> <!-- sml -->
+			<value>sensor</value> <!-- sml -->
+		</element>
+		<element>
+			<resourceKey>codelist.scopecode[18]</resourceKey>
+			<value>acousticSensor</value> <!-- sml -->
 		</element>
 
 	</list>
