@@ -46,6 +46,5 @@ local.properties
 .texlipse
 /target/
 # Configuration
-build.properties
-
+**/build.properties
 
