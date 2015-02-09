@@ -45,6 +45,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 /target/
-
-#Configuration
+# Configuration
 build.properties
+
+
