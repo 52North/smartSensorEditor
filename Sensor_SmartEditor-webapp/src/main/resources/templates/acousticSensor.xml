@@ -47,7 +47,7 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 				<sml:IdentifierList>
 					<sml:identifier name="uniqueID">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-							<sml:value/>
+							<sml:value>TestID</sml:value>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="longName">
@@ -71,7 +71,7 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 					</sml:classifier>
 					<sml:classifier name="">
 						<sml:Term definition="urn:ogc:def:classifier:OGC:1.0:sensorType">
-							<sml:value></sml:value>
+							<sml:value>acousticSensor</sml:value>
 						</sml:Term>
 					</sml:classifier>
 				</sml:ClassifierList>

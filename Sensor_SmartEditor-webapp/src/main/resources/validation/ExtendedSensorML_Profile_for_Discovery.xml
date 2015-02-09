@@ -101,8 +101,8 @@
 		<sch:rule context="//sml:identification">
 			<sch:let name="uniqueIDExtended_Text"
 				value="sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value/text()" />
-			<sch:assert test="$uniqueIDExtended_Text != ''"
-				id="storage[&quot;FileIdentifier&quot;].identifier">errors.validation.SML.extended.uniqueID</sch:assert>
+			<sch:assert test="$uniqueIDExtended_Text"
+				id="storage[&quot;smlUniqueID&quot;].id">errors.validation.SML.extended.uniqueID</sch:assert>
 
 			<sch:let name="longNameExtended_Text"
 				value="sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:longName']/sml:value/text()" />

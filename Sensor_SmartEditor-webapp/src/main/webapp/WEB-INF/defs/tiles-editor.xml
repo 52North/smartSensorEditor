@@ -185,4 +185,5 @@
 	<definition name="editor.body.service" template="/WEB-INF/jsp/body_service.jsp" />
 	<definition name="editor.body.dataset" template="/WEB-INF/jsp/body_dataset.jsp" />
 	<definition name="editor.body.sensor" template="/WEB-INF/jsp/body_sensor.jsp" />
+	<definition name="editor.body.acousticSensor" template="/WEB-INF/jsp/body_acousticSensor.jsp" />
 </tiles-definitions>

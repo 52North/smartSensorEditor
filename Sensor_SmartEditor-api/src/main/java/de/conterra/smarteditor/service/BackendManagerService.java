@@ -89,7 +89,6 @@ public class BackendManagerService {
 
 	private Properties activeBeanNamesRegex;
 
-
 	public boolean isUpdate() {
 		return update;
 	}
@@ -437,11 +436,18 @@ public class BackendManagerService {
 			String resourceType = lUtil
 					.evaluateAsString("//gmd:hierarchyLevel/*/@codeListValue",
 							getMergeDocument());
-			if (resourceType == "") {
-				String bool = lUtil.evaluateAsString("boolean(//sml:System)",
-						getMergeDocument());
-				if (bool.equals("true")) {
-					resourceType = "sensor";
+
+			if (resourceType.equals("")) {
+				resourceType = lUtil
+						.evaluateAsString(
+								"//sml:System/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='urn:ogc:def:classifier:OGC:1.0:sensorType']/sml:value",
+								getMergeDocument());
+				if (resourceType.equals("")) {
+					String bool = lUtil.evaluateAsString(
+							"boolean(//sml:System)", getMergeDocument());
+					if (bool.equals("true")) {
+						resourceType = "sensor";
+					}
 				}
 			}
 			return resourceType;
@@ -456,7 +462,7 @@ public class BackendManagerService {
 	 */
 	public String getFileIdentifier() {
 		String resource = backend.getResourceType();
-		if (!resource.equals("sensor")) {
+		if (!resource.contains("sensor")) {
 			Object o = getBackend().getStorage().get("fileIdentifier");
 			if (o != null) {
 				return ((FileIdentifierBean) o).getId();
@@ -476,25 +482,24 @@ public class BackendManagerService {
 	 */
 	public void newMetadataIdentifier() {
 		String newID = UUID.randomUUID().toString();
-		
-			Object o = getBackend().getStorage().get("fileIdentifier");
-			if (o != null) {
-				LOG.info("Updating metadata identifier fileIdentifier...");
-				((FileIdentifierBean) o).setId(newID);
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("New identifier is: " + newID);
-				}
+
+		Object o = getBackend().getStorage().get("fileIdentifier");
+		if (o != null) {
+			LOG.info("Updating metadata identifier fileIdentifier...");
+			((FileIdentifierBean) o).setId(newID);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("New identifier is: " + newID);
 			}
-		
-			 o = getBackend().getStorage().get("smlUniqueID");
-			if (o != null) {
-				LOG.info("Updating metadata identifier smlUniqueID...");
-				((FileIdentifierBean) o).setId(newID);
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("New identifier is: " + newID);
-				}
+		}
+
+		o = getBackend().getStorage().get("smlUniqueID");
+		if (o != null) {
+			LOG.info("Updating metadata identifier smlUniqueID...");
+			((FileIdentifierBean) o).setId(newID);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("New identifier is: " + newID);
 			}
-		
+		}
 
 	}
 }
