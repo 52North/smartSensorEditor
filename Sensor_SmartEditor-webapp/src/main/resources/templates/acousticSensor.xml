@@ -47,12 +47,12 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 				<sml:IdentifierList>
 					<sml:identifier name="uniqueID">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-							<sml:value>TestID</sml:value>
+							<sml:value/>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="longName">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-							<sml:value/>
+							<sml:value>TestName</sml:value>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="shortName">
