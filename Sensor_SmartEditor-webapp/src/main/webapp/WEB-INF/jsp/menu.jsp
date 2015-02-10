@@ -30,7 +30,7 @@
 	}
 	function uniqueID_or_Title_missing() {
 		var resource = $("#resTitle").attr("name");
-		if (resource.indexOf("smlUniqueID")!="-1") {
+		if (resource.indexOf("smlUniqueID") != "-1") {
 			$("#dialog-uniqueID-template-missing").dialog('open');
 		} else {
 			$("#dialog-title-template-missing").dialog('open');
@@ -65,16 +65,20 @@
 						});
 						$("#saveLocal").click(
 								function() {
-									$('#target').val('saveLocal');
-									// turn off validation
-									var old = $('input[name=validatorId]')
-											.attr("value");
-									$('input[name=validatorId]').attr("value",
-											"");
-									$('#updateMetadata').submit();
-									// reset value
-									$('input[name=validatorId]').attr("value",
-											old);
+									if ($('#resTitle').val() == '') {
+										uniqueID_or_Title_missing();
+									} else {
+										$('#target').val('saveLocal');
+										// turn off validation
+										var old = $('input[name=validatorId]')
+												.attr("value");
+										$('input[name=validatorId]').attr(
+												"value", "");
+										$('#updateMetadata').submit();
+										// reset value
+										$('input[name=validatorId]').attr(
+												"value", old);
+									}
 								});
 
 						$("#saveTemplate")
@@ -315,18 +319,17 @@
 											}
 										});
 						$("#dialog-uniqueID-template-missing")
-						.dialog(
-								{
-									autoOpen : false,
-									modal : false,
-									buttons : {
-										'<fmt:message key="editor.general.widget.ok"/>' : function() {
-											$(this).dialog('close');
-										}
-									}
-								});
+								.dialog(
+										{
+											autoOpen : false,
+											modal : false,
+											buttons : {
+												'<fmt:message key="editor.general.widget.ok"/>' : function() {
+													$(this).dialog('close');
+												}
+											}
+										});
 					});
-
 </script>
 
 <ul id="subMenu">

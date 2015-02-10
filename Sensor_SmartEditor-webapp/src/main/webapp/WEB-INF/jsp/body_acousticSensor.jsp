@@ -32,6 +32,9 @@
 	<tiles:insertAttribute name="smlShortName" />
 	<tiles:insertAttribute name="smlLongName" />
 	<tiles:insertAttribute name="smlKeyword" />
+	<tiles:insertAttribute name="smlAcousticSensorLength" />
+	<tiles:insertAttribute name="smlAcousticSensorWeight" />
+	<tiles:insertAttribute name="smlAcousticSensorHeight" />
 	<%-- 	<br>
 		<tiles:insertAttribute name="alternateTitle" />
 		<br>	    
