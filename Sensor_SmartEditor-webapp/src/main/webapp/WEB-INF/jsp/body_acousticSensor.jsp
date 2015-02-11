@@ -21,21 +21,21 @@
 <div id="metadataElementTabs">
 	<ul>
 		<li><a href="#tabs-1"><fmt:message key="section.description" /></a></li>
-<%-- 		<li><a href="#tabs-2"><fmt:message key="section.categories" /></a></li>
+		<%-- 		<li><a href="#tabs-2"><fmt:message key="section.categories" /></a></li>
 		<li><a href="#tabs-3"><fmt:message key="section.access" /></a></li>
 		<li><a href="#tabs-4"><fmt:message key="section.distribution" /></a></li>
 		<li><a href="#tabs-5"><fmt:message key="section.quality" /></a></li>
 		<li><a href="#tabs-6"><fmt:message key="section.metadata" /></a></li> --%>
 	</ul>
 	<div id="tabs-1">
-	<tiles:insertAttribute name="smlUniqueID" />
-	<tiles:insertAttribute name="smlShortName" />
-	<tiles:insertAttribute name="smlLongName" />
-	<tiles:insertAttribute name="smlKeyword" />
-	<tiles:insertAttribute name="smlAcousticSensorLength" />
-	<tiles:insertAttribute name="smlAcousticSensorWeight" />
-	<tiles:insertAttribute name="smlAcousticSensorHeight" />
-	<%-- 	<br>
+		<tiles:insertAttribute name="smlIdentifier" />
+		<tiles:insertAttribute name="smlKeyword" />
+		<tiles:insertAttribute name="smlIdentification" />
+		<tiles:insertAttribute name="smlAcousticSensorLength" />
+		<tiles:insertAttribute name="smlAcousticSensorWeight" />
+		<tiles:insertAttribute name="smlAcousticSensorHeight" />
+
+		<%-- 	<br>
 		<tiles:insertAttribute name="alternateTitle" />
 		<br>	    
 		<tiles:insertAttribute name="abstract" />
@@ -121,5 +121,4 @@
 		<tiles:insertAttribute name="metadataStandard" />
 		<br>
 	</div> --%>
-</div>
-
+	</div>

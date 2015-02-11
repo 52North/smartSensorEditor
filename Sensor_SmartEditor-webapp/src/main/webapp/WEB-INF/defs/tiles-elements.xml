@@ -190,4 +190,9 @@
                  template="/WEB-INF/jsp/elements/multiSmlKeyword.jsp">
          <put-attribute name="innerSmlKeyword" value="/WEB-INF/jsp/elements/smlKeyword.jsp"/>
     </definition>
+       <definition name="editor.body.smlIdentification"
+                 template="/WEB-INF/jsp/elements/multiSmlIdentification.jsp">
+         <put-attribute name="innerSmlIdentification" value="/WEB-INF/jsp/elements/smlIdentification.jsp"/>
+    </definition>
+    
 </tiles-definitions>

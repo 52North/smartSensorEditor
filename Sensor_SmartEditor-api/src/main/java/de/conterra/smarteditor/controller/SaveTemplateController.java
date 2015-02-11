@@ -32,69 +32,69 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Controller handles the persistence of a template
- * @author kse
- * Date: 17.03.2010
- * Time: 16:25:35
+ * 
+ * @author kse Date: 17.03.2010 Time: 16:25:35
  */
 public class SaveTemplateController implements Controller {
 
-    private static Logger LOG = Logger.getLogger(SaveLocalController.class);
+	private static Logger LOG = Logger.getLogger(SaveLocalController.class);
 
-    private BackendManagerService mBackendService;
-    private TemplateManager mTemplateManager;
-    private UserInfoBean mUserInfo;
+	private BackendManagerService mBackendService;
+	private TemplateManager mTemplateManager;
+	private UserInfoBean mUserInfo;
 
+	public UserInfoBean getUserInfo() {
+		return mUserInfo;
+	}
 
-    public UserInfoBean getUserInfo() {
-        return mUserInfo;
-    }
+	public void setUserInfo(UserInfoBean pUserInfo) {
+		mUserInfo = pUserInfo;
+	}
 
-    public void setUserInfo(UserInfoBean pUserInfo) {
-        mUserInfo = pUserInfo;
-    }
+	public BackendManagerService getBackendService() {
+		return mBackendService;
+	}
 
-    public BackendManagerService getBackendService() {
-        return mBackendService;
-    }
+	public void setBackendService(BackendManagerService pBackendService) {
+		mBackendService = pBackendService;
+	}
 
-    public void setBackendService(BackendManagerService pBackendService) {
-        mBackendService = pBackendService;
-    }
+	public TemplateManager getTemplateManager() {
+		return mTemplateManager;
+	}
 
-    public TemplateManager getTemplateManager() {
-        return mTemplateManager;
-    }
+	public void setTemplateManager(TemplateManager templateManager) {
+		this.mTemplateManager = templateManager;
+	}
 
-    public void setTemplateManager(TemplateManager templateManager) {
-        this.mTemplateManager = templateManager;
-    }
-
-    /**
-     * @param request
-     * @param pResponse
-     * @return
-     * @throws Exception
-     */
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse pResponse) throws Exception {
-        // get backend document
-        Document lMerge = mBackendService.mergeBackend();
-        XPathUtil lUtil = new XPathUtil();
-        lUtil.setContext(new EditorContext());
-        String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
-        if(lTitle.equals("")){
-        	lTitle=lUtil.evaluateAsString("//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value/text()", lMerge);
-        }
-        try {
-            mTemplateManager.saveTemplate(lTitle, "MD_Metadata",
-                    mUserInfo.getUserId() != null ? mUserInfo.getUserId() : "",
-                    mUserInfo.getGroupId() != null ? mUserInfo.getGroupId() : "",
-                    "public",
-                    DOMUtil.convertToString(lMerge, false));
-        } catch (Exception e) {
-            LOG.error(e);
-            pResponse.sendError(500, e.getMessage());
-        }
-        LOG.info("Template saved...");
-        return null;
-    }
+	/**
+	 * @param request
+	 * @param pResponse
+	 * @return
+	 * @throws Exception
+	 */
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse pResponse) throws Exception {
+		// get backend document
+		Document lMerge = mBackendService.mergeBackend();
+		XPathUtil lUtil = new XPathUtil();
+		lUtil.setContext(new EditorContext());
+		String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
+		if (lTitle.equals("")) {
+			lTitle= lUtil.evaluateAsString(
+					"//sml:member/sml:System/gml:identifier/text()", lMerge);
+		}
+		try {
+			mTemplateManager.saveTemplate(lTitle, "MD_Metadata", mUserInfo
+					.getUserId() != null ? mUserInfo.getUserId() : "",
+					mUserInfo.getGroupId() != null ? mUserInfo.getGroupId()
+							: "", "public", DOMUtil.convertToString(lMerge,
+							false));
+		} catch (Exception e) {
+			LOG.error(e);
+			pResponse.sendError(500, e.getMessage());
+		}
+		LOG.info("Template saved...");
+		return null;
+	}
 }

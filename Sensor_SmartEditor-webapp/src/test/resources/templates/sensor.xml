@@ -37,6 +37,7 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 	version="1.0.1">
 	<sml:member>
 		<sml:System>
+		    <gml:identifier></gml:identifier>
 			<gml:description></gml:description>
 			<sml:keywords>
 				<sml:KeywordList>

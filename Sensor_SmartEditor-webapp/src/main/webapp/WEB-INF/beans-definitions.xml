@@ -382,10 +382,10 @@
 		<lang:property name="transformToISO" value="/xslt/SmlShortName_sml.xslt" />
 		<lang:property name="transformToBean" value="/xslt/SmlShortName_bean.xslt" />
 	</lang:groovy>
-	<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
+ 	<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
-	</bean>
+	</bean> 
 	<lang:groovy id="smlAcousticSensorLength" script-source="classpath:groovy/SmlAcousticSensorLengthBean.groovy">
 		<lang:property name="transformToISO" value="/xslt/SmlAcousticSensorLength_sml.xslt" />
 		<lang:property name="transformToBean" value="/xslt/SmlAcousticSensorLength_bean.xslt" />
@@ -398,6 +398,19 @@
 		<lang:property name="transformToISO" value="/xslt/SmlAcousticSensorHeight_sml.xslt" />
 		<lang:property name="transformToBean" value="/xslt/SmlAcousticSensorHeight_bean.xslt" />
 	</lang:groovy>
+	
+	<lang:groovy id="smlIdentification"
+		script-source="classpath:groovy/SmlIdentificationBean.groovy" scope="session" />
+	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
+		<property name="bean" ref="smlIdentification" />
+	</bean>
+	<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
+		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
+	</bean> 
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
 		scope="session">
 		<aop:scoped-proxy />
@@ -449,10 +462,12 @@
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
 				<entry key="smlLongName" value-ref="smlLongName" />
 				<entry key="smlShortName" value-ref="smlShortName" />
-				<entry key="smlUniqueID" value-ref="smlUniqueID" />
+			    <entry key="smlUniqueID" value-ref="smlUniqueID" />
 				<entry key="smlAcousticSensorLength" value-ref="smlAcousticSensorLength" />
 				<entry key="smlAcousticSensorWeight" value-ref="smlAcousticSensorWeight" />
 				<entry key="smlAcousticSensorHeight" value-ref="smlAcousticSensorHeight" />
+				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
+				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>
 		</property>
 	</bean>

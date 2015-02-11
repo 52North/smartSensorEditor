@@ -468,7 +468,7 @@ public class BackendManagerService {
 				return ((FileIdentifierBean) o).getId();
 			}
 		} else {
-			Object o = getBackend().getStorage().get("smlUniqueID");
+			Object o = getBackend().getStorage().get("smlIdentifier");
 			if (o != null) {
 				return ((FileIdentifierBean) o).getId();
 
@@ -492,12 +492,12 @@ public class BackendManagerService {
 			}
 		}
 
-		o = getBackend().getStorage().get("smlUniqueID");
+		o = getBackend().getStorage().get("smlIdentifier");
 		if (o != null) {
-			LOG.info("Updating metadata identifier smlUniqueID...");
+			LOG.info("Updating metadata identifier smlIdentifier...");
 			((FileIdentifierBean) o).setId(newID);
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("New identifier is: " + newID);
+				LOG.debug("New smlIdentifier is: " + newID);
 			}
 		}
 

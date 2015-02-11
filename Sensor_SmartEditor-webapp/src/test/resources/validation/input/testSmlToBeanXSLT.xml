@@ -7,11 +7,13 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 	version="1.0.1">
 	<sml:member>
 		<sml:System>
-			<gml:description></gml:description>
+			<gml:identifier>testIdentifier</gml:identifier>
+			<gml:description>testIdentifier</gml:description>
 			<sml:keywords>
-			
+
 				<sml:KeywordList>
-					<sml:keyword >testkeyword</sml:keyword>
+					<sml:keyword>testkeyword</sml:keyword>
+					<sml:keyword>testkeyword2</sml:keyword>
 				</sml:KeywordList>
 			</sml:keywords>
 			<sml:identification>
@@ -105,8 +107,8 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 					</sml:interface>
 				</sml:InterfaceList>
 			</sml:interfaces>
-			<sml:inputs/>
-			<sml:outputs/>
+			<sml:inputs />
+			<sml:outputs />
 			<sml:components>
 				<sml:ComponentList>
 					<sml:component name="" xlink:href="" />

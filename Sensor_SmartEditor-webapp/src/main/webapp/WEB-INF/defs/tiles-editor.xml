@@ -82,7 +82,11 @@
 	    <put-attribute name="smlAcousticSensorWeight"
 	       value="/WEB-INF/jsp/elements/smlAcousticSensorWeight.jsp" cascade="true" />
 	    <put-attribute name="smlAcousticSensorHeight"
-	       value="/WEB-INF/jsp/elements/smlAcousticSensorHeight.jsp" cascade="true" />			
+	       value="/WEB-INF/jsp/elements/smlAcousticSensorHeight.jsp" cascade="true" />
+	       <put-attribute name="smlIdentification" value="editor.body.smlIdentification"
+			cascade="true" />
+	   <put-attribute name="smlIdentifier"
+			value="/WEB-INF/jsp/elements/smlIdentifier.jsp" cascade="true" />		
 		<put-attribute name="body" value="editor.body.dataset" />
 		<put-attribute name="alternateTitle" value="editor.body.alternateTitle"
 			cascade="true" />
