@@ -64,7 +64,7 @@
 				<entry key="smlShortName" value-ref="smlShortName" />
 				<entry key="smlUniqueID" value-ref="smlUniqueID" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
-				<entry key="smlIdentifier" value-ref="multiSmlIdentifier" />
+				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>
 		</property>
 	</bean>

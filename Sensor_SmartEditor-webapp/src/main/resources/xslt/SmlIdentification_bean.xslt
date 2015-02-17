@@ -24,10 +24,10 @@
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no" omit-xml-declaration="yes"/>
     <xsl:template match="/">
         <multi_container>
-            <xsl:for-each select="//sml:member/*/sml:identification/sml:IdentifierList/sml:identifier">
+            <xsl:for-each select="/*/sml:identification/sml:IdentifierList/sml:identifier">
                 <SmlIdentification>
                     <name>
-                        <xsl:value-of select="./@name"/>
+                        <xsl:value-of select="./sml:Term/sml:label"/>
                     </name>
                     <definition>
                         <xsl:value-of select="./sml:Term/@definition"/>

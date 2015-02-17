@@ -104,12 +104,12 @@ public class BeanXsltTest {
 		usingNamespaces.setBindings(map);
 	}
 
-	/**
+/*	*//**
 	 * This method tests, if the test-value for longName within the xml document
 	 * is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testLongName() throws Exception {
 		// copy test-value into bean
@@ -130,12 +130,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for shortName within the xml
 	 * document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testShortName() throws Exception {
 		// copy test-value into bean
@@ -156,12 +156,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for uniqueID within the xml document
 	 * is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testUniqueID() throws Exception {
 		// copy test-value into bean
@@ -182,12 +182,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for uniqueID within the xml document
 	 * is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testKeyword() throws Exception {
 		// copy test-value into bean
@@ -208,12 +208,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for smlAcousticSensor_Length within
 	 * the xml document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensor_Length() throws Exception {
 		// copy test-value into bean
@@ -234,12 +234,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for smlAcousticSensor_Weight within
 	 * the xml document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensorWeight() throws Exception {
 		// copy test-value into bean
@@ -260,12 +260,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for smlAcousticSensor_Height within
 	 * the xml document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensorHeight() throws Exception {
 		// copy test-value into bean
@@ -286,12 +286,12 @@ public class BeanXsltTest {
 		}
 	}
 
-	/**
+	*//**
 	 * This method tests, if the test-value for smlIdentification within the xml
 	 * document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 */
+	 *//*
 	@Test
 	public void testSmlIdentification() throws Exception {
 		// copy test-value into bean
@@ -319,7 +319,7 @@ public class BeanXsltTest {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
-	}
+	}*/
 
 	/**
 	 * This method tests, if the test-value for smlIdentifier within the xml

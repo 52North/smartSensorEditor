@@ -10,29 +10,28 @@
 	and limitations under the License. -->
 
 <xsl:stylesheet version="2.0"
-	xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv"
+ xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	exclude-result-prefixes="gmd gco srv sml">
+	exclude-result-prefixes="gmd gco gml sml">
 
 	<!-- include base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing identifiers -->
-	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList/*" />
+	<xsl:template match="/*/sml:identification/sml:IdentifierList/*" />
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="//sml:member/*/sml:identification/sml:IdentifierList">
+	<xsl:template match="/*/sml:identification/sml:IdentifierList">
 		<xsl:copy>
 			<xsl:for-each select="$beanDoc/*/SmlIdentification">
 				<sml:identifier>
-					<xsl:attribute name="name">
-						<xsl:value-of select="name" />
-					</xsl:attribute>
 					<sml:Term>
 						<xsl:attribute name="definition">
 							<xsl:value-of select="definition" />
 						</xsl:attribute>
+						<sml:label>
+						<xsl:value-of select="name" />
+						</sml:label>
 						<sml:value>
 							<xsl:value-of select="value" />
 						</sml:value>

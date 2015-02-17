@@ -9,17 +9,16 @@
 	and limitations under the License. -->
 
 <xsl:stylesheet version="2.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-	xmlns:gml="http://www.opengis.net/gml"
-	exclude-result-prefixes="gml sml">
+ xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	exclude-result-prefixes="gmd gco gml sml">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"
 		indent="no" omit-xml-declaration="yes" />
 	<xsl:template match="/">
 		<FileIdentifier>
 			<identifier>
 				<xsl:value-of
-					select="//sml:member/*/gml:identifier/text()" />
+					select="/*/gml:identifier/text()" />
 			</identifier>
 		</FileIdentifier>
 	</xsl:template>

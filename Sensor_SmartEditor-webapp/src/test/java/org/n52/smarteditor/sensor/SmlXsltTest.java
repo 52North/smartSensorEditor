@@ -103,14 +103,14 @@ public class SmlXsltTest {
 		HashMap<String,String> map = new HashMap<String,String>();
 		map.put("sml", "http://www.opengis.net/sensorML/1.0.1");
 		map.put("swe", "http://www.opengis.net/swe/1.0.1");
-		map.put("gml", "http://schemas.opengis.net/gml/3.1.1/base/gml.xsd");
+		map.put("gml", "http://www.opengis.net/gml/3.2");
 		usingNamespaces = new SimpleNamespaceContext();
 		usingNamespaces.setBindings(map);
 	}
 
-	/**
+/*	*//**
 	  This method tests, if the test-value for longName is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testLongName() {
 		//
@@ -131,9 +131,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	/**
+	*//**
 	  This method tests, if the test-value for shortName is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testShortName() {
 		BeanUtil.setProperty(smlShortName, "shortName", "shortname");
@@ -152,9 +152,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	/**
+	*//**
 	  This method tests, if the test-value for uniqueId is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testUniqueID() {
 		BeanUtil.setProperty(smlUniqueID, "id", "testunique");
@@ -174,9 +174,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	/**
+	*//**
 	  This method tests, if the test-value for keyword is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testKeyword() {
 	
@@ -196,9 +196,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	/**
+	*//**
 	  This method tests, if the test-value for SmlAcousticSensorLength is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensorLength() {
 		//
@@ -220,9 +220,9 @@ public class SmlXsltTest {
 
 	}
 	
-	/**
+	*//**
 	  This method tests, if the test-value for SmlAcousticSensorHeight is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensorHeight() {
 		//
@@ -244,9 +244,9 @@ public class SmlXsltTest {
 
 	}
 	
-/**
+*//**
 	 * This method tests, if the test-value for SmlAcousticSensorWeight is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testSmlAcousticSensorWeight() {
 		//
@@ -267,9 +267,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	/**
+	*//**
 	  This method tests, if the test-value for smlIdentification is copied into the xml document.
-	 */
+	 *//*
 	@Test
 	public void testSmlIdentification() {
 	
@@ -290,7 +290,7 @@ public class SmlXsltTest {
 			throw e;
 		}
 
-	}
+	}*/
 	/**
 	  This method tests, if the test-value for uniqueId is copied into the xml document.
 	 */
@@ -305,7 +305,7 @@ public class SmlXsltTest {
 			assertThat(
 					beanSource,
 					hasXPath(
-							"//sml:member/sml:System/gml:identifier[text()='testIdentifier']",
+							"//gml:identifier[text()='testIdentifier']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

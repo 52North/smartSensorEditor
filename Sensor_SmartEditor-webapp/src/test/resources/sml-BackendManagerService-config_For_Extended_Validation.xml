@@ -87,6 +87,17 @@
 		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
 	</bean>
 
+		<lang:groovy id="smlIdentification"
+		script-source="classpath:groovy/SmlIdentificationBean.groovy" />
+	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
+		<property name="bean" ref="smlIdentification" />
+	</bean>
+		<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
+		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
+	</bean> 
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
 		>
 		<aop:scoped-proxy />
@@ -100,6 +111,8 @@
 				<entry key="smlLongName" value-ref="smlLongName" />
 				<entry key="smlShortName" value-ref="smlShortName" />
 				<entry key="smlUniqueID" value-ref="smlUniqueID" />
+				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
+				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>
 		</property>
 	</bean>

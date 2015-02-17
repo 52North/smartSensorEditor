@@ -69,7 +69,7 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/sml-BackendManagerService-config_For_Extended_Validation.xml")
-public class TestValidationExtended {
+public class TestValidationExtended{
 	@Resource(name = "xsltTransformerService")
 	XSLTTransformerService xsltTransformer;
 

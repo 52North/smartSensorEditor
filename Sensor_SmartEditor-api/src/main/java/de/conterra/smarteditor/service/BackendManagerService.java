@@ -444,7 +444,7 @@ public class BackendManagerService {
 								getMergeDocument());
 				if (resourceType.equals("")) {
 					String bool = lUtil.evaluateAsString(
-							"boolean(//sml:System)", getMergeDocument());
+							"boolean(//sml:identification)", getMergeDocument());
 					if (bool.equals("true")) {
 						resourceType = "sensor";
 					}

@@ -46,7 +46,7 @@ public class EditorContext implements NamespaceContext {
     // ISO
     protected static String sNS_GMD = "http://www.isotc211.org/2005/gmd";
     protected static String sNS_GCO = "http://www.isotc211.org/2005/gco";
-    protected static String sNS_GML = "http://www.opengis.net/gml";
+    protected static String sNS_GML = "http://www.opengis.net/gml/3.2";
     protected static String sNS_GMX = "http://www.isotc211.org/2005/gmx";
     protected static String sNS_GMI = "http://www.isotc211.org/2005/gmi";
     protected static String sNS_GSR = "http://www.isotc211.org/2005/gsr";
@@ -62,8 +62,9 @@ public class EditorContext implements NamespaceContext {
 
     //config
     protected static String sNS_TC = "http://www.conterra.de/catalog/config/common";
-
-    protected static String sNS_SML="http://www.opengis.net/sensorML/1.0.1";
+    
+    
+    protected static String sNS_SML="http://www.opengis.net/sensorml/2.0";
     /**
      * Maps a prefix to a uri
      *

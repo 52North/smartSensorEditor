@@ -112,7 +112,7 @@ public class SaveLocalController implements Controller {
         lUtil.setContext(new EditorContext());
         String lFileId = lUtil.evaluateAsString("//gmd:fileIdentifier/gco:CharacterString/text()", lDoc);
         if(lFileId.equals("")){
-        	lFileId=lUtil.evaluateAsString("//sml:member/sml:System/gml:identifier/text()", lDoc);
+        	lFileId=lUtil.evaluateAsString("/*/gml:identifier/text()", lDoc);
         }
         // set response attributes
         //pResponse.setContentType("application/x-download");

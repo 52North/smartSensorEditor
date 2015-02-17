@@ -82,7 +82,7 @@ public class SaveTemplateController implements Controller {
 		String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
 		if (lTitle.equals("")) {
 			lTitle= lUtil.evaluateAsString(
-					"//sml:member/sml:System/gml:identifier/text()", lMerge);
+					"/*/gml:identifier/text()", lMerge);
 		}
 		try {
 			mTemplateManager.saveTemplate(lTitle, "MD_Metadata", mUserInfo
