@@ -43,7 +43,9 @@ import de.conterra.smarteditor.beans.BaseBean;
 import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import static org.junit.matchers.JUnitMatchers.containsString;
+import static org.junit.matchers.JUnitMatchers.either;
 import static org.hamcrest.Matchers.not;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/sml-BackendManagerService-config.xml")
@@ -81,7 +83,7 @@ public class TestRegex_MergeBackend {
 				.getBackend().getStorage().entrySet()) {
 			// check if bean should be merged
 			if (backendManagerService.isBeanActive(lEntry.getKey())) {
-				assertThat(lEntry.getKey(), containsString("sml"));
+				assertThat(lEntry.getKey(),either(containsString("sml")).or(containsString("swe")));
 			}
 		}
 	}

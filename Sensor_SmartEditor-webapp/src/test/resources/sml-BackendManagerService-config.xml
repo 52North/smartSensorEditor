@@ -46,10 +46,11 @@
 		<property name="beanTransformer" ref="beanTransformerService" />
 		<property name="xsltTransformer" ref="xsltTransformerService" />
 		<!-- <property name="activeBeanNamesRegex" ref="sensor_"/> -->
-		<property name="activeBeanNamesRegex">
+			<property name="activeBeanNamesRegex">
 			<props>
-				<prop key="sensor">(sml\w+)|(\w+sml)</prop>
-				<prop key="dataset">!(sml)</prop>
+				<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
+				<prop key="acousticSensor">(sml\w+)|(\w+sml)</prop>
+				<prop key="dataset">.*s^m^l^.*</prop>
 			</props>
 		</property>
 	</bean>
@@ -82,6 +83,13 @@
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
 		<property name="bean" ref="smlIdentification" />
 	</bean>
+				<lang:groovy id="sweQuantityCharacteristic"
+		script-source="classpath:groovy/SweQuantityBean.groovy" />
+	<bean id="multiSweQuantityCharacteristic" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SweQuantityCharacteristic_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
+		<property name="bean" ref="sweQuantityCharacteristic" />
+	</bean>
 		<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
@@ -98,6 +106,7 @@
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
+					<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic"/>
 			</map>
 		</property>
 	</bean>
