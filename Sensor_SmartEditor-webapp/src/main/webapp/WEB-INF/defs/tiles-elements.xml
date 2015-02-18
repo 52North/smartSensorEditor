@@ -194,5 +194,9 @@
                  template="/WEB-INF/jsp/elements/multiSmlIdentification.jsp">
          <put-attribute name="innerSmlIdentification" value="/WEB-INF/jsp/elements/smlIdentification.jsp"/>
     </definition>
+       <definition name="editor.body.sweQuantityCharacteristic"
+                 template="/WEB-INF/jsp/elements/multiSweQuantityCharacteristic.jsp">
+         <put-attribute name="innerSweQuantityCharacteristic" value="/WEB-INF/jsp/elements/sweQuantityCharacteristic.jsp"/>
+    </definition>
     
 </tiles-definitions>

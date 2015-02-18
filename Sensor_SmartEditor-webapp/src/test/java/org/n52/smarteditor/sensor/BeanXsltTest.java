@@ -54,8 +54,7 @@ import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({ "/sml-transformer-config.xml",
-		"/sml-transformer-config_AcousticSensor.xml" })
+@ContextConfiguration({ "/sml-transformer-config.xml"})
 public class BeanXsltTest {
 	SimpleNamespaceContext usingNamespaces;
 	static private Logger LOG = Logger.getRootLogger();
@@ -63,131 +62,31 @@ public class BeanXsltTest {
 	@Resource(name = "beanTransformerService")
 	BeanTransformerService beanTransformerService;
 
-	@Resource(name = "smlLongName")
-	BaseBean smlLongName;
-	@Resource(name = "smlShortName")
-	BaseBean smlShortName;
-	@Resource(name = "smlUniqueID")
-	BaseBean smlUniqueID;
+	
 	@Resource(name = "smlIdentifier")
 	BaseBean smlIdentifier;
 
-	@Resource(name = "smlAcousticSensorLength")
-	BaseBean smlAcousticSensorLength;
-	@Resource(name = "smlAcousticSensorWeight")
-	BaseBean smlAcousticSensorWeight;
-	@Resource(name = "smlAcousticSensorHeight")
-	BaseBean smlAcousticSensorHeight;
 
 	@Resource(name = "multiSmlKeyword")
 	BaseBean multiSmlKeyword;
 
 	@Resource(name = "multiSmlIdentification")
 	BaseBean multiSmlIdentification;
+	
+	@Resource(name = "multiSweQuantityCharacteristic")
+	BaseBean multiSweQuantityCharacteristic;
+	
 
 	Document mDatasetDocument = DOMUtil.createFromStream(BeanXsltTest.class
 			.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"),
 			true);
-	Document mDatasetDocument_AcousticSensor = DOMUtil
-			.createFromStream(
-					BeanXsltTest.class
-							.getResourceAsStream("/validation/input/testSmlToBeanXSLT_AcousticSensor.xml"),
-					true);
 
-	@Before
-	public void before() {
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("sml", "http://www.opengis.net/sensorML/1.0.1");
-		map.put("swe", "http://www.opengis.net/swe/1.0.1");
-		map.put("gml", "http://schemas.opengis.net/gml/3.1.1/base/gml.xsd");
-		usingNamespaces = new SimpleNamespaceContext();
-		usingNamespaces.setBindings(map);
-	}
-
-/*	*//**
-	 * This method tests, if the test-value for longName within the xml document
+	/**
+	 * This method tests, if the test-value for keyword within the xml document
 	 * is copied into the bean.
 	 * 
 	 * @throws Exception
-	 *//*
-	@Test
-	public void testLongName() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(smlLongName,
-				mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/SmlLongName/longName[text()='testname']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-
-	*//**
-	 * This method tests, if the test-value for shortName within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
-	@Test
-	public void testShortName() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(smlShortName,
-				mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/SmlShortName/shortName[text()='shortname']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-
-	*//**
-	 * This method tests, if the test-value for uniqueID within the xml document
-	 * is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
-	@Test
-	public void testUniqueID() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(smlUniqueID,
-				mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/FileIdentifier/identifier[text()='testunique']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-
-	*//**
-	 * This method tests, if the test-value for uniqueID within the xml document
-	 * is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
+	 */
 	@Test
 	public void testKeyword() throws Exception {
 		// copy test-value into bean
@@ -200,7 +99,7 @@ public class BeanXsltTest {
 		try {
 			assertThat(
 					bean,
-					hasXPath("//SmlKeyword/keyword[text()='testkeyword']",
+					hasXPath("//SmlKeyword/keyword[text()='Ocean Acoustics']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
@@ -208,90 +107,14 @@ public class BeanXsltTest {
 		}
 	}
 
-	*//**
-	 * This method tests, if the test-value for smlAcousticSensor_Length within
-	 * the xml document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
-	@Test
-	public void testSmlAcousticSensor_Length() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				smlAcousticSensorLength, mDatasetDocument_AcousticSensor);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/SmlAcousticSensorLength/length[text()='32']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
 
-	*//**
-	 * This method tests, if the test-value for smlAcousticSensor_Weight within
-	 * the xml document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
-	@Test
-	public void testSmlAcousticSensorWeight() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				smlAcousticSensorWeight, mDatasetDocument_AcousticSensor);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/SmlAcousticSensorWeight/weight[text()='128']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
 
-	*//**
-	 * This method tests, if the test-value for smlAcousticSensor_Height within
-	 * the xml document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 *//*
-	@Test
-	public void testSmlAcousticSensorHeight() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				smlAcousticSensorHeight, mDatasetDocument_AcousticSensor);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/SmlAcousticSensorHeight/height[text()='6.5']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-
-	*//**
+	/**
 	 * This method tests, if the test-value for smlIdentification within the xml
 	 * document is copied into the bean.
 	 * 
 	 * @throws Exception
-	 *//*
+	 */
 	@Test
 	public void testSmlIdentification() throws Exception {
 		// copy test-value into bean
@@ -304,23 +127,72 @@ public class BeanXsltTest {
 		try {
 			assertThat(
 					bean,
-					hasXPath("//SmlIdentification/value[text()='testunique']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlIdentification/name[text()='shortName']",
-							usingNamespaces));
-			assertThat(
-					bean,
 					hasXPath(
-							"//SmlIdentification/definition[text()='urn:ogc:def:identifier:OGC:1.0:longName']",
+							"//SmlIdentification/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlIdentification/name[text()='Short name']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlIdentification/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
-	}*/
+	}
 
+	/**
+	 * This method tests, if the test-value for smlIdentification within the xml
+	 * document is copied into the bean.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSweQuantityCharacteristic() throws Exception {
+		// copy test-value into bean
+		BaseBean lBean = beanTransformerService.initBean(
+				multiSweQuantityCharacteristic, mDatasetDocument);
+		Assert.assertNotNull(lBean);
+		// transform to xml for testing
+		Document beanXML = beanTransformerService.toXML(lBean);
+		Source bean = new DOMSource(beanXML);
+		try {
+			assertThat(
+					bean,
+					hasXPath(
+							"//SweQuantity/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#weight']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SweQuantity/label[text()='Length (mm)']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SweQuantity/value[text()='36.0']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SweQuantity/uom[text()='mm']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SweQuantity/description[text()='testDescription']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SweQuantity/identifier[text()='testIdentifierQuantity']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+	}
 	/**
 	 * This method tests, if the test-value for smlIdentifier within the xml
 	 * document is copied into the bean.

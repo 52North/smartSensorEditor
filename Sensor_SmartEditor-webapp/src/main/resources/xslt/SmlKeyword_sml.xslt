@@ -9,42 +9,28 @@
 	express or implied. See the License for the specific language governing permissions 
 	and limitations under the License. -->
 <xsl:stylesheet version="2.0"
-	xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-	xmlns:gml="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"
+	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0"
+	xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing Names -->
-	<xsl:template match="//sml:member/*/sml:keywords" />
+	<xsl:template match="/*/sml:keywords/sml:KeywordList/*" />
 
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="//sml:member/*">
+	<xsl:template match="/*/sml:keywords/sml:KeywordList">
 		<xsl:copy>
-			<xsl:apply-templates select="gml:description" />
-			<sml:keywords>
-				<sml:KeywordList>
-					<xsl:for-each select="$beanDoc/*/SmlKeyword">
-						<sml:keyword>
-							<xsl:value-of select="keyword" />
-						</sml:keyword>
-					</xsl:for-each>
-				</sml:KeywordList>
-			</sml:keywords>
-			<xsl:apply-templates select="sml:identification" />
-			<xsl:apply-templates select="sml:classification" />
-			<xsl:apply-templates select="sml:validTime" />
-			<xsl:apply-templates select="sml:characteristics" />
-			<xsl:apply-templates select="sml:capabilities" />
-			<xsl:apply-templates select="sml:contact" />
-			<xsl:apply-templates select="sml:position" />
-			<xsl:apply-templates select="sml:interfaces" />
-			<xsl:apply-templates select="sml:inputs" />
-			<xsl:apply-templates select="sml:outputs" />
-			<xsl:apply-templates select="sml:components" />
+			<xsl:for-each select="$beanDoc/*/SmlKeyword">
+				<sml:keyword>
+					<xsl:value-of select="keyword" />
+				</sml:keyword>
+			</xsl:for-each>
 		</xsl:copy>
-
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
 <sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
 	xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:gml="http://www.opengis.net/gml"
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,29 +37,27 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 	version="1.0.1">
 	<sml:member>
 		<sml:System>
-		
 			<gml:description></gml:description>
 			<sml:keywords>
-			
 				<sml:KeywordList>
-					<sml:keyword />
+					<sml:keyword></sml:keyword>
 				</sml:KeywordList>
 			</sml:keywords>
 			<sml:identification>
 				<sml:IdentifierList>
 					<sml:identifier name="uniqueID">
-						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-							<sml:value></sml:value>
+						<sml:Term definition="urn">
+							<sml:value />
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="longName">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-							<sml:value></sml:value>
+							<sml:value>testname</sml:value>
 						</sml:Term>
 					</sml:identifier>
 					<sml:identifier name="shortName">
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
-							<sml:value></sml:value>
+							<sml:value />
 						</sml:Term>
 					</sml:identifier>
 				</sml:IdentifierList>
@@ -54,32 +82,6 @@ http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
 					<gml:endPosition></gml:endPosition>
 				</gml:TimePeriod>
 			</sml:validTime>
-			<sml:characteristics>
-				<swe:DataRecord definition="urn:ogc:def:property:OGC:physicalProperties">
-					<swe:field name="">
-						<swe:DataRecord>
-							<swe:field name="">
-								<swe:Quantity definition="urn:ogc:def:property:OGC:weight">
-									<swe:uom  />
-									<swe:value/>
-								</swe:Quantity>
-							</swe:field>
-							<swe:field name="">
-								<swe:Quantity definition="urn:ogc:def:property:OGC:height">
-									<swe:uom  />
-									<swe:value/>
-								</swe:Quantity>
-							</swe:field>
-							<swe:field name="">
-								<swe:Quantity definition="urn:ogc:def:property:OGC:length">
-									<swe:uom />
-									<swe:value/>
-								</swe:Quantity>
-							</swe:field>
-						</swe:DataRecord>
-					</swe:field>
-				</swe:DataRecord>
-			</sml:characteristics>
 			<sml:capabilities>
 				<swe:DataRecord>
 					<swe:field name="">

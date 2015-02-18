@@ -23,24 +23,35 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing identifiers -->
-	<xsl:template match="/*/sml:identification/sml:IdentifierList/*" />
+	<xsl:template match="/*/sml:characteristics/sml:CharacteristicList/*" />
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:identification/sml:IdentifierList">
+	<xsl:template match="/*/sml:characteristics/sml:CharacteristicList">
 		<xsl:copy>
-			<xsl:for-each select="$beanDoc/*/SmlIdentification">
-				<sml:identifier>
-					<sml:Term>
+			<xsl:for-each select="$beanDoc/*/SweQuantity">
+				<sml:characteristic>
+					<swe:Quantity>
 						<xsl:attribute name="definition">
 							<xsl:value-of select="definition" />
 						</xsl:attribute>
-						<sml:label>
-						<xsl:value-of select="name" />
-						</sml:label>
-						<sml:value>
+						<swe:identifier>
+							<xsl:value-of select="identifier" />
+						</swe:identifier>
+						<swe:label>
+							<xsl:value-of select="label" />
+						</swe:label>
+						<swe:description>
+							<xsl:value-of select="description" />
+						</swe:description>
+						<swe:uom>
+							<xsl:attribute name="code">
+							<xsl:value-of select="uom" />
+						</xsl:attribute>
+						</swe:uom>
+						<swe:value>
 							<xsl:value-of select="value" />
-						</sml:value>
-					</sml:Term>
-				</sml:identifier>
+						</swe:value>
+					</swe:Quantity>
+				</sml:characteristic>
 			</xsl:for-each>
 		</xsl:copy>
 	</xsl:template>

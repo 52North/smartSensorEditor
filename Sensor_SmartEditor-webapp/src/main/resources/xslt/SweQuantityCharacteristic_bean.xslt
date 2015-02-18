@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!-- See the NOTICE file distributed with this work for additional information 
 	regarding copyright ownership. con terra GmbH licenses this file to You under 
 	the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -17,31 +16,34 @@
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
+	<xsl:output method="xml" version="1.0" encoding="UTF-8"
+		indent="no" omit-xml-declaration="yes" />
 
-	<!-- include base template -->
-	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
-	<!-- parameter handed over by transformer -->
-	<xsl:param name="beanDoc" />
-	<!-- remove existing identifiers -->
-	<xsl:template match="/*/sml:identification/sml:IdentifierList/*" />
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:identification/sml:IdentifierList">
-		<xsl:copy>
-			<xsl:for-each select="$beanDoc/*/SmlIdentification">
-				<sml:identifier>
-					<sml:Term>
-						<xsl:attribute name="definition">
-							<xsl:value-of select="definition" />
-						</xsl:attribute>
-						<sml:label>
-						<xsl:value-of select="name" />
-						</sml:label>
-						<sml:value>
-							<xsl:value-of select="value" />
-						</sml:value>
-					</sml:Term>
-				</sml:identifier>
+	<xsl:template match="/">
+		<multi_container>
+			<xsl:for-each
+				select="/*/sml:characteristics/sml:CharacteristicList/sml:characteristic">
+				<SweQuantity>
+					<label>
+						<xsl:value-of select="./swe:Quantity/swe:label" />
+					</label>
+					<definition>
+						<xsl:value-of select="./swe:Quantity/@definition" />
+					</definition>
+					<value>
+						<xsl:value-of select="number(./swe:Quantity/swe:value)" />
+					</value>
+					<uom>
+						<xsl:value-of select="./swe:Quantity/swe:uom/@code" />
+					</uom>
+					<description>
+						<xsl:value-of select="./swe:Quantity/swe:description" />
+					</description>
+					<identifier>
+						<xsl:value-of select="./swe:Quantity/swe:identifier" />
+					</identifier>
+				</SweQuantity>
 			</xsl:for-each>
-		</xsl:copy>
+		</multi_container>
 	</xsl:template>
 </xsl:stylesheet>

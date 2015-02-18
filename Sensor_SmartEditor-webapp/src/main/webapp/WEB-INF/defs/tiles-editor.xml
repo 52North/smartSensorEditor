@@ -69,21 +69,12 @@
 	<!-- body tiles of the editor -->
 	<definition name="editor.body" template="/WEB-INF/jsp/body.jsp"
 		preparer="de.conterra.smarteditor.tiles.BodyViewPreparer">
-		<put-attribute name="smlUniqueID"
-			value="/WEB-INF/jsp/elements/smlUniqueID.jsp" cascade="true" />
-		<put-attribute name="smlShortName"
-			value="/WEB-INF/jsp/elements/smlShortName.jsp" cascade="true" />
-		<put-attribute name="smlLongName"
-			value="/WEB-INF/jsp/elements/smlLongName.jsp" cascade="true" />
 		<put-attribute name="smlKeyword" value="editor.body.smlKeyword"
 			cascade="true" />
-		<put-attribute name="smlAcousticSensorLength"
-	       value="/WEB-INF/jsp/elements/smlAcousticSensorLength.jsp" cascade="true" />	
-	    <put-attribute name="smlAcousticSensorWeight"
-	       value="/WEB-INF/jsp/elements/smlAcousticSensorWeight.jsp" cascade="true" />
-	    <put-attribute name="smlAcousticSensorHeight"
-	       value="/WEB-INF/jsp/elements/smlAcousticSensorHeight.jsp" cascade="true" />
+		
 	       <put-attribute name="smlIdentification" value="editor.body.smlIdentification"
+			cascade="true" />
+			 <put-attribute name="sweQuantityCharacteristic" value="editor.body.sweQuantityCharacteristic"
 			cascade="true" />
 	   <put-attribute name="smlIdentifier"
 			value="/WEB-INF/jsp/elements/smlIdentifier.jsp" cascade="true" />		

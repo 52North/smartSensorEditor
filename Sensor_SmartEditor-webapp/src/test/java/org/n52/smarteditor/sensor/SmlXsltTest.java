@@ -56,7 +56,7 @@ import de.conterra.smarteditor.util.DOMUtil;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/sml-transformer-config.xml" , "/sml-transformer-config_AcousticSensor.xml"})
+@ContextConfiguration(locations = {"/sml-transformer-config.xml"})
 public class SmlXsltTest {
 	static private Logger LOG = Logger.getRootLogger();
 	SimpleNamespaceContext usingNamespaces;
@@ -66,16 +66,6 @@ public class SmlXsltTest {
 	Document mRefDatasetDocument = DOMUtil.createFromStream(
 			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT.xml"), true);
 	
-	Document mRefDatasetDocument_AcousticSensor = DOMUtil.createFromStream(
-			BeanXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT_AcousticSensor.xml"), true);
-	@Resource(name = "smlLongName")
-	BaseBean smlLongName;
-	
-	@Resource(name = "smlShortName")
-	BaseBean smlShortName;
-     
-	@Resource(name = "smlUniqueID")
-	BaseBean smlUniqueID;
 	
 	@Resource(name = "smlKeyword")
 	BaseBean smlKeyword;
@@ -85,12 +75,9 @@ public class SmlXsltTest {
 	@Resource(name = "smlIdentifier")
     BaseBean smlIdentifier;
 	
-	@Resource(name = "smlAcousticSensorLength")
-	BaseBean smlAcousticSensorLength;
-	@Resource(name = "smlAcousticSensorWeight")
-	BaseBean smlAcousticSensorWeight;
-	@Resource(name = "smlAcousticSensorHeight")
-	BaseBean smlAcousticSensorHeight;
+
+	@Resource(name = "sweQuantityCharacteristic")
+	BaseBean sweQuantityCharacteristic;
 	
 
 	@Resource(name = "multiSmlKeyword")
@@ -98,85 +85,23 @@ public class SmlXsltTest {
 	
 	@Resource(name = "multiSmlIdentification")
     MultipleElementBean multiSmlIdentification;
+	
+
+	@Resource(name = "multiSweQuantityCharacteristic")
+	MultipleElementBean multiSweQuantityCharacteristic;
 	@Before
 	public void before() {
 		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("sml", "http://www.opengis.net/sensorML/1.0.1");
-		map.put("swe", "http://www.opengis.net/swe/1.0.1");
+		map.put("sml", "http://www.opengis.net/sensorml/2.0");
+		map.put("swe", "http://www.opengis.net/swe/2.0");
 		map.put("gml", "http://www.opengis.net/gml/3.2");
 		usingNamespaces = new SimpleNamespaceContext();
 		usingNamespaces.setBindings(map);
 	}
 
-/*	*//**
-	  This method tests, if the test-value for longName is copied into the xml document.
-	 *//*
-	@Test
-	public void testLongName() {
-		//
-		BeanUtil.setProperty(smlLongName, "longName", "testname");
-		//
-		Document doc = beanTransformerService.mergeToISO(smlLongName,
-				mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longName']/sml:value[text()='testname']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	*//**
-	  This method tests, if the test-value for shortName is copied into the xml document.
-	 *//*
-	@Test
-	public void testShortName() {
-		BeanUtil.setProperty(smlShortName, "shortName", "shortname");
-		Document doc = beanTransformerService.mergeToISO(smlShortName,
-				mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']/sml:value[text()='shortname']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	*//**
-	  This method tests, if the test-value for uniqueId is copied into the xml document.
-	 *//*
-	@Test
-	public void testUniqueID() {
-		BeanUtil.setProperty(smlUniqueID, "id", "testunique");
-		
-		Document doc = beanTransformerService.mergeToISO(smlUniqueID,
-				mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']/sml:value[text()='testunique']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	*//**
+	/**
 	  This method tests, if the test-value for keyword is copied into the xml document.
-	 *//*
+	 */
 	@Test
 	public void testKeyword() {
 	
@@ -188,7 +113,7 @@ public class SmlXsltTest {
 			assertThat(
 					beanSource,
 					hasXPath(
-							"//sml:member/sml:System/sml:keywords/sml:KeywordList/sml:keyword[text()='testkeyword']",
+							"/*/sml:keywords/sml:KeywordList/sml:keyword[text()='testkeyword']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
@@ -196,80 +121,9 @@ public class SmlXsltTest {
 		}
 
 	}
-	*//**
-	  This method tests, if the test-value for SmlAcousticSensorLength is copied into the xml document.
-	 *//*
-	@Test
-	public void testSmlAcousticSensorLength() {
-		//
-		BeanUtil.setProperty(smlAcousticSensorLength, "length", "10");
-		//
-		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorLength,
-				mRefDatasetDocument_AcousticSensor);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:length']/swe:value[text()='10']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	
-	*//**
-	  This method tests, if the test-value for SmlAcousticSensorHeight is copied into the xml document.
-	 *//*
-	@Test
-	public void testSmlAcousticSensorHeight() {
-		//
-		BeanUtil.setProperty(smlAcousticSensorHeight, "height", "15");
-		//
-		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorHeight,
-				mRefDatasetDocument_AcousticSensor);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:height']/swe:value[text()='15']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	
-*//**
-	 * This method tests, if the test-value for SmlAcousticSensorWeight is copied into the xml document.
-	 *//*
-	@Test
-	public void testSmlAcousticSensorWeight() {
-		//
-		BeanUtil.setProperty(smlAcousticSensorWeight, "weight", "20");
-		//
-		Document doc = beanTransformerService.mergeToISO(smlAcousticSensorWeight,
-				mRefDatasetDocument_AcousticSensor);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"//sml:member/sml:System/sml:characteristics/swe:DataRecord[@definition='urn:ogc:def:property:OGC:physicalProperties']/swe:field/swe:DataRecord/swe:field/swe:Quantity[@definition='urn:ogc:def:property:OGC:weight']/swe:value[text()='20']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	*//**
+/**
 	  This method tests, if the test-value for smlIdentification is copied into the xml document.
-	 *//*
+	 */
 	@Test
 	public void testSmlIdentification() {
 	
@@ -283,14 +137,71 @@ public class SmlXsltTest {
 			assertThat(
 					beanSource,
 					hasXPath(
-							"//sml:member/sml:System/sml:identification/sml:IdentifierList/sml:identifier[@name='testname']/sml:Term[@definition='testdefinition']/sml:value[text()='testvalue']",
+							"/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='testdefinition']/sml:value[text()='testvalue']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='testdefinition']/sml:label[text()='testname']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
 
-	}*/
+	}
+	
+	/**
+	  This method tests, if the test-value for smlIdentification is copied into the xml document.
+	 */
+	@Test
+	public void testSweQuantityCharacteristic() {
+	
+		BeanUtil.setProperty(sweQuantityCharacteristic, "identifier","testIdentifier");
+		BeanUtil.setProperty(sweQuantityCharacteristic, "label","testLabel");
+		BeanUtil.setProperty(sweQuantityCharacteristic, "description","testDescription");
+		BeanUtil.setProperty(sweQuantityCharacteristic, "uom","testUom");
+		BeanUtil.setProperty(sweQuantityCharacteristic, "value","20.2");
+		BeanUtil.setProperty(sweQuantityCharacteristic, "definition","testDefinition");
+		
+		multiSweQuantityCharacteristic.getItems().add(sweQuantityCharacteristic);
+		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity[@definition='testDefinition']/swe:identifier[text()='testIdentifier']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:label[text()='testLabel']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:description[text()='testDescription']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:value[text()='20.2']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:uom[@code='testUom']",
+							usingNamespaces));
+			
+			
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
 	/**
 	  This method tests, if the test-value for uniqueId is copied into the xml document.
 	 */

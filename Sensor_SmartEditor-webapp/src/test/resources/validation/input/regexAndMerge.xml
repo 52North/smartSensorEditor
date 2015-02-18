@@ -7,10 +7,8 @@
    <!--Keywords describing the hydrophone-->
    <sml:keywords>
       <sml:KeywordList>
-         <sml:keyword>Earth Science > Oceans > Ocean Acoustics</sml:keyword>
-         <sml:keyword>Ocean Acoustics</sml:keyword>
-         <sml:keyword>SODAR Acoustic Receivers Hydrophone</sml:keyword>
-         <sml:keyword>Projects:ESONET Platforms: Fixed Oberservation Stations</sml:keyword>
+         <sml:keyword>test</sml:keyword>
+         <sml:keyword>test</sml:keyword>
       </sml:KeywordList>
    </sml:keywords>
    <!--Identifiers of the hydrophone-->
@@ -18,44 +16,16 @@
       <sml:IdentifierList>
          <!--UUID of the hydrophone-->
          <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#UUID">
-               <sml:label>UUID</sml:label>
-               <sml:value>C41969B6-F170-0501-432E-B43D5420140B</sml:value>
+            <sml:Term definition="test">
+               <sml:label>test</sml:label>
+               <sml:value>test</sml:value>
             </sml:Term>
          </sml:identifier>
          <!--Short name of the hydrophone-->
          <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#shortName">
-               <sml:label>Short name</sml:label>
-               <sml:value>Example Hydrophone 1</sml:value>
-            </sml:Term>
-         </sml:identifier>
-         <!--Long name of the hydrophone-->
-         <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#longName">
-               <sml:label>Long name</sml:label>
-               <sml:value>Example Hydrophone 1 NeXOS</sml:value>
-            </sml:Term>
-         </sml:identifier>
-         <!--Device ID of the hydrophone-->
-         <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#deviceID">
-               <sml:label>Device ID</sml:label>
-               <sml:value>C6764FF3-A220-0001-2D56-19DB17401D90</sml:value>
-            </sml:Term>
-         </sml:identifier>
-         <!--Serial number of the hydrophone-->
-         <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#serialNumber">
-               <sml:label>Serial number</sml:label>
-               <sml:value>1234567890</sml:value>
-            </sml:Term>
-         </sml:identifier>
-         <!--WMO id of the hydrophone-->
-         <sml:identifier>
-            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#WMO_ID">
-               <sml:label>WMO</sml:label>
-               <sml:value>123456</sml:value>
+            <sml:Term definition="test">
+               <sml:label>test</sml:label>
+               <sml:value>test</sml:value>
             </sml:Term>
          </sml:identifier>
       </sml:IdentifierList>

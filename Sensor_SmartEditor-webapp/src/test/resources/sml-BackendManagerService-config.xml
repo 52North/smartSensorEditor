@@ -74,19 +74,6 @@
 		<property name="transformToBean" value="/xslt/SmlKeyword_bean.xslt" />
 		<property name="bean" ref="smlKeyword" />
 	</bean>
-	<lang:groovy id="smlLongName" script-source="classpath:groovy/SmlLongNameBean.groovy"
-		>
-		<lang:property name="transformToISO" value="/xslt/SmlLongName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlLongName_bean.xslt" />
-	</lang:groovy>
-	<lang:groovy id="smlShortName" script-source="classpath:groovy/SmlShortNameBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlShortName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlShortName_bean.xslt" />
-	</lang:groovy>
-	<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
-		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
-		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
-	</bean>
 
 		<lang:groovy id="smlIdentification"
 		script-source="classpath:groovy/SmlIdentificationBean.groovy" />
@@ -109,9 +96,6 @@
 			<map>
 				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
-				<entry key="smlLongName" value-ref="smlLongName" />
-				<entry key="smlShortName" value-ref="smlShortName" />
-				<entry key="smlUniqueID" value-ref="smlUniqueID" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>

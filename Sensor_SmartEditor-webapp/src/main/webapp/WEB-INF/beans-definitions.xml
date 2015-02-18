@@ -1,34 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
-    Software GmbH
-
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License version 2 as published
-    by the Free Software Foundation.
-
-    If the program is linked with libraries which are licensed under one of
-    the following licenses, the combination of the program with the linked
-    library is not considered a "derivative work" of the program:
-
-        - Apache License, version 2.0
-        - Apache Software License, version 1.0
-        - GNU Lesser General Public License, version 3
-        - Mozilla Public License, versions 1.0, 1.1 and 2.0
-        - Common Development and Distribution License (CDDL), version 1.0
-
-    Therefore the distribution of the program linked with libraries licensed
-    under the aforementioned licenses, is permitted by the copyright holders
-    if the distribution is compliant with both the GNU General Public
-    License version 2 and the aforementioned licenses.
-
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-    Public License for more details.
-
--->
+<!-- Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial 
+	Open Source Software GmbH This program is free software; you can redistribute 
+	it and/or modify it under the terms of the GNU General Public License version 
+	2 as published by the Free Software Foundation. If the program is linked 
+	with libraries which are licensed under one of the following licenses, the 
+	combination of the program with the linked library is not considered a "derivative 
+	work" of the program: - Apache License, version 2.0 - Apache Software License, 
+	version 1.0 - GNU Lesser General Public License, version 3 - Mozilla Public 
+	License, versions 1.0, 1.1 and 2.0 - Common Development and Distribution 
+	License (CDDL), version 1.0 Therefore the distribution of the program linked 
+	with libraries licensed under the aforementioned licenses, is permitted by 
+	the copyright holders if the distribution is compliant with both the GNU 
+	General Public License version 2 and the aforementioned licenses. This program 
+	is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU General Public License for more details. -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:lang="http://www.springframework.org/schema/lang"
@@ -373,32 +359,8 @@
 		<property name="transformToBean" value="/xslt/SmlKeyword_bean.xslt" />
 		<property name="bean" ref="smlKeyword" />
 	</bean>
-	<lang:groovy id="smlLongName" script-source="classpath:groovy/SmlLongNameBean.groovy"
-		scope="session">
-		<lang:property name="transformToISO" value="/xslt/SmlLongName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlLongName_bean.xslt" />
-	</lang:groovy>
-	<lang:groovy id="smlShortName" script-source="classpath:groovy/SmlShortNameBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlShortName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlShortName_bean.xslt" />
-	</lang:groovy>
- 	<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
-		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
-		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
-	</bean> 
-	<lang:groovy id="smlAcousticSensorLength" script-source="classpath:groovy/SmlAcousticSensorLengthBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlAcousticSensorLength_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlAcousticSensorLength_bean.xslt" />
-	</lang:groovy>
-	<lang:groovy id="smlAcousticSensorWeight" script-source="classpath:groovy/SmlAcousticSensorWeightBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlAcousticSensorWeight_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlAcousticSensorWeight_bean.xslt" />
-	</lang:groovy>
-	<lang:groovy id="smlAcousticSensorHeight" script-source="classpath:groovy/SmlAcousticSensorHeightBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlAcousticSensorHeight_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlAcousticSensorHeight_bean.xslt" />
-	</lang:groovy>
-	
+
+
 	<lang:groovy id="smlIdentification"
 		script-source="classpath:groovy/SmlIdentificationBean.groovy" scope="session" />
 	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean"
@@ -407,10 +369,16 @@
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
 		<property name="bean" ref="smlIdentification" />
 	</bean>
+	<lang:groovy id="sweQuantityCharacteristic" script-source="classpath:groovy/SweQuantityBean.groovy" />
+	<bean id="multiSweQuantityCharacteristic" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SweQuantityCharacteristic_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
+		<property name="bean" ref="sweQuantityCharacteristic" />
+	</bean>
 	<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
-	</bean> 
+	</bean>
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
 		scope="session">
 		<aop:scoped-proxy />
@@ -460,13 +428,8 @@
 				<entry key="resourceMaintenance" value-ref="multiResourceMaintenance" />
 				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
-				<entry key="smlLongName" value-ref="smlLongName" />
-				<entry key="smlShortName" value-ref="smlShortName" />
-			    <entry key="smlUniqueID" value-ref="smlUniqueID" />
-				<entry key="smlAcousticSensorLength" value-ref="smlAcousticSensorLength" />
-				<entry key="smlAcousticSensorWeight" value-ref="smlAcousticSensorWeight" />
-				<entry key="smlAcousticSensorHeight" value-ref="smlAcousticSensorHeight" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
+				<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>
 		</property>

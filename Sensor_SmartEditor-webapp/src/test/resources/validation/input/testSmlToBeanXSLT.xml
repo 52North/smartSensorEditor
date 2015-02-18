@@ -470,4 +470,75 @@
          <sml:component name="pressureDetector_of_ExampleHydrophone1" xlink:href="http://52north.org/pressureDetector_of_ExampleHydrophone1.xml"/>
       </sml:ComponentList>
    </sml:components>
+   
+<!--    ##### hydrophone_Type -->
+<sml:characteristics name="ExampleHydrophone1Characteristics">
+      <sml:CharacteristicList>
+         <!--The weight of the hydrophone-->
+         <sml:characteristic name="weight">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#weight">
+               <swe:label>Weight (kg)</swe:label>
+               <swe:uom code="kg"/>
+               <swe:value>0.423</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+         <!--The length of the hydrophone-->
+         <sml:characteristic name="length">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#length">
+               <swe:label>Length (mm)</swe:label>
+               <swe:uom code="mm"/>
+               <swe:value>35</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+         <!--The width of the hydrophone-->
+         <sml:characteristic name="width">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#width">
+               <swe:label>Width (mm)</swe:label>
+               <swe:uom code="mm"/>
+               <swe:value>36</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+         <!--The height of the hydrophone-->
+         <sml:characteristic name="height">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#height">
+               <swe:label>Height (mm)</swe:label>
+               <swe:uom code="mm"/>
+               <swe:value>220</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+         <!--The material of the hydrophone-->
+         <sml:characteristic name="material">
+            <swe:Text definition="http://www.nexosproject.eu/dictionary/definitions.html#material">
+               <swe:label>Material</swe:label>
+               <swe:value>Encapsulated polymer</swe:value>
+            </swe:Text>
+         </sml:characteristic>
+         <!--The storage type of the hydrophone-->
+         <sml:characteristic name="storageType">
+            <swe:Text definition="http://www.nexosproject.eu/dictionary/definitions.html#storageType">
+               <swe:label>Storage Type</swe:label>
+               <swe:value>SSD</swe:value>
+            </swe:Text>
+         </sml:characteristic>
+         <!--The storage capacity of the hydrophone-->
+         <sml:characteristic name="storageCapacity">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#storageCapacity">
+               <swe:label>Storage Capacity (By)</swe:label>
+               <swe:uom code="By"/>
+               <swe:value>1000000000</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+         <!--The battery current of the hydrophone-->
+         <sml:characteristic name="batteryCurrent">
+            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#batteryCurrent">
+               <swe:identifier>testIdentifierQuantity</swe:identifier>
+               <swe:label>Battery Current (mA)</swe:label>
+               <swe:description>testDescription</swe:description>
+               <swe:uom code="mA"/>
+               <swe:value>22</swe:value>
+            </swe:Quantity>
+         </sml:characteristic>
+      </sml:CharacteristicList>
+   </sml:characteristics>
+
 </sml:PhysicalSystem>

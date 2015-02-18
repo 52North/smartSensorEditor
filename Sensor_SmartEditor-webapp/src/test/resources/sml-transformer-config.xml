@@ -6,19 +6,6 @@
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
 
-
- <lang:groovy id="smlLongName" script-source="classpath:groovy/SmlLongNameBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlLongName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlLongName_bean.xslt" />
-	</lang:groovy>
-	 <lang:groovy id="smlShortName" script-source="classpath:groovy/SmlShortNameBean.groovy">
-		<lang:property name="transformToISO" value="/xslt/SmlShortName_sml.xslt" />
-		<lang:property name="transformToBean" value="/xslt/SmlShortName_bean.xslt" />
-	</lang:groovy>
-<bean id="smlUniqueID" class="de.conterra.smarteditor.beans.FileIdentifierBean">
-		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
-		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
-	</bean>
 <lang:groovy id="smlKeyword" script-source="classpath:groovy/SmlKeywordBean.groovy"
 		 />
 	<bean id="multiSmlKeyword" class="de.conterra.smarteditor.beans.MultipleElementBean"
@@ -33,6 +20,13 @@
 		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
 		<property name="bean" ref="smlIdentification" />
+	</bean>
+			<lang:groovy id="sweQuantityCharacteristic"
+		script-source="classpath:groovy/SweQuantityBean.groovy" />
+	<bean id="multiSweQuantityCharacteristic" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SweQuantityCharacteristic_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
+		<property name="bean" ref="sweQuantityCharacteristic" />
 	</bean>
 		<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
@@ -60,11 +54,9 @@
 		<property name="storage">
 			<map>
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
-				<entry key="smlLongName" value-ref="smlLongName" />
-				<entry key="smlShortName" value-ref="smlShortName" />
-				<entry key="smlUniqueID" value-ref="smlUniqueID" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
+				<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic"/>
 			</map>
 		</property>
 	</bean>
