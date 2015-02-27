@@ -11,6 +11,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>smartSensorEditor webapp</name>
 	<url>https://github.com/52North/smartSensorEditor</url>
+        <inceptionYear>2014</inceptionYear>
+                
 	<licenses>
 		<license>
 			<name>Apache Software License 2.0</name>
