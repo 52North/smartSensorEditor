@@ -3,12 +3,14 @@
 
 	<parent>
 		<groupId>org.n52.metadata</groupId>
-		<artifactId>Sensor_SmartEditor</artifactId>
+		<artifactId>smartsensoreditor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<packaging>jar</packaging>
-	<artifactId>Sensor_SmartEditor-api</artifactId>
+	<artifactId>smartsensoreditor-api</artifactId>
 	<modelVersion>4.0.0</modelVersion>
+	<name>smartSensorEditor API</name>
+	<url>https://github.com/52North/smartSensorEditor</url>
 
 	<licenses>
 		<license>
@@ -28,7 +30,7 @@
 					<artifactSet>
 						<includes>
 							<include>org.n52.metadata:smarteditor-api</include>
-							<include>org.52North.metadata:Sensor_SmartEditor-api</include>
+							<include>org.52North.metadata:smartsensoreditor-api</include>
 						</includes>
 					</artifactSet>
 					<filter>

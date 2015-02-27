@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>org.n52.metadata</groupId>
+		<artifactId>smartsensoreditor</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<packaging>war</packaging>
+	<artifactId>smartsensoreditor-webapp</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<name>smartSensorEditor webapp</name>
+	<url>https://github.com/52North/smartSensorEditor</url>
+	<licenses>
+		<license>
+			<name>Apache Software License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<build.properties.project>${basedir}/src/main/webapp/META-INF/build.properties</build.properties.project>
+		<build.properties.local>${user.home}/build.properties</build.properties.local>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.n52.metadata</groupId>
+			<artifactId>smarteditor-webapp</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.n52.metadata</groupId>
+			<artifactId>smartsensoreditor-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.xmlmatchers</groupId>
+			<artifactId>xml-matchers</artifactId>
+			<version>1.0-RC1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.n52.metadata</groupId>
+			<artifactId>smarteditor-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+            <finalName>smartSensorEditor</finalName>
+            <plugins>
+                    <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>properties-maven-plugin</artifactId>
+                            <version>1.0-alpha-2</version>
+                            <executions>
+                                    <execution>
+                                            <phase>initialize</phase>
+                                            <goals>
+                                                    <goal>read-project-properties</goal>
+                                            </goals>
+                                            <configuration>
+                                                    <quiet>true</quiet>
+                                                    <files>
+                                                            <file>${build.properties.project}</file>
+                                                            <file>${build.properties.local}</file>
+                                                    </files>
+                                            </configuration>
+                                    </execution>
+                            </executions>
+                    </plugin>
+
+                    <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-war-plugin</artifactId>
+                            <version>2.4</version>
+                            <configuration>
+                                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                                    <webResources>
+                                            <resource>
+                                                    <directory>${basedir}/src/main/webapp</directory>
+                                                    <filtering>true</filtering>
+                                            </resource>
+                                    </webResources>
+                                    <overlays>
+                                            <overlay>
+                                                    <id>smarteditor-webapp filtered</id>
+                                                    <groupId>org.n52.metadata</groupId>
+                                                    <artifactId>smarteditor-webapp</artifactId>
+                                                    <!-- <filtered>true</filtered> <includes> <include>WEB-INF/**/*.properties</include> 
+                                                            <include>WEB-INF/**/*.xml</include> <include>WEB-INF/*.xml</include> </includes> 
+                                                            <excludes> <exclude>**/postgresql-*.jar</exclude> </excludes> </overlay> 
+                                                            <overlay> <id>smarteditor-webapp unfiltered</id> <groupId>org.n52.metadata</groupId> 
+                                                            <artifactId>smarteditor-webapp</artifactId> <filtered>false</filtered> <excludes> 
+                                                            <exclude>WEB-INF/**/*.properties</exclude> <exclude>WEB-INF/*.xml</exclude> 
+                                                            <exclude>WEB-INF/**/*.xml</exclude> <exclude>**/postgresql-*.jar</exclude> 
+                                                            </excludes> -->
+                                            </overlay>
+                                    </overlays>
+                                    <!-- <attachClasses>true</attachClasses> <archiveClasses>true</archiveClasses> -->
+                            </configuration>
+                    </plugin>
+            </plugins>
+	</build>
+
+</project>

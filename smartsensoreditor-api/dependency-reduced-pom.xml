@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>Sensor_SmartEditor</artifactId>
+    <artifactId>smartsensoreditor</artifactId>
     <groupId>org.n52.metadata</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>Sensor_SmartEditor-api</artifactId>
+  <artifactId>smartsensoreditor-api</artifactId>
+  <name>smartSensorEditor API</name>
+  <url>https://github.com/52North/smartSensorEditor</url>
   <licenses>
     <license>
       <name>Apache Software License 2.0</name>
@@ -31,7 +33,7 @@
           <artifactSet>
             <includes>
               <include>org.n52.metadata:smarteditor-api</include>
-              <include>org.52North.metadata:Sensor_SmartEditor-api</include>
+              <include>org.52North.metadata:smartsensoreditor-api</include>
             </includes>
           </artifactSet>
           <filter>
@@ -39,7 +41,7 @@
             <excludes>
               <exclude>de/conterra/smarteditor/controller/SaveLocalController.class</exclude>
               <exclude>de/conterra/smarteditor/xml/EditorContext.class</exclude>
-              <exclude>de/conterra/smarteditor/service/BackendManagerSesrvice.class</exclude>
+              <exclude>de/conterra/smarteditor/service/BackendManagerService.class</exclude>
             </excludes>
           </filter>
         </configuration>
