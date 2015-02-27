@@ -5,12 +5,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.metadata</groupId>
 	<artifactId>smartsensoreditor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+        <name>smartSensorEditor</name>
+        <version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<url>https://github.com/52North/smartSensorEditor</url>
+        
 	<modules>
 		<module>smartsensoreditor-api</module>
 		<module>smartsensoreditor-webapp</module>
 	</modules>
+        
 	<licenses>
 		<license>
 			<name>Apache Software License 2.0</name>
@@ -20,7 +24,7 @@
 	</licenses>
 	<properties>
 		<spring.version>3.0.6.RELEASE</spring.version>
-		<currentYear>2014</currentYear> <!-- manual setting -->
+		<currentYear>2015</currentYear> <!-- manual setting -->
 		<maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
 		<currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
 		<license.header.file>misc/license_header.txt</license.header.file>

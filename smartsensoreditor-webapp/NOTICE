@@ -45,8 +45,8 @@ This project includes:
   org.springframework.core under The Apache Software License, Version 2.0
   org.springframework.expression under The Apache Software License, Version 2.0
   Saxon-HE under Mozilla Public License Version 1.0
-  Sensor_SmartEditor-api under Apache Software License 2.0
-  Sensor_SmartEditor-webapp under Apache Software License 2.0
+  smartsensoreditor-api under Apache Software License 2.0
+  smartsensoreditor-webapp under Apache Software License 2.0
   servlet-api under CDDL 1.1 or GPL2 w/ CPE
   smarteditor-webapp under Apache Software License 2.0
   spring-test under Apache License, Version 2.0
