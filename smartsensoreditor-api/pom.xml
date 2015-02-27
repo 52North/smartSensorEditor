@@ -11,6 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>smartSensorEditor API</name>
 	<url>https://github.com/52North/smartSensorEditor</url>
+        <inceptionYear>2014</inceptionYear>
 
 	<licenses>
 		<license>

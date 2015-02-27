@@ -9,8 +9,10 @@
 	<packaging>war</packaging>
 	<artifactId>smartsensoreditor-webapp</artifactId>
 	<modelVersion>4.0.0</modelVersion>
-	<name>Sensor_SmartEditor-webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>smartSensorEditor webapp</name>
+	<url>https://github.com/52North/smartSensorEditor</url>
+<inceptionYear>2014</inceptionYear>
+
 	<licenses>
 		<license>
 			<name>Apache Software License 2.0</name>
@@ -27,7 +29,7 @@
 		<dependency>
 			<groupId>org.n52.metadata</groupId>
 			<artifactId>smarteditor-webapp</artifactId>
-				<type>war</type>
+			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -82,60 +84,60 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>smartsensoreditor</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-							<quiet>true</quiet>
-							<files>
-								<file>${build.properties.project}</file>
-								<file>${build.properties.local}</file>
-							</files>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+            <finalName>smartSensorEditor</finalName>
+            <plugins>
+                    <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>properties-maven-plugin</artifactId>
+                            <version>1.0-alpha-2</version>
+                            <executions>
+                                    <execution>
+                                            <phase>initialize</phase>
+                                            <goals>
+                                                    <goal>read-project-properties</goal>
+                                            </goals>
+                                            <configuration>
+                                                    <quiet>true</quiet>
+                                                    <files>
+                                                            <file>${build.properties.project}</file>
+                                                            <file>${build.properties.local}</file>
+                                                    </files>
+                                            </configuration>
+                                    </execution>
+                            </executions>
+                    </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webResources>
-						<resource>
-							<directory>${basedir}/src/main/webapp</directory>
-							<filtering>true</filtering>
-						</resource>
-					</webResources>
-					<overlays>
-						<overlay>
-							<id>smarteditor-webapp filtered</id>
-							<groupId>org.n52.metadata</groupId>
-							<artifactId>smarteditor-webapp</artifactId>
-							<!-- <filtered>true</filtered> <includes> <include>WEB-INF/**/*.properties</include> 
-								<include>WEB-INF/**/*.xml</include> <include>WEB-INF/*.xml</include> </includes> 
-								<excludes> <exclude>**/postgresql-*.jar</exclude> </excludes> </overlay> 
-								<overlay> <id>smarteditor-webapp unfiltered</id> <groupId>org.n52.metadata</groupId> 
-								<artifactId>smarteditor-webapp</artifactId> <filtered>false</filtered> <excludes> 
-								<exclude>WEB-INF/**/*.properties</exclude> <exclude>WEB-INF/*.xml</exclude> 
-								<exclude>WEB-INF/**/*.xml</exclude> <exclude>**/postgresql-*.jar</exclude> 
-								</excludes> -->
-						</overlay>
-					</overlays>
-					<!-- <attachClasses>true</attachClasses> <archiveClasses>true</archiveClasses> -->
-				</configuration>
-			</plugin>
-		</plugins>
+                    <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-war-plugin</artifactId>
+                            <version>2.4</version>
+                            <configuration>
+                                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                                    <webResources>
+                                            <resource>
+                                                    <directory>${basedir}/src/main/webapp</directory>
+                                                    <filtering>true</filtering>
+                                            </resource>
+                                    </webResources>
+                                    <overlays>
+                                            <overlay>
+                                                    <id>smarteditor-webapp filtered</id>
+                                                    <groupId>org.n52.metadata</groupId>
+                                                    <artifactId>smarteditor-webapp</artifactId>
+                                                    <!-- <filtered>true</filtered> <includes> <include>WEB-INF/**/*.properties</include> 
+                                                            <include>WEB-INF/**/*.xml</include> <include>WEB-INF/*.xml</include> </includes> 
+                                                            <excludes> <exclude>**/postgresql-*.jar</exclude> </excludes> </overlay> 
+                                                            <overlay> <id>smarteditor-webapp unfiltered</id> <groupId>org.n52.metadata</groupId> 
+                                                            <artifactId>smarteditor-webapp</artifactId> <filtered>false</filtered> <excludes> 
+                                                            <exclude>WEB-INF/**/*.properties</exclude> <exclude>WEB-INF/*.xml</exclude> 
+                                                            <exclude>WEB-INF/**/*.xml</exclude> <exclude>**/postgresql-*.jar</exclude> 
+                                                            </excludes> -->
+                                            </overlay>
+                                    </overlays>
+                                    <!-- <attachClasses>true</attachClasses> <archiveClasses>true</archiveClasses> -->
+                            </configuration>
+                    </plugin>
+            </plugins>
 	</build>
 
 </project>
