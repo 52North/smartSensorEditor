@@ -26,12 +26,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details.
  */
-package de.conterra.smarteditor.controller;
+package org.n52.smarteditor.controller;
 
+import de.conterra.smarteditor.controller.SaveLocalController;
 import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.XPathUtil;
-import de.conterra.smarteditor.xml.EditorContext;
+
 import org.apache.log4j.Logger;
+import org.n52.smarteditor.xml.EditorContext;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
@@ -44,6 +46,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import java.util.Map;
 
 /**
@@ -54,7 +57,7 @@ import java.util.Map;
  *         Date: 17.03.2010
  *         Time: 09:29:08
  */
-public class SaveLocalController implements Controller {
+public class SaveLocalControllerSML extends SaveLocalController implements Controller {
 
     private static Logger LOG = Logger.getLogger(SaveLocalController.class);
 

@@ -37,7 +37,7 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="beans-definitions.xml" />
 
-	<bean id="backendSetupService" class="de.conterra.smarteditor.service.BackendManagerService"
+	<bean id="backendSetupService" class="org.n52.smarteditor.service.BackendManagerServiceSML"
 		scope="session">
 		<aop:scoped-proxy />
 		<property name="validators">

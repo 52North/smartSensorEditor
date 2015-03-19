@@ -25,7 +25,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details.
  */
-package de.conterra.smarteditor.service;
+package org.n52.smarteditor.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -36,6 +36,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+
+
+
+
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMResult;
@@ -43,7 +47,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
-
+import org.n52.smarteditor.xml.EditorContext;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.w3c.dom.Document;
@@ -51,11 +55,16 @@ import org.w3c.dom.Document;
 import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.BaseBean;
 import de.conterra.smarteditor.beans.FileIdentifierBean;
+import de.conterra.smarteditor.controller.SaveTemplateController;
 import de.conterra.smarteditor.dao.LockManager;
+import de.conterra.smarteditor.service.BackendManagerException;
+import de.conterra.smarteditor.service.BackendManagerService;
+import de.conterra.smarteditor.service.BeanTransformerService;
+import de.conterra.smarteditor.service.TransformerException;
+import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import de.conterra.smarteditor.util.XPathUtil;
 import de.conterra.smarteditor.validator.SchematronValidator;
-import de.conterra.smarteditor.xml.EditorContext;
 
 /**
  * Service manages any access to and modification of the backend storage
@@ -67,9 +76,9 @@ import de.conterra.smarteditor.xml.EditorContext;
  *         <p/>
  *         Date: 16.02.2010 Time: 15:19:00
  */
-public class BackendManagerService {
+public class BackendManagerServiceSML extends BackendManagerService{
 
-	static private Logger LOG = Logger.getLogger(BackendManagerService.class);
+	static private Logger LOG = Logger.getLogger(BackendManagerServiceSML.class);
 	// know validators
 	private Map<String, SchematronValidator> validators;
 	// the bean object that stores the form elements
@@ -251,7 +260,7 @@ public class BackendManagerService {
 	 *
 	 * @param pResourceType
 	 *            one of MD_ScopeCode
-	 * @throws BackendManagerService
+	 * @throws BackendManagerServiceSML
 	 */
 	public synchronized void initBackend(String pResourceType)
 			throws BackendManagerException {

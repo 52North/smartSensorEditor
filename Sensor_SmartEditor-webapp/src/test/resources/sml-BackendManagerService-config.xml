@@ -35,7 +35,7 @@
 		<property name="svrlFilename" value="iso_svrl_for_xslt2.xsl" />
 		<property name="xsltService" ref="xsltTransformerService" />
 	</bean>
-    	<bean id="backendSetupService" class="de.conterra.smarteditor.service.BackendManagerService">
+    	<bean id="backendSetupService" class="org.n52.smarteditor.service.BackendManagerServiceSML">
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>

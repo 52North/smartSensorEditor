@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    con terra GmbH licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <import resource="dao-definitions.xml"/>
+    <import resource="beans-definitions.xml"/>
+    <import resource="tiles-definitions.xml"/>
+    <import resource="validator-definitions.xml"/>
+    <import resource="service-definitions.xml"/>
+
+    <context:component-scan base-package="de.conterra.smarteditor.controller"/>
+
+    <bean name="samlInterceptor" class="de.conterra.smarteditor.interceptors.SamlInterceptor">
+        <property name="userInfo" ref="userInfoBean"/>
+        <property name="ticketSessionName" value="ticket"/>
+        <property name="ticketFactory">
+            <bean class="de.conterra.smarteditor.common.authentication.SamlTicketFactory" scope="singleton">
+                <property name="provider">
+                    <bean class="${security.keystore.provider.class}"
+                          scope="prototype">
+                        <property name="JKSPwd" value="${security.keystore.pwd}"/>
+                        <property name="path" value="${security.keystore.path}"/>
+                        <property name="alias" value="${security.certificate.alias}"/>
+                        <property name="aliasPwd" value="${security.certificate.pwd}"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="verify" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="samlInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/showXStreamXML.do">xstreamXMLCommandController</prop>
+                <prop key="/edit.do">editController</prop>
+                <prop key="/exit.do">exitController</prop>
+                <prop key="/levelNameController.do">levelNameController</prop>
+                <prop key="/saveLocal.do">saveLocalController</prop>
+                <prop key="/saveTemplate.do">saveTemplateController</prop>
+                <prop key="/publish.do">publishController</prop>
+                <prop key="/releaseId.do">releaseIdController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- ============================== -->
+    <!-- resolver                       -->
+    <!-- ============================== -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="InvokerException">errors/invoker-error</prop>
+                <prop key="SpecialRuntimeApplicationError">errors/runtime-error</prop>
+            </props>
+        </property>
+        <property name="defaultErrorView" value="redirect:edit.do"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- theme resource -->
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.SessionThemeResolver">
+        <property name="defaultThemeName" value="themes.default"/>
+    </bean>
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource"/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="500000"/>
+    </bean>
+
+    <!-- ============================== -->
+    <!-- controller -->
+    <!-- ============================== -->
+    <bean name="releaseIdController" class="de.conterra.smarteditor.controller.ReleaseIdController">
+        <property name="lockManager" ref="lockingDAO"/>
+        <property name="userInfo" ref="userInfoBean"/>
+    </bean>
+
+    <bean id="xstreamXMLCommandController" class="de.conterra.smarteditor.controller.ShowXStreamXMLController">
+        <property name="backend" ref="backendBean"/>
+        <property name="commandName" value="xStreamClass"/>
+        <property name="commandClass" value="de.conterra.smarteditor.beans.XStreamClass"/>
+    </bean>
+
+    <!-- ============================== -->
+    <!-- header action controller -->
+    <!-- ============================== -->
+    <bean id="levelNameController" class="de.conterra.smarteditor.controller.HierarchyLevelNameController">
+        <property name="page" value="editor.body.tree"/>
+        <property name="thematicTree" ref="thematicTreeDAO"/>
+    </bean>
+
+    <bean id="saveLocalController" class="org.n52.smarteditor.controller.SaveLocalControllerSML">
+        <property name="backendService" ref="backendSetupService"/>
+        <property name="contentType" value="application/x-download"/>
+        <property name="setHeader">
+            <map>
+                <entry key="Cache-Control" value="public, must-revalidate"/>
+                <entry key="Pragma" value=""/>
+                <!-- this empty value needs to be added for IE download via https bug -->
+            </map>
+        </property>
+    </bean>
+
+    <bean id="saveTemplateController" class="org.n52.smarteditor.controller.SaveTemplateControllerSML">
+        <property name="backendService" ref="backendSetupService"/>
+        <property name="templateManager" ref="templateManager"/>
+        <property name="userInfo" ref="userInfoBean"/>
+    </bean>
+
+    <bean id="publishController" class="de.conterra.smarteditor.controller.PublishController">
+        <property name="backendManager" ref="backendSetupService"/>
+        <property name="catalogService" ref="catalogServiceDAO"/>
+        <property name="config" ref="configBean"/>
+        <property name="lockManager" ref="lockingDAO"/>
+        <property name="userInfo" ref="userInfoBean"/>
+        <property name="commandName" value="publish"/>
+        <property name="commandClass" value="de.conterra.smarteditor.beans.PublishBean"/>
+        <property name="formView" value="editor.publish"/>
+        <property name="successView" value="editor.finished"/>
+    </bean>
+
+    <bean id="exitController" class="de.conterra.smarteditor.controller.ExitController">
+        <property name="lockManager" ref="lockingDAO"/>
+        <property name="userInfo" ref="userInfoBean"/>
+        <property name="viewName" value="editor.exit"/>
+    </bean>
+
+    <!-- ============================== -->
+    <!-- main edit controller -->
+    <!-- ============================== -->
+    <bean id="editController" class="de.conterra.smarteditor.controller.EditController" scope="session">
+        <property name="bindOnNewForm" value="true"/>
+        <property name="sessionForm" value="true"/>
+        <property name="propertyEditors">
+            <list>
+                <ref bean="hierarchyLevelNamePropertyEditorRegistrar"/>
+                <ref bean="datePropertyEditorRegistrar"/>
+            </list>
+        </property>
+        <property name="thematicTree" ref="thematicTreeDAO"/>
+        <property name="mapConfig" ref="mapClientConfig"/>
+        <property name="config" ref="configBean"/>
+        <property name="backendService" ref="backendSetupService"/>
+        <property name="workflowManager" ref="genericManager"/>
+        <property name="fileSystem" ref="fileSystemDAO"/>
+        <property name="userInfo" ref="userInfoBean"/>
+        <property name="commandName" value="updateMetadata"/>
+        <property name="commandClass" value="de.conterra.smarteditor.beans.BackendBean"/>
+        <property name="validator" ref="metadataValidator"/>
+        <property name="formView" value="editor.main"/>
+        <property name="successView" value="editor.publish"/>
+    </bean>
+</beans>
