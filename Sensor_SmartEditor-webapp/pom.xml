@@ -66,6 +66,7 @@
 		<dependency>
 			<groupId>org.n52.metadata</groupId>
 			<artifactId>smarteditor-api</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.annotation</groupId>

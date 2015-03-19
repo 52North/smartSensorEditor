@@ -31,7 +31,7 @@
           <artifactSet>
             <includes>
               <include>org.n52.metadata:smarteditor-api</include>
-              <include>org.52North.metadata:Sensor_SmartEditor-api</include>
+              <include>org.n52.metadata:Sensor_SmartEditor-api</include>
             </includes>
           </artifactSet>
           <filter>
@@ -39,7 +39,7 @@
             <excludes>
               <exclude>de/conterra/smarteditor/controller/SaveLocalController.class</exclude>
               <exclude>de/conterra/smarteditor/xml/EditorContext.class</exclude>
-              <exclude>de/conterra/smarteditor/service/BackendManagerSesrvice.class</exclude>
+              <exclude>de/conterra/smarteditor/service/BackendManagerService.class</exclude>
             </excludes>
           </filter>
         </configuration>
