@@ -399,9 +399,9 @@
 			<resourceKey>enumeration.servicetype[13]</resourceKey>
 			<value>ARCIMS</value>
 		</element>
-			<element>
+		<element>
 			<resourceKey>enumeration.servicetype[27]</resourceKey>
-			<value>WMS</value>
+			<value>SOS</value>
 		</element>
 	</list>
 	<list>
@@ -2238,7 +2238,7 @@
 			<value>true</value>
 		</element>
 	</list>
-
+<!--  SML-->
 	<list>
 		<identifier>sensorSMLProfile</identifier>
 		<element>
@@ -2249,6 +2249,29 @@
 			<resourceKey>codelist.sensorSMLProfile[1]</resourceKey>
 			<value>acousticSensor</value>
 		</element>
+
+	</list>
+	
+<!-- SML -->
+	<list>
+		<identifier>SOS_Operations</identifier>
+		<element>
+			<resourceKey>enumeration.SOS_Operation[0]</resourceKey>
+			<value>INSERT</value>
+		</element>
+		<element>
+			<resourceKey>enumeration.SOS_Operation[1]</resourceKey>
+			<value>UPDATE</value>
+		</element>
+		<element>
+			<resourceKey>enumeration.SOS_Operation[2]</resourceKey>
+			<value>DELETE</value>
+		</element>
+		<element>
+			<resourceKey>enumeration.SOS_Operation[3]</resourceKey>
+			<value>DESCRIBE</value>
+		</element>
+
 
 	</list>
 </ISODictionary>
