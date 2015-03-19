@@ -35,12 +35,12 @@ import javax.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.n52.smarteditor.service.BackendManagerServiceSML;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertThat;
 import de.conterra.smarteditor.beans.BaseBean;
+import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.junit.matchers.JUnitMatchers.either;
@@ -51,7 +51,7 @@ import static org.hamcrest.Matchers.not;
 @ContextConfiguration(locations = "/sml-BackendManagerService-config.xml")
 public class TestRegex_MergeBackend {
 	@Resource(name = "backendSetupService")
-	BackendManagerServiceSML backendManagerService;
+	BackendManagerService backendManagerService;
 
 	@Before
 	public void before() {
@@ -82,7 +82,7 @@ public class TestRegex_MergeBackend {
 		for (Map.Entry<String, BaseBean> lEntry : backendManagerService
 				.getBackend().getStorage().entrySet()) {
 			// check if bean should be merged
-			if (backendManagerService.isBeanActive(lEntry.getKey())) {
+			if (((BackendManagerServiceSML)backendManagerService).isBeanActive(lEntry.getKey())) {
 				assertThat(lEntry.getKey(),either(containsString("sml")).or(containsString("swe")));
 			}
 		}
@@ -96,7 +96,7 @@ public class TestRegex_MergeBackend {
 		for (Map.Entry<String, BaseBean> lEntry : backendManagerService
 				.getBackend().getStorage().entrySet()) {
 			// check if bean should be merged
-			if (backendManagerService.isBeanActive(lEntry.getKey())) {
+			if (((BackendManagerServiceSML)backendManagerService).isBeanActive(lEntry.getKey())) {
 				assertThat(lEntry.getKey(), not(containsString("sml")));
 			}
 		}

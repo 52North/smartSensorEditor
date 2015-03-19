@@ -51,6 +51,7 @@
 		<property name="backend" ref="backendBean" />
 		<property name="beanTransformer" ref="beanTransformerService" />
 		<property name="xsltTransformer" ref="xsltTransformerService" />
+			<property name="editorContext" ref="EditorContext"/>
 		<property name="activeBeanNamesRegex">
 			<props>
 
@@ -60,9 +61,10 @@
 			</props>
 		</property>
 	</bean>
-
-	<bean id="metadataValidator" class="de.conterra.smarteditor.validator.MetadataValidator">
+	<bean id="EditorContext" class="org.n52.smarteditor.xml.EditorContextSML"/>
+	<bean id="metadataValidator" class="org.n52.smarteditor.validator.MetadataValidatorSML">
 		<property name="service" ref="backendSetupService" />
+		<property name="editorContext" ref="EditorContext"/>
 	</bean>
 
 	<bean id="beanTransformerService" class="de.conterra.smarteditor.service.BeanTransformerService">

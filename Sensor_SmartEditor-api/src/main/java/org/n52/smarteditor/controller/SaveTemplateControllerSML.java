@@ -16,6 +16,17 @@
 
 package org.n52.smarteditor.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+import de.conterra.smarteditor.xml.EditorContext;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+import org.w3c.dom.Document;
+
 import de.conterra.smarteditor.admin.TemplateManager;
 import de.conterra.smarteditor.beans.UserInfoBean;
 import de.conterra.smarteditor.controller.SaveLocalController;
@@ -23,15 +34,6 @@ import de.conterra.smarteditor.controller.SaveTemplateController;
 import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import de.conterra.smarteditor.util.XPathUtil;
-
-import org.apache.log4j.Logger;
-import org.n52.smarteditor.xml.EditorContext;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.w3c.dom.Document;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Controller handles the persistence of a template
@@ -45,59 +47,89 @@ public class SaveTemplateControllerSML extends SaveTemplateController implements
 	private BackendManagerService mBackendService;
 	private TemplateManager mTemplateManager;
 	private UserInfoBean mUserInfo;
-
-	public UserInfoBean getUserInfo() {
-		return mUserInfo;
-	}
-
-	public void setUserInfo(UserInfoBean pUserInfo) {
-		mUserInfo = pUserInfo;
-	}
-	
-	public BackendManagerService getBackendService() {
+	public BackendManagerService getmBackendService() {
 		return mBackendService;
 	}
 
-	public void setBackendService(BackendManagerService pBackendService) {
-		mBackendService = pBackendService;
+	public void setmBackendService(BackendManagerService mBackendService) {
+		this.mBackendService = mBackendService;
 	}
 
-	public TemplateManager getTemplateManager() {
+	public TemplateManager getmTemplateManager() {
 		return mTemplateManager;
 	}
 
-	public void setTemplateManager(TemplateManager templateManager) {
-		this.mTemplateManager = templateManager;
+	public void setmTemplateManager(TemplateManager mTemplateManager) {
+		this.mTemplateManager = mTemplateManager;
 	}
 
-	/**
-	 * @param request
-	 * @param pResponse
-	 * @return
-	 * @throws Exception
-	 */
-	public ModelAndView handleRequest(HttpServletRequest request,
-			HttpServletResponse pResponse) throws Exception {
-		// get backend document
-		Document lMerge = mBackendService.mergeBackend();
-		XPathUtil lUtil = new XPathUtil();
-		lUtil.setContext(new EditorContext());
-		String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
-		if (lTitle.equals("")) {
-			lTitle= lUtil.evaluateAsString(
-					"/*/gml:identifier/text()", lMerge);
-		}
-		try {
-			mTemplateManager.saveTemplate(lTitle, "MD_Metadata", mUserInfo
-					.getUserId() != null ? mUserInfo.getUserId() : "",
-					mUserInfo.getGroupId() != null ? mUserInfo.getGroupId()
-							: "", "public", DOMUtil.convertToString(lMerge,
-							false));
-		} catch (Exception e) {
-			LOG.error(e);
-			pResponse.sendError(500, e.getMessage());
-		}
-		LOG.info("Template saved...");
-		return null;
+	public UserInfoBean getmUserInfo() {
+		return mUserInfo;
 	}
+
+	public void setmUserInfo(UserInfoBean mUserInfo) {
+		this.mUserInfo = mUserInfo;
+	}
+	private EditorContext editorContext;
+
+
+
+	public EditorContext getEditorContext() {
+		return editorContext;
+	}
+
+	public void setEditorContext(EditorContext editorContext) {
+		this.editorContext = editorContext;
+	}
+	
+
+	    public UserInfoBean getUserInfo() {
+	        return mUserInfo;
+	    }
+
+	    public void setUserInfo(UserInfoBean pUserInfo) {
+	        mUserInfo = pUserInfo;
+	    }
+
+	    public BackendManagerService getBackendService() {
+	        return mBackendService;
+	    }
+
+	    public void setBackendService(BackendManagerService pBackendService) {
+	        mBackendService = pBackendService;
+	    }
+
+	    public TemplateManager getTemplateManager() {
+	        return mTemplateManager;
+	    }
+
+	    public void setTemplateManager(TemplateManager templateManager) {
+	        this.mTemplateManager = templateManager;
+	    }
+
+	    /**
+	     * @param request
+	     * @param pResponse
+	     * @return
+	     * @throws Exception
+	     */
+	    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse pResponse) throws Exception {
+	        // get backend document
+	        Document lMerge = mBackendService.mergeBackend();
+	        XPathUtil lUtil = new XPathUtil();
+	        lUtil.setContext(new EditorContext());
+	        String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
+	        try {
+	            mTemplateManager.saveTemplate(lTitle, "MD_Metadata",
+	                    mUserInfo.getUserId() != null ? mUserInfo.getUserId() : "",
+	                    mUserInfo.getGroupId() != null ? mUserInfo.getGroupId() : "",
+	                    "public",
+	                    DOMUtil.convertToString(lMerge, false));
+	        } catch (Exception e) {
+	            LOG.error(e);
+	            pResponse.sendError(500, e.getMessage());
+	        }
+	        LOG.info("Template saved...");
+	        return null;
+	    }
 }

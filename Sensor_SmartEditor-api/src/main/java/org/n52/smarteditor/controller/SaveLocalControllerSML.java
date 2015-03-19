@@ -28,15 +28,7 @@
  */
 package org.n52.smarteditor.controller;
 
-import de.conterra.smarteditor.controller.SaveLocalController;
-import de.conterra.smarteditor.service.BackendManagerService;
-import de.conterra.smarteditor.util.XPathUtil;
-
-import org.apache.log4j.Logger;
-import org.n52.smarteditor.xml.EditorContext;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.w3c.dom.Document;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +39,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import java.util.Map;
+import org.apache.log4j.Logger;
+import de.conterra.smarteditor.xml.EditorContext;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+import org.w3c.dom.Document;
+
+import de.conterra.smarteditor.controller.SaveLocalController;
+import de.conterra.smarteditor.util.XPathUtil;
 
 /**
  * Controller to save a metadata document on the local hard disk
@@ -60,45 +59,17 @@ import java.util.Map;
 public class SaveLocalControllerSML extends SaveLocalController implements Controller {
 
     private static Logger LOG = Logger.getLogger(SaveLocalController.class);
+	private EditorContext editorContext;
 
-    private Map<String, String> addHeader;
-    private Map<String, String> setHeader;
-    private String contentType;
 
-    protected BackendManagerService mBackendService;
 
-    public BackendManagerService getBackendService() {
-        return mBackendService;
-    }
+	public EditorContext getEditorContext() {
+		return editorContext;
+	}
 
-    public void setBackendService(BackendManagerService pBackendService) {
-        mBackendService = pBackendService;
-    }
-
-    public Map<String, String> getAddHeader() {
-        return addHeader;
-    }
-
-    public void setAddHeader(Map<String, String> addHeader) {
-        this.addHeader = addHeader;
-    }
-
-    public Map<String, String> getSetHeader() {
-        return setHeader;
-    }
-
-    public void setSetHeader(Map<String, String> setHeader) {
-        this.setHeader = setHeader;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
+	public void setEditorContext(EditorContext editorContext) {
+		this.editorContext = editorContext;
+	}
     /**
      * Hanlde user request
      *
@@ -112,7 +83,7 @@ public class SaveLocalControllerSML extends SaveLocalController implements Contr
         // get document stored in backenservice
         Document lDoc = mBackendService.mergeBackend();
         XPathUtil lUtil = new XPathUtil();
-        lUtil.setContext(new EditorContext());
+        lUtil.setContext(editorContext);
         String lFileId = lUtil.evaluateAsString("//gmd:fileIdentifier/gco:CharacterString/text()", lDoc);
         if(lFileId.equals("")){
         	lFileId=lUtil.evaluateAsString("/*/gml:identifier/text()", lDoc);

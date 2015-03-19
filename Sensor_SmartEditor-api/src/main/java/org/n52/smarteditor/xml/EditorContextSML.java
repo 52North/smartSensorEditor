@@ -31,6 +31,8 @@ package org.n52.smarteditor.xml;
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 
+import de.conterra.smarteditor.xml.EditorContext;
+
 import java.util.Iterator;
 
 /**
@@ -41,7 +43,7 @@ import java.util.Iterator;
  * 
  * TODO: make the EditorContext configurable
  */
-public class EditorContext implements NamespaceContext {
+public class EditorContextSML extends EditorContext implements NamespaceContext {
 
     // ISO
     protected static String sNS_GMD = "http://www.isotc211.org/2005/gmd";
