@@ -53,9 +53,10 @@
 		<property name="xsltTransformer" ref="xsltTransformerService" />
 		<property name="activeBeanNamesRegex">
 			<props>
-				<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
-				<prop key="acousticSensor">(sml\w+)|(\w+sml)</prop>
-				<prop key="dataset">.*[^s][^m][^l].*</prop>
+
+			<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
+				<prop key="dataset">^((?!sml).)*$</prop>
+				<prop key="service">^((?!sml).)*$</prop>
 			</props>
 		</property>
 	</bean>

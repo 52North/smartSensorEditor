@@ -48,8 +48,9 @@
 		<!-- <property name="activeBeanNamesRegex" ref="sensor_"/> -->
 		<property name="activeBeanNamesRegex">
 			<props>
-				<prop key="sensor">(sml\w+)|(\w+sml)</prop>
-				<prop key="dataset">!(sml)</prop>
+				<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
+				<prop key="dataset">^((?!sml).)*$</prop>
+				<prop key="service">^((?!sml).)*$</prop>
 			</props>
 		</property>
 	</bean>
