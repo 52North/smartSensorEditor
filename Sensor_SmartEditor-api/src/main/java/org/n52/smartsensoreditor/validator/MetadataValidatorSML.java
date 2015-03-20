@@ -23,7 +23,6 @@ import de.conterra.smarteditor.validator.MetadataValidator;
 import de.conterra.smarteditor.xml.EditorContext;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -33,16 +32,12 @@ import javax.xml.xpath.XPathConstants;
 /**
  * Main validator class for validation
  * <p/>
- * @author kse
- * Date: 27.02.2010
- * Time: 18:05:46
+ * 
+ * @author kse Date: 27.02.2010 Time: 18:05:46
  */
-public class MetadataValidatorSML extends MetadataValidator implements Validator {
+public class MetadataValidatorSML extends MetadataValidator {
 
-    private BackendManagerService mService;
 	private EditorContext editorContext;
-
-
 
 	public EditorContext getEditorContext() {
 		return editorContext;
@@ -51,43 +46,35 @@ public class MetadataValidatorSML extends MetadataValidator implements Validator
 	public void setEditorContext(EditorContext editorContext) {
 		this.editorContext = editorContext;
 	}
-    public BackendManagerService getService() {
-        return mService;
-    }
 
-    public void setService(BackendManagerService pService) {
-        mService = pService;
-    }
 
-    public boolean supports(Class clazz) {
-        return BackendBean.class.isAssignableFrom(clazz);
-    }
-    
-
-    /**
-     * validates the backend bean properties against a given schematron (or else) validator
-     *
-     * @param target
-     * @param errors
-     */
-    public void validate(Object target, Errors errors) {
-        BackendBean lBean = (BackendBean) target;
-        // chekc if we need to validate
-        if (lBean.getValidatorId() != null && !lBean.getValidatorId().equals("")) {
-            // apply schematron transformation
-            Document lReport = mService.validate(lBean.getValidatorId());
-            // add assertions to errors.
-            XPathUtil lUtil = new XPathUtil();
-            lUtil.setContext(editorContext);
-            Object o = lUtil.evaluateXPath("//svrl:failed-assert", XPathConstants.NODESET, lReport);
-            if (o != null) {
-                NodeList lList = ((NodeList) o);
-                for (int i = 0; i < lList.getLength(); i++) {
-                    Node lNode = lList.item(i);
-                    errors.rejectValue(lUtil.evaluateAsString("@id", lNode),
-                            lUtil.evaluateAsString("svrl:text", lNode));
-                }
-            }
-        }
-    }
+	/**
+	 * validates the backend bean properties against a given schematron (or
+	 * else) validator
+	 *
+	 * @param target
+	 * @param errors
+	 */
+	public void validate(Object target, Errors errors) {
+		BackendBean lBean = (BackendBean) target;
+		// chekc if we need to validate
+		if (lBean.getValidatorId() != null
+				&& !lBean.getValidatorId().equals("")) {
+			// apply schematron transformation
+			Document lReport = getService().validate(lBean.getValidatorId());
+			// add assertions to errors.
+			XPathUtil lUtil = new XPathUtil();
+			lUtil.setContext(editorContext);
+			Object o = lUtil.evaluateXPath("//svrl:failed-assert",
+					XPathConstants.NODESET, lReport);
+			if (o != null) {
+				NodeList lList = ((NodeList) o);
+				for (int i = 0; i < lList.getLength(); i++) {
+					Node lNode = lList.item(i);
+					errors.rejectValue(lUtil.evaluateAsString("@id", lNode),
+							lUtil.evaluateAsString("svrl:text", lNode));
+				}
+			}
+		}
+	}
 }

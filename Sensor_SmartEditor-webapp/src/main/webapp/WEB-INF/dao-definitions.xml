@@ -86,13 +86,13 @@
 
 	<bean id="lockingDAO" class="de.conterra.smarteditor.dao.NulledLockManager" />
 
-	<bean id="catalogServiceDAO" class="org.n52.smartsensoreditor.dao.CatalogServiceDAOSML">
+	<bean id="catalogServiceDAO" class="org.n52.smartsensoreditor.dao.EditorAwareCatalogServiceDAO">
 		<property name="maxNumberOfDrafts" value="50" />
 		<property name="outputSchema" value="http://www.isotc211.org/2005/gmd" />
 		<property name="config" ref="configBean" />
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="manager" ref="genericManager" />
-			<property name="editorContext" ref="EditorContext"/>
+		<property name="editorContext" ref="EditorContext"/>
 	</bean>
 	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
 	<bean id="fileSystemDAO" class="de.conterra.smarteditor.dao.FileSystemDAO">

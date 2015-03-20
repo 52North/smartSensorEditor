@@ -56,12 +56,10 @@ import de.conterra.smarteditor.util.XPathUtil;
  *         Date: 17.03.2010
  *         Time: 09:29:08
  */
-public class SaveLocalControllerSML extends SaveLocalController implements Controller {
+public class SaveLocalControllerSML extends SaveLocalController  {
 
     private static Logger LOG = Logger.getLogger(SaveLocalController.class);
 	private EditorContext editorContext;
-
-
 
 	public EditorContext getEditorContext() {
 		return editorContext;

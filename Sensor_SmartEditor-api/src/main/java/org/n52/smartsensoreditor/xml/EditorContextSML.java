@@ -29,11 +29,8 @@
 package org.n52.smartsensoreditor.xml;
 
 import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
 
 import de.conterra.smarteditor.xml.EditorContext;
-
-import java.util.Iterator;
 
 /**
  * Context namespace required by ISO 19139 and schematron
@@ -43,7 +40,7 @@ import java.util.Iterator;
  * 
  * TODO: make the EditorContext configurable
  */
-public class EditorContextSML extends EditorContext implements NamespaceContext {
+public class EditorContextSML extends EditorContext {
 
     // ISO
     protected static String sNS_GMD = "http://www.isotc211.org/2005/gmd";
@@ -151,14 +148,5 @@ public class EditorContextSML extends EditorContext implements NamespaceContext 
         }
     }
 
-    /**
-     * not implemented
-     *
-     * @param namespace
-     * @return null
-     */
-    public Iterator getPrefixes(String namespace) {
-        return null;
-    }
 }
    
