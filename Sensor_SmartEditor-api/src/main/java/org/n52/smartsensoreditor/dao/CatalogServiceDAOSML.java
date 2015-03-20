@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.n52.smarteditor.dao;
+package org.n52.smartsensoreditor.dao;
 
 import de.conterra.smarteditor.beans.IConfigOptions;
 import de.conterra.smarteditor.beans.UserInfoBean;

@@ -26,7 +26,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details.
  */
-package org.n52.smarteditor.xml;
+package org.n52.smartsensoreditor.xml;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;

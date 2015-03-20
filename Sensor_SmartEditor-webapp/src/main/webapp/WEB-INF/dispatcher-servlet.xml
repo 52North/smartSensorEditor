@@ -132,7 +132,7 @@
 		<property name="thematicTree" ref="thematicTreeDAO" />
 	</bean>
 
-	<bean id="saveLocalController" class="org.n52.smarteditor.controller.SaveLocalControllerSML">
+	<bean id="saveLocalController" class="org.n52.smartsensoreditor.controller.SaveLocalControllerSML">
 		<property name="backendService" ref="backendSetupService" />
 		<property name="contentType" value="application/x-download" />
 		<property name="setHeader">
@@ -144,9 +144,9 @@
 		</property>
 		<property name="editorContext" ref="EditorContext" />
 	</bean>
-	<bean id="EditorContext" class="org.n52.smarteditor.xml.EditorContextSML"/>
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
 	<bean id="saveTemplateController"
-		class="org.n52.smarteditor.controller.SaveTemplateControllerSML">
+		class="org.n52.smartsensoreditor.controller.SaveTemplateControllerSML">
 		<property name="backendService" ref="backendSetupService" />
 		<property name="templateManager" ref="templateManager" />
 		<property name="userInfo" ref="userInfoBean" />

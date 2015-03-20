@@ -36,7 +36,7 @@
 		<property name="svrlFilename" value="iso_svrl_for_xslt2.xsl" />
 		<property name="xsltService" ref="xsltTransformerService" />
 	</bean>
-	<bean id="backendSetupService" class="org.n52.smarteditor.service.BackendManagerServiceSML">
+	<bean id="backendSetupService" class="org.n52.smartsensoreditor.service.BackendManagerServiceSML">
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>
@@ -58,8 +58,8 @@
 	</bean>
 
 	<!-- beans from beans-definitions -->
-	<bean id="EditorContext" class="org.n52.smarteditor.xml.EditorContextSML"/>
-	<bean id="metadataValidator" class="org.n52.smarteditor.validator.MetadataValidatorSML">
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
+	<bean id="metadataValidator" class="org.n52.smartsensoreditor.validator.MetadataValidatorSML">
 		<property name="service" ref="backendSetupService" />
 		<property name="editorContext" ref="EditorContext"/>
 	</bean>

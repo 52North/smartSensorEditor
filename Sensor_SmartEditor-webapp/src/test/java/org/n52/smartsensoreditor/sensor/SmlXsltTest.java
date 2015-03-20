@@ -26,7 +26,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details.
  */
-package org.n52.smarteditor.sensor;
+package org.n52.smartsensoreditor.sensor;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.xmlmatchers.XmlMatchers.hasXPath;

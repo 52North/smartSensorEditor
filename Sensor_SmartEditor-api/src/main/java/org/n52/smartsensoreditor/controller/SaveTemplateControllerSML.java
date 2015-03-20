@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.n52.smarteditor.controller;
+package org.n52.smartsensoreditor.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

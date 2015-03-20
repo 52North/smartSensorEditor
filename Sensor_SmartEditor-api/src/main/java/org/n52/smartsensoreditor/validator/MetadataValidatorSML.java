@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.n52.smarteditor.validator;
+package org.n52.smartsensoreditor.validator;
 
 import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.service.BackendManagerService;

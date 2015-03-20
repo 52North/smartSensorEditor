@@ -37,7 +37,7 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="beans-definitions.xml" />
 
-	<bean id="backendSetupService" class="org.n52.smarteditor.service.BackendManagerServiceSML"
+	<bean id="backendSetupService" class="org.n52.smartsensoreditor.service.BackendManagerServiceSML"
 		scope="session">
 		<aop:scoped-proxy />
 		<property name="validators">
@@ -61,8 +61,8 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="EditorContext" class="org.n52.smarteditor.xml.EditorContextSML"/>
-	<bean id="metadataValidator" class="org.n52.smarteditor.validator.MetadataValidatorSML">
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
+	<bean id="metadataValidator" class="org.n52.smartsensoreditor.validator.MetadataValidatorSML">
 		<property name="service" ref="backendSetupService" />
 		<property name="editorContext" ref="EditorContext"/>
 	</bean>

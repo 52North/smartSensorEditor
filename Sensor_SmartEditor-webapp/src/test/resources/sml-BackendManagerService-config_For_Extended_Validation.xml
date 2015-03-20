@@ -35,7 +35,7 @@
 		<property name="svrlFilename" value="iso_svrl_for_xslt2.xsl" />
 		<property name="xsltService" ref="xsltTransformerService" />
 	</bean>
-    	<bean id="backendSetupService" class="org.n52.smarteditor.service.BackendManagerServiceSML">
+    	<bean id="backendSetupService" class="org.n52.smartsensoreditor.service.BackendManagerServiceSML">
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>
@@ -88,7 +88,7 @@
 		<property name="transformToISO" value="/xslt/SmlUniqueID_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlUniqueID_bean.xslt" />
 	</bean>
-	<bean id="EditorContext" class="org.n52.smarteditor.xml.EditorContextSML"/>
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
 		<lang:groovy id="smlIdentification"
 		script-source="classpath:groovy/SmlIdentificationBean.groovy" />
 	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean">

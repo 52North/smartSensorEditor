@@ -25,7 +25,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
  * Public License for more details.
  */
-package org.n52.smarteditor.service;
+package org.n52.smartsensoreditor.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
