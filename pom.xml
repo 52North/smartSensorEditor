@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.metadata</groupId>
-	<artifactId>Sensor_SmartEditor</artifactId>
+	<artifactId>smartsensoreditor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>Sensor_SmartEditor-api</module>
-		<module>Sensor_SmartEditor-webapp</module>
+		<module>smartsensoreditor-api</module>
+		<module>smartsensoreditor-webapp</module>
 	</modules>
 	<licenses>
 		<license>

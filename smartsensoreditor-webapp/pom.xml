@@ -3,11 +3,11 @@
 
 	<parent>
 		<groupId>org.n52.metadata</groupId>
-		<artifactId>Sensor_SmartEditor</artifactId>
+		<artifactId>smartsensoreditor</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<packaging>war</packaging>
-	<artifactId>Sensor_SmartEditor-webapp</artifactId>
+	<artifactId>smartsensoreditor-webapp</artifactId>
 	<modelVersion>4.0.0</modelVersion>
 	<name>Sensor_SmartEditor-webapp</name>
 	<url>http://maven.apache.org</url>
@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.n52.metadata</groupId>
-			<artifactId>Sensor_SmartEditor-api</artifactId>
+			<artifactId>smartsensoreditor-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -82,7 +82,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>Sensor_SmartEditor</finalName>
+		<finalName>smartsensoreditor</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
