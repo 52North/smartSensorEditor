@@ -82,22 +82,22 @@
 	</div>
 	
 	<div id="serviceTokenForSOS"  class="serviceDivSOS">
-		<label for="servicetokenforSOS" class="firstLabel width150"><fmt:message
-				key="start.service.tokenForSOS" /></label> <input name="servicetokenForSOS"
-			id="servicetokenForSOS" size="100"/>
+		<label for="serviceTokenforSOS" class="firstLabel width150"><fmt:message
+				key="start.service.tokenForSOS" /></label> <input name="serviceTokenForSOS"
+			id="serviceTokenForSOS" size="100"/>
 			
 	</div>
 	
 	<div id="serviceProcedureIDForSOS"  class="serviceDivSOS">
 		<label for="serviceProcedureIDForSOS" class="firstLabel width150"><fmt:message
-				key="start.service.serviceProcedureIDForSOS" /></label> <input name="serviceProcedureIDForSOS"
+				key="start.service.procedureIDForSOS" /></label> <input name="serviceProcedureIDForSOS"
 			id="serviceProcedureIDForSOS" size="100" />
 			
 	</div>
 	
 	<div id="DIVserviceOperationForSOS"  class="serviceDivSOS">
 		<label for="serviceOperationForSOS" class="firstLabel width150"><fmt:message
-				key="start.service.OperationForSOS" /></label> <select
+				key="start.service.operationForSOS" /></label> <select
 			id="serviceOperationForSOS" name="serviceOperationForSOS">
 			<option value=""><fmt:message key="editor.general.choose" /></option>
 			<c:forEach items="${SOS_Operations.nvp}" var="entry">
