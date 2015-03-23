@@ -59,7 +59,7 @@ import java.util.Map;
  */
 public class SaveLocalControllerSML extends SaveLocalController  {
 
-    private static Logger LOG = Logger.getLogger(SaveLocalController.class);
+    private static Logger LOG = Logger.getLogger(SaveLocalControllerSML.class);
 	private EditorContext editorContext;
 
 	public EditorContext getEditorContext() {

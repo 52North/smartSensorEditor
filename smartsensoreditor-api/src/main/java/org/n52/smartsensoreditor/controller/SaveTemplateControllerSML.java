@@ -54,7 +54,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SaveTemplateControllerSML extends SaveTemplateController {
 
-	private static Logger LOG = Logger.getLogger(SaveLocalController.class);
+	private static Logger LOG = Logger.getLogger(SaveTemplateControllerSML.class);
 
 	private EditorContext editorContext;
 
