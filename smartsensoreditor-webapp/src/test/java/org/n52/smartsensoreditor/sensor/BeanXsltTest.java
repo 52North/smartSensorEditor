@@ -1,5 +1,5 @@
 /**
- * Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -31,16 +31,13 @@ package org.n52.smartsensoreditor.sensor;
 import static org.xmlmatchers.XmlMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.util.HashMap;
 
 import javax.annotation.Resource;
-import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

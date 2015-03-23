@@ -1,5 +1,5 @@
 /**
- * Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -29,8 +29,11 @@
 package org.n52.smartsensoreditor.xml;
 
 import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
 
 import de.conterra.smarteditor.xml.EditorContext;
+
+import java.util.Iterator;
 
 /**
  * Context namespace required by ISO 19139 and schematron

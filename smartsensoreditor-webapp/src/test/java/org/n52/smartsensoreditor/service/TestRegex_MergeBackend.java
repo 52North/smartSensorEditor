@@ -1,5 +1,5 @@
 /**
- * Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -35,7 +35,6 @@ import javax.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.n52.smartsensoreditor.service.BackendManagerServiceSML;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

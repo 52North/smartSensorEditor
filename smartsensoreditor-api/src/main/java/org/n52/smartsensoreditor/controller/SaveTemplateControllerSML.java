@@ -1,44 +1,56 @@
 /**
- * See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * con terra GmbH licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+ * Software GmbH
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published
+ * by the Free Software Foundation.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * If the program is linked with libraries which are licensed under one of
+ * the following licenses, the combination of the program with the linked
+ * library is not considered a "derivative work" of the program:
+ *
+ *     - Apache License, version 2.0
+ *     - Apache Software License, version 1.0
+ *     - GNU Lesser General Public License, version 3
+ *     - Mozilla Public License, versions 1.0, 1.1 and 2.0
+ *     - Common Development and Distribution License (CDDL), version 1.0
+ *
+ * Therefore the distribution of the program linked with libraries licensed
+ * under the aforementioned licenses, is permitted by the copyright holders
+ * if the distribution is compliant with both the GNU General Public
+ * License version 2 and the aforementioned licenses.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+ * Public License for more details.
  */
-
 package org.n52.smartsensoreditor.controller;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
-
-import de.conterra.smarteditor.xml.EditorContext;
-
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.w3c.dom.Document;
 
 import de.conterra.smarteditor.admin.TemplateManager;
 import de.conterra.smarteditor.beans.UserInfoBean;
-import de.conterra.smarteditor.controller.SaveLocalController;
 import de.conterra.smarteditor.controller.SaveTemplateController;
 import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import de.conterra.smarteditor.util.XPathUtil;
+import de.conterra.smarteditor.xml.EditorContext;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+import org.w3c.dom.Document;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Controller handles the persistence of a template
- * 
- * @author kse Date: 17.03.2010 Time: 16:25:35
+ * Controller to save a metadata document on the local hard disk
+ * <p/>
+ *
+ * @author kse
+ *         Date: 17.03.2010
+ *         Time: 09:29:08
  */
 public class SaveTemplateControllerSML extends SaveTemplateController {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -28,7 +28,15 @@
  */
 package org.n52.smartsensoreditor.controller;
 
-import java.util.Map;
+import de.conterra.smarteditor.controller.SaveLocalController;
+import de.conterra.smarteditor.service.BackendManagerService;
+import de.conterra.smarteditor.util.XPathUtil;
+import de.conterra.smarteditor.xml.EditorContext;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
+import org.w3c.dom.Document;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -39,14 +47,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.log4j.Logger;
-import de.conterra.smarteditor.xml.EditorContext;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-import org.w3c.dom.Document;
-
-import de.conterra.smarteditor.controller.SaveLocalController;
-import de.conterra.smarteditor.util.XPathUtil;
+import java.util.Map;
 
 /**
  * Controller to save a metadata document on the local hard disk

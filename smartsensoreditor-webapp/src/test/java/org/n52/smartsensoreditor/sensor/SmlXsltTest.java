@@ -1,5 +1,5 @@
 /**
- * Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial Open Source
+ * Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -53,6 +53,7 @@ import de.conterra.smarteditor.beans.BaseBean;
 import de.conterra.smarteditor.beans.MultipleElementBean;
 import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
