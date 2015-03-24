@@ -65,7 +65,7 @@
 </span>
 
 <p>&nbsp;</p>
-<form:form action="startService.do" commandName="startEditorBean"
+<form:form action="startServiceSOS.do" commandName="startEditorBeanSML"
 	method="Post">
 
 	<label for="serviceUrl" class="firstLabel width150"><fmt:message

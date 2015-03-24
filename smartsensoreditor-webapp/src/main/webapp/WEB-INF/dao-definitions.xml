@@ -171,14 +171,21 @@
                 <entry key="view" value-ref="inspireWebServiceDAO"/>
                 <entry key="discovery" value-ref="inspireWebServiceDAO"/>
                 <entry key="arcims" value-ref="arcimsWebServiceDAO"/>
+                <entry key="sos" value-ref="sosWebServiceDAO"/>
             </map>
         </property>
     </bean>
 
-    <bean id="webServiceDAO" class="org.n52.smartsensoreditor.dao.WebServiceDescriptionDAOSML" abstract="true">
+    <bean id="webServiceDAO" class="de.conterra.smarteditor.dao.WebServiceDescriptionDAO" abstract="true">
         <property name="xsltTransformer" ref="xsltTransformerService"/>
     </bean>
-
+   <bean id="sosWebServiceDAO" class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO" parent="webServiceDAO">
+        <property name="transformerFiles">
+            <map>
+                <entry key="sos" value="${external.xslt.dir}/SOS2isoap.xsl"/>
+            </map>
+        </property>
+    </bean>
     <bean id="ogcWebServiceDAO" class="de.conterra.smarteditor.dao.OgcWebServiceDescriptionDAO" parent="webServiceDAO">
         <property name="transformerFiles">
             <map>

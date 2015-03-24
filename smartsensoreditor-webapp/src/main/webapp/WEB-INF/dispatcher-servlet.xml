@@ -40,7 +40,8 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="service-definitions.xml" />
 
-	<context:component-scan base-package="de.conterra.smarteditor.controller" />
+ <!--    <context:component-scan base-package="de.conterra.smarteditor.controller"/> -->
+    <context:component-scan base-package="org.n52.smartsensoreditor.controller"/>
 
 	<bean name="samlInterceptor" class="de.conterra.smarteditor.interceptors.SamlInterceptor">
 		<property name="userInfo" ref="userInfoBean" />
@@ -153,7 +154,8 @@
 		<property name="thematicTree" ref="thematicTreeDAO" />
 	</bean>
 
-	<bean id="saveLocalController" class="org.n52.smartsensoreditor.controller.SaveLocalControllerSML">
+	<bean id="saveLocalController"
+		class="org.n52.smartsensoreditor.controller.SaveLocalControllerSML">
 		<property name="backendService" ref="backendSetupService" />
 		<property name="contentType" value="application/x-download" />
 		<property name="setHeader">
@@ -165,7 +167,8 @@
 		</property>
 		<property name="editorContext" ref="EditorContext" />
 	</bean>
-	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
+
+
 	<bean id="saveTemplateController"
 		class="org.n52.smartsensoreditor.controller.SaveTemplateControllerSML">
 		<property name="backendService" ref="backendSetupService" />
@@ -218,4 +221,7 @@
 		<property name="formView" value="editor.main" />
 		<property name="successView" value="editor.publish" />
 	</bean>
+	<!--SML -->
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML" />
+
 </beans>
