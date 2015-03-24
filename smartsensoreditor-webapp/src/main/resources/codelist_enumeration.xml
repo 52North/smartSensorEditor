@@ -414,7 +414,7 @@
 			<value>ARCIMS</value>
 		</element>
 		<element>
-			<resourceKey>enumeration.servicetype[27]</resourceKey>
+			<resourceKey>enumeration.servicetype[9]</resourceKey>
 			<value>SOS</value>
 		</element>
 	</list>
@@ -2280,10 +2280,6 @@
 		<element>
 			<resourceKey>enumeration.SOS_Operation[2]</resourceKey>
 			<value>DELETE</value>
-		</element>
-		<element>
-			<resourceKey>enumeration.SOS_Operation[3]</resourceKey>
-			<value>DESCRIBE</value>
 		</element>
 
 

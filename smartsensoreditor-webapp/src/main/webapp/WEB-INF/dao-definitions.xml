@@ -62,7 +62,6 @@
         <property name="stylesheetExternalDir" value="${external.xslt.dir}"/>
         <property name="codeListIds">
             <list>
-                <value>sensorSMLProfile</value>
                 <value>MD_ScopeCode</value>
                 <value>MD_ClassificationCode</value>
                 <value>MD_TopicCategoryCode</value>
@@ -86,6 +85,8 @@
                 <value>SV_DCPList</value>
                 <value>SV_CouplingType</value>
                 <value>Language</value>
+                <value>sensorSMLProfile</value>
+                <value>SOS_Operations</value>
             </list>
         </property>
         <property name="draftSupported" value="${csw.draft.supported}"/>
