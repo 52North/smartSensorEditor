@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+        http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+<bean id="webServiceDAO" class="de.conterra.smarteditor.dao.WebServiceDescriptionDAO" abstract="true">
+        <property name="xsltTransformer" ref="xsltTransformerService"/>
+    </bean>
+   	<bean id="xsltTransformerService" class="de.conterra.smarteditor.service.XSLTTransformerService"
+		init-method="init">
+		<property name="transformerFactoryClassName" value="net.sf.saxon.TransformerFactoryImpl" />
+		<property name="outputKeys">
+			<map>
+				<entry key="encoding" value="UTF-8" />
+				<entry key="omit-xml-declaration" value="yes" />
+				<entry key="indent" value="no" />
+			</map>
+		</property>
+	</bean>
+   <bean id="sosWebServiceDAO" class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO" parent="webServiceDAO">
+        <property name="transformerFiles">
+            <map>
+                <entry key="sos" value="/internal/external/extractDataFromSOSDescribeSensorResponse.xsl"/>
+            </map>
+        </property>
+    </bean>
+    </beans>
+    

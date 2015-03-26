@@ -23,37 +23,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		// trigger visibility of service Name
-		$('#serviceNameContainer').hide();
-		$('#serviceTokenForSOS').hide();
-		$('#DIVserviceOperationForSOS').hide();
-		$('#serviceProcedureIDForSOS').hide();
-		$('#serviceType').click(function() {
-			if ($('#serviceType').attr('value') == 'ARCIMS') {
-				$('#serviceNameContainer').show();
-			} else {
+	$(document).ready(
+			function() {
+				// trigger visibility of service Name
 				$('#serviceNameContainer').hide();
-			}
-			if ($('#serviceType').attr('value') == 'SOS') {
-				$('#serviceTokenForSOS').show();
-				$('#DIVserviceOperationForSOS').show();
-			} else {
 				$('#serviceTokenForSOS').hide();
 				$('#DIVserviceOperationForSOS').hide();
 				$('#serviceProcedureIDForSOS').hide();
-			}
-		});
-		$('#serviceOperationForSOS').click(function() {
-			if ($('#serviceOperationForSOS').attr('value').match(/^(UPDATE|DELETE|DESCRIBE)$/)) {
-				$('#serviceProcedureIDForSOS').show();
-			} else {
-				$('#serviceProcedureIDForSOS').hide();
-			}
-		});
-		
-	});
-	
+				$('#serviceType').click(function() {
+					if ($('#serviceType').attr('value') == 'ARCIMS') {
+						$('#serviceNameContainer').show();
+					} else {
+						$('#serviceNameContainer').hide();
+					}
+					if ($('#serviceType').attr('value') == 'SOS') {
+						$('#serviceTokenForSOS').show();
+						$('#DIVserviceOperationForSOS').show();
+					} else {
+						$('#serviceTokenForSOS').hide();
+						$('#DIVserviceOperationForSOS').hide();
+						$('#serviceProcedureIDForSOS').hide();
+					}
+				});
+				$('#serviceOperationForSOS').click(
+						function() {
+							if ($('#serviceOperationForSOS').attr('value')
+									.match(/^(UPDATE|DELETE|DESCRIBE)$/)) {
+								$('#serviceProcedureIDForSOS').show();
+							} else {
+								$('#serviceProcedureIDForSOS').hide();
+							}
+						});
+
+			});
 </script>
 
 <h2>
@@ -67,35 +69,38 @@
 <p>&nbsp;</p>
 <form:form action="startServiceSOS.do" commandName="startEditorBeanSML"
 	method="Post">
-
+<div id="serviceUrlContainer" class="serviceDivSOS">
 	<label for="serviceUrl" class="firstLabel width150"><fmt:message
 			key="start.service.url" /></label>
 	<input name="serviceUrl" id="serviceUrl" size="100" />
 	<br>
 	<form:errors path="serviceUrl" cssClass="ui-state-error-text" />
-	<br>
-	<div id="serviceNameContainer" class="serviceDivSOS" >
+	</div>
+	<div id="serviceNameContainer" class="serviceDivSOS">
 		<label for="serviceName" class="firstLabel width150"><fmt:message
 				key="start.service.name" /></label> <input name="serviceName"
 			id="serviceName" size="100" />
-			
+
 	</div>
-	
-	<div id="serviceTokenForSOS"  class="serviceDivSOS">
+
+	<div id="serviceTokenForSOS" class="serviceDivSOS">
 		<label for="serviceTokenforSOS" class="firstLabel width150"><fmt:message
 				key="start.service.tokenForSOS" /></label> <input name="serviceTokenForSOS"
-			id="serviceTokenForSOS" size="100"/>
-			
+			id="serviceTokenForSOS" size="100" /><br>
+		<form:errors path="serviceTokenForSOS" cssClass="ui-state-error-text" />
 	</div>
-	
-	<div id="serviceProcedureIDForSOS"  class="serviceDivSOS">
+
+	<div id="serviceProcedureIDForSOS" class="serviceDivSOS">
 		<label for="serviceProcedureIDForSOS" class="firstLabel width150"><fmt:message
-				key="start.service.procedureIDForSOS" /></label> <input name="serviceProcedureIDForSOS"
-			id="serviceProcedureIDForSOS" size="100" />
-			
+				key="start.service.procedureIDForSOS" /></label> <input
+			name="serviceProcedureIDForSOS" id="serviceProcedureIDForSOS"
+			size="100" /><br>
+		<form:errors path="serviceProcedureIDForSOS"
+			cssClass="ui-state-error-text" />
 	</div>
-	
-	<div id="DIVserviceOperationForSOS"  class="serviceDivSOS">
+
+
+	<div id="DIVserviceOperationForSOS" class="serviceDivSOS">
 		<label for="serviceOperationForSOS" class="firstLabel width150"><fmt:message
 				key="start.service.operationForSOS" /></label> <select
 			id="serviceOperationForSOS" name="serviceOperationForSOS">
@@ -103,12 +108,13 @@
 			<c:forEach items="${SOS_Operations.nvp}" var="entry">
 				<option value="${entry.value}">${entry.name}</option>
 			</c:forEach>
-		</select>
-			
+		</select><br>
+		<form:errors path="serviceOperationForSOS"
+			cssClass="ui-state-error-text" />
 	</div>
-	
 
-	<div id="DIVserviceType"  class="serviceDivSOS">
+
+	<div id="DIVserviceType" class="serviceDivSOS">
 		<label for="serviceType" class="firstLabel width150"><fmt:message
 				key="start.service.type" /></label> <select id="serviceType"
 			name="serviceType">
@@ -116,11 +122,11 @@
 			<c:forEach items="${CT_ServiceTypeExt.nvp}" var="entry">
 				<option value="${entry.value}">${entry.name}</option>
 			</c:forEach>
-		</select>
-		
+		</select><br>
+		<form:errors path="serviceType" cssClass="ui-state-error-text" />
 	</div>
-	
-	<form:errors path="serviceType" cssClass="ui-state-error-text" />
+
+
 	<br>
 
 	<p>&nbsp;</p>

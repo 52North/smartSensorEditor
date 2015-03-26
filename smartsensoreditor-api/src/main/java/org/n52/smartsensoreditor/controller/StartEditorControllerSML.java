@@ -369,6 +369,13 @@ public class StartEditorControllerSML extends StartEditorController{
         if (pEditorBean.getServiceType().equalsIgnoreCase("ARCIMS")) {
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceName", "errors.service.name.empty");
         }
+        
+        if (pEditorBean.getServiceType().equalsIgnoreCase("SOS")) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceTokenForSOS", "errors.service.tokenForSOS.empty");
+            ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceProcedureIDForSOS", "errors.service.procedureIDForSOS.empty");
+            ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceOperationForSOS", "errors.service.operationForSOS.empty");
+        }
+        
         if (pResult.hasErrors()) {
             // return form view
             return new ModelAndView(getFormView(), getModelMap());

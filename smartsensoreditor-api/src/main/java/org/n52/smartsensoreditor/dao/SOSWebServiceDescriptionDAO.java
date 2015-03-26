@@ -89,11 +89,12 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
             String content = client.invoke(queryString);
             getXsltTransformer().setRulesetSystemID(getTemplateName());
             Document doc = DOMUtil.newDocument(true);
-           Source source = new DOMSource(DOMUtil.createFromString(content, true));
+            Source source = new DOMSource(DOMUtil.createFromString(content, true));
             Result result = new DOMResult(doc);
             // transform
             getXsltTransformer().transform(source, result);
             return doc;
+       
         } catch (TransformerException e) {
             LOG.error(e.getMessage(), e);
             throw new WebServiceDescriptionException(e);

@@ -182,7 +182,7 @@
    <bean id="sosWebServiceDAO" class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO" parent="webServiceDAO">
         <property name="transformerFiles">
             <map>
-                <entry key="sos" value="${external.xslt.dir}/SOS2isoap.xsl"/>
+                <entry key="sos" value="${external.xslt.dir}/extractDataFromSOSDescribeSensorResponse.xsl"/>
             </map>
         </property>
     </bean>
