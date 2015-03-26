@@ -40,6 +40,7 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="service-definitions.xml" />
 
+vorsicht!
  <!--    <context:component-scan base-package="de.conterra.smarteditor.controller"/> -->
     <context:component-scan base-package="org.n52.smartsensoreditor.controller"/>
 

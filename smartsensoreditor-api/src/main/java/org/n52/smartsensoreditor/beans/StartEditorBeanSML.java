@@ -28,8 +28,6 @@
  */
 package org.n52.smartsensoreditor.beans;
 
-import org.w3c.dom.Document;
-
 import de.conterra.smarteditor.beans.StartEditorBean;
 
 /**
@@ -38,7 +36,7 @@ import de.conterra.smarteditor.beans.StartEditorBean;
  * Date: 26.03.2010
  * Time: 15:00:42
  */
-public class StartEditorBeanSML extends StartEditorBean{
+public class StartEditorBeanSML extends StartEditorBean 	{
     //SOS
     private String mserviceTokenForSOS;
 	private String mserviceProcedureIDForSOS;

@@ -69,18 +69,16 @@
 <p>&nbsp;</p>
 <form:form action="startServiceSOS.do" commandName="startEditorBeanSML"
 	method="Post">
-<div id="serviceUrlContainer" class="serviceDivSOS">
-	<label for="serviceUrl" class="firstLabel width150"><fmt:message
-			key="start.service.url" /></label>
-	<input name="serviceUrl" id="serviceUrl" size="100" />
-	<br>
-	<form:errors path="serviceUrl" cssClass="ui-state-error-text" />
+	<div id="serviceUrlContainer" class="serviceDivSOS">
+		<label for="serviceUrl" class="firstLabel width150"><fmt:message
+				key="start.service.url" /></label> <input name="serviceUrl" id="serviceUrl"
+			size="100" /> <br>
+		<form:errors path="serviceUrl" cssClass="ui-state-error-text" />
 	</div>
 	<div id="serviceNameContainer" class="serviceDivSOS">
 		<label for="serviceName" class="firstLabel width150"><fmt:message
 				key="start.service.name" /></label> <input name="serviceName"
 			id="serviceName" size="100" />
-
 	</div>
 
 	<div id="serviceTokenForSOS" class="serviceDivSOS">

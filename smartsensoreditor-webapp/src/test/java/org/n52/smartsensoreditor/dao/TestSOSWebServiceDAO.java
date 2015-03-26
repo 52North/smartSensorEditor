@@ -41,27 +41,31 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
 
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/TestTransformer.xml")
 public class TestSOSWebServiceDAO {
+	
 	@Resource(name = "sosWebServiceDAO")
 	SOSWebServiceDescriptionDAO sosWebServiceDAO;
 	
-	
+	private String sensorId = "http://www.52north.org/test/procedure/9";
+
 	@Before
-	public void before(){
+	public void before() {
 		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp/service");
-		sosWebServiceDAO.setServiceProcedureIDForSOS("http://www.52north.org/test/procedure/9");
+		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
 		sosWebServiceDAO.setServiceType("SOS");
 	}
+
 	@Test
 	public void testTransformer() {
-	Document doc=sosWebServiceDAO.getDescription();
-	String docString = DOMUtil.convertToString(
-			doc, true);
-	System.out.println(docString);
-	assertThat(docString, not(containsString("DescribeSensorResponse")));
+		Document doc = sosWebServiceDAO.getDescription();
+		String docString = DOMUtil.convertToString(doc, true);
+		/* System.out.println(docString); */
+		assertThat(docString, not(containsString("DescribeSensorResponse")));
+		assertThat(docString, containsString("sml:PhysicalSystem"));
+		assertThat(docString, containsString(sensorId));
 	}
 }
