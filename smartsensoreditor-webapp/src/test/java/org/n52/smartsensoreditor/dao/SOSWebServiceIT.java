@@ -34,29 +34,40 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 
 import javax.annotation.Resource;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
 
+import de.conterra.smarteditor.cswclient.invoker.HttpSoapInvoker;
+import de.conterra.smarteditor.dao.CatalogServiceDAO;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/TestTransformer.xml")
-public class TestSOSWebServiceDAO {
+public class SOSWebServiceIT {
 	
 	@Resource(name = "sosWebServiceDAO")
-	SOSWebServiceDescriptionDAO sosWebServiceDAO;
+	 SOSWebServiceDescriptionDAO sosWebServiceDAO;
 	
-	private String sensorId = "http://www.52north.org/test/procedure/9";
+	private  String sensorId = "http://www.52north.org/test/procedure/1111111";
+	private String endpoint ="http://localhost:8080/52n-sos-webapp/service";
 
 	@Before
 	public void before() {
 		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp/service");
 		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
 		sosWebServiceDAO.setServiceType("SOS");
+	}
+	
+	@Before
+	public void insertSensor() {
+		//insert sensor post
+		CatalogServiceDAO sosClient=new CatalogServiceDAO();
 	}
 
 	@Test
@@ -68,4 +79,10 @@ public class TestSOSWebServiceDAO {
 		assertThat(docString, containsString("sml:PhysicalSystem"));
 		assertThat(docString, containsString(sensorId));
 	}
+	
+	@After
+	public void removeSensor() {
+		//delete sensor post
+	}
+
 }

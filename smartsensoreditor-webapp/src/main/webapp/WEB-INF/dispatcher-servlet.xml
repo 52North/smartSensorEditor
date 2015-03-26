@@ -40,9 +40,9 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="service-definitions.xml" />
 
-vorsicht!
- <!--    <context:component-scan base-package="de.conterra.smarteditor.controller"/> -->
-    <context:component-scan base-package="org.n52.smartsensoreditor.controller"/>
+    <context:component-scan base-package="de.conterra.smarteditor.controller,org.n52.smartsensoreditor.controller">
+    	<context:exclude-filter type="regex" expression="de\.conterra\.smarteditor\.controller\.StartEditorController"/>
+    </context:component-scan>
 
 	<bean name="samlInterceptor" class="de.conterra.smarteditor.interceptors.SamlInterceptor">
 		<property name="userInfo" ref="userInfoBean" />
