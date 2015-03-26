@@ -32,7 +32,16 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,9 +51,17 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import de.conterra.smarteditor.clients.ClientFactory;
+import de.conterra.smarteditor.clients.Protocol;
+import de.conterra.smarteditor.clients.RequestFactory;
+import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.cswclient.invoker.HttpSoapInvoker;
 import de.conterra.smarteditor.dao.CatalogServiceDAO;
+import de.conterra.smarteditor.dao.GenericCatalogService;
+import de.conterra.smarteditor.dao.GeonetworkCatalogService;
+import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,22 +71,49 @@ public class SOSWebServiceIT {
 	@Resource(name = "sosWebServiceDAO")
 	 SOSWebServiceDescriptionDAO sosWebServiceDAO;
 	
-	private  String sensorId = "http://www.52north.org/test/procedure/1111111";
-	private String endpoint ="http://localhost:8080/52n-sos-webapp/service";
-
+	private  String sensorId = "http://www.52north.org/test/procedure/9";
+	private String endpoint ="http://localhost:8080/52n-sos-webapp/service/soap";
+	private Map<String,String> endpoints = new HashMap<String,String>();
+	@Resource(name = "xsltTransformerService")
+	private XSLTTransformerService xsltTransformerService;
 	@Before
 	public void before() {
 		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp/service");
 		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
 		sosWebServiceDAO.setServiceType("SOS");
+	
+		insertSensor();
 	}
 	
-	@Before
 	public void insertSensor() {
-		//insert sensor post
-		CatalogServiceDAO sosClient=new CatalogServiceDAO();
+		try {
+			URL url = getClass().getResource("/requests/insertTestSensorSoap.xml");
+			File fXmlFile = new File(url.getPath());
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document request;
+			request = dBuilder.parse(fXmlFile);
+			//insert sensor post
+			SoapClient client = (SoapClient) ClientFactory.createClient(Protocol.HTTP_SOAP, endpoint);
+			client.setTranformerService(xsltTransformerService);
+			client.getTranformerService().init();
+			client.setPayload(DOMUtil.convertToString(request, true));
+			
+		try {
+		String s=	client.invoke(null);
+		System.out.println(s);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		} catch (SAXException | IOException | ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
+  
 	@Test
 	public void testTransformer() {
 		Document doc = sosWebServiceDAO.getDescription();
@@ -82,7 +126,28 @@ public class SOSWebServiceIT {
 	
 	@After
 	public void removeSensor() {
-		//delete sensor post
+		
+		try {
+			URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
+			File fXmlFile = new File(url.getPath());
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document request;
+			request = dBuilder.parse(fXmlFile);//insert sensor post
+					SoapClient client = (SoapClient) ClientFactory.createClient(Protocol.HTTP_SOAP, endpoint);
+			client.setTranformerService(xsltTransformerService);
+			client.getTranformerService().init();
+			client.setPayload(DOMUtil.convertToString(request, true));
+			String s=	client.invoke(null);
+			System.out.println(s);
+		
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+   
 	}
 
 }
