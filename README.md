@@ -113,6 +113,14 @@ With the following command all dependencies of the module are build as well ([de
 ```
 mvn clean package -pl smartsensoreditor-webapp -am
 ```
+### How to start the integration tests?
+
+By default no integration tests are executed during the command "clean install". If you would like to execute them, go to the main folder of the whole project. With the attribute -P a specific Profile can be chosen. 
+Use the following command to start the integration tests for the SmartSensorEditor:
+```
+mvn -P itestsos clean install
+```
+
 
 ### How to create my own form?
 
