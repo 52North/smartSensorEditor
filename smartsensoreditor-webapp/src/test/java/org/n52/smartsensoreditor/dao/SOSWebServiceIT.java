@@ -50,6 +50,7 @@ import org.w3c.dom.Document;
 import de.conterra.smarteditor.clients.ClientFactory;
 import de.conterra.smarteditor.clients.Protocol;
 import de.conterra.smarteditor.clients.SoapClient;
+import de.conterra.smarteditor.dao.WebServiceDescriptionException;
 import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
@@ -61,19 +62,17 @@ public class SOSWebServiceIT {
 	SOSWebServiceDescriptionDAO sosWebServiceDAO;
 
 	private String sensorId = "http://www.52north.org/test/procedure/9";
-	
-	private String endpoint = "http://localhost:9090/52n-sos-webapp/service/soap";
+	private String serviceURL="http://localhost:8080/52n-sos-webapp_4.3.0/service";
+	private String endpoint = serviceURL+"/soap";
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
 
 	@Before
 	public void before() throws Exception {
-		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp/service");
+		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp_4.3.0/service");
 		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
 		sosWebServiceDAO.setServiceType("SOS");
-
-		insertSensor();
 	}
 
 	public void insertSensor() throws Exception {
@@ -95,16 +94,26 @@ public class SOSWebServiceIT {
 	}
 
 	@Test
-	public void testTransformer() {
+	public void testTransformer() throws Exception {
+		String docString="";
+		try {
 		Document doc = sosWebServiceDAO.getDescription();
-		String docString = DOMUtil.convertToString(doc, true);
-		/* System.out.println(docString); */
+	    docString = DOMUtil.convertToString(doc, true);
+		
+		} catch (Exception e) {
+			if(e.toString().contains("is invalid")){
+				insertSensor();
+				Document doc = sosWebServiceDAO.getDescription();
+				docString = DOMUtil.convertToString(doc, true);
+			}
+		}
 		assertThat(docString, not(containsString("DescribeSensorResponse")));
 		assertThat(docString, containsString("sml:PhysicalSystem"));
 		assertThat(docString, containsString(sensorId));
+		
 	}
 
-	@After
+	
 	public void removeSensor() throws Exception {
 		URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
 		File fXmlFile = new File(url.getPath());
@@ -116,9 +125,13 @@ public class SOSWebServiceIT {
 				Protocol.HTTP_SOAP, endpoint);
 		client.setTranformerService(xsltTransformerService);
 		client.getTranformerService().init();
+		System.out.println("String:"+DOMUtil.convertToString(request, true));
 		client.setPayload(DOMUtil.convertToString(request, true));
 		client.invoke(null);
-		// System.out.println(s);
+	    
 	}
-
+	@After
+    public void finish() throws Exception{
+    	removeSensor();
+    }
 }

@@ -76,7 +76,7 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
 	}
 
     @Override
-    public Document getDescription() throws WebServiceDescriptionException {
+    public Document getDescription() throws WebServiceDescriptionException{
         GetClient client = new GetClient(getUrl());
         Map<String, String> queryString = new HashMap<String, String>();
         queryString.put("service", getServiceType());
@@ -87,6 +87,9 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
         client.addRequestHeader("Content-Type", "application/x-kvp");
         try {
             String content = client.invoke(queryString);
+            if(content.contains("is invalid")){
+            	throw new Exception(content);
+    		}
             getXsltTransformer().setRulesetSystemID(getTemplateName());
             Document doc = DOMUtil.newDocument(true);
             Source source = new DOMSource(DOMUtil.createFromString(content, true));
@@ -95,11 +98,10 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
             getXsltTransformer().transform(source, result);
             return doc;
        
-        } catch (TransformerException e) {
-            LOG.error(e.getMessage(), e);
-            throw new WebServiceDescriptionException(e);
         } catch (Exception e) {
+        	if(!e.getMessage().contains("'procedure' is invalid")){
             LOG.error(e.getMessage(), e);
+        	}
             throw new WebServiceDescriptionException(e);
         }
     }
