@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="SOS" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite name="Transactional Sensor Editor POX"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="before" searchProperties="true" id="832424e6-9349-4226-8517-4bb61461c830"><con:settings/><con:testStep type="httprequest" name="delete"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="delete" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request>&lt;?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="SOS" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite name="Transactional Sensor Editor POX"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="before" searchProperties="true" id="832424e6-9349-4226-8517-4bb61461c830"><con:settings/><con:testStep type="httprequest" name="delete"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="delete" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4,3,0/service</con:endpoint><con:request>&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;swes:DeleteSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     &lt;swes:procedure>http://www.52north.org/test/procedure/9&lt;/swes:procedure>
-&lt;/swes:DeleteSensor></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>Authorization</con:name><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="InsertSensor with Token" searchProperties="true" id="faa4151d-07f0-4efa-bb9b-20170d1edf20"><con:settings/><con:testStep type="httprequest" name="Test if not inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+&lt;/swes:DeleteSensor></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>Authorization</con:name><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="InsertSensor with Token" searchProperties="true" id="faa4151d-07f0-4efa-bb9b-20170d1edf20"><con:settings/><con:testStep type="httprequest" name="Test if not inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
     <!-- optional validTime: not set, latest sensor description is returned. -->
     <!-- 
 	<swes:validTime><gml:TimeInstant gml:id="validTime"><gml:timePosition>2013-08-14T15:02:43.219</gml:timePosition></gml:TimeInstant></swes:validTime>
@@ -21,110 +21,64 @@
     <!-- 
 	<swes:validTime><gml:TimePeriod gml:id="validTime"><gml:beginPosition>2013-08-14T15:02:43.219</gml:beginPosition><gml:endPosition>2013-08-14t15:02:47</gml:endPosition></gml:TimePeriod></swes:validTime>
 	 -->
-</swes:DescribeSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Insert"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Insert" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</swes:DescribeSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Insert"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Insert" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:InsertSensor service="SOS" version="2.0.0"
-    xmlns:swes="http://www.opengis.net/swes/2.0"
-    xmlns:sos="http://www.opengis.net/sos/2.0"
-    xmlns:swe="http://www.opengis.net/swe/1.0.1"
-    xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-    xmlns:gml="http://www.opengis.net/gml"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd   http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
-    <swes:procedureDescription>
-        <sml:SensorML version="1.0.1">
-            <sml:member>
-                <sml:System>
-                    <!-- optional; generated if not present -->
+            xmlns:swes="http://www.opengis.net/swes/2.0"
+            xmlns:sos="http://www.opengis.net/sos/2.0"
+            xmlns:swe="http://www.opengis.net/swe/2.0"
+            xmlns:sml="http://www.opengis.net/sensorml/2.0"
+            xmlns:gml="http://www.opengis.net/gml/3.2"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:gco="http://www.isotc211.org/2005/gco"
+            xmlns:gmd="http://www.isotc211.org/2005/gmd">
+            <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+            <swes:procedureDescription>
+                <sml:PhysicalSystem gml:id="sensor9">
+                    <!--Unique identifier -->
+                    <gml:identifier codeSpace="uniqueID">http://www.52north.org/test/procedure/9</gml:identifier>
                     <sml:identification>
                         <sml:IdentifierList>
-                            <sml:identifier name="uniqueID">
-                                <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-                                    <sml:value>http://www.52north.org/test/procedure/9</sml:value>
-                                </sml:Term>
-                            </sml:identifier>
-                            <sml:identifier name="longName">
+                            <sml:identifier>
                                 <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
+                                    <sml:label>longName</sml:label>
                                     <sml:value>52°North Initiative for Geospatial Open Source
-										Software GmbH (http://52north.org)</sml:value>
+										Software GmbH (http://52north.org)
+									</sml:value>
                                 </sml:Term>
                             </sml:identifier>
-                            <sml:identifier name="shortName">
+                            <sml:identifier>
                                 <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+                                    <sml:label>shortName</sml:label>
                                     <sml:value>52°North GmbH</sml:value>
                                 </sml:Term>
                             </sml:identifier>
                         </sml:IdentifierList>
                     </sml:identification>
                     <sml:capabilities name="offerings">
-                        <!-- Special capabilities used to specify offerings. -->
-                        <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
-							added during DescribeSensor. -->
-                        <!-- Offering is generated if not specified. -->
-                        <swe:SimpleDataRecord>
-                            <!-- Field name is used for the offering's name -->
-                            <swe:field name="Offering for sensor 9">
+                        <sml:CapabilityList>
+                            <!-- Special capabilities used to specify offerings. -->
+                            <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
+					         added during DescribeSensor. -->
+                            <!-- Offering is generated if not specified. -->
+                            <sml:capability name="offeringID">
                                 <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+                                    <swe:label>offeringID</swe:label>
                                     <swe:value>http://www.52north.org/test/offering/9</swe:value>
                                 </swe:Text>
-                            </swe:field>
-                        </swe:SimpleDataRecord>
+                            </sml:capability>
+                        </sml:CapabilityList>
                     </sml:capabilities>
-                    <sml:capabilities name="parentProcedures">
-                        <!-- Special capabilities used to specify parent procedures. -->
-                        <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
-							added during DescribeSensor. -->
-                        <swe:SimpleDataRecord>
-                            <swe:field name="parentProcedure">
-                                <swe:Text>
-                                    <swe:value>http://www.52north.org/test/procedure/1</swe:value>
-                                </swe:Text>
-                            </swe:field>
-                        </swe:SimpleDataRecord>
-                    </sml:capabilities>
-                    <sml:capabilities name="featuresOfInterest">
-                        <!-- Special capabilities used to specify features of interest. -->
-                        <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
-							added during DescribeSensor. -->
-                        <swe:SimpleDataRecord>
-                            <swe:field name="featureOfInterestID">
-                                <swe:Text>
-                                    <swe:value>http://www.52north.org/test/featureOfInterest/9
-									</swe:value>
-                                </swe:Text>
-                            </swe:field>
-                        </swe:SimpleDataRecord>
-                    </sml:capabilities>
-                    <sml:position name="sensorPosition">
-                        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">
-                            <swe:location>
-                                <swe:Vector gml:id="STATION_LOCATION">
-                                    <swe:coordinate name="easting">
-                                        <swe:Quantity axisID="x">
-                                            <swe:uom code="degree"/>
-                                            <swe:value>7.651968812254194</swe:value>
-                                        </swe:Quantity>
-                                    </swe:coordinate>
-                                    <swe:coordinate name="northing">
-                                        <swe:Quantity axisID="y">
-                                            <swe:uom code="degree"/>
-                                            <swe:value>51.935101100104916</swe:value>
-                                        </swe:Quantity>
-                                    </swe:coordinate>
-                                    <swe:coordinate name="altitude">
-                                        <swe:Quantity axisID="z">
-                                            <swe:uom code="m"/>
-                                            <swe:value>52.0</swe:value>
-                                        </swe:Quantity>
-                                    </swe:coordinate>
-                                </swe:Vector>
-                            </swe:location>
-                        </swe:Position>
-                    </sml:position>
+                    <sml:featuresOfInterest>
+                        <sml:FeatureList definition="http://www.opengis.net/def/featureOfInterest/identifier">
+                            <swe:label>featuresOfInterest</swe:label>
+                            <sml:feature xlink:href="http://www.52north.org/test/featureOfInterest/9"/>
+                        </sml:FeatureList>
+                    </sml:featuresOfInterest>
                     <sml:inputs>
                         <sml:InputList>
                             <sml:input name="test_observable_property_9">
-                                <swe:ObservableProperty definition="http://www.52north.org/test/observableProperty/9"/>
+                                <sml:ObservableProperty definition="http://www.52north.org/test/observableProperty/9"/>
                             </sml:input>
                         </sml:InputList>
                     </sml:inputs>
@@ -172,39 +126,60 @@
                             </sml:output>
                         </sml:OutputList>
                     </sml:outputs>
-                </sml:System>
-            </sml:member>
-        </sml:SensorML>
-    </swes:procedureDescription>
-    <!-- multiple values possible -->
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
-    <swes:observableProperty>http://www.52north.org/test/observableProperty/9_7</swes:observableProperty>
-    <swes:metadata>
-        <sos:SosInsertionMetadata>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
-            <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
+                    <sml:attachedTo xlink:href="http://www.52north.org/test/procedure/1" xlink:title="http://www.52north.org/test/procedure/1"/>
+                    <sml:position>
+                        <swe:Vector referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                            <swe:coordinate name="easting">
+                                <swe:Quantity axisID="x">
+                                    <swe:uom code="degree"/>
+                                    <swe:value>7.651968812254194</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                            <swe:coordinate name="northing">
+                                <swe:Quantity axisID="y">
+                                    <swe:uom code="degree"/>
+                                    <swe:value>51.935101100104916</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                            <swe:coordinate name="altitude">
+                                <swe:Quantity axisID="z">
+                                    <swe:uom code="m"/>
+                                    <swe:value>52.0</swe:value>
+                                </swe:Quantity>
+                            </swe:coordinate>
+                        </swe:Vector>
+                    </sml:position>
+                </sml:PhysicalSystem>
+            </swes:procedureDescription>
             <!-- multiple values possible -->
-            <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
-        </sos:SosInsertionMetadata>
-    </swes:metadata>
-</swes:InsertSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token> &lt;swes:assignedOffering>http://www.52north.org/test/offering/9&lt;/swes:assignedOffering>
-</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
+            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_7</swes:observableProperty>
+            <swes:metadata>
+                <sos:SosInsertionMetadata>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
+                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
+                    <!-- multiple values possible -->
+                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                </sos:SosInsertionMetadata>
+            </swes:metadata>
+        </swes:InsertSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token> &lt;swes:assignedOffering>http://www.52north.org/test/offering/9&lt;/swes:assignedOffering>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
     <!-- optional validTime: not set, latest sensor description is returned. -->
     <!-- 
 	<swes:validTime><gml:TimeInstant gml:id="validTime"><gml:timePosition>2013-08-14T15:02:43.219</gml:timePosition></gml:TimeInstant></swes:validTime>
@@ -215,13 +190,13 @@
     <!-- 
 	<swes:validTime><gml:TimePeriod gml:id="validTime"><gml:beginPosition>2013-08-14T15:02:43.219</gml:beginPosition><gml:endPosition>2013-08-14t15:02:47</gml:endPosition></gml:TimePeriod></swes:validTime>
 	 -->
-</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UpdateSensor with Token" searchProperties="true" id="29a87330-df60-40ce-b7dc-3c780a154781"><con:settings/><con:testStep type="httprequest" name="not updated yet"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="not updated yet" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UpdateSensor with Token" searchProperties="true" id="29a87330-df60-40ce-b7dc-3c780a154781"><con:settings/><con:testStep type="httprequest" name="not updated yet"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="not updated yet" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
     <!-- optional validTime: not set, latest sensor description is returned. -->
     <!-- 
 	<swes:validTime><gml:TimeInstant gml:id="validTime"><gml:timePosition>2013-08-14T15:02:43.219</gml:timePosition></gml:TimeInstant></swes:validTime>
@@ -232,108 +207,67 @@
     <!-- 
 	<swes:validTime><gml:TimePeriod gml:id="validTime"><gml:beginPosition>2013-08-14T15:02:43.219</gml:beginPosition><gml:endPosition>2013-08-14t15:02:47</gml:endPosition></gml:TimePeriod></swes:validTime>
 	 -->
-</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>&lt;swe:value>57.0&lt;/swe:value></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Update"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Update" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<swes:UpdateSensorDescription service="SOS" version="2.0.0"
-    xmlns:swes="http://www.opengis.net/swes/2.0"
-    xmlns:sos="http://www.opengis.net/sos/2.0"
-    xmlns:swe="http://www.opengis.net/swe/1.0.1"
-    xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
-    xmlns:gml="http://www.opengis.net/gml"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd   http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
-    <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
-    <swes:description>
-        <swes:SensorDescription>
-            <swes:data>
-                <sml:SensorML version="1.0.1">
-                    <sml:member>
-                        <sml:System>
-                            <!-- optional; generated if not present -->
+</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>&lt;swe:value>57.0&lt;/swe:value></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Update"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Update" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+  <swes:UpdateSensorDescription service="SOS" version="2.0.0"
+            xmlns:swes="http://www.opengis.net/swes/2.0"
+            xmlns:sos="http://www.opengis.net/sos/2.0"
+            xmlns:swe="http://www.opengis.net/swe/2.0"
+            xmlns:sml="http://www.opengis.net/sensorml/2.0"
+            xmlns:gml="http://www.opengis.net/gml/3.2"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:gco="http://www.isotc211.org/2005/gco"
+            xmlns:gmd="http://www.isotc211.org/2005/gmd" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
+            <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
+            <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+            <swes:description>
+                <swes:SensorDescription>
+                    <swes:data>
+                        <sml:PhysicalSystem gml:id="sensor9">
+                            <!--Unique identifier -->
+                            <gml:identifier codeSpace="uniqueID">http://www.52north.org/test/procedure/9</gml:identifier>
                             <sml:identification>
                                 <sml:IdentifierList>
-                                    <sml:identifier name="uniqueID">
-                                        <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">
-                                            <sml:value>http://www.52north.org/test/procedure/9</sml:value>
-                                        </sml:Term>
-                                    </sml:identifier>
-                                    <sml:identifier name="longName">
+                                    <sml:identifier>
                                         <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
-                                            <sml:value>52°North Initiative for Geospatial Open Source Software GmbH (http://52north.org)</sml:value>
+                                            <sml:label>longName</sml:label>
+                                            <sml:value>52°North Initiative for Geospatial Open Source
+												Software GmbH (http://52north.org)
+											</sml:value>
                                         </sml:Term>
                                     </sml:identifier>
-                                    <sml:identifier name="shortName">
+                                    <sml:identifier>
                                         <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">
+                                            <sml:label>shortName</sml:label>
                                             <sml:value>52°North GmbH</sml:value>
                                         </sml:Term>
                                     </sml:identifier>
                                 </sml:IdentifierList>
                             </sml:identification>
                             <sml:capabilities name="offerings">
-                                <!-- Special capabilities used to specify offerings. -->
-                                <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, added during DescribeSensor. -->
-                                <!-- Offering is generated if not specified. -->
-                                <swe:SimpleDataRecord>
-                                    <!-- Field name is used for the offering's name -->
-                                    <swe:field name="Offering for sensor 9">
+                                <sml:CapabilityList>
+                                    <!-- Special capabilities used to specify offerings. -->
+                                    <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
+					                 added during DescribeSensor. -->
+                                    <!-- Offering is generated if not specified. -->
+                                    <sml:capability name="offeringID">
                                         <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+                                            <swe:label>offeringID</swe:label>
                                             <swe:value>http://www.52north.org/test/offering/9</swe:value>
                                         </swe:Text>
-                                    </swe:field>
-                                </swe:SimpleDataRecord>
+                                    </sml:capability>
+                                </sml:CapabilityList>
                             </sml:capabilities>
-                            <sml:capabilities name="parentProcedures">
-                                <!-- Special capabilities used to specify parent procedures. -->
-                                <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, added during DescribeSensor. -->
-                                <swe:SimpleDataRecord>
-                                    <swe:field name="parentProcedure">
-                                        <swe:Text>
-                                            <swe:value>http://www.52north.org/test/procedure/1</swe:value>
-                                        </swe:Text>
-                                    </swe:field>
-                                </swe:SimpleDataRecord>
-                            </sml:capabilities>
-                            <sml:capabilities name="featuresOfInterest">
-                                <!-- Special capabilities used to specify features of interest. -->
-                                <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, added during DescribeSensor. -->
-                                <swe:SimpleDataRecord>
-                                    <swe:field name="featureOfInterestID">
-                                        <swe:Text>
-                                            <swe:value>http://www.52north.org/test/featureOfInterest/9</swe:value>
-                                        </swe:Text>
-                                    </swe:field>
-                                </swe:SimpleDataRecord>
-                            </sml:capabilities>
-                            <sml:position name="sensorPosition">
-                                <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">
-                                    <swe:location>
-                                        <swe:Vector gml:id="STATION_LOCATION">
-                                            <swe:coordinate name="easting">
-                                                <swe:Quantity axisID="x">
-                                                    <swe:uom code="degree"/>
-                                                    <swe:value>7.651968812254194</swe:value>
-                                                </swe:Quantity>
-                                            </swe:coordinate>
-                                            <swe:coordinate name="northing">
-                                                <swe:Quantity axisID="y">
-                                                    <swe:uom code="degree"/>
-                                                    <swe:value>51.935101100104916</swe:value>
-                                                </swe:Quantity>
-                                            </swe:coordinate>
-                                            <swe:coordinate name="altitude">
-                                                <swe:Quantity axisID="z">
-                                                    <swe:uom code="m"/>
-                                                    <swe:value>57.0</swe:value>
-                                                </swe:Quantity>
-                                            </swe:coordinate>
-                                        </swe:Vector>
-                                    </swe:location>
-                                </swe:Position>
-                            </sml:position>
+                            <sml:featuresOfInterest>
+                                <sml:FeatureList definition="http://www.opengis.net/def/featureOfInterest/identifier">
+                                    <swe:label>featuresOfInterest</swe:label>
+                                    <sml:feature xlink:href="http://www.52north.org/test/featureOfInterest/9"/>
+                                </sml:FeatureList>
+                            </sml:featuresOfInterest>
                             <sml:inputs>
                                 <sml:InputList>
                                     <sml:input name="test_observable_property_9">
-                                        <swe:ObservableProperty definition="http://www.52north.org/test/observableProperty/9"/>
+                                        <sml:ObservableProperty definition="http://www.52north.org/test/observableProperty/9"/>
                                     </sml:input>
                                 </sml:InputList>
                             </sml:inputs>
@@ -358,16 +292,58 @@
                                     <sml:output name="test_observable_property_9_5">
                                         <swe:Boolean definition="http://www.52north.org/test/observableProperty/9_5"/>
                                     </sml:output>
+                                    <sml:output name="test_observable_property_9_7">
+                                        <swe:DataArray>
+                                            <swe:elementCount>
+                                                <swe:Count/>
+                                            </swe:elementCount>
+                                            <swe:elementType name="defs">
+                                                <swe:DataRecord>
+                                                    <swe:field name="phenomenonTime">
+                                                        <swe:Time definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">
+                                                            <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+                                                        </swe:Time>
+                                                    </swe:field>
+                                                    <swe:field name="test_observable_property_6">
+                                                        <swe:Quantity definition="http://www.52north.org/test/observableProperty/6">
+                                                            <swe:uom code="test_unit_6"/>
+                                                        </swe:Quantity>
+                                                    </swe:field>
+                                                </swe:DataRecord>
+                                            </swe:elementType>
+                                        </swe:DataArray>
+                                    </sml:output>
                                 </sml:OutputList>
                             </sml:outputs>
-                        </sml:System>
-                    </sml:member>
-                </sml:SensorML>
-            </swes:data>
-        </swes:SensorDescription>
-    </swes:description>
-</swes:UpdateSensorDescription>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token> &lt;swes:updatedProcedure>http://www.52north.org/test/procedure/9&lt;/swes:updatedProcedure>
-</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if updated"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if updated" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                            <sml:attachedTo xlink:href="http://www.52north.org/test/procedure/1" xlink:title="http://www.52north.org/test/procedure/1"/>
+                            <sml:position>
+                                <swe:Vector referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                                    <swe:coordinate name="easting">
+                                        <swe:Quantity axisID="x">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>7.651968812254194</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="northing">
+                                        <swe:Quantity axisID="y">
+                                            <swe:uom code="degree"/>
+                                            <swe:value>51.935101100104916</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                    <swe:coordinate name="altitude">
+                                        <swe:Quantity axisID="z">
+                                            <swe:uom code="m"/>
+                                            <swe:value>57.0</swe:value>
+                                        </swe:Quantity>
+                                    </swe:coordinate>
+                                </swe:Vector>
+                            </sml:position>
+                        </sml:PhysicalSystem>
+                    </swes:data>
+                </swes:SensorDescription>
+            </swes:description>
+        </swes:UpdateSensorDescription>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token> &lt;swes:updatedProcedure>http://www.52north.org/test/procedure/9&lt;/swes:updatedProcedure>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if updated"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if updated" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -385,13 +361,13 @@
 	<swes:validTime><gml:TimePeriod gml:id="validTime"><gml:beginPosition>2013-08-14T15:02:43.219</gml:beginPosition><gml:endPosition>2013-08-14t15:02:47</gml:endPosition></gml:TimePeriod></swes:validTime>
 	 -->
 </swes:DescribeSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>&lt;swe:value>57.0&lt;/swe:value>
-</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="DeleteSensor with Token" searchProperties="true" id="0adffea3-9a2c-42ba-8597-08cba6cf8d4d"><con:settings/><con:testStep type="httprequest" name="Test if not deleted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not deleted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="DeleteSensor with Token" searchProperties="true" id="0adffea3-9a2c-42ba-8597-08cba6cf8d4d"><con:settings/><con:testStep type="httprequest" name="Test if not deleted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not deleted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+    <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
     <!-- optional validTime: not set, latest sensor description is returned. -->
     <!-- 
 	<swes:validTime><gml:TimeInstant gml:id="validTime"><gml:timePosition>2013-08-14T15:02:43.219</gml:timePosition></gml:TimeInstant></swes:validTime>
@@ -402,12 +378,12 @@
     <!-- 
 	<swes:validTime><gml:TimePeriod gml:id="validTime"><gml:beginPosition>2013-08-14T15:02:43.219</gml:beginPosition><gml:endPosition>2013-08-14t15:02:47</gml:endPosition></gml:TimePeriod></swes:validTime>
 	 -->
-</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="delete"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="delete" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request>&lt;?xml version="1.0" encoding="UTF-8"?>
+</swes:DescribeSensor>]]></con:request><con:assertion type="Simple NotContains" name="Not Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="delete"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="delete" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="test123" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request>&lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;swes:DeleteSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
     &lt;swes:procedure>http://www.52north.org/test/procedure/9&lt;/swes:procedure>
-&lt;/swes:DeleteSensor></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>&lt;swes:deletedProcedure>http://www.52north.org/test/procedure/9&lt;/swes:deletedProcedure></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>Authorization</con:name><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Test if deleted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if deleted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+&lt;/swes:DeleteSensor></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>&lt;swes:deletedProcedure>http://www.52north.org/test/procedure/9&lt;/swes:deletedProcedure></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name>Authorization</con:name><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Test if deleted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if deleted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <swes:DescribeSensor service="SOS" version="2.0.0"
     xmlns:swes="http://www.opengis.net/swes/2.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -427,7 +403,7 @@
 </swes:DescribeSensor>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Transactional Sensor Editor SOAP"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="before" searchProperties="true" id="1e46e1f9-2925-407d-a3b0-e522e81bcf22"><con:settings/><con:testStep type="httprequest" name="delete"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="delete" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="Authorization" value="test123"/>
   &lt;con:entry key="Content-Type" value="application/soap+xml"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope
     xmlns:env="http://www.w3.org/2003/05/soap-envelope"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">
@@ -437,7 +413,7 @@
             <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
         </swes:DeleteSensor>
     </env:Body>
-</env:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="InsertSensor with Soap" searchProperties="true" id="4c67ebf7-5a16-46d9-8f64-f1f7b817f3b5"><con:settings/><con:testStep type="httprequest" name="Test if not inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/soap+xml" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</env:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="InsertSensor with Soap" searchProperties="true" id="4c67ebf7-5a16-46d9-8f64-f1f7b817f3b5"><con:settings/><con:testStep type="httprequest" name="Test if not inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if not inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/soap+xml" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope
     xmlns:env="http://www.w3.org/2003/05/soap-envelope"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">
@@ -462,7 +438,7 @@
 </env:Envelope>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token>of the parameter 'procedure' is invalid</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><con:parameter><con:name/><con:value/><con:style>QUERY</con:style></con:parameter></con:parameters></con:config></con:testStep><con:testStep type="httprequest" name="Insert"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Insert" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="Authorization" value="test123"/>
   &lt;con:entry key="Content-Type" value="application/soap+xml"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope
     xmlns:env="http://www.w3.org/2003/05/soap-envelope"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd     http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
@@ -502,7 +478,10 @@
                     </sml:identification>
                     <sml:capabilities name="offerings">
                         <sml:CapabilityList>
-                            <!--The sensivitiy of detector-->
+                            <!-- Special capabilities used to specify offerings. -->
+                            <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
+					         added during DescribeSensor. -->
+                            <!-- Offering is generated if not specified. -->
                             <sml:capability name="offeringID">
                                 <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
                                     <swe:label>offeringID</swe:label>
@@ -620,7 +599,7 @@
 </token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="InsertAcousticSensor"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="InsertAcousticSensor" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="Authorization" value="test123"/>
   &lt;con:entry key="Content-Type" value="application/soap+xml"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service(Request does not work)</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope
     xmlns:env="http://www.w3.org/2003/05/soap-envelope"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertSensor.xsd     http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
@@ -976,7 +955,7 @@
         </swes:InsertSensor>
     </env:Body>
 </env:Envelope>]]></con:request><con:assertion type="Simple Contains" name="Contains"><con:configuration><token> &lt;swes:assignedOffering>http://www.52north.org/test/offering/9&lt;/swes:assignedOffering>
-</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/soap+xml" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp/service</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="httprequest" name="Test if inserted"><con:settings/><con:config method="POST" xsi:type="con:HttpRequest" name="Test if inserted" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/soap+xml" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/52n-sos-webapp_4.3.0/service(Request does not work)</con:endpoint><con:request><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope
     xmlns:env="http://www.w3.org/2003/05/soap-envelope"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">

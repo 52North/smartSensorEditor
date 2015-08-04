@@ -64,6 +64,7 @@ public class SOSWebServiceIT {
 	private String sensorId = "http://www.52north.org/test/procedure/9";
 	private String serviceURL="http://localhost:8080/52n-sos-webapp_4.3.0/service";
 	private String endpoint = serviceURL+"/soap";
+	private final String authorizationToken="test123";
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
@@ -85,6 +86,7 @@ public class SOSWebServiceIT {
 		// insert sensor post
 		SoapClient client = (SoapClient) ClientFactory.createClient(
 				Protocol.HTTP_SOAP, endpoint);
+		client.addRequestHeader("Authorization", authorizationToken);
 		client.setTranformerService(xsltTransformerService);
 		client.getTranformerService().init();
 		client.setPayload(DOMUtil.convertToString(request, true));
@@ -123,9 +125,10 @@ public class SOSWebServiceIT {
 		request = dBuilder.parse(fXmlFile);// insert sensor post
 		SoapClient client = (SoapClient) ClientFactory.createClient(
 				Protocol.HTTP_SOAP, endpoint);
+		client.addRequestHeader("Authorization", authorizationToken);
 		client.setTranformerService(xsltTransformerService);
 		client.getTranformerService().init();
-		System.out.println("String:"+DOMUtil.convertToString(request, true));
+		//System.out.println("String:"+DOMUtil.convertToString(request, true));
 		client.setPayload(DOMUtil.convertToString(request, true));
 		client.invoke(null);
 	    

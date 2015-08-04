@@ -415,7 +415,7 @@
 		</element>
 		<element>
 			<resourceKey>enumeration.servicetype[9]</resourceKey>
-			<value>SOS</value>
+			<value>SOS</value> <!-- Is needed for StartEditorControllerSML.java -->
 		</element>
 	</list>
 	<list>
@@ -2271,7 +2271,7 @@
 		<identifier>SOS_Operations</identifier>
 		<element>
 			<resourceKey>enumeration.SOS_Operation[0]</resourceKey>
-			<value>INSERT</value>
+			<value>INSERT</value><!-- Is needed for StartEditorControllerSML.java -->
 		</element>
 		<element>
 			<resourceKey>enumeration.SOS_Operation[1]</resourceKey>

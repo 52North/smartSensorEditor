@@ -60,8 +60,8 @@ public class StartEditorControllerSML extends StartEditorController {
 	protected static final Logger LOG = Logger
 			.getLogger(StartEditorControllerSML.class);
 
-	private static final String SOS_SERVICE_TYPE = "SOS";
-
+	private static final String SOS_SERVICE_TYPE = "SOS";  //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.servicetype[9]"
+    private static final String SOS_Operation_Insert="INSERT"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
 	/**
 	 * Starts editor with a service description
 	 *
@@ -81,7 +81,9 @@ public class StartEditorControllerSML extends StartEditorController {
         
         if (pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE)) {
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceTokenForSOS", "errors.service.tokenForSOS.empty");
+            if(!pEditorBean.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_Insert)){
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceProcedureIDForSOS", "errors.service.procedureIDForSOS.empty");
+            }
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceOperationForSOS", "errors.service.operationForSOS.empty");
         }
         
