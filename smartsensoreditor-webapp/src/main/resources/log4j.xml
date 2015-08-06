@@ -32,31 +32,31 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-        <param name="Threshold" value="DEBUG"/>
+        <param name="Threshold" value="${logging.log4j.appender.console.level}"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%-5p] %d [%t] %c - %m%n"/>
         </layout>
     </appender>
     <appender name="LOGFILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.base}/logs/smarteditor-webapp.log"/>
-        <param name="Threshold" value="DEBUG"/>
+        <param name="File" value="${logging.log4j.appender.file.path}/${logging.log4j.appender.file.name}.log"/>
+        <param name="Threshold" value="${logging.log4j.appender.file.level}"/>
         <param name="MaxFileSize" value="5000KB"/>
         <param name="MaxBackupIndex" value="3"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%-5p] %d{ISO8601} [%t] %c - %m%n"/>
         </layout>
     </appender>
-   <logger name="de.conterra">
-        <level value="DEBUG"/>
+    <logger name="de.conterra">
+        <level value="${logging.log4j.logger.app.level}"/>
     </logger>
     <logger name="de.conterra.smarteditor.edit">
-        <level value="DEBUG"/>
+        <level value="${logging.log4j.logger.app.level}"/>
     </logger>
     <logger name="org.springframework">
-        <level value="INFO"/>
+        <level value="${logging.log4j.logger.root.level}"/>
     </logger>
     <root>
-        <level value="INFO"/>
+        <level value="${logging.log4j.logger.root.level}"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="LOGFILE"/>
     </root>

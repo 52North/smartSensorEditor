@@ -24,6 +24,25 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<build.properties.project>${basedir}/src/main/webapp/META-INF/build.properties</build.properties.project>
 		<build.properties.local>${user.home}/build.properties</build.properties.local>
+		<!--##### logging properties #####-->
+        <logging.log4j.logger.root.level>WARN</logging.log4j.logger.root.level>
+        <logging.log4j.logger.app.level>INFO</logging.log4j.logger.app.level>
+        <logging.log4j.appender.console.level>WARN</logging.log4j.appender.console.level>
+        <!-- file appender only used in the web applications -->
+        <logging.log4j.appender.file.level>INFO</logging.log4j.appender.file.level>
+        <logging.log4j.appender.file.path>${catalina.base}/logs</logging.log4j.appender.file.path>
+        <logging.log4j.appender.file.name>${project.artifactId}</logging.log4j.appender.file.name>
+		    <!-- from application.properties -->
+        <csw.discovery>http://www.sdisuite.de/soapServices/services/CSWDiscovery</csw.discovery>
+        <csw.manager>http://www.sdisuite.de/soapServices/services/CSWManager</csw.manager>
+        <db.jndi.name>java:comp/env/jdbc/editor</db.jndi.name>
+        <db.hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</db.hibernate.dialect>
+        <security.keystore.provider.class>de.conterra.smarteditor.common.authentication.ClassPathKeyStoreProvider
+        </security.keystore.provider.class>
+        <security.keystore.pwd>changeit</security.keystore.pwd>
+        <security.keystore.path>/.keystore</security.keystore.path>
+        <security.certificate.alias>ct-security</security.certificate.alias>
+        <security.certificate.pwd>changeit</security.certificate.pwd>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -85,6 +104,25 @@
 
 	</dependencies>
 	<build>
+	   <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>log4j.xml</include>
+                    <include>application.properties</include>
+                    <include>info.txt</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>log4j.xml</exclude>
+                    <exclude>application.properties</exclude>
+                    <exclude>info.txt</exclude>
+                </excludes>
+            </resource>
+        </resources>
 		<finalName>smartSensorEditor</finalName>
 		<plugins>
 			<plugin>
@@ -107,7 +145,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

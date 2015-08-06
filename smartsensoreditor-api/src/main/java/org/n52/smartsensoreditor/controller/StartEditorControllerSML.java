@@ -62,7 +62,9 @@ public class StartEditorControllerSML extends StartEditorController {
 
 	private static final String SOS_SERVICE_TYPE = "SOS";  //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.servicetype[9]"
     private static final String SOS_Operation_Insert="INSERT"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
-	/**
+    private static final String SOS_Operation_DELETE="DELETE"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
+
+    /**
 	 * Starts editor with a service description
 	 *
 	 * @param pEditorBean
@@ -72,6 +74,7 @@ public class StartEditorControllerSML extends StartEditorController {
     @RequestMapping(value = "/startServiceSOS", method = RequestMethod.POST)
     public ModelAndView startServiceHandler(@ModelAttribute("startEditorBeanSML") StartEditorBeanSML pEditorBean,
                                             BindingResult pResult) {
+    	//Error handling
         ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceUrl", "errors.service.url.empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceType", "errors.service.type.empty");
         
@@ -81,7 +84,7 @@ public class StartEditorControllerSML extends StartEditorController {
         
         if (pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE)) {
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceTokenForSOS", "errors.service.tokenForSOS.empty");
-            if(!pEditorBean.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_Insert)){
+            if(pEditorBean.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DELETE)){
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceProcedureIDForSOS", "errors.service.procedureIDForSOS.empty");
             }
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceOperationForSOS", "errors.service.operationForSOS.empty");
@@ -93,27 +96,33 @@ public class StartEditorControllerSML extends StartEditorController {
             return new ModelAndView(getFormView(), getModelMap());
         }
         
+        //Create webservice
         WebServiceDescriptionDAO dao =  getServiceFactory().getDescriptionDAO(pEditorBean.getServiceType().toLowerCase());
         dao.setUrl(pEditorBean.getServiceUrl());
         LOG.trace("Current dao: " + dao);
+        if (!"".equals(pEditorBean.getServiceName())) {
+			dao.setServiceName(pEditorBean.getServiceName());
+		}
+           //Only for SOS
         if(pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE))  {
-        	LOG.debug("Starting SOS interaction");
+        	LOG.debug("Put SOS values into webserviceDescriptionDAO");
         		StartEditorBeanSML editorBeanSML = (StartEditorBeanSML) pEditorBean;
     		
     			if (dao instanceof SOSWebServiceDescriptionDAO) {
     				SOSWebServiceDescriptionDAO sosDao = (SOSWebServiceDescriptionDAO) dao;
+    				//Set procedureID
     				String procId = editorBeanSML.getServiceProcedureIDForSOS();
     				sosDao.setServiceProcedureIDForSOS(procId);
 					LOG.debug("Procedure ID set to '" + procId + "'");
+					//Set token
+					String token = editorBeanSML.getServiceTokenForSOS();
+    				sosDao.setServiceProcedureIDForSOS(token);
+					LOG.debug("Procedure ID set to '" + token + "'");
     			}
     			else  {
             		throw new RuntimeException("editor bean service type is " + SOS_SERVICE_TYPE + " but DAO instance is of type " + dao.getClass().getName() + ", should be " + SOSWebServiceDescriptionDAO.class.getName());
             	}
         }
-        
-        if (!"".equals(pEditorBean.getServiceName())) {
-			dao.setServiceName(pEditorBean.getServiceName());
-		}
 		try {
 			Document lDoc = dao.getDescription();
 			if (LOG.isTraceEnabled()) {
