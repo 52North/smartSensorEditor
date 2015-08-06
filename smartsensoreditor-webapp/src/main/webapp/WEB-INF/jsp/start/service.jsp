@@ -39,21 +39,14 @@
 					if ($('#serviceType').attr('value') == 'SOS') {
 						$('#serviceTokenForSOS').show();
 						$('#DIVserviceOperationForSOS').show();
+						$('#serviceProcedureIDForSOS').show();
 					} else {
 						$('#serviceTokenForSOS').hide();
 						$('#DIVserviceOperationForSOS').hide();
 						$('#serviceProcedureIDForSOS').hide();
+						$('#serviceProcedureIDForSOS').hide();
 					}
 				});
-				$('#serviceOperationForSOS').click(
-						function() {
-							if ($('#serviceOperationForSOS').attr('value')
-									.match(/^(UPDATE|DELETE|DESCRIBE)$/)) {
-								$('#serviceProcedureIDForSOS').show();
-							} else {
-								$('#serviceProcedureIDForSOS').hide();
-							}
-						});
 
 			});
 </script>

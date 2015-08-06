@@ -61,8 +61,7 @@ public class StartEditorControllerSML extends StartEditorController {
 			.getLogger(StartEditorControllerSML.class);
 
 	private static final String SOS_SERVICE_TYPE = "SOS";  //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.servicetype[9]"
-    private static final String SOS_Operation_Insert="INSERT"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
-    private static final String SOS_Operation_DELETE="DELETE"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
+    private static final String SOS_Operation_DELETE="DeleteSensor"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
 
     /**
 	 * Starts editor with a service description
@@ -116,13 +115,21 @@ public class StartEditorControllerSML extends StartEditorController {
 					LOG.debug("Procedure ID set to '" + procId + "'");
 					//Set token
 					String token = editorBeanSML.getServiceTokenForSOS();
-    				sosDao.setServiceProcedureIDForSOS(token);
+    				sosDao.setServiceTokenForSOS(token);
 					LOG.debug("Procedure ID set to '" + token + "'");
+					
+					
+					//When a sensor should be deleted
+					 if (editorBeanSML.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DELETE)) {
+				        	LOG.debug("sensor should be deleted");
+				            return new ModelAndView(getFormView(), getModelMap());
+				        }
     			}
     			else  {
             		throw new RuntimeException("editor bean service type is " + SOS_SERVICE_TYPE + " but DAO instance is of type " + dao.getClass().getName() + ", should be " + SOSWebServiceDescriptionDAO.class.getName());
             	}
         }
+       
 		try {
 			Document lDoc = dao.getDescription();
 			if (LOG.isTraceEnabled()) {

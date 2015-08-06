@@ -49,7 +49,7 @@
     <logger name="de.conterra">
         <level value="${logging.log4j.logger.app.level}"/>
     </logger>
-    <logger name="de.conterra.smarteditor.edit">
+    <logger name="org.n52.smartsensoreditor">
         <level value="${logging.log4j.logger.app.level}"/>
     </logger>
     <logger name="org.springframework">

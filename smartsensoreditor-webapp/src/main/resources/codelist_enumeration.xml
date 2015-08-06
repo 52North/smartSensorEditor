@@ -2271,17 +2271,11 @@
 		<identifier>SOS_Operations</identifier>
 		<element>
 			<resourceKey>enumeration.SOS_Operation[0]</resourceKey>
-			<value>INSERT</value><!-- Is needed for StartEditorControllerSML.java -->
+			<value>DescribeSensor</value><!-- Is needed for StartEditorControllerSML.java -->
 		</element>
 		<element>
 			<resourceKey>enumeration.SOS_Operation[1]</resourceKey>
-			<value>UPDATE</value>
+			<value>DeleteSensor</value>
 		</element>
-		<element>
-			<resourceKey>enumeration.SOS_Operation[2]</resourceKey>
-			<value>DELETE</value>
-		</element>
-
-
 	</list>
 </ISODictionary>

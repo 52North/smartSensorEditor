@@ -85,6 +85,7 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
         queryString.put("version","2.0.0");
         queryString.put("procedureDescriptionFormat","http://www.opengis.net/sensorml/2.0");
         client.addRequestHeader("Content-Type", "application/x-kvp");
+        client.addRequestHeader("Authorization", getServiceTokenForSOS());
         try {
             String content = client.invoke(queryString);
             if(content.contains("is invalid")){
