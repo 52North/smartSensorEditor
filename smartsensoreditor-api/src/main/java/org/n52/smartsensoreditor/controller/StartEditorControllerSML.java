@@ -83,9 +83,7 @@ public class StartEditorControllerSML extends StartEditorController {
         
         if (pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE)) {
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceTokenForSOS", "errors.service.tokenForSOS.empty");
-            if(pEditorBean.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DELETE)){
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceProcedureIDForSOS", "errors.service.procedureIDForSOS.empty");
-            }
             ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceOperationForSOS", "errors.service.operationForSOS.empty");
         }
         

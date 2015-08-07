@@ -23,34 +23,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				// trigger visibility of service Name
+	$(document).ready(function() {
+		// trigger visibility of service Name
+		$('#serviceNameContainer').hide();
+		$('#serviceTokenForSOS').hide();
+		$('#DIVserviceOperationForSOS').hide();
+		$('#serviceProcedureIDForSOS').hide();
+		$('#serviceType').click(function() {
+			if ($('#serviceType').attr('value') == 'ARCIMS') {
+				$('#serviceNameContainer').show();
+			} else {
 				$('#serviceNameContainer').hide();
+			}
+			if ($('#serviceType').attr('value') == 'SOS') {
+				$('#serviceTokenForSOS').show();
+				$('#DIVserviceOperationForSOS').show();
+				$('#serviceProcedureIDForSOS').show();
+			} else {
 				$('#serviceTokenForSOS').hide();
 				$('#DIVserviceOperationForSOS').hide();
 				$('#serviceProcedureIDForSOS').hide();
-				$('#serviceType').click(function() {
-					if ($('#serviceType').attr('value') == 'ARCIMS') {
-						$('#serviceNameContainer').show();
-					} else {
-						$('#serviceNameContainer').hide();
-					}
-					if ($('#serviceType').attr('value') == 'SOS') {
-						$('#serviceTokenForSOS').show();
-						$('#DIVserviceOperationForSOS').show();
-						$('#serviceProcedureIDForSOS').show();
-					} else {
-						$('#serviceTokenForSOS').hide();
-						$('#DIVserviceOperationForSOS').hide();
-						$('#serviceProcedureIDForSOS').hide();
-						$('#serviceProcedureIDForSOS').hide();
-					}
-				});
+				$('#serviceProcedureIDForSOS').hide();
+			}
+		});
 
-			});
+	});
+	$('#showErrors').bind("DOMNodeInserted", function(e) {
+		$('#showErrors').addClass("ui-state-error ui-corner-all");	
+	});
 </script>
-
 <h2>
 	<fmt:message key="start.service.title" />
 </h2>
@@ -117,7 +118,13 @@
 		<form:errors path="serviceType" cssClass="ui-state-error-text" />
 	</div>
 
-
+	<c:set var="err">
+		<form:errors path="*" element="div" id="err"
+			cssClass="hidden ui-icon-alert" />
+	</c:set>
+	<script>
+		$('#showErrors').append('${err}');
+	</script>
 	<br>
 
 	<p>&nbsp;</p>
