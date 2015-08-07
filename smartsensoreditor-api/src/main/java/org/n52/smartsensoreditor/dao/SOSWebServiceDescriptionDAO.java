@@ -28,21 +28,31 @@
  */
 package org.n52.smartsensoreditor.dao;
 
+import de.conterra.smarteditor.clients.ClientFactory;
 import de.conterra.smarteditor.clients.GetClient;
 import de.conterra.smarteditor.clients.PostClient;
+import de.conterra.smarteditor.clients.Protocol;
+import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.dao.WebServiceDescriptionDAO;
 import de.conterra.smarteditor.dao.WebServiceDescriptionException;
+import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 
+import javax.annotation.Resource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 
+import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +65,9 @@ import java.util.Map;
  */
 public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
 
+	@Resource(name = "xsltTransformerService")
+	private XSLTTransformerService xsltTransformerService;
+	
     private static Logger LOG = Logger.getLogger(SOSWebServiceDescriptionDAO.class);
     private Map<String, String> transformerFiles;
     private String serviceTokenForSOS;
@@ -105,6 +118,34 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
         	}
             throw new WebServiceDescriptionException(e);
         }
+    }
+    
+    public String deleteSensor()throws WebServiceDescriptionException{
+    	String response="";
+    	URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
+		File xmlFile = new File(url.getPath());
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document request;
+			request = dBuilder.parse(xmlFile);// insert sensor post
+			SoapClient client = (SoapClient) ClientFactory.createClient(
+					Protocol.HTTP_SOAP, getUrl()+"/soap");
+			client.addRequestHeader("Authorization", getServiceTokenForSOS());
+			client.setTranformerService(xsltTransformerService);
+			//System.out.println("String:"+DOMUtil.convertToString(request, true));
+			client.setPayload(DOMUtil.convertToString(request, true));
+			response=client.invoke(null);
+			if(response.contains("soap:Fault")){
+				throw new Exception(response);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new WebServiceDescriptionException(e);
+		} 
+		
+    	return response;
     }
     public Map<String, String> getTransformerFiles() {
         return transformerFiles;

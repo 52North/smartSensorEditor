@@ -98,17 +98,16 @@ public class SOSWebServiceIT {
 
 	public void insertSensor() throws Exception {
 		URL url = getClass().getResource("/requests/insertTestSensorSoap.xml");
-		File fXmlFile = new File(url.getPath());
+		File xmlFile = new File(url.getPath());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document request;
-		request = dBuilder.parse(fXmlFile);
+		request = dBuilder.parse(xmlFile);
 		// insert sensor post
 		SoapClient client = (SoapClient) ClientFactory.createClient(
 				Protocol.HTTP_SOAP, endpoint);
 		client.addRequestHeader("Authorization", authorizationToken);
 		client.setTranformerService(xsltTransformerService);
-		client.getTranformerService().init();
 		client.setPayload(DOMUtil.convertToString(request, true));
 
 		client.invoke(null);
@@ -138,16 +137,15 @@ public class SOSWebServiceIT {
 	
 	public void removeSensor() throws Exception {
 		URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
-		File fXmlFile = new File(url.getPath());
+		File xmlFile = new File(url.getPath());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document request;
-		request = dBuilder.parse(fXmlFile);// insert sensor post
+		request = dBuilder.parse(xmlFile);// insert sensor post
 		SoapClient client = (SoapClient) ClientFactory.createClient(
 				Protocol.HTTP_SOAP, endpoint);
 		client.addRequestHeader("Authorization", authorizationToken);
 		client.setTranformerService(xsltTransformerService);
-		client.getTranformerService().init();
 		//System.out.println("String:"+DOMUtil.convertToString(request, true));
 		client.setPayload(DOMUtil.convertToString(request, true));
 		client.invoke(null);
