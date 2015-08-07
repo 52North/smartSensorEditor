@@ -32,8 +32,11 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.xml.parsers.DocumentBuilder;
@@ -64,15 +67,32 @@ public class SOSWebServiceIT {
 	private String sensorId = "http://www.52north.org/test/procedure/9";
 	private String serviceURL="http://localhost:8080/52n-sos-webapp_4.3.0/service";
 	private String endpoint = serviceURL+"/soap";
-	private final String authorizationToken="test123";
+	private String authorizationToken="test123";
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
 
 	@Before
 	public void before() throws Exception {
-		sosWebServiceDAO.setUrl("http://localhost:8080/52n-sos-webapp_4.3.0/service");
+		//Get from propertyFile
+		Properties properties = new Properties();
+		String userHome=System.getProperty("user.home");
+		BufferedInputStream stream = new BufferedInputStream(new FileInputStream(userHome+"/build.properties"));
+		properties.load(stream);
+		stream.close();
+		if(properties.getProperty("IT_sensorId")!=null){
+			sensorId=properties.getProperty("IT_sensorId");
+		}
+		if(properties.getProperty("IT_serviceURL")!=null){
+			serviceURL=properties.getProperty("IT_serviceURL");
+		}
+		if(properties.getProperty("IT_authorizationToken")!=null){
+			authorizationToken=properties.getProperty("IT_authorizationToken");
+		}
+		
+		sosWebServiceDAO.setUrl(serviceURL);
 		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
+		
 		sosWebServiceDAO.setServiceType("SOS");
 	}
 
