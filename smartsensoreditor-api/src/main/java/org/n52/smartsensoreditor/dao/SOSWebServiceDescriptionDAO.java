@@ -40,6 +40,7 @@ import de.conterra.smarteditor.util.DOMUtil;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 import javax.annotation.Resource;
 import javax.xml.parsers.DocumentBuilder;
@@ -130,6 +131,10 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document request;
 			request = dBuilder.parse(xmlFile);// insert sensor post
+			//set procedure ID for the sensor to delete
+			Node newNode= request.getElementsByTagName("swes:procedure").item(0);
+			newNode.setTextContent(getServiceProcedureIDForSOS());
+			//create SOAP client
 			SoapClient client = (SoapClient) ClientFactory.createClient(
 					Protocol.HTTP_SOAP, getUrl()+"/soap");
 			client.addRequestHeader("Authorization", getServiceTokenForSOS());
