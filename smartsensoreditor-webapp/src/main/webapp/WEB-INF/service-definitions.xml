@@ -46,6 +46,7 @@
 				<entry key="inspireValidator" value-ref="inspireValidator" />
 				<entry key="smlValidator" value-ref="smlValidator" />
 				<entry key="extendedSmlValidator" value-ref="extendedSmlValidator" />
+				<entry key="noValidator" value-ref="noValidator" />
 			</map>
 		</property>
 		<property name="backend" ref="backendBean" />

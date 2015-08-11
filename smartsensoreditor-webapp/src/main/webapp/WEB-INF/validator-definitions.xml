@@ -45,8 +45,13 @@
         <property name="id" value="smlValidator"/>
         <property name="rulessetSystemID" value="/validation/SensorML_Profile_for_Discovery.xslt"/>
     </bean>
+    
     <bean id="extendedSmlValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
         <property name="id" value="extendedSmlValidator"/>
         <property name="rulessetSystemID" value="/validation/ExtendedSensorML_Profile_for_Discovery.xslt"/>
+    </bean>
+      <bean id="noValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
+        <property name="id" value="noValidator"/>
+        <property name="rulessetSystemID" value="/validation/NoValidation.xslt"/>
     </bean>
 </beans>

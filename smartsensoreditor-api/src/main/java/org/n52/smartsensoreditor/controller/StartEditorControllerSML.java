@@ -121,7 +121,7 @@ public class StartEditorControllerSML extends StartEditorController {
 					 if (editorBeanSML.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DELETE)) {
 				        	LOG.debug("sensor should be deleted");
 				        	try {
-				        	String response=sosDao.deleteSensor();
+				        	sosDao.deleteSensor();
 				        	}catch(WebServiceDescriptionException e){
 				        		pResult.rejectValue("serviceUrl", "errors.service.connect", new Object[]{e.getMessage()}, "Capabilities error");
 				        	}
