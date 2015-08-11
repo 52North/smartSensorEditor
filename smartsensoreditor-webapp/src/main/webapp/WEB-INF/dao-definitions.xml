@@ -171,7 +171,7 @@
                 <entry key="view" value-ref="inspireWebServiceDAO"/>
                 <entry key="discovery" value-ref="inspireWebServiceDAO"/>
                 <entry key="arcims" value-ref="arcimsWebServiceDAO"/>
-                <entry key="sos" value-ref="sosWebServiceDAO"/>
+                <entry key="sos" value-ref="sosWebServiceDAO"/>  <!-- needs to be the same like the keys in need to be the same like in src/main/resources/codelist_enumeration.xml, identifier: CT_ServiceTypeExt. -->
             </map>
         </property>
     </bean>

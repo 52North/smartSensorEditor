@@ -392,7 +392,7 @@
 		</element>
 	</list>
 	<list>
-		<identifier>CT_ServiceTypeExt</identifier>
+		<identifier>CT_ServiceTypeExt</identifier> <!-- needs to be the same like the keys in need to be the same like in WEB-INF/dao-definitions.xml in the bean with id="webServiceFactory". -->
 		<element>
 			<resourceKey>enumeration.servicetype[0]</resourceKey>
 			<value>WMS</value>
