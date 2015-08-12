@@ -55,7 +55,6 @@
 			<property name="editorContext" ref="EditorContext"/>
 		<property name="activeBeanNamesRegex">
 			<props>
-
 			<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
 				<prop key="dataset">^((?!sml).)*$</prop>
 				<prop key="service">^((?!sml).)*$</prop>

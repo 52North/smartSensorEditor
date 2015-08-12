@@ -199,7 +199,7 @@
 	<!-- ============================== -->
 	<!-- main edit controller -->
 	<!-- ============================== -->
-	<bean id="editController" class="de.conterra.smarteditor.controller.EditController"
+	<bean id="editController" class="org.n52.smartsensoreditor.controller.EditControllerSML"
 		scope="session">
 		<property name="bindOnNewForm" value="true" />
 		<property name="sessionForm" value="true" />
@@ -214,6 +214,8 @@
 		<property name="config" ref="configBean" />
 		<property name="backendService" ref="backendSetupService" />
 		<property name="workflowManager" ref="genericManager" />
+		<!-- SOS workflowManager SML-->
+		<property name="workflowManagerSOS" ref="operationSOSManager" />
 		<property name="fileSystem" ref="fileSystemDAO" />
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="commandName" value="updateMetadata" />
