@@ -71,8 +71,11 @@ select, .ui-select-menu {
 		<p style="margin-bottom: 20px">
 			<fmt:message key="publish.states.message" />
 		</p>
+		<p style="margin-bottom: 20px">
+			<fmt:message key="publish.SOSService.message" />
+		</p>
 		<form:form commandName="publish" action="publish.do" id="publishForm">
-			<div id="selectStatesDiv" style="margin-top: 25px">
+			<%-- 	<div id="selectStatesDiv" style="margin-top: 25px">
 				<label for="selectStates" style="width: 30em; float: left;"><fmt:message
 						key="publish.states.title.sub" />:</label> <select name="stateId"
 					id="selectStates">
@@ -82,48 +85,41 @@ select, .ui-select-menu {
                         selected="selected"</c:if>>${state.stateName}</option>
 					</c:forEach>
 				</select>
+			</div> --%>
+
+			<div id="procedureIdSOSDiv" style="margin-top: 25px">
+				<label for="procedureIdSOS" style="width: 30em; float: left;"><fmt:message
+						key="publish.procedureIdSOS.title.sub" />:</label>
+				<c:out value="${stateModel.procedureIdSOS}" />
+				<input type="hidden" name="procedureIdSOS" id="procedureIdSOS"
+					value="${stateModel.procedureIdSOS}" />
+			</div>
+
+			<div id="selectOperationsSOSDiv" style="margin-top: 25px">
+				<label for="selectOperationSOS" style="width: 30em; float: left;"><fmt:message
+						key="publish.operationsSOS.title.sub" />:</label> <select
+					name="serviceOperationSOS" id="selectOperationSOS">
+					<c:forEach items="${stateModel.operationsSOS}" var="operationSOS">
+						<option value="${operationSOS.stateId}"
+							<c:if test="${stateModel.currentOperationSOSId == operationSOS.stateId}">
+                        selected="selected"</c:if>>${operationSOS.stateName}</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div id="serviceTokenSOSDiv" style="margin-top: 25px">
+				<label for="serviceTokenSOS" style="width: 30em; float: left;"><fmt:message
+						key="publish.serviceTokenSOS.title.sub" />:</label> <input
+					name="serviceTokenSOS" id="serviceTokenSOS" />
 			</div>
 			<br>
-			<fieldset id="SOSService"
-				style="margin-right: 7px; padding-bottom: 10px">
-				<legend>
-					<fmt:message key="publish.serviceSOS.title.sub" />
-				</legend>
-				<p style="margin-bottom: 20px">
-					<fmt:message key="publish.SOSService.message" />
-				</p>
-				<div id="procedureIdSOSDiv" style="margin-top: 25px">
-					<label for="procedureIdSOS" style="width: 30em; float: left;"><fmt:message
-							key="publish.procedureIdSOS.title.sub" />:</label>
-					<c:out value="${stateModel.procedureIdSOS}" />
-					<input type="hidden" name="procedureIdSOS" id="procedureIdSOS" value="${stateModel.procedureIdSOS}"/> 
-				</div>
+			<div id="serviceURLSOSDiv" style="margin-top: 25px">
+				<label for="serviceURLSOS" style="width: 30em; float: left;"><fmt:message
+						key="publish.serviceURLSOS.title.sub" />:</label> <input
+					name="serviceUrlSOS" id="serviceURLSOS"
+					value="${stateModel.serviceURLSOS}" />
+			</div>
 
-				<div id="selectOperationsSOSDiv" style="margin-top: 25px">
-					<label for="selectOperationSOS" style="width: 30em; float: left;"><fmt:message
-							key="publish.operationsSOS.title.sub" />:</label> <select
-						name="serviceOperationSOS" id="selectOperationSOS">
-						<c:forEach items="${stateModel.operationsSOS}" var="operationSOS">
-							<option value="${operationSOS.stateId}"
-								<c:if test="${stateModel.currentOperationSOSId == operationSOS.stateId}">
-                        selected="selected"</c:if>>${operationSOS.stateName}</option>
-						</c:forEach>
-					</select>
-				</div>
-			
-				<div id="serviceTokenSOSDiv" style="margin-top: 25px">
-					<label for="serviceTokenSOS" style="width: 30em; float: left;"><fmt:message
-							key="publish.serviceTokenSOS.title.sub" />:</label> <input
-						name="serviceTokenSOS" id="serviceTokenSOS" />
-				</div>
-				<br>
-				<div id="serviceURLSOSDiv" style="margin-top: 25px">
-					<label for="serviceURLSOS" style="width: 30em; float: left;"><fmt:message
-							key="publish.serviceURLSOS.title.sub" />:</label> <input
-						name="serviceUrlSOS" id="serviceURLSOS"
-						value="${stateModel.serviceURLSOS}" />
-				</div>
-			</fieldset>
 			<div id="stateButtons" style="margin-top: 25px">
 				<a class="button" href="#" id="publishFormButton"> <fmt:message
 						key="publish.submit" />
