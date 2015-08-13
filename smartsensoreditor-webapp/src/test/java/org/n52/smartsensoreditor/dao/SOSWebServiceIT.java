@@ -62,7 +62,7 @@ import de.conterra.smarteditor.util.DOMUtil;
 public class SOSWebServiceIT {
 
 	@Resource(name = "sosWebServiceDAO")
-	SOSWebServiceDAO sosWebServiceDAO;
+	SOSWebServiceDescriptionDAO sosWebServiceDAO;
 
 	private String sensorId = "http://www.52north.org/test/procedure/9";
 	private String serviceURL="http://localhost:8080/52n-sos-webapp_4.3.0/service";

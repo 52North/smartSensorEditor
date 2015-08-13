@@ -30,7 +30,7 @@ package org.n52.smartsensoreditor.controller;
 
 import org.apache.log4j.Logger;
 import org.n52.smartsensoreditor.beans.StartEditorBeanSML;
-import org.n52.smartsensoreditor.dao.SOSWebServiceDAO;
+import org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -105,8 +105,8 @@ public class StartEditorControllerSML extends StartEditorController {
         	LOG.debug("Put SOS values into webserviceDescriptionDAO");
         		StartEditorBeanSML editorBeanSML = (StartEditorBeanSML) pEditorBean;
     		
-    			if (dao instanceof SOSWebServiceDAO) {
-    				SOSWebServiceDAO sosDao = (SOSWebServiceDAO) dao;
+    			if (dao instanceof SOSWebServiceDescriptionDAO) {
+    				SOSWebServiceDescriptionDAO sosDao = (SOSWebServiceDescriptionDAO) dao;
     				//Set procedureID
     				String procId = editorBeanSML.getServiceProcedureIDForSOS();
     				sosDao.setServiceProcedureIDForSOS(procId);
@@ -129,7 +129,7 @@ public class StartEditorControllerSML extends StartEditorController {
 				        }
     			}
     			else  {
-            		throw new RuntimeException("editor bean service type is " + SOS_SERVICE_TYPE + " but DAO instance is of type " + dao.getClass().getName() + ", should be " + SOSWebServiceDAO.class.getName());
+            		throw new RuntimeException("editor bean service type is " + SOS_SERVICE_TYPE + " but DAO instance is of type " + dao.getClass().getName() + ", should be " + SOSWebServiceDescriptionDAO.class.getName());
             	}
         }
        

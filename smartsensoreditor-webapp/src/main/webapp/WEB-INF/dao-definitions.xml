@@ -109,13 +109,13 @@
 	<!-- SOS operation states for the selectStates.jsp BEGIN -->
 	<bean id="operationSOSUpdated" class="de.conterra.smarteditor.common.workflow.WorkflowState">
 		<property name="protectionLevel" value="update" />
-		<property name="stateId" value="updated" />
-		<property name="stateName" value="Updated" />
+		<property name="stateId" value="update" />
+		<property name="stateName" value="Update" />
 	</bean>
 	<bean id="operationSOSInserted" class="de.conterra.smarteditor.common.workflow.WorkflowState">
 		<property name="protectionLevel" value="insert" />
-		<property name="stateId" value="inserted" />
-		<property name="stateName" value="Inserted" />
+		<property name="stateId" value="insert" />
+		<property name="stateName" value="Insert" />
 	</bean>
 	<bean id="operationSOSManager"
 		class="de.conterra.smarteditor.common.workflow.GenericWorkflowManager">
@@ -201,7 +201,7 @@
 				<entry key="view" value-ref="inspireWebServiceDAO" />
 				<entry key="discovery" value-ref="inspireWebServiceDAO" />
 				<entry key="arcims" value-ref="arcimsWebServiceDAO" />
-				<entry key="sos" value-ref="sosWebServiceDAO" />  <!-- needs to be the same like the keys in need to be the same like in src/main/resources/codelist_enumeration.xml, 
+				<entry key="sos" value-ref="sosWebServiceDescriptionDAO" />  <!-- needs to be the same like the keys in need to be the same like in src/main/resources/codelist_enumeration.xml, 
 					identifier: CT_ServiceTypeExt. -->
 			</map>
 		</property>
@@ -211,8 +211,8 @@
 		abstract="true">
 		<property name="xsltTransformer" ref="xsltTransformerService" />
 	</bean>
-	<bean id="sosWebServiceDAO"
-		class="org.n52.smartsensoreditor.dao.SOSWebServiceDAO"
+	<bean id="sosWebServiceDescriptionDAO"
+		class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO"
 		parent="webServiceDAO">
 		<property name="transformerFiles">
 			<map>

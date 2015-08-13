@@ -28,59 +28,44 @@
  */
 package org.n52.smartsensoreditor.beans;
 
+import de.conterra.smarteditor.beans.PublishBean;
+
 /**
  * [Explain the purpose of this class or interface, dude]
  * 
  * @author kse Date: 19.03.2010 Time: 16:35:13
  */
-public class PublishBeanSML {
+public class PublishBeanSML extends PublishBean {
 
-	private String mStateId;
-	private String mServiceUrlForSOS;
-	private String mserviceTokenForSOS;
-	private String mserviceProcedureIDForSOS;
-	private String mserviceOperationForSOS;
-
+	private String mServiceUrlSOS;
+	private String mServiceTokenSOS;
+	private String mProcedureIdSOS;
+	private String mServiceOperationSOS;
 	
-
-	public String getStateId() {
-		return mStateId;
+	public String getServiceUrlSOS() {
+		return mServiceUrlSOS;
+	}
+	public void setServiceUrlSOS(String mServiceUrlSOS) {
+		this.mServiceUrlSOS = mServiceUrlSOS;
+	}
+	public String getServiceTokenSOS() {
+		return mServiceTokenSOS;
+	}
+	public void setServiceTokenSOS(String mServiceTokenSOS) {
+		this.mServiceTokenSOS = mServiceTokenSOS;
+	}
+	public String getProcedureIdSOS() {
+		return mProcedureIdSOS;
+	}
+	public void setProcedureIdSOS(String mProcedureIdSOS) {
+		this.mProcedureIdSOS = mProcedureIdSOS;
+	}
+	public String getServiceOperationSOS() {
+		return mServiceOperationSOS;
+	}
+	public void setServiceOperationSOS(String mServiceOperationSOS) {
+		this.mServiceOperationSOS = mServiceOperationSOS;
 	}
 
-	public void setStateId(String pStateId) {
-		mStateId = pStateId;
-	}
-
-	public String getServiceUrlForSOS() {
-		return mServiceUrlForSOS;
-	}
-
-	public void setServiceUrlForSOS(String pServiceUrlForSOS) {
-		this.mServiceUrlForSOS = pServiceUrlForSOS;
-	}
-	
-	public String getServiceTokenForSOS() {
-		return mserviceTokenForSOS;
-	}
-
-	public void setServiceTokenForSOS(String pserviceTokenForSOS) {
-		mserviceTokenForSOS = pserviceTokenForSOS;
-	}
-
-	public String getServiceProcedureIDForSOS() {
-		return mserviceProcedureIDForSOS;
-	}
-
-	public void setServiceProcedureIDForSOS(String pserviceProcedureIDForSOS) {
-		mserviceProcedureIDForSOS = pserviceProcedureIDForSOS;
-	}
-
-	public String getServiceOperationForSOS() {
-		return mserviceOperationForSOS;
-	}
-
-	public void setServiceOperationForSOS(String pserviceOperationForSOS) {
-		mserviceOperationForSOS = pserviceOperationForSOS;
-	}
 
 }

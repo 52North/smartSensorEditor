@@ -51,7 +51,7 @@ select, .ui-select-menu {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#selectStates,#selectOperationsSOS').selectmenu({
+		$('#selectStates,#selectOperationSOS').selectmenu({
 			style : 'popup',
 			width : 300
 		});
@@ -96,13 +96,13 @@ select, .ui-select-menu {
 					<label for="procedureIdSOS" style="width: 30em; float: left;"><fmt:message
 							key="publish.procedureIdSOS.title.sub" />:</label>
 					<c:out value="${stateModel.procedureIdSOS}" />
-					<%-- <form:hidden path="procedureIdSOS" id="procedureIdSOS" value="${stateModel.procedureIdSOS}"/> --%>
+					<input type="hidden" name="procedureIdSOS" id="procedureIdSOS" value="${stateModel.procedureIdSOS}"/> 
 				</div>
 
 				<div id="selectOperationsSOSDiv" style="margin-top: 25px">
-					<label for="selectOperationsSOS" style="width: 30em; float: left;"><fmt:message
+					<label for="selectOperationSOS" style="width: 30em; float: left;"><fmt:message
 							key="publish.operationsSOS.title.sub" />:</label> <select
-						name="operationSOS" id="selectOperationsSOS">
+						name="serviceOperationSOS" id="selectOperationSOS">
 						<c:forEach items="${stateModel.operationsSOS}" var="operationSOS">
 							<option value="${operationSOS.stateId}"
 								<c:if test="${stateModel.currentOperationSOSId == operationSOS.stateId}">
@@ -110,8 +110,7 @@ select, .ui-select-menu {
 						</c:forEach>
 					</select>
 				</div>
-
-
+			
 				<div id="serviceTokenSOSDiv" style="margin-top: 25px">
 					<label for="serviceTokenSOS" style="width: 30em; float: left;"><fmt:message
 							key="publish.serviceTokenSOS.title.sub" />:</label> <input

@@ -178,14 +178,14 @@
 		<property name="editorContext" ref="EditorContext" />
 	</bean>
 
-	<bean id="publishController" class="de.conterra.smarteditor.controller.PublishController">
+	<bean id="publishController" class="org.n52.smartsensoreditor.controller.PublishControllerSML">
 		<property name="backendManager" ref="backendSetupService" />
 		<property name="catalogService" ref="catalogServiceDAO" />
 		<property name="config" ref="configBean" />
 		<property name="lockManager" ref="lockingDAO" />
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="commandName" value="publish" />
-		<property name="commandClass" value="de.conterra.smarteditor.beans.PublishBean" />
+		<property name="commandClass" value="org.n52.smartsensoreditor.beans.PublishBeanSML" />
 		<property name="formView" value="editor.publish" />
 		<property name="successView" value="editor.finished" />
 	</bean>
