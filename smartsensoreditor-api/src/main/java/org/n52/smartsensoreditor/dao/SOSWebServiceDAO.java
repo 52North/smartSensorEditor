@@ -64,12 +64,12 @@ import java.util.Map;
  *         Date: 19.07.11
  *         Time: 12:28
  */
-public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
+public class SOSWebServiceDAO extends WebServiceDescriptionDAO {
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
 	
-    private static Logger LOG = Logger.getLogger(SOSWebServiceDescriptionDAO.class);
+    private static Logger LOG = Logger.getLogger(SOSWebServiceDAO.class);
     private Map<String, String> transformerFiles;
     private String serviceTokenForSOS;
     private String serviceProcedureIDForSOS;

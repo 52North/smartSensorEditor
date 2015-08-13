@@ -212,7 +212,7 @@
 		<property name="xsltTransformer" ref="xsltTransformerService" />
 	</bean>
 	<bean id="sosWebServiceDAO"
-		class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO"
+		class="org.n52.smartsensoreditor.dao.SOSWebServiceDAO"
 		parent="webServiceDAO">
 		<property name="transformerFiles">
 			<map>
