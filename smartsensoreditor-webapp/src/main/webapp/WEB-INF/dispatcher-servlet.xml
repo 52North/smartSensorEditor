@@ -178,7 +178,7 @@
 		<property name="editorContext" ref="EditorContext" />
 	</bean>
 
-	<bean id="publishController" class="org.n52.smartsensoreditor.controller.PublishControllerSML">
+	<bean id="publishController" class="de.conterra.smarteditor.controller.PublishController">
 		<property name="backendManager" ref="backendSetupService" />
 		<property name="catalogService" ref="catalogServiceDAO" />
 		<property name="config" ref="configBean" />

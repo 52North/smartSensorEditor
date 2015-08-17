@@ -62,7 +62,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Backend controller for the edit form.
  * <p/>
  *
- * @author kse Date: 08.02.2010 Time: 22:15:29
+ *
  */
 public class EditControllerSML extends EditController {
 

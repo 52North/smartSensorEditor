@@ -33,7 +33,7 @@ import de.conterra.smarteditor.beans.PublishBean;
 /**
  * [Explain the purpose of this class or interface, dude]
  * 
- * @author kse Date: 19.03.2010 Time: 16:35:13
+ *
  */
 public class PublishBeanSML extends PublishBean {
 

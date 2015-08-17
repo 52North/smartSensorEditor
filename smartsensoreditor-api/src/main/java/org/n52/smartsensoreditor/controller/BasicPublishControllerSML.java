@@ -31,14 +31,13 @@ package org.n52.smartsensoreditor.controller;
 import de.conterra.smarteditor.beans.IConfigOptions;
 import de.conterra.smarteditor.beans.PublishBean;
 import de.conterra.smarteditor.beans.UserInfoBean;
-import de.conterra.smarteditor.controller.PublishController;
+import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
+import de.conterra.smarteditor.dao.AbstractCatalogService;
 import de.conterra.smarteditor.dao.CatalogServiceDAO;
 import de.conterra.smarteditor.dao.LockManager;
 import de.conterra.smarteditor.service.BackendManagerService;
-
 import org.apache.log4j.Logger;
-import org.n52.smartsensoreditor.beans.PublishBeanSML;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -46,20 +45,43 @@ import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Publishes Metadata to the catalogue
- * <p/>
- * @author kse
- * Date: 16.02.2010
- * Time: 14:56:26
+ * This controller publishes a metadata document using the plain CSW-T interface
+ * without any addition features (user id, locking, etc...)
  */
-public class PublishControllerSML extends PublishController{
+public class BasicPublishControllerSML extends SimpleFormController {
 
-    protected static final Logger LOG = Logger.getLogger(PublishControllerSML.class);
+    protected static final Logger LOG = Logger.getLogger(BasicPublishControllerSML.class);
+
+    private BackendManagerService backendManager;
+    private AbstractCatalogService catalogService;
+    private RequestFactory requestFactory;
+
+    public RequestFactory getRequestFactory() {
+        return requestFactory;
+    }
+
+    public void setRequestFactory(RequestFactory requestFactory) {
+        this.requestFactory = requestFactory;
+    }
+    public BackendManagerService getBackendManager() {
+        return backendManager;
+    }
+
+    public void setBackendManager(BackendManagerService backendManager) {
+        this.backendManager = backendManager;
+    }
+
+    public AbstractCatalogService getCatalogService() {
+        return catalogService;
+    }
+
+    public void setCatalogService(AbstractCatalogService catalogService) {
+        this.catalogService = catalogService;
+    }
 
     /**
      * This is triggered when the form is submitted
@@ -76,26 +98,19 @@ public class PublishControllerSML extends PublishController{
                                     HttpServletResponse response,
                                     Object command,
                                     BindException errors) throws Exception {
-        PublishBeanSML lBean = (PublishBeanSML) command;
-        Document lDoc = getBackendManager().mergeBackend();
-        TransactionResponse lResponse = null;
-        if (getUserInfo().isUpdate()) {
-            // unlock id
-            if (getLockManager() != null && getLockManager().isActive()) {
-                LOG.info("Unlocking id...");
-                getLockManager().releaseId(getUserInfo().getLockedId());
-            }
-
+        Document doc = getBackendManager().mergeBackend();
+        Document catalogRequest = null;
+        if (getBackendManager().isUpdate()) {
             // reset update
-            getUserInfo().setUpdate(false);
-            // update doc in catalog
-            lResponse = getCatalogService().update(lDoc, lBean.getStateId());
-
+            getBackendManager().setUpdate(false);
+            // create request
+            catalogRequest = getRequestFactory().createRequest("update", doc);
         } else {
-            lResponse = getCatalogService().insert(lDoc, lBean.getStateId());
+            catalogRequest = getRequestFactory().createRequest("insert", doc);
         }
+        Document catalogResponse = getCatalogService().transaction(catalogRequest);
         Map<String, Object> lModel = new HashMap<String, Object>();
-        lModel.put("response", lResponse);
+        lModel.put("response", new TransactionResponse(catalogResponse));
         return new ModelAndView(getSuccessView(), lModel);
     }
 }

@@ -131,7 +131,7 @@ public class SOSWebServiceIT {
 		
 	}
 
-	
+	//Concept from de.conterra.smarteditor.clients.SoapClientTest
 	public void removeSensor() throws Exception {
 		URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
 		File xmlFile = new File(url.getPath());

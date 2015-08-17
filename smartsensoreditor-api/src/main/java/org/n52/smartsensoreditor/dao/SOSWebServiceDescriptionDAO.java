@@ -60,9 +60,6 @@ import java.util.Map;
 /**
  * Gets the description of OGC Web services
  *
- * @author kse
- *         Date: 19.07.11
- *         Time: 12:28
  */
 public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
 
@@ -121,6 +118,7 @@ public class SOSWebServiceDescriptionDAO extends WebServiceDescriptionDAO {
         }
     }
     
+  //Concept from de.conterra.smarteditor.clients.SoapClientTest
     public String deleteSensor()throws WebServiceDescriptionException{
     	String response="";
     	URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");

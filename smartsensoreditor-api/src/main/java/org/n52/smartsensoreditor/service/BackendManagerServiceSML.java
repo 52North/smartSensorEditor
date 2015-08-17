@@ -65,11 +65,6 @@ import de.conterra.smarteditor.xml.EditorContext;
  * Service manages any access to and modification of the backend storage
  * <p/>
  *
- * @author kse
- * @author extended by Jana
- *         <p/>
- *         <p/>
- *         Date: 16.02.2010 Time: 15:19:00
  */
 public class BackendManagerServiceSML extends BackendManagerService {
 

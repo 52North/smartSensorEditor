@@ -51,7 +51,6 @@ import de.conterra.smarteditor.util.DOMUtil;
 /**
  * Start controller for smartEditor
  *
- * @author kse Date: 26.03.2010 Time: 12:46:34
  */
 
 @Controller

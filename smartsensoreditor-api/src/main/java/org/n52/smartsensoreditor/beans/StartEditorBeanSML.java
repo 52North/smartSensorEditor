@@ -32,7 +32,7 @@ import de.conterra.smarteditor.beans.StartEditorBean;
 
 /**
  * Sores startup parameters
- * @author kse
+ *
  * Date: 26.03.2010
  * Time: 15:00:42
  */
