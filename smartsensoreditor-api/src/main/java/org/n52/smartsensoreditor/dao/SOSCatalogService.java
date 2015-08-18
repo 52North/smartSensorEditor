@@ -36,6 +36,7 @@ import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.dao.CatalogServiceException;
 import de.conterra.smarteditor.dao.GenericCatalogService;
 import de.conterra.smarteditor.service.XSLTTransformerService;
+import de.conterra.smarteditor.util.DOMUtil;
 
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.w3c.dom.Document;
@@ -54,7 +55,7 @@ public class SOSCatalogService extends GenericCatalogService {
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
-	
+
 
 	public XSLTTransformerService getTransformerService() {
 		return transformerService;
@@ -64,29 +65,27 @@ public class SOSCatalogService extends GenericCatalogService {
 		this.transformerService = transformerService;
 	}
 
-	@Override
+	/*@Override
 	public Document discovery(Document request) throws CatalogServiceException {
 		getClient().setEndpoint(super.getEndpoints().get("discovery"));
-		setCookie();
 		return doRequest(request);
-	}
+	}*/
 
 	@Override
 	public Document transaction(Document request) throws CatalogServiceException {
-		//setCookie();
-		GenericClient genericClient =  ClientFactory.createClient(Protocol.valueOf(getClientId()), "http://www.sdisuite.de/soapServices/services/CSWDiscovery");
-		if(genericClient.getClass().isInstance(new SoapClient(""))){
-			SoapClient soapClient=(SoapClient)genericClient;
-			soapClient.setTranformerService(transformerService);
-			genericClient=soapClient;
-		}
-		setClient((PostClient) genericClient);
-		getClient().setEndpoint(super.getEndpoints().get("transaction"));
 		return doRequest(request);
 	}
-
-	private void setCookie() {
-		getClient().setEndpoint(super.getEndpoints().get("discovery"));
-		/*getClient().setRequestHeader("Cookie", "JSESSIONID=" + sessionId);*/
+	public void addRequestHeader(String name,String value)throws CatalogServiceException  {
+		if(getClient()==null){
+			new CatalogServiceException("Request header could not been set, because the client is not initialized");
+		}
+		getClient().addRequestHeader(name, value);
+	}
+	public void init(String endpoint){
+		GenericClient genericClient =  ClientFactory.createClient(Protocol.valueOf(getClientId()), endpoint);
+		if(genericClient.getClass().isInstance(new SoapClient(""))){
+			((SoapClient)genericClient).setTranformerService(transformerService);
+		}
+		setClient((PostClient) genericClient);
 	}
 }

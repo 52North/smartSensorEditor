@@ -65,7 +65,7 @@ public class SOSWebServiceIT {
 	SOSWebServiceDescriptionDAO sosWebServiceDAO;
 
 	private String sensorId = "http://www.52north.org/test/procedure/9";
-	private String serviceURL="http://localhost:8080/52n-sos-webapp_4.3.0/service";
+	private String serviceURL="http://localhost:8081/52n-sos-webapp_4.3.0/service";
 	private String endpoint = serviceURL+"/soap";
 	private String authorizationToken="test123";
 

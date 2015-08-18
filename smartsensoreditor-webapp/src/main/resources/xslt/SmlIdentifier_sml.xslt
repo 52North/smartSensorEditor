@@ -14,28 +14,14 @@
 	exclude-result-prefixes="gmd gco gml sml">
 	<!-- import base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
-
 	<xsl:template match="/*/gml:identifier" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	<xsl:template match="/*">
+	<xsl:template match="/*/gml:identifier">
 		<xsl:copy>
-			<gml:identifier codeSpace="uid">
+			 <xsl:attribute name="codeSpace">uniqueID</xsl:attribute>
 				<xsl:value-of select="$beanDoc/FileIdentifier/identifier" />
-			</gml:identifier>
-		 	<xsl:apply-templates select="gml:description" />
-			<xsl:apply-templates select="sml:keywords" />
-			<xsl:apply-templates select="sml:identification" />
-			<xsl:apply-templates select="sml:characteristics" />
-		<!-- 	<xsl:apply-templates select="sml:classification" />
-			<xsl:apply-templates select="sml:validTime" />
-			<xsl:apply-templates select="sml:capabilities" />
-			<xsl:apply-templates select="sml:contact" />
-			<xsl:apply-templates select="sml:position" />
-			<xsl:apply-templates select="sml:interfaces" />
-			<xsl:apply-templates select="sml:inputs" />
-			<xsl:apply-templates select="sml:outputs" />
-			<xsl:apply-templates select="sml:components" /> -->
 		</xsl:copy>
-	</xsl:template>
+ 	</xsl:template>
+
 </xsl:stylesheet>

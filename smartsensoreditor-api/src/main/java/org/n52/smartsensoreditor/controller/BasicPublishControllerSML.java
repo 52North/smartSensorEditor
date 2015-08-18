@@ -32,6 +32,7 @@ import de.conterra.smarteditor.beans.IConfigOptions;
 import de.conterra.smarteditor.beans.PublishBean;
 import de.conterra.smarteditor.beans.UserInfoBean;
 import de.conterra.smarteditor.clients.RequestFactory;
+import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.controller.BasicPublishController;
 import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
 import de.conterra.smarteditor.dao.AbstractCatalogService;
@@ -40,6 +41,8 @@ import de.conterra.smarteditor.dao.LockManager;
 import de.conterra.smarteditor.service.BackendManagerService;
 
 import org.apache.log4j.Logger;
+import org.n52.smartsensoreditor.beans.PublishBeanSML;
+import org.n52.smartsensoreditor.dao.SOSCatalogService;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -73,7 +76,7 @@ public class BasicPublishControllerSML extends BasicPublishController {
                                     HttpServletResponse response,
                                     Object command,
                                     BindException errors) throws Exception {
-    	PublishBean lBean = (PublishBean) command;
+    	PublishBeanSML lBean = (PublishBeanSML) command;
         Document doc = getBackendManager().mergeBackend();
         Document catalogRequest = null;
         if (getBackendManager().isUpdate()) {
@@ -83,6 +86,10 @@ public class BasicPublishControllerSML extends BasicPublishController {
             catalogRequest = getRequestFactory().createRequest("update", doc);
         } else {
             catalogRequest = getRequestFactory().createRequest("insert", doc);
+        }
+        if(getCatalogService().getClass().isInstance(new SOSCatalogService())){
+        	((SOSCatalogService)getCatalogService()).init(lBean.getServiceUrlSOS());
+        	((SOSCatalogService)getCatalogService()).addRequestHeader("Authorization", lBean.getServiceTokenSOS());
         }
         Document catalogResponse = getCatalogService().transaction(catalogRequest);
         Map<String, Object> lModel = new HashMap<String, Object>();
