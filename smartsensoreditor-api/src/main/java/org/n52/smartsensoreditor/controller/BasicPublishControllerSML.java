@@ -32,11 +32,13 @@ import de.conterra.smarteditor.beans.IConfigOptions;
 import de.conterra.smarteditor.beans.PublishBean;
 import de.conterra.smarteditor.beans.UserInfoBean;
 import de.conterra.smarteditor.clients.RequestFactory;
+import de.conterra.smarteditor.controller.BasicPublishController;
 import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
 import de.conterra.smarteditor.dao.AbstractCatalogService;
 import de.conterra.smarteditor.dao.CatalogServiceDAO;
 import de.conterra.smarteditor.dao.LockManager;
 import de.conterra.smarteditor.service.BackendManagerService;
+
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,6 +47,7 @@ import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,37 +55,9 @@ import java.util.Map;
  * This controller publishes a metadata document using the plain CSW-T interface
  * without any addition features (user id, locking, etc...)
  */
-public class BasicPublishControllerSML extends SimpleFormController {
+public class BasicPublishControllerSML extends BasicPublishController {
 
     protected static final Logger LOG = Logger.getLogger(BasicPublishControllerSML.class);
-
-    private BackendManagerService backendManager;
-    private AbstractCatalogService catalogService;
-    private RequestFactory requestFactory;
-
-    public RequestFactory getRequestFactory() {
-        return requestFactory;
-    }
-
-    public void setRequestFactory(RequestFactory requestFactory) {
-        this.requestFactory = requestFactory;
-    }
-    public BackendManagerService getBackendManager() {
-        return backendManager;
-    }
-
-    public void setBackendManager(BackendManagerService backendManager) {
-        this.backendManager = backendManager;
-    }
-
-    public AbstractCatalogService getCatalogService() {
-        return catalogService;
-    }
-
-    public void setCatalogService(AbstractCatalogService catalogService) {
-        this.catalogService = catalogService;
-    }
-
     /**
      * This is triggered when the form is submitted
      *
@@ -98,6 +73,7 @@ public class BasicPublishControllerSML extends SimpleFormController {
                                     HttpServletResponse response,
                                     Object command,
                                     BindException errors) throws Exception {
+    	PublishBean lBean = (PublishBean) command;
         Document doc = getBackendManager().mergeBackend();
         Document catalogRequest = null;
         if (getBackendManager().isUpdate()) {

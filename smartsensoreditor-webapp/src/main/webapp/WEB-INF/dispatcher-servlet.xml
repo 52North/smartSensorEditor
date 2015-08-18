@@ -40,9 +40,11 @@
 	<import resource="validator-definitions.xml" />
 	<import resource="service-definitions.xml" />
 
-    <context:component-scan base-package="de.conterra.smarteditor.controller,org.n52.smartsensoreditor.controller">
-    	<context:exclude-filter type="regex" expression="de\.conterra\.smarteditor\.controller\.StartEditorController"/>
-    </context:component-scan>
+	<context:component-scan
+		base-package="de.conterra.smarteditor.controller,org.n52.smartsensoreditor.controller">
+		<context:exclude-filter type="regex"
+			expression="de\.conterra\.smarteditor\.controller\.StartEditorController" />
+	</context:component-scan>
 
 	<bean name="samlInterceptor" class="de.conterra.smarteditor.interceptors.SamlInterceptor">
 		<property name="userInfo" ref="userInfoBean" />
@@ -87,7 +89,7 @@
 				<prop key="/levelNameController.do">levelNameController</prop>
 				<prop key="/saveLocal.do">saveLocalController</prop>
 				<prop key="/saveTemplate.do">saveTemplateController</prop>
-				<prop key="/publish.do">publishController</prop>
+				<prop key="/publish.do">basicPublishController</prop>
 				<prop key="/releaseId.do">releaseIdController</prop>
 			</props>
 		</property>
@@ -178,14 +180,24 @@
 		<property name="editorContext" ref="EditorContext" />
 	</bean>
 
-	<bean id="publishController" class="de.conterra.smarteditor.controller.PublishController">
+	<!-- <bean id="publishController" class="de.conterra.smarteditor.controller.PublishController"> 
+		<property name="backendManager" ref="backendSetupService" /> <property name="catalogService" 
+		ref="catalogServiceDAO" /> <property name="config" ref="configBean" /> <property 
+		name="lockManager" ref="lockingDAO" /> <property name="userInfo" ref="userInfoBean" 
+		/> <property name="commandName" value="publish" /> <property name="commandClass" 
+		value="org.n52.smartsensoreditor.beans.PublishBeanSML" /> <property name="formView" 
+		value="editor.publish" /> <property name="successView" value="editor.finished" 
+		/> </bean> -->
+
+	<bean id="basicPublishController"
+		class="org.n52.smartsensoreditor.controller.BasicPublishControllerSML">
 		<property name="backendManager" ref="backendSetupService" />
-		<property name="catalogService" ref="catalogServiceDAO" />
-		<property name="config" ref="configBean" />
-		<property name="lockManager" ref="lockingDAO" />
-		<property name="userInfo" ref="userInfoBean" />
+		<property name="catalogService" ref="SOSCatalogServiceDAO" />
+		<property name="requestFactory" ref="RequestFactory" />
+		<!-- <property name="userInfo" ref="userInfoBean" /> -->
 		<property name="commandName" value="publish" />
-		<property name="commandClass" value="org.n52.smartsensoreditor.beans.PublishBeanSML" />
+		<property name="commandClass"
+			value="org.n52.smartsensoreditor.beans.PublishBeanSML" />
 		<property name="formView" value="editor.publish" />
 		<property name="successView" value="editor.finished" />
 	</bean>
@@ -214,7 +226,7 @@
 		<property name="config" ref="configBean" />
 		<property name="backendService" ref="backendSetupService" />
 		<property name="workflowManager" ref="genericManager" />
-		<!-- SOS workflowManager SML-->
+		<!-- SOS workflowManager SML -->
 		<property name="workflowManagerSOS" ref="operationSOSManager" />
 		<property name="fileSystem" ref="fileSystemDAO" />
 		<property name="userInfo" ref="userInfoBean" />
@@ -224,7 +236,5 @@
 		<property name="formView" value="editor.main" />
 		<property name="successView" value="editor.publish" />
 	</bean>
-	<!--SML -->
-	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML" />
 
 </beans>

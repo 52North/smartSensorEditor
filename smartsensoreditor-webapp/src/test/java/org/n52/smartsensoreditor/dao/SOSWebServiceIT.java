@@ -92,7 +92,7 @@ public class SOSWebServiceIT {
 		
 		sosWebServiceDAO.setServiceType("SOS");
 	}
-
+	//Concept from de.conterra.smarteditor.clients.SoapClientTest
 	public void insertSensor() throws Exception {
 		URL url = getClass().getResource("/requests/insertTestSensorSoap.xml");
 		File xmlFile = new File(url.getPath());

@@ -53,8 +53,9 @@
 	<bean id="configBean" class="de.conterra.smarteditor.beans.SpringConfigBean">
 		<property name="cswEndpoints">
 			<map>
-				<entry key="discovery" value="${csw.discovery}" />
-				<entry key="transaction" value="${csw.manager}" />
+				<!-- <entry key="discovery" value="${csw.discovery}" /> <entry key="transaction" 
+					value="${csw.manager}" /> commented out because they are defined in the "SOSCatalogServiceDAO" 
+					Bean. See more down. SOS, SML -->
 			</map>
 		</property>
 		<property name="stylesheetImportDir" value="${import.xslt.dir}" />
@@ -137,6 +138,21 @@
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="manager" ref="genericManager" />
 	</bean>
+
+	<bean id="SOSCatalogServiceDAO" class="org.n52.smartsensoreditor.dao.SOSCatalogService">
+		<!-- <property name="config" ref="configBean" /> <property name="userInfo" 
+			ref="userInfoBean" /> <property name="manager" ref="genericManager" /> -->
+		<property name="endpoints">
+			<map>
+				<entry key="discovery" value="${csw.discovery}" />
+				<entry key="transaction" value="${csw.manager}" />
+			</map>
+		</property>
+		<property name="clientId" value="HTTP_SOAP" />
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
+	<!--This bean is needed for the SOSCatalogServiceDAO Bean, SML SOS -->
+<!-- 	<bean id="SoapClient" class="de.conterra.smarteditor.clients.SoapClient" /> -->
 
 	<bean id="fileSystemDAO" class="de.conterra.smarteditor.dao.FileSystemDAO">
 		<property name="dictionary" ref="dictionary" />
@@ -343,5 +359,17 @@
 		</tx:attributes>
 	</tx:advice>
 
+	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
+		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
+		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest -->
+	<bean id="RequestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+		<property name="availableRequests">
+			<map>
+				<entry key="insert" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="update" value="/requests/UpdateSOS_Request.xslt" />
+			</map>
+		</property>
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
 
 </beans>
