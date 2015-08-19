@@ -44,6 +44,7 @@ import de.conterra.smarteditor.service.BackendManagerService;
 
 import org.apache.log4j.Logger;
 import org.n52.smartsensoreditor.beans.PublishBeanSML;
+import org.n52.smartsensoreditor.cswclient.facades.TransactionResponseSOS;
 import org.n52.smartsensoreditor.dao.SOSCatalogService;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -108,7 +109,12 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		}
 		Document catalogResponse = getCatalogService().transaction(catalogRequest);
 		Map<String, Object> lModel = new HashMap<String, Object>();
-		lModel.put("response", new TransactionResponse(catalogResponse));
+		if(getBackendManager().getResourceType().equals("sensor")){
+			lModel.put("response", new TransactionResponseSOS(catalogResponse));
+		}else{
+			lModel.put("response", new TransactionResponse(catalogResponse));
+		}
+		
 		return new ModelAndView(getSuccessView(), lModel);
 	}
 }
