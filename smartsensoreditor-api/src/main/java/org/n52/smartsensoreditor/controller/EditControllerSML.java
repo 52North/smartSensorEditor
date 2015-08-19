@@ -82,7 +82,10 @@ public class EditControllerSML extends EditController {
 	public void setWorkflowManagerSOS(IWorkflowManager workflowManager) {
 		this.workflowManagerSOS = workflowManager;
 	}
-
+/**
+ * This method creates the model map for the selectStates.jsp. 
+ * The values which can be selected in the boxes are created here.
+ */
 	@Override
 	protected Map<String, Object> createModelMap(HttpServletRequest request) {
 		String status = getWorkflowManager().getStatus(

@@ -15,8 +15,7 @@
 					<sml:identifier>
 						<sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">
 							<sml:label>longName</sml:label>
-							<sml:value>52°North Initiative for Geospatial Open Source
-								Software GmbH (http://52north.org)
+							<sml:value>beforeUpdate
 							</sml:value>
 						</sml:Term>
 					</sml:identifier>

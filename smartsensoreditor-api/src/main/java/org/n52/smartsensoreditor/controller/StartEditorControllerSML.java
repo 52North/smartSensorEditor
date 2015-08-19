@@ -139,6 +139,8 @@ public class StartEditorControllerSML extends StartEditorController {
 				LOG.trace("Retrieved document from DAO: " + docString);
 			}
 			if (lDoc != null) {
+				getBackendService().setUpdate(true);
+				
 				getBackendService().initBackend(lDoc);
 				return new ModelAndView(getSuccessView());
 			}

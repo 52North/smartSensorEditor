@@ -12,12 +12,14 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:gco="http://www.isotc211.org/2005/gco"
             xmlns:gmd="http://www.isotc211.org/2005/gmd" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd">
-            <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
+            <swes:procedure>
+            <xsl:copy-of select="/*/gml:identifier/text()"/>
+            </swes:procedure>
             <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
             <swes:description>
                 <swes:SensorDescription>
                     <swes:data>
-                       <xsl:copy-of select="$sensorDescription"/>
+                       <xsl:copy-of select="."/>
                     </swes:data>
                 </swes:SensorDescription>
             </swes:description>

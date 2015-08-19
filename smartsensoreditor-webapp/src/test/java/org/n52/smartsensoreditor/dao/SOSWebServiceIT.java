@@ -52,6 +52,7 @@ import org.w3c.dom.Document;
 
 import de.conterra.smarteditor.clients.ClientFactory;
 import de.conterra.smarteditor.clients.Protocol;
+import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.dao.WebServiceDescriptionException;
 import de.conterra.smarteditor.service.XSLTTransformerService;
@@ -71,7 +72,8 @@ public class SOSWebServiceIT {
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
-
+    @Resource(name="RequestFactory")
+    private RequestFactory requestFactory;
 	@Before
 	public void before() throws Exception {
 		//Get from propertyFile
@@ -111,8 +113,9 @@ public class SOSWebServiceIT {
 		// System.out.println(s);
 	}
 
-	@Test
-	public void testTransformer() throws Exception {
+	
+	//@Test
+	public void testGetDescription() throws Exception {
 		String docString="";
 		try {
 		Document doc = sosWebServiceDAO.getDescription();
@@ -128,6 +131,46 @@ public class SOSWebServiceIT {
 		assertThat(docString, not(containsString("DescribeSensorResponse")));
 		assertThat(docString, containsString("sml:PhysicalSystem"));
 		assertThat(docString, containsString(sensorId));
+		
+	}
+	//Concept from de.conterra.smarteditor.clients.SoapClientTest
+		public void updateSensor() throws Exception {
+			URL url = getClass().getResource("/requests/updateTestSensorSoap.xml");
+			File xmlFile = new File(url.getPath());
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document testSensor;
+			testSensor = dBuilder.parse(xmlFile);
+			//Create Request
+			Document request=requestFactory.createRequest("update", testSensor);
+			// insert sensor post
+			SoapClient client = (SoapClient) ClientFactory.createClient(
+					Protocol.HTTP_SOAP, endpoint);
+			client.addRequestHeader("Authorization", authorizationToken);
+			client.setTranformerService(xsltTransformerService);
+			client.setPayload(DOMUtil.convertToString(request, true));
+
+			client.invoke(null);
+			// System.out.println(s);
+		}
+	@Test
+	public void testUpdateSensor() throws Exception {
+		String docString="";
+		try {
+		removeSensor();
+		} catch (Exception e) {	
+		}
+		//insert sensor and test the value which will be checked
+		insertSensor();
+		Document doc = sosWebServiceDAO.getDescription();
+		docString = DOMUtil.convertToString(doc, true);
+		assertThat(docString, containsString("beforeUpdate"));
+		updateSensor();
+		doc = sosWebServiceDAO.getDescription();
+		docString = DOMUtil.convertToString(doc, true);
+		assertThat(docString, not(containsString("beforeUpdate")));
+		assertThat(docString, containsString("Test_longName_Update"));
+		
 		
 	}
 

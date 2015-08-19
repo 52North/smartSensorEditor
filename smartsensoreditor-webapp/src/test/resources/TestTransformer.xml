@@ -31,6 +31,17 @@
 			</map>
 		</property>
 	</bean>
-	
+		<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
+		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
+		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest -->
+	<bean id="RequestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+		<property name="availableRequests">
+			<map>
+				<entry key="insert" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="update" value="/requests/UpdateSOS_Request.xslt" />
+			</map>
+		</property>
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
 </beans>
     
