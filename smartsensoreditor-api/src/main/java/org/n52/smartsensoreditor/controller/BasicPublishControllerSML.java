@@ -33,6 +33,8 @@ import de.conterra.smarteditor.beans.PublishBean;
 import de.conterra.smarteditor.beans.UserInfoBean;
 import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.clients.SoapClient;
+import de.conterra.smarteditor.common.workflow.GenericWorkflowManager;
+import de.conterra.smarteditor.common.workflow.IState;
 import de.conterra.smarteditor.controller.BasicPublishController;
 import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
 import de.conterra.smarteditor.dao.AbstractCatalogService;
@@ -60,40 +62,53 @@ import java.util.Map;
  */
 public class BasicPublishControllerSML extends BasicPublishController {
 
-    protected static final Logger LOG = Logger.getLogger(BasicPublishControllerSML.class);
-    /**
-     * This is triggered when the form is submitted
-     *
-     * @param request
-     * @param response
-     * @param command
-     * @param errors
-     * @return
-     * @throws Exception
-     */
-    @Override
-    protected ModelAndView onSubmit(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    Object command,
-                                    BindException errors) throws Exception {
-    	PublishBeanSML lBean = (PublishBeanSML) command;
-        Document doc = getBackendManager().mergeBackend();
-        Document catalogRequest = null;
-        if (getBackendManager().isUpdate()) {
-            // reset update
-            getBackendManager().setUpdate(false);
-            // create request
-            catalogRequest = getRequestFactory().createRequest("update", doc);
-        } else {
-            catalogRequest = getRequestFactory().createRequest("insert", doc);
-        }
-        if(getCatalogService().getClass().isInstance(new SOSCatalogService())){
-        	((SOSCatalogService)getCatalogService()).init(lBean.getServiceUrlSOS());
-        	((SOSCatalogService)getCatalogService()).addRequestHeader("Authorization", lBean.getServiceTokenSOS());
-        }
-        Document catalogResponse = getCatalogService().transaction(catalogRequest);
-        Map<String, Object> lModel = new HashMap<String, Object>();
-        lModel.put("response", new TransactionResponse(catalogResponse));
-        return new ModelAndView(getSuccessView(), lModel);
-    }
+	protected static final Logger LOG = Logger.getLogger(BasicPublishControllerSML.class);
+	
+	private GenericWorkflowManager operationSOSManager;
+	
+	
+	public GenericWorkflowManager getOperationSOSManager() {
+		return operationSOSManager;
+	}
+
+
+	public void setOperationSOSManager(GenericWorkflowManager operationSOSManager) {
+		this.operationSOSManager = operationSOSManager;
+	}
+
+
+	/**
+	 * This is triggered when the form is submitted
+	 *
+	 * @param request
+	 * @param response
+	 * @param command
+	 * @param errors
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	protected ModelAndView onSubmit(HttpServletRequest request,
+			HttpServletResponse response,
+			Object command,
+			BindException errors) throws Exception {
+		PublishBeanSML lBean = (PublishBeanSML) command;
+		Document doc = getBackendManager().mergeBackend();
+		Document catalogRequest = null;
+		//get the State using the selected operation in selectStates.jsp
+		IState selectedState=operationSOSManager.getState(lBean.getServiceOperationSOS(), request.getLocale());  
+		// reset update
+		getBackendManager().setUpdate(false);
+		// create request
+		catalogRequest = getRequestFactory().createRequest(selectedState.getProtectionLevel() , doc);
+
+		if(getCatalogService().getClass().isInstance(new SOSCatalogService())){
+			((SOSCatalogService)getCatalogService()).init(lBean.getServiceUrlSOS());
+			((SOSCatalogService)getCatalogService()).addRequestHeader("Authorization", lBean.getServiceTokenSOS());
+		}
+		Document catalogResponse = getCatalogService().transaction(catalogRequest);
+		Map<String, Object> lModel = new HashMap<String, Object>();
+		lModel.put("response", new TransactionResponse(catalogResponse));
+		return new ModelAndView(getSuccessView(), lModel);
+	}
 }

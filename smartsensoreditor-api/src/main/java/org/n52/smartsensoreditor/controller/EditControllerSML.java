@@ -70,17 +70,17 @@ public class EditControllerSML extends EditController {
 			.getLogger(EditControllerSML.class);
 
 
-	private IWorkflowManager workflowManagerSOS;
+	private IWorkflowManager operationSOSManager;
 
 	public EditControllerSML() {
 	}
 
-	public IWorkflowManager getWorkflowManagerSOS() {
-		return workflowManagerSOS;
+	public IWorkflowManager getOperationSOSManager() {
+		return operationSOSManager;
 	}
 
-	public void setWorkflowManagerSOS(IWorkflowManager workflowManager) {
-		this.workflowManagerSOS = workflowManager;
+	public void setOperationSOSManager(IWorkflowManager operationSOSManager) {
+		this.operationSOSManager = operationSOSManager;
 	}
 /**
  * This method creates the model map for the selectStates.jsp. 
@@ -102,9 +102,14 @@ public class EditControllerSML extends EditController {
 					.getDefaultState();
 			status = defaultState.getStateId();
 			// SOS operation
-			IState defaultOperationSOS = (IState) getWorkflowManagerSOS()
+			IState defaultOperationSOS = (IState) getOperationSOSManager()
 					.getDefaultState();
 			statusOperationSOS = defaultOperationSOS.getStateId();
+			//if the metadata set has the status update, then set this as default 
+			if(getBackendService().isUpdate()){
+			defaultOperationSOS=(IState) getOperationSOSManager().getState("update", request.getLocale());
+			statusOperationSOS = defaultOperationSOS.getStateId();
+			}
 		}
 		List<IState> stateList = getWorkflowManager().getStates(
 				getUserInfo().getTicket(), status, request.getLocale(), true);
@@ -116,17 +121,16 @@ public class EditControllerSML extends EditController {
 		concurrentHashMap.put("currentStateId", lState.getStateId());
 
 		// SOS OperationList
-		List<IState> stateListOperationSOS = getWorkflowManagerSOS().getStates(
+		List<IState> stateListOperationSOS = getOperationSOSManager().getStates(
 				getUserInfo().getTicket(), statusOperationSOS, request.getLocale(), true);
 		concurrentHashMap.put("operationsSOS", stateListOperationSOS);
-		IState lOperationsSOS = (IState) getWorkflowManagerSOS().getState(
+		IState lOperationsSOS = (IState) getOperationSOSManager().getState(
 				statusOperationSOS, request.getLocale());
 		concurrentHashMap.put("currentOperationSOSName", lOperationsSOS.getStateName());
 		concurrentHashMap.put("currentOperationSOSId", lOperationsSOS.getStateId());
         
 		concurrentHashMap.put("procedureIdSOS", getBackendService().getFileIdentifier()); //procedureId==smlIdentifier==<gml:identifier(unique identifier)
-		concurrentHashMap.put("serviceURLSOS", getBackendService().getFileIdentifier());
-		
+		concurrentHashMap.put("serviceURLSOS","");
 		return concurrentHashMap;
 	}
 

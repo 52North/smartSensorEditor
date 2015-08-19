@@ -198,6 +198,7 @@
 		<property name="commandName" value="publish" />
 		<property name="commandClass"
 			value="org.n52.smartsensoreditor.beans.PublishBeanSML" />
+		<property name="operationSOSManager" ref="operationSOSManager" />
 		<property name="formView" value="editor.publish" />
 		<property name="successView" value="editor.finished" />
 	</bean>
@@ -227,7 +228,7 @@
 		<property name="backendService" ref="backendSetupService" />
 		<property name="workflowManager" ref="genericManager" />
 		<!-- SOS workflowManager SML -->
-		<property name="workflowManagerSOS" ref="operationSOSManager" />
+		<property name="operationSOSManager" ref="operationSOSManager" />
 		<property name="fileSystem" ref="fileSystemDAO" />
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="commandName" value="updateMetadata" />
