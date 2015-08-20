@@ -56,6 +56,7 @@ public class TransactionResponseSOS extends TransactionResponse {
 	private String insertedProcedure;
 	private String updatedProcedure;
 	private String deletedProcedure;
+	private String error;
 
 	public TransactionResponseSOS() {
 		super(null);
@@ -69,15 +70,9 @@ public class TransactionResponseSOS extends TransactionResponse {
 	public TransactionResponseSOS(Document pDoc) {
 		super(pDoc);
 		//initialize the procedure ids
-		Object o = evaluateXPath("//swes:assignedProcedure", XPathConstants.NODE);
-		if(o!=null)
-			insertedProcedure=String.valueOf(((Element) o).getFirstChild().getNodeValue());
-		o = evaluateXPath("//swes:updatedProcedure", XPathConstants.NODE);
-		if(o!=null)
-			updatedProcedure=String.valueOf(((Element) o).getFirstChild().getNodeValue());
-		o = evaluateXPath("//swes:deletedProcedure", XPathConstants.NODE);
-		if(o!=null)
-			deletedProcedure=String.valueOf(((Element) o).getFirstChild().getNodeValue());
+		insertedProcedure=evaluateAsString("//swes:assignedProcedure");
+		updatedProcedure=evaluateAsString("//swes:updatedProcedure");
+        deletedProcedure=evaluateAsString("//swes:deletedProcedure");
 	}
 
 	/**
@@ -88,40 +83,45 @@ public class TransactionResponseSOS extends TransactionResponse {
 	@Override
 	public List getIdentifiers() {
 		List<String> lResult = new ArrayList<String>();
-		if (insertedProcedure!=null){
+		if (!insertedProcedure.equals("")){
 			//assigned Procedure
-			lResult.add("assigned Procedure: "+insertedProcedure);
+			lResult.add(insertedProcedure);
 			//assigned Offering
-			//initialize the procedure ids
-			Object o = evaluateXPath("//swes:assignedOffering", XPathConstants.NODE);
+			Element o = (Element)evaluateXPath("//swes:assignedOffering", XPathConstants.NODE);
 			if(o!=null){
-				String insertedOffering=String.valueOf(((Element) o).getFirstChild().getNodeValue());
-				lResult.add("assigned Offering: "+insertedOffering);
+				NodeList list=o.getChildNodes();
+				int length=list.getLength();
+				Node node;
+				for(int i=0; i<length;i++){
+					node=list.item(i);
+					String insertedOffering=node.getNodeValue();
+					lResult.add(insertedOffering);
+				}
 			}
-		}else if(updatedProcedure!=null){
-			lResult.add("updated Procedure: "+updatedProcedure);
-		}else if(deletedProcedure!=null){
-			lResult.add("deleted Procedure: "+deletedProcedure);
+		}else if(!updatedProcedure.equals("")){
+			lResult.add(updatedProcedure);
+		}else if(!deletedProcedure.equals("")){
+			lResult.add(deletedProcedure);
 		}
 		return lResult;
 	}
 
 	public String getRequestId() {
-		if (insertedProcedure!=null){
+		if (!insertedProcedure.equals("")){
 			return insertedProcedure;
 			
 			}
-	   if(updatedProcedure!=null){
+	   if(!updatedProcedure.equals("")){
 			return updatedProcedure;
 	   }
-		if(deletedProcedure!=null){
+		if(!deletedProcedure.equals("")){
 			return deletedProcedure;
 		}
 		return "";
 	}
 	@Override
 	public int getTotalInserted() {
-		if (insertedProcedure == null) {
+		if (insertedProcedure.equals("")) {
 			LOG.debug("'//swes:assignedProcedure' results to NULL. Returning 0 thus.");
 			return 0;
 		}
@@ -129,7 +129,7 @@ public class TransactionResponseSOS extends TransactionResponse {
 	}
 	@Override
 	public int getTotalUpdated() {
-		if (updatedProcedure == null) {
+		if (updatedProcedure.equals("")) {
 			LOG.debug("'//swes:updatedProcedure' results to NULL. Returning 0 thus.");
 			return 0;
 		}
@@ -137,11 +137,20 @@ public class TransactionResponseSOS extends TransactionResponse {
 	}
 	@Override
 	public int getTotalDeleted() {
-		if (deletedProcedure == null) {
+		if (deletedProcedure.equals("")) {
 			LOG.debug("'//swes:deletedProcedure' results to NULL. Returning 0 thus.");
 			return 0;
 		}
 		return 1;
+	}
+	
+	public String getError() {
+		error=evaluateAsString("//ows:ExceptionText");
+		if (error.equals("")) {
+			LOG.debug("'//ows:ExceptionText' results to NULL. Returning 0 thus.");
+			error="";
+		}
+		return error;
 	}
 	@Override
 	protected NamespaceContext getNamespaceContext() {

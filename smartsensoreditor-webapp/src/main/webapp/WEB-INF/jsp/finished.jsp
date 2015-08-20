@@ -58,7 +58,11 @@
         <b><fmt:message key="publish.finished.inserted"/></b>:<c:out value="${response.totalInserted}"/><br>
         <b><fmt:message key="publish.finished.deleted"/></b>:<c:out value="${response.totalDeleted}"/><br>
         <b><fmt:message key="publish.finished.updated"/></b>:<c:out value="${response.totalUpdated}"/><br>
-        </p>
+         <p>&nbsp;</p>
+         <c:if test="${response.error!=''}">
+        <b><fmt:message key="published.finished.error"/></b>:<br>
+        <c:out value="${response.error}"/><br>
+        </c:if>
         <p>&nbsp;</p>
         <ul id="subMenu">
             <li>

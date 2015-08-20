@@ -100,13 +100,21 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		IState selectedState=operationSOSManager.getState(lBean.getServiceOperationSOS(), request.getLocale());  
 		// reset update
 		getBackendManager().setUpdate(false);
-		// create request
-		catalogRequest = getRequestFactory().createRequest(selectedState.getProtectionLevel() , doc);
 
-		if(getCatalogService().getClass().isInstance(new SOSCatalogService())){
-			((SOSCatalogService)getCatalogService()).init(lBean.getServiceUrlSOS());
-			((SOSCatalogService)getCatalogService()).addRequestHeader("Authorization", lBean.getServiceTokenSOS());
+//		Map<String, String[]> parameters
+//		parameters.put("sosmetdata", new String[] {"b", "a"})
+		
+		// create request
+		catalogRequest = getRequestFactory().createRequest(selectedState.getStateId() , doc); //, parameters);
+		
+		// add additional fields for SOS publish
+		AbstractCatalogService service = getCatalogService();
+		if (service instanceof SOSCatalogService) {
+			SOSCatalogService sosService = (SOSCatalogService) service;
+			sosService.init(lBean.getServiceUrlSOS());
+			sosService.addRequestHeader("Authorization", lBean.getServiceTokenSOS());
 		}
+		
 		Document catalogResponse = getCatalogService().transaction(catalogRequest);
 		Map<String, Object> lModel = new HashMap<String, Object>();
 		if(getBackendManager().getResourceType().equals("sensor")){
