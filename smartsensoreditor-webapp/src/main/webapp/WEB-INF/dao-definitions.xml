@@ -1,34 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
-    Software GmbH
-
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License version 2 as published
-    by the Free Software Foundation.
-
-    If the program is linked with libraries which are licensed under one of
-    the following licenses, the combination of the program with the linked
-    library is not considered a "derivative work" of the program:
-
-        - Apache License, version 2.0
-        - Apache Software License, version 1.0
-        - GNU Lesser General Public License, version 3
-        - Mozilla Public License, versions 1.0, 1.1 and 2.0
-        - Common Development and Distribution License (CDDL), version 1.0
-
-    Therefore the distribution of the program linked with libraries licensed
-    under the aforementioned licenses, is permitted by the copyright holders
-    if the distribution is compliant with both the GNU General Public
-    License version 2 and the aforementioned licenses.
-
-    This program is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-    Public License for more details.
-
--->
+<!-- Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source 
+	Software GmbH This program is free software; you can redistribute it and/or 
+	modify it under the terms of the GNU General Public License version 2 as 
+	published by the Free Software Foundation. If the program is linked with 
+	libraries which are licensed under one of the following licenses, the combination 
+	of the program with the linked library is not considered a "derivative work" 
+	of the program: - Apache License, version 2.0 - Apache Software License, 
+	version 1.0 - GNU Lesser General Public License, version 3 - Mozilla Public 
+	License, versions 1.0, 1.1 and 2.0 - Common Development and Distribution 
+	License (CDDL), version 1.0 Therefore the distribution of the program linked 
+	with libraries licensed under the aforementioned licenses, is permitted by 
+	the copyright holders if the distribution is compliant with both the GNU 
+	General Public License version 2 and the aforementioned licenses. This program 
+	is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU General Public License for more details. -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -53,9 +39,8 @@
 	<bean id="configBean" class="de.conterra.smarteditor.beans.SpringConfigBean">
 		<property name="cswEndpoints">
 			<map>
-				<!-- <entry key="discovery" value="${csw.discovery}" /> <entry key="transaction" 
-					value="${csw.manager}" /> commented out because they are defined in the "SOSCatalogServiceDAO" 
-					Bean. See more down. SOS, SML -->
+				<entry key="discovery" value="${csw.discovery}" />
+				<entry key="transaction" value="${csw.manager}" />
 			</map>
 		</property>
 		<property name="stylesheetImportDir" value="${import.xslt.dir}" />
@@ -108,14 +93,16 @@
 		<property name="defaultState" ref="statePublished" />
 	</bean>
 	<!-- SOS operation states for the selectStates.jsp BEGIN -->
+	<!-- !!The stateId values need to be the same like the keys in availableRequests 
+		in the RequestFactory Bean. Therefore global properties are created in application.properties -->
 	<bean id="operationSOSUpdated" class="de.conterra.smarteditor.common.workflow.WorkflowState">
-		<property name="protectionLevel" value="update" />
-		<property name="stateId" value="update" />
+		<property name="protectionLevel" value="public" />
+		<property name="stateId" value="${updateOperation}" />
 		<property name="stateName" value="Update" />
 	</bean>
 	<bean id="operationSOSInserted" class="de.conterra.smarteditor.common.workflow.WorkflowState">
-		<property name="protectionLevel" value="insert" />
-		<property name="stateId" value="insert" />
+		<property name="protectionLevel" value="public" />
+		<property name="stateId" value="${insertOperation}" />
 		<property name="stateName" value="Insert" />
 	</bean>
 	<bean id="operationSOSManager"
@@ -128,6 +115,7 @@
 		</property>
 		<property name="defaultState" ref="operationSOSInserted" />
 	</bean>
+
 	<!-- SOS operation states for the selectStates.jsp END -->
 	<bean id="lockingDAO" class="de.conterra.smarteditor.dao.NulledLockManager" />
 
@@ -151,8 +139,6 @@
 		<property name="clientId" value="HTTP_SOAP" />
 		<property name="transformerService" ref="xsltTransformerService" />
 	</bean>
-	<!--This bean is needed for the SOSCatalogServiceDAO Bean, SML SOS -->
-<!-- 	<bean id="SoapClient" class="de.conterra.smarteditor.clients.SoapClient" /> -->
 
 	<bean id="fileSystemDAO" class="de.conterra.smarteditor.dao.FileSystemDAO">
 		<property name="dictionary" ref="dictionary" />
@@ -361,12 +347,15 @@
 
 	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
 		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
-		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest -->
+		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest !!The key in available 
+		Requests need to be the same like in operationSOSManager Bean the statedId 
+		in the referenced States. (See operationSOSUpdated stateID for example) Therefore 
+		global properties are created in application.properties. -->
 	<bean id="RequestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
 		<property name="availableRequests">
 			<map>
-				<entry key="insert" value="/requests/InsertSOS_Request.xslt" />
-				<entry key="update" value="/requests/UpdateSOS_Request.xslt" />
+				<entry key="${insertOperation}" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="${updateOperation}" value="/requests/UpdateSOS_Request.xslt" />
 			</map>
 		</property>
 		<property name="transformerService" ref="xsltTransformerService" />

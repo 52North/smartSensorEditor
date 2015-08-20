@@ -30,8 +30,8 @@
             </label>
         </td>
         <td>
-            <b><c:out value="${updateMetadata.storage['smlIdentifier'].id}"/></b>
-            <form:hidden path="storage['smlIdentifier'].id" id="smlIdentifier"/>
+        <form:input htmlEscape="true" path="storage['smlIdentifier'].id" size="100"
+                id="smlIdentifier"/><br>
         </td>
     </tr>
 </table>
