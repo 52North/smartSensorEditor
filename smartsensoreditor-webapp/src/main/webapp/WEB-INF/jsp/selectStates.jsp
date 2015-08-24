@@ -75,7 +75,7 @@ select, .ui-select-menu {
 			<fmt:message key="publish.SOSService.message" />
 		</p>
 		<form:form commandName="publish" action="publish.do" id="publishForm">
-			<%-- 	<div id="selectStatesDiv" style="margin-top: 25px">
+			<div id="selectStatesDiv" style="margin-top: 25px ;display:none">
 				<label for="selectStates" style="width: 30em; float: left;"><fmt:message
 						key="publish.states.title.sub" />:</label> <select name="stateId"
 					id="selectStates">
@@ -85,7 +85,7 @@ select, .ui-select-menu {
                         selected="selected"</c:if>>${state.stateName}</option>
 					</c:forEach>
 				</select>
-			</div> --%>
+			</div>
 
 			<div id="procedureIdSOSDiv" style="margin-top: 25px">
 				<label for="procedureIdSOS" style="width: 30em; float: left;"><fmt:message

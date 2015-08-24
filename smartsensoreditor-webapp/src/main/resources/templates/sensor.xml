@@ -77,22 +77,6 @@
                   <gml:endPosition indeterminatePosition="unknown"/>
                 </gml:TimePeriod>
               </sml:validTime>
-              <sml:capabilities name="offerings">
-                <sml:CapabilityList>
-                  <sml:capability name="offeringID">
-                    <swe:Text definition="http://www.opengis.net/def/offering/identifier">
-                      <swe:label>offeringID</swe:label>
-                      <swe:value>http://www.52north.org/test/offering/1234</swe:value>
-                    </swe:Text>
-                  </sml:capability>
-                   <sml:capability name="offeringID">
-                    <swe:Text definition="http://www.opengis.net/def/offering/identifier">
-                      <swe:label>offeringID</swe:label>
-                      <swe:value>http://www.52north.org/test/offering/9</swe:value>
-                    </swe:Text>
-                  </sml:capability>
-                </sml:CapabilityList>
-              </sml:capabilities>
               <sml:contacts>
                 <sml:ContactList>
                   <sml:contact>
