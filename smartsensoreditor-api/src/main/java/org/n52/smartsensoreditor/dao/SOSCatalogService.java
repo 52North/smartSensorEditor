@@ -81,6 +81,8 @@ public class SOSCatalogService extends GenericCatalogService {
 		}
 		getClient().addRequestHeader(name, value);
 	}
+	
+	
 	public void init(String endpoint){
 		GenericClient genericClient =  ClientFactory.createClient(Protocol.valueOf(getClientId()), endpoint);
 		if(genericClient.getClass().isInstance(new SoapClient(""))){

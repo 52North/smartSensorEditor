@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
@@ -28,7 +29,16 @@
     Public License for more details.
 
 -->
-<swes:DeleteSensor service="SOS" version="2.0.0"
-	xmlns:swes="http://www.opengis.net/swes/2.0">
-	<swes:procedure></swes:procedure>
-</swes:DeleteSensor>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map id="transformerFiles">
+		<entry key="sos"
+			value="${external.xslt.dir}/extractDataFromSOSDescribeSensorResponse.xsl" />
+	</util:map>
+
+</beans>

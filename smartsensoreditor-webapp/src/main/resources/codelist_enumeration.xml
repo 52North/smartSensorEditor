@@ -2267,8 +2267,9 @@
 	</list>
 	
 <!-- SML -->
+<!-- The values are needed in the class StartEditorControllerSML.java, -->
 	<list>
-		<identifier>SOS_Operations</identifier>
+		<identifier>SOS_Operations</identifier> 
 		<element>
 			<resourceKey>enumeration.SOS_Operation[0]</resourceKey>
 			<value>DescribeSensor</value><!-- Is needed for StartEditorControllerSML.java -->

@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source 
-	Software GmbH This program is free software; you can redistribute it and/or 
-	modify it under the terms of the GNU General Public License version 2 as 
-	published by the Free Software Foundation. If the program is linked with 
-	libraries which are licensed under one of the following licenses, the combination 
-	of the program with the linked library is not considered a "derivative work" 
-	of the program: - Apache License, version 2.0 - Apache Software License, 
-	version 1.0 - GNU Lesser General Public License, version 3 - Mozilla Public 
-	License, versions 1.0, 1.1 and 2.0 - Common Development and Distribution 
-	License (CDDL), version 1.0 Therefore the distribution of the program linked 
-	with libraries licensed under the aforementioned licenses, is permitted by 
-	the copyright holders if the distribution is compliant with both the GNU 
-	General Public License version 2 and the aforementioned licenses. This program 
-	is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-	PURPOSE. See the GNU General Public License for more details. -->
+<!--
+
+    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -97,12 +111,12 @@
 		in the RequestFactory Bean. Therefore global properties are created in application.properties -->
 	<bean id="operationSOSUpdated" class="de.conterra.smarteditor.common.workflow.WorkflowState">
 		<property name="protectionLevel" value="public" />
-		<property name="stateId" value="${updateOperation}" />
+		<property name="stateId" value="${updateSensorOperation}" />
 		<property name="stateName" value="Update" />
 	</bean>
 	<bean id="operationSOSInserted" class="de.conterra.smarteditor.common.workflow.WorkflowState">
 		<property name="protectionLevel" value="public" />
-		<property name="stateId" value="${insertOperation}" />
+		<property name="stateId" value="${insertSensorOperation}" />
 		<property name="stateName" value="Insert" />
 	</bean>
 	<bean id="operationSOSManager"
@@ -126,16 +140,12 @@
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="manager" ref="genericManager" />
 	</bean>
-
+<!-- SOS catalog service bean -->
 	<bean id="SOSCatalogServiceDAO" class="org.n52.smartsensoreditor.dao.SOSCatalogService">
 		<!-- <property name="config" ref="configBean" /> <property name="userInfo" 
 			ref="userInfoBean" /> <property name="manager" ref="genericManager" /> -->
-		<property name="endpoints">
-			<map>
-				<entry key="discovery" value="${csw.discovery}" />
-				<entry key="transaction" value="${csw.manager}" />
-			</map>
-		</property>
+		<!-- <property name="endpoints"> <map> <entry key="discovery" value="${csw.discovery}" 
+			/> <entry key="transaction" value="${csw.manager}" /> </map> </property> -->
 		<property name="clientId" value="HTTP_SOAP" />
 		<property name="transformerService" ref="xsltTransformerService" />
 	</bean>
@@ -203,8 +213,6 @@
 				<entry key="view" value-ref="inspireWebServiceDAO" />
 				<entry key="discovery" value-ref="inspireWebServiceDAO" />
 				<entry key="arcims" value-ref="arcimsWebServiceDAO" />
-				<entry key="sos" value-ref="sosWebServiceDescriptionDAO" />  <!-- needs to be the same like the keys in need to be the same like in src/main/resources/codelist_enumeration.xml, 
-					identifier: CT_ServiceTypeExt. -->
 			</map>
 		</property>
 	</bean>
@@ -212,16 +220,6 @@
 	<bean id="webServiceDAO" class="de.conterra.smarteditor.dao.WebServiceDescriptionDAO"
 		abstract="true">
 		<property name="xsltTransformer" ref="xsltTransformerService" />
-	</bean>
-	<bean id="sosWebServiceDescriptionDAO"
-		class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO"
-		parent="webServiceDAO">
-		<property name="transformerFiles">
-			<map>
-				<entry key="sos"
-					value="${external.xslt.dir}/extractDataFromSOSDescribeSensorResponse.xsl" />
-			</map>
-		</property>
 	</bean>
 	<bean id="ogcWebServiceDAO" class="de.conterra.smarteditor.dao.OgcWebServiceDescriptionDAO"
 		parent="webServiceDAO">
@@ -345,17 +343,19 @@
 		</tx:attributes>
 	</tx:advice>
 
-	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
+	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java and StartEditorControllerSML.java, 
 		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
-		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest !!The key in available 
-		Requests need to be the same like in operationSOSManager Bean the statedId 
+		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest 
+		!!The keys and ${insertSensorOperation} ${updateSensorOperation} in available Requests need to be the same like in operationSOSManager Bean the statedIdand 
 		in the referenced States. (See operationSOSUpdated stateID for example) Therefore 
 		global properties are created in application.properties. -->
-	<bean id="RequestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+	<bean id="requestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
 		<property name="availableRequests">
 			<map>
-				<entry key="${insertOperation}" value="/requests/InsertSOS_Request.xslt" />
-				<entry key="${updateOperation}" value="/requests/UpdateSOS_Request.xslt" />
+			    <entry key="get" value="/requests/GetSOS_Request.xslt" />
+				<entry key="${insertSensorOperation}" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="${updateSensorOperation}" value="/requests/UpdateSOS_Request.xslt" />
+				<entry key="delete" value="/requests/DeleteSOS_Request.xslt" />
 			</map>
 		</property>
 		<property name="transformerService" ref="xsltTransformerService" />

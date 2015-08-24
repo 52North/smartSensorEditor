@@ -39,6 +39,7 @@
 	<import resource="tiles-definitions.xml" />
 	<import resource="validator-definitions.xml" />
 	<import resource="service-definitions.xml" />
+	<import resource="util-config-definitions.xml" />
 
 	<context:component-scan
 		base-package="de.conterra.smarteditor.controller,org.n52.smartsensoreditor.controller">
@@ -193,7 +194,7 @@
 		class="org.n52.smartsensoreditor.controller.BasicPublishControllerSML">
 		<property name="backendManager" ref="backendSetupService" />
 		<property name="catalogService" ref="SOSCatalogServiceDAO" />
-		<property name="requestFactory" ref="RequestFactory" />
+		<property name="requestFactory" ref="requestFactory" />
 		<!-- <property name="userInfo" ref="userInfoBean" /> -->
 		<property name="commandName" value="publish" />
 		<property name="commandClass"
