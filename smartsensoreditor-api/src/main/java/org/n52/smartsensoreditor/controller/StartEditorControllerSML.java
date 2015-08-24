@@ -200,15 +200,12 @@ public class StartEditorControllerSML extends StartEditorController {
 				//Create Request and do transaction
 				catalogRequest = getRequestFactory().createRequest("get" , parameterMap);
 				
-				try {
-					catalogResponse = sosService.transaction(catalogRequest);//does it really throw an exception??
-				} catch (Exception e) {
-					pResult.rejectValue("serviceUrl", "errors.service.connect", new Object[]{e.getMessage()}, "Capabilities error");
-					return new ModelAndView(getFormView(), getModelMap());
-				}
+				catalogResponse = sosService.transaction(catalogRequest);//does it really throw an exception??
+				
 				if(catalogResponse==null){
 					Map<String, Object> lModel=getModelMap();
-					lModel.put("serverError","errors.service.connect");
+					lModel.put("response", new TransactionResponseSOS());
+					lModel.put("serverError","errors.service.connect.request");
 					lModel.put("sourcePage","startService");
 					return new ModelAndView(getFinishView(), lModel);
 				}
@@ -234,7 +231,8 @@ public class StartEditorControllerSML extends StartEditorController {
 				Map<String, Object> lModel = new HashMap<String, Object>();
 				lModel.put("sourcePage","startService");
 				if(catalogResponse==null){
-					lModel.put("serverError","errors.service.connect");
+					lModel.put("response", new TransactionResponseSOS());
+					lModel.put("serverError","errors.service.connect.request");
 					return new ModelAndView(getFinishView(), lModel);
 				}
 			

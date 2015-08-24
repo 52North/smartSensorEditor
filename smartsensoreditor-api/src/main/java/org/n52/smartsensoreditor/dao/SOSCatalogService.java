@@ -75,6 +75,7 @@ public class SOSCatalogService extends GenericCatalogService {
 	public Document transaction(Document request) throws CatalogServiceException {
 		return doRequest(request);
 	}
+	
 	public void addRequestHeader(String name,String value)throws CatalogServiceException  {
 		if(getClient()==null){
 			new CatalogServiceException("Request header could not been set, because the client is not initialized");
@@ -85,7 +86,7 @@ public class SOSCatalogService extends GenericCatalogService {
 	
 	public void init(String endpoint){
 		GenericClient genericClient =  ClientFactory.createClient(Protocol.valueOf(getClientId()), endpoint);
-		if(genericClient.getClass().isInstance(new SoapClient(""))){
+		if(genericClient instanceof SoapClient){
 			((SoapClient)genericClient).setTranformerService(transformerService);
 		}
 		setClient((PostClient) genericClient);

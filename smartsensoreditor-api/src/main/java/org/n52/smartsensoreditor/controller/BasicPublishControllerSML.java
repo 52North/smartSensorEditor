@@ -119,7 +119,8 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		Map<String, Object> lModel = new HashMap<String, Object>();
 		lModel.put("sourcePage","publish");
 		if(catalogResponse==null){
-			lModel.put("serverError","errors.service.connect");
+			lModel.put("response", new TransactionResponseSOS());
+			lModel.put("serverError","errors.service.connect.request");
 			return new ModelAndView(getSuccessView(), lModel);
 		}
 		if(getBackendManager().getResourceType().equals("sensor")){
