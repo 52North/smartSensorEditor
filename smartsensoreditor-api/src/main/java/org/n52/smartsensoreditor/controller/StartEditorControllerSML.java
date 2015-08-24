@@ -201,10 +201,16 @@ public class StartEditorControllerSML extends StartEditorController {
 				catalogRequest = getRequestFactory().createRequest("get" , parameterMap);
 				
 				try {
-					catalogResponse = sosService.transaction(catalogRequest);
+					catalogResponse = sosService.transaction(catalogRequest);//does it really throw an exception??
 				} catch (Exception e) {
 					pResult.rejectValue("serviceUrl", "errors.service.connect", new Object[]{e.getMessage()}, "Capabilities error");
 					return new ModelAndView(getFormView(), getModelMap());
+				}
+				if(catalogResponse==null){
+					Map<String, Object> lModel=getModelMap();
+					lModel.put("serverError","errors.service.connect");
+					lModel.put("sourcePage","startService");
+					return new ModelAndView(getFinishView(), lModel);
 				}
 				//For Transformation
 				Document sensorML = DOMUtil.newDocument(true);
@@ -216,7 +222,8 @@ public class StartEditorControllerSML extends StartEditorController {
 				// transform
 				getXsltTransformer().transform(source, result);
 				getBackendService().initBackend(sensorML);
-
+				
+				getBackendService().setUpdate(true);
 				return new ModelAndView(getSuccessView());
 
 			}
@@ -225,9 +232,13 @@ public class StartEditorControllerSML extends StartEditorController {
 				catalogRequest = getRequestFactory().createRequest("delete" , parameterMap);
 				catalogResponse = sosService.transaction(catalogRequest);
 				Map<String, Object> lModel = new HashMap<String, Object>();
+				lModel.put("sourcePage","startService");
+				if(catalogResponse==null){
+					lModel.put("serverError","errors.service.connect");
+					return new ModelAndView(getFinishView(), lModel);
+				}
 			
 				lModel.put("response", new TransactionResponseSOS(catalogResponse));
-				
 				return new ModelAndView(getFinishView(), lModel);
 			}
 		}else{

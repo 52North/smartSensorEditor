@@ -152,6 +152,10 @@ public class TransactionResponseSOS extends TransactionResponse {
 		}
 		return error;
 	}
+	public void setError(String error){
+		this.error=error;
+	}
+	
 	@Override
 	protected NamespaceContext getNamespaceContext() {
 		return cswContextSOS;

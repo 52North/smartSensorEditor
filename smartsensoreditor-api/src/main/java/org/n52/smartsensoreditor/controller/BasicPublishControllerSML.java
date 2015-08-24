@@ -100,7 +100,7 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		IState selectedState=operationSOSManager.getState(lBean.getServiceOperationSOS(), request.getLocale());  
 		// reset update
 		getBackendManager().setUpdate(false);
-
+		
 //		Map<String, String[]> parameters
 //		parameters.put("sosmetdata", new String[] {"b", "a"})
 		
@@ -117,6 +117,11 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		
 		Document catalogResponse = getCatalogService().transaction(catalogRequest);
 		Map<String, Object> lModel = new HashMap<String, Object>();
+		lModel.put("sourcePage","publish");
+		if(catalogResponse==null){
+			lModel.put("serverError","errors.service.connect");
+			return new ModelAndView(getSuccessView(), lModel);
+		}
 		if(getBackendManager().getResourceType().equals("sensor")){
 			lModel.put("response", new TransactionResponseSOS(catalogResponse));
 		}else{
