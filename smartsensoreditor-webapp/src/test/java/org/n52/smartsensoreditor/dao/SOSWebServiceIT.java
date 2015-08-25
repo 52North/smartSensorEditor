@@ -36,14 +36,21 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -62,18 +69,26 @@ import de.conterra.smarteditor.util.DOMUtil;
 @ContextConfiguration(locations = "/TestTransformer.xml")
 public class SOSWebServiceIT {
 
-	@Resource(name = "sosWebServiceDAO")
-	SOSWebServiceDescriptionDAO sosWebServiceDAO;
-
-	private String sensorId = "http://www.52north.org/test/procedure/9";
-	private String serviceURL="http://localhost:8081/52n-sos-webapp_4.3.0/service";
-	private String endpoint = serviceURL+"/soap";
-	private String authorizationToken="test123";
+	@Resource(name = "SOSCatalogServiceDAO")
+	SOSCatalogService sosWebServiceDAO;
 
 	@Resource(name = "xsltTransformerService")
 	private XSLTTransformerService xsltTransformerService;
-    @Resource(name="RequestFactory")
-    private RequestFactory requestFactory;
+
+	@Resource(name="requestFactory")
+	private RequestFactory requestFactory;
+
+	@Resource(name = "xsltTransformerService")
+	private XSLTTransformerService xsltTransformer;
+
+	@Resource(name="transformerFiles" )
+	private Map<String, String> transformerFiles;
+
+	private String sensorId = "http://www.52north.org/test/procedure/9";
+	private String serviceURL="http://localhost:8081/52n-sos-webapp/service";
+	private String endpoint = serviceURL+"/soap";
+	private String authorizationToken="test123";
+	Map parameterMap =null;
 	@Before
 	public void before() throws Exception {
 		//Get from propertyFile
@@ -88,111 +103,178 @@ public class SOSWebServiceIT {
 		if(properties.getProperty("IT_authorizationToken")!=null){
 			authorizationToken=properties.getProperty("IT_authorizationToken");
 		}
+
+		sosWebServiceDAO.init(endpoint);
+
+		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
+		parameterMap = new HashMap();
+		parameterMap.put("procedureId", sensorId);
+	}
+	/**
+	 * Extracts SensorML from the Soap message
+	 */
+	private Document transform(Document response){
+		//For Transformation
+		Document sensorML = DOMUtil.newDocument(true);
+		Source source = new DOMSource(response);
+		Result result = new DOMResult(sensorML);
+
+		String transformerFilePath=transformerFiles.get("sos");
+		xsltTransformer.setRulesetSystemID(transformerFilePath);
+		// transform
+		xsltTransformer.transform(source, result);
+		return sensorML;
+	}
+	public String getSensor() throws Exception{
+		sosWebServiceDAO.init(endpoint);
+
+		Document catalogRequest = requestFactory.createRequest("get" , parameterMap);
+		Document catalogResponse = sosWebServiceDAO.transaction(catalogRequest);
 		
-		sosWebServiceDAO.setUrl(serviceURL);
-		sosWebServiceDAO.setServiceProcedureIDForSOS(sensorId);
+		if(catalogResponse==null) {
+			throw new Exception();
+		}
 		
-		sosWebServiceDAO.setServiceType("SOS");
+		//Extract the sensorML from the Soap message
+		Document sensorML=transform(catalogResponse);
+		String docString = DOMUtil.convertToString(sensorML, true);
+	
+		return docString;
 	}
 	//Concept from de.conterra.smarteditor.clients.SoapClientTest
-	public void insertSensor() throws Exception {
+	public String insertSensor() throws Exception {
+		sosWebServiceDAO.init(endpoint);
+
+		//get the test sensor data
 		URL url = getClass().getResource("/requests/insertTestSensorSoap.xml");
 		File xmlFile = new File(url.getPath());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document request;
 		request = dBuilder.parse(xmlFile);
-		// insert sensor post
-		SoapClient client = (SoapClient) ClientFactory.createClient(
-				Protocol.HTTP_SOAP, endpoint);
-		client.addRequestHeader("Authorization", authorizationToken);
-		client.setTranformerService(xsltTransformerService);
-		client.setPayload(DOMUtil.convertToString(request, true));
+		
+		//create Request
+		request=requestFactory.createRequest("insert", request);
+		
+		// insert sensor 
+		Document catalogResponse =sosWebServiceDAO.transaction(request);
+		
+		if(catalogResponse==null) {
+			throw new Exception();
+		}
+		String docString = DOMUtil.convertToString(catalogResponse, true);
 
-		client.invoke(null);
-		// System.out.println(s);
+		return docString;
+
+	}
+	//Concept from de.conterra.smarteditor.clients.SoapClientTest
+	public String updateSensor() throws Exception {
+		sosWebServiceDAO.init(endpoint);
+
+		//get the test sensor data
+		URL url = getClass().getResource("/requests/updateTestSensorSoap.xml");
+		File xmlFile = new File(url.getPath());
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document testSensor;
+		testSensor = dBuilder.parse(xmlFile);
+		
+		//Create Request
+		Document request=requestFactory.createRequest("update", testSensor);
+		
+		// update sensor
+		Document catalogResponse =sosWebServiceDAO.transaction(request);
+
+		if(catalogResponse==null) {
+			throw new Exception();
+		}
+		//Extract the SensorML from the Soap message
+		Document sensorML=transform(catalogResponse);
+		String docString = DOMUtil.convertToString(sensorML, true);
+
+		return docString;
+
 	}
 
-	
-	//@Test
+	public String deleteSensor() throws Exception{
+		String docString="";
+		sosWebServiceDAO.init(endpoint);
+        //create Request and send to SOS
+		Document catalogRequest = requestFactory.createRequest("delete" , parameterMap);
+		Document catalogResponse = sosWebServiceDAO.transaction(catalogRequest);
+		
+		if(catalogResponse==null) {
+			throw new Exception();
+		}
+		docString = DOMUtil.convertToString(catalogResponse, true);
+		return docString;
+		
+	}
+	@Test
 	public void testGetDescription() throws Exception {
 		String docString="";
 		try {
-		Document doc = sosWebServiceDAO.getDescription();
-	    docString = DOMUtil.convertToString(doc, true);
-		
+			docString=getSensor();
 		} catch (Exception e) {
-			if(e.toString().contains("is invalid")){
-				insertSensor();
-				Document doc = sosWebServiceDAO.getDescription();
-				docString = DOMUtil.convertToString(doc, true);
-			}
+			insertSensor();
+			docString=getSensor();
 		}
+
 		assertThat(docString, not(containsString("DescribeSensorResponse")));
 		assertThat(docString, containsString("sml:PhysicalSystem"));
 		assertThat(docString, containsString(sensorId));
-		
-	}
-	//Concept from de.conterra.smarteditor.clients.SoapClientTest
-		public void updateSensor() throws Exception {
-			URL url = getClass().getResource("/requests/updateTestSensorSoap.xml");
-			File xmlFile = new File(url.getPath());
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document testSensor;
-			testSensor = dBuilder.parse(xmlFile);
-			//Create Request
-			Document request=requestFactory.createRequest("update", testSensor);
-			// insert sensor post
-			SoapClient client = (SoapClient) ClientFactory.createClient(
-					Protocol.HTTP_SOAP, endpoint);
-			client.addRequestHeader("Authorization", authorizationToken);
-			client.setTranformerService(xsltTransformerService);
-			client.setPayload(DOMUtil.convertToString(request, true));
 
-			client.invoke(null);
-			// System.out.println(s);
+	}
+	@Test
+	public void testInsertSensor() throws Exception {
+		String docString="";
+		try {
+			deleteSensor();
+		} catch (Exception e) {	
 		}
+		//insert sensor and test if the data were inserted
+		insertSensor();
+		docString= getSensor();
+		assertThat(docString, containsString("beforeUpdate"));
+	}
+
 	@Test
 	public void testUpdateSensor() throws Exception {
 		String docString="";
 		try {
-		removeSensor();
+			deleteSensor();
 		} catch (Exception e) {	
 		}
 		//insert sensor and test the value which will be checked
 		insertSensor();
-		Document doc = sosWebServiceDAO.getDescription();
-		docString = DOMUtil.convertToString(doc, true);
+		docString= getSensor();
 		assertThat(docString, containsString("beforeUpdate"));
+
+		//update the sensor data and check if the values were updated
 		updateSensor();
-		doc = sosWebServiceDAO.getDescription();
-		docString = DOMUtil.convertToString(doc, true);
+		docString= getSensor();
 		assertThat(docString, not(containsString("beforeUpdate")));
 		assertThat(docString, containsString("Test_longName_Update"));
-		
-		
+	}
+	@Test
+	public void testDeleteSensor() throws Exception {
+		String docString="";
+		try {
+			docString=deleteSensor();
+		} catch (Exception e) {
+			insertSensor();
+			docString=deleteSensor();
+		}
+	
+		assertThat(docString, containsString("swes:deletedProcedure"));
+		assertThat(docString, containsString("http://www.52north.org/test/procedure/9"));
 	}
 
-	//Concept from de.conterra.smarteditor.clients.SoapClientTest
-	public void removeSensor() throws Exception {
-		URL url = getClass().getResource("/requests/deleteTestSensorSoap.xml");
-		File xmlFile = new File(url.getPath());
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document request;
-		request = dBuilder.parse(xmlFile);// insert sensor post
-		SoapClient client = (SoapClient) ClientFactory.createClient(
-				Protocol.HTTP_SOAP, endpoint);
-		client.addRequestHeader("Authorization", authorizationToken);
-		client.setTranformerService(xsltTransformerService);
-		//System.out.println("String:"+DOMUtil.convertToString(request, true));
-		client.setPayload(DOMUtil.convertToString(request, true));
-		client.invoke(null);
-	    
-	}
 	@After
-    public void finish() throws Exception{
-    	removeSensor();
-    }
+	public void finish(){
+		try {
+			deleteSensor();
+		} catch (Exception e) {
+		}
+	}
 }

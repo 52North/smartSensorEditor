@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
         http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-	<bean id="webServiceDAO" class="de.conterra.smarteditor.dao.WebServiceDescriptionDAO"
-		abstract="true">
-		<property name="xsltTransformer" ref="xsltTransformerService" />
-	</bean>
 	<bean id="xsltTransformerService" class="de.conterra.smarteditor.service.XSLTTransformerService"
 		init-method="init">
 		<property name="transformerFactoryClassName" value="net.sf.saxon.TransformerFactoryImpl" />
@@ -21,27 +18,30 @@
 			</map>
 		</property>
 	</bean>
-	<bean id="sosWebServiceDAO"
-		class="org.n52.smartsensoreditor.dao.SOSWebServiceDescriptionDAO"
-		parent="webServiceDAO">
-		<property name="transformerFiles">
-			<map>
-				<entry key="sos"
-					value="/internal/external/extractDataFromSOSDescribeSensorResponse.xsl" />
-			</map>
-		</property>
+	<bean id="SOSCatalogServiceDAO" class="org.n52.smartsensoreditor.dao.SOSCatalogService">
+		<property name="clientId" value="HTTP_SOAP" />
+		<property name="transformerService" ref="xsltTransformerService" />
 	</bean>
-		<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
+
+
+	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java, 
 		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
 		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest -->
-	<bean id="RequestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+	<bean id="requestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
 		<property name="availableRequests">
 			<map>
+				<entry key="get" value="/requests/GetSOS_Request.xslt" />
 				<entry key="insert" value="/requests/InsertSOS_Request.xslt" />
 				<entry key="update" value="/requests/UpdateSOS_Request.xslt" />
+				<entry key="delete" value="/requests/DeleteSOS_Request.xslt" />
 			</map>
 		</property>
 		<property name="transformerService" ref="xsltTransformerService" />
 	</bean>
+	<util:map id="transformerFiles">
+		<entry key="sos"
+			value="/internal/external/extractDataFromSOSDescribeSensorResponse.xsl" />
+	</util:map>
+
 </beans>
     

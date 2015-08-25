@@ -1,4 +1,0 @@
-<swes:DeleteSensor service="SOS" version="2.0.0"
-	xmlns:swes="http://www.opengis.net/swes/2.0">
-	<swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
-</swes:DeleteSensor>
