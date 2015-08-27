@@ -55,13 +55,26 @@ select, .ui-select-menu {
 			style : 'popup',
 			width : 300
 		});
-		$('#serviceURLSOS,#serviceTokenSOS').addClass("ui-corner-all");
-		$('#serviceURLSOS,#serviceTokenSOS').addClass("ui-selectmenu");
+		$('#serviceURLSOS,#serviceTokenSOS,#swesObservableProperties,#SOSObservationTypes,#SOSFeatureOfInterestTypes').addClass("ui-corner-all");
+		$('#serviceURLSOS,#serviceTokenSOS,#swesObservableProperties,#SOSObservationTypes,#SOSFeatureOfInterestTypes').addClass("ui-selectmenu");
 		$('#serviceURLSOS,#serviceTokenSOS').css("width", "300");
+		$('#swesObservableProperties,#SOSObservationTypes,#SOSFeatureOfInterestTypes').css("width", "500");
+		$('#swesObservableProperties,#SOSObservationTypes,#SOSFeatureOfInterestTypes').css("height", "100");
 		$("#publishFormButton").click(function() {
 			$("#publishForm").submit();
 		});
+		$("#selectOperationSOS").on("selectmenuchange",function(event,ui) {
+			if (ui.value == 'insert') {
+				$('#swesObservablePropertiesDiv,#SOSObservationTypesDiv,#SOSFeatureOfInterestTypesDiv').show();
+			} else {
+				$('#swesObservablePropertiesDiv,#SOSObservationTypesDiv,#SOSFeatureOfInterestTypesDiv').hide();
+			}
+		});
+		if($("#selectOperationSOS").attr("value")!="insert"){
+			$('#swesObservablePropertiesDiv,#SOSObservationTypesDiv,#SOSFeatureOfInterestTypesDiv').hide();
+			}
 	});
+
 </script>
 <div class="container">
 	<fieldset>
@@ -119,7 +132,25 @@ select, .ui-select-menu {
 					name="serviceUrlSOS" id="serviceURLSOS"
 					value="${stateModel.serviceURLSOS}" />
 			</div>
-
+          
+          <br>
+			<div id="swesObservablePropertiesDiv" style="margin-top: 25px">
+				<label for="swesObservableProperties" style="width: 30em; float: left;"><fmt:message
+						key="element.swesObservableProperties.label" />:</label> <textarea
+					name="swesObservableProperties" id="swesObservableProperties"></textarea>
+			</div>
+			<br>
+			<div id="SOSObservationTypesDiv" style="margin-top: 25px">
+				<label for="SOSObservationTypes" style="width: 30em; float: left;"><fmt:message
+						key="element.SOSObservationTypes.label" />:</label> <textarea
+					name="sosObservationTypes" id="SOSObservationTypes"></textarea>
+			</div>
+			<br>
+			<div id="SOSFeatureOfInterestTypesDiv" style="margin-top: 25px">
+				<label for="SOSFeatureOfInterestTypes" style="width: 30em; float: left;"><fmt:message
+						key="element.SOSFeatureOfInterestTypes.label" />:</label> <textarea
+					name="sosFeatureOfInterestTypes" id="SOSFeatureOfInterestTypes"></textarea>
+			</div>
 			<div id="stateButtons" style="margin-top: 25px">
 				<a class="button" href="#" id="publishFormButton"> <fmt:message
 						key="publish.submit" />

@@ -41,6 +41,7 @@ import de.conterra.smarteditor.dao.AbstractCatalogService;
 import de.conterra.smarteditor.dao.CatalogServiceDAO;
 import de.conterra.smarteditor.dao.LockManager;
 import de.conterra.smarteditor.service.BackendManagerService;
+import de.conterra.smarteditor.util.DOMUtil;
 
 import org.apache.log4j.Logger;
 import org.n52.smartsensoreditor.beans.PublishBeanSML;
@@ -93,6 +94,7 @@ public class BasicPublishControllerSML extends BasicPublishController {
 			HttpServletResponse response,
 			Object command,
 			BindException errors) throws Exception {
+		
 		PublishBeanSML lBean = (PublishBeanSML) command;
 		Document doc = getBackendManager().mergeBackend();
 		Document catalogRequest = null;
@@ -101,11 +103,19 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		// reset update
 		getBackendManager().setUpdate(false);
 		
-//		Map<String, String[]> parameters
-//		parameters.put("sosmetdata", new String[] {"b", "a"})
+        Map<String, Object> parameterMap=new  HashMap<String, Object>();
+        String [] swesObservablePropertyList=toList(lBean.getSwesObservableProperties());
+		parameterMap.put("swesObservablePropertyList",swesObservablePropertyList);
+		
+		 String [] sosObservationTypeList=toList(lBean.getSosObservationTypes());
+		 parameterMap.put("sosObservationTypeList",sosObservationTypeList);
+		 
+		 String [] sosFeatureOfInterestTypeList=toList(lBean.getSosFeatureOfInterestTypes());
+		 parameterMap.put("sosFeatureOfInterestTypeList",sosFeatureOfInterestTypeList);
 		
 		// create request
-		catalogRequest = getRequestFactory().createRequest(selectedState.getStateId() , doc); //, parameters);
+		catalogRequest = getRequestFactory().createRequest(selectedState.getStateId() , doc, parameterMap);
+		LOG.debug("catalog request:"+"\n"+DOMUtil.convertToString(catalogRequest,true));
 		
 		// add additional fields for SOS publish
 		AbstractCatalogService service = getCatalogService();
@@ -116,13 +126,16 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		}
 		
 		Document catalogResponse = getCatalogService().transaction(catalogRequest);
+		
 		Map<String, Object> lModel = new HashMap<String, Object>();
 		lModel.put("sourcePage","publish");
+		
 		if(catalogResponse==null){
 			lModel.put("response", new TransactionResponseSOS());
 			lModel.put("serverError","errors.service.connect.request");
 			return new ModelAndView(getSuccessView(), lModel);
 		}
+		
 		if(getBackendManager().getResourceType().equals("sensor")){
 			lModel.put("response", new TransactionResponseSOS(catalogResponse));
 		}else{
@@ -130,5 +143,10 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		}
 		
 		return new ModelAndView(getSuccessView(), lModel);
+	}
+	private String[] toList(String values){
+		  values= values.replaceAll("\\s", "");
+	      String[] list=values.split(",");
+	      return list;
 	}
 }

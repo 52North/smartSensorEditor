@@ -1,5 +1,8 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ogc="http://www.opengis.net/ogc">
     <xsl:output method="xml" indent="yes" encoding="UTF-8" omit-xml-declaration="no"/>
+    <xsl:param name="swesObservablePropertyList" />
+    <xsl:param name="sosObservationTypeList"/>
+    <xsl:param name="sosFeatureOfInterestTypeList"/>
     <xsl:template match="/">
         <swes:InsertSensor service="SOS" version="2.0.0"
             xmlns:swes="http://www.opengis.net/swes/2.0"
@@ -16,24 +19,23 @@
                <xsl:copy-of select="."/>
             </swes:procedureDescription>
             <!-- multiple values possible -->
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
-            <swes:observableProperty>http://www.52north.org/test/observableProperty/9_7</swes:observableProperty>
+            <xsl:for-each select="$swesObservablePropertyList">
+				 <swes:observableProperty>
+				 		<xsl:value-of select="." />
+				 </swes:observableProperty>
+			</xsl:for-each>
             <swes:metadata>
                 <sos:SosInsertionMetadata>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
-                    <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
-                    <!-- multiple values possible -->
-                    <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+                  <xsl:for-each select="$sosObservationTypeList">
+				 <sos:observationType>
+				 		<xsl:value-of select="." />
+				 </sos:observationType>
+			     </xsl:for-each>
+			        <xsl:for-each select="$sosFeatureOfInterestTypeList">
+				 <sos:featureOfInterestType>
+				 		<xsl:value-of select="." />
+				 </sos:featureOfInterestType>
+			     </xsl:for-each>
                 </sos:SosInsertionMetadata>
             </swes:metadata>
         </swes:InsertSensor>

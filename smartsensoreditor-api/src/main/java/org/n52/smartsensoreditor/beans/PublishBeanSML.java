@@ -41,6 +41,9 @@ public class PublishBeanSML extends PublishBean {
 	private String mServiceTokenSOS;
 	private String mProcedureIdSOS;
 	private String mServiceOperationSOS;
+	private String mSwesObservableProperties;
+	private String mSOSObservationTypes;
+	private String mSOSFeatureOfInterestTypes;
 	
 	public String getServiceUrlSOS() {
 		return mServiceUrlSOS;
@@ -67,5 +70,23 @@ public class PublishBeanSML extends PublishBean {
 		this.mServiceOperationSOS = mServiceOperationSOS;
 	}
 
+	public String getSwesObservableProperties() {
+		return mSwesObservableProperties;
+	}
+	public void setSwesObservableProperties(String mSwesObservableProperties) {
+		this.mSwesObservableProperties = mSwesObservableProperties;
+	}
+	public String getSosObservationTypes() {
+		return mSOSObservationTypes;
+	}
+	public void setSosObservationTypes(String sosObservationTypes) {
+		this.mSOSObservationTypes = sosObservationTypes;
+	}
+	public String getSosFeatureOfInterestTypes() {
+		return mSOSFeatureOfInterestTypes;
+	}
+	public void setSosFeatureOfInterestTypes(String sosFeatureOfInterestTypes) {
+		this.mSOSFeatureOfInterestTypes = sosFeatureOfInterestTypes;
+	}
 
 }
