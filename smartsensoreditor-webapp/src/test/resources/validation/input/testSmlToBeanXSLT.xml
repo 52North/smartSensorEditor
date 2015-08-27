@@ -60,6 +60,55 @@
          </sml:identifier>
       </sml:IdentifierList>
    </sml:identification>
+     <!--Classifier of the hydrophone-->
+   <sml:classification>
+      <sml:ClassifierList>
+         <!--UUID of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#UUID">
+               <sml:label>UUID</sml:label>
+               <sml:value>C41969B6-F170-0501-432E-B43D5420140B</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!--Short name of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#shortName">
+               <sml:label>Short name</sml:label>
+               <sml:value>Example Hydrophone 1</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!--Long name of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#longName">
+               <sml:label>Long name</sml:label>
+               <sml:value>Example Hydrophone 1 NeXOS</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!--Device ID of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#deviceID">
+               <sml:label>Device ID</sml:label>
+               <sml:value>C6764FF3-A220-0001-2D56-19DB17401D90</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!--Serial number of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#serialNumber">
+               <sml:label>Serial number</sml:label>
+               <sml:value>1234567890</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!--WMO id of the hydrophone-->
+         <sml:classifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#WMO_ID">
+               <sml:label>WMO</sml:label>
+               <sml:value>123456</sml:value>
+            </sml:Term>
+         </sml:classifier>
+      </sml:ClassifierList>
+   </sml:classification>
+   
+
    <!--Time period for which the description of this hydrophone is valid-->
    <sml:validTime>
       <gml:TimePeriod gml:id="validityPeriod">

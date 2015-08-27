@@ -80,7 +80,7 @@
 	</bean>
 
 	<lang:groovy id="smlIdentification"
-		script-source="classpath:groovy/SmlIdentificationBean.groovy" />
+		script-source="classpath:groovy/SmlTermBean.groovy" />
 	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean">
 		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />

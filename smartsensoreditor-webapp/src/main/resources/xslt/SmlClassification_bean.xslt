@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!-- See the NOTICE file distributed with this work for additional information 
 	regarding copyright ownership. con terra GmbH licenses this file to You under 
 	the Apache License, Version 2.0 (the "License"); you may not use this file 
@@ -17,35 +16,24 @@
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
-
-	<!-- include base template -->
-	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
-	<!-- parameter handed over by transformer -->
-	<xsl:param name="beanDoc" />
-	<!-- remove existing identifiers -->
-	<xsl:template match="//sml:identification/*" />
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:identification">
-		<xsl:copy>
-			<xsl:if test="$beanDoc/*/SmlTerm">
-				<sml:IdentifierList>
-					<xsl:for-each select="$beanDoc/*/SmlTerm">
-						<sml:identifier>
-							<sml:Term>
-								<xsl:attribute name="definition">
-							<xsl:value-of select="definition" />
-						</xsl:attribute>
-								<sml:label>
-						<xsl:value-of select="name" />
-						</sml:label>
-								<sml:value>
-							<xsl:value-of select="value" />
-						</sml:value>
-							</sml:Term>
-						</sml:identifier>
-					</xsl:for-each>
-				</sml:IdentifierList>
-			</xsl:if>
-		</xsl:copy>
+	<xsl:output method="xml" version="1.0" encoding="UTF-8"
+		indent="no" omit-xml-declaration="yes" />
+	<xsl:template match="/">
+		<multi_container>
+			<xsl:for-each
+				select="/*/sml:classification/sml:ClassifierList/sml:classifier">
+				<SmlTerm>
+					<name>
+						<xsl:value-of select="./sml:Term/sml:label" />
+					</name>
+					<definition>
+						<xsl:value-of select="./sml:Term/@definition" />
+					</definition>
+					<value>
+						<xsl:value-of select="./sml:Term/sml:value" />
+					</value>
+				</SmlTerm>
+			</xsl:for-each>
+		</multi_container>
 	</xsl:template>
 </xsl:stylesheet>

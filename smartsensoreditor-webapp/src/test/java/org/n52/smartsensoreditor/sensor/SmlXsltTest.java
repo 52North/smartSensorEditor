@@ -29,7 +29,10 @@
 package org.n52.smartsensoreditor.sensor;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.is;
 import static org.xmlmatchers.XmlMatchers.hasXPath;
+
 
 import java.util.HashMap;
 
@@ -73,6 +76,9 @@ public class SmlXsltTest {
 	
 	@Resource(name = "smlIdentification")
     BaseBean smlIdentification;
+	@Resource(name = "smlClassification")
+    BaseBean smlClassification;
+	
 	@Resource(name = "smlIdentifier")
     BaseBean smlIdentifier;
 	
@@ -86,6 +92,9 @@ public class SmlXsltTest {
 	
 	@Resource(name = "multiSmlIdentification")
     MultipleElementBean multiSmlIdentification;
+	
+	@Resource(name = "multiSmlClassification")
+    MultipleElementBean multiSmlClassification;
 	
 
 	@Resource(name = "multiSweQuantityCharacteristic")
@@ -151,7 +160,121 @@ public class SmlXsltTest {
 		}
 
 	}
+	/**
+	  This method tests, if the test-value for smlClassification is copied into the xml document.
+	 */
+	@Test
+	public void testSmlClassification() {
 	
+		BeanUtil.setProperty(smlClassification, "name","testname");
+		BeanUtil.setProperty(smlClassification, "definition","testdefinition");
+		BeanUtil.setProperty(smlClassification, "value","testvalue");
+		multiSmlClassification.getItems().add(smlClassification);
+		Document doc = beanTransformerService.mergeToISO(multiSmlClassification,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='testdefinition']/sml:value[text()='testvalue']",
+							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='testdefinition']/sml:label[text()='testname']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+	 */
+	@Test
+	public void testSmlClassifierListNotExists() {
+	
+		Document doc = beanTransformerService.mergeToISO(multiSmlClassification,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					is(not(hasXPath(
+							"/*/sml:classification/sml:ClassifierList",
+							usingNamespaces))));
+		
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	/**
+	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+	 */
+	@Test
+	public void testSmlIdentifierListNotExists() {
+	
+		Document doc = beanTransformerService.mergeToISO(multiSmlIdentification,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					is(not(hasXPath(
+							"/*/sml:identification/sml:IdentifierList",
+							usingNamespaces))));
+		
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	/**
+	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+	 */
+	@Test
+	public void testSmlKeywordListNotExists() {
+	
+		Document doc = beanTransformerService.mergeToISO(multiSmlKeyword,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					is(not(hasXPath(
+							"/*/sml:keywords/sml:KeywordList",
+							usingNamespaces))));
+		
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+	 */
+	@Test
+	public void testSweCharacteristicListNotExists() {
+	
+		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					is(not(hasXPath(
+							"/*/sml:characteristics/sml:CharacteristicList",
+							usingNamespaces))));
+		
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
 	/**
 	  This method tests, if the test-value for smlIdentification is copied into the xml document.
 	 */

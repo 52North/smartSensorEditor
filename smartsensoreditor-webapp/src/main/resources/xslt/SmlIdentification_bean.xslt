@@ -22,7 +22,7 @@
 		<multi_container>
 			<xsl:for-each
 				select="/*/sml:identification/sml:IdentifierList/sml:identifier">
-				<SmlIdentification>
+				<SmlTerm>
 					<name>
 						<xsl:value-of select="./sml:Term/sml:label" />
 					</name>
@@ -32,7 +32,7 @@
 					<value>
 						<xsl:value-of select="./sml:Term/sml:value" />
 					</value>
-				</SmlIdentification>
+				</SmlTerm>
 			</xsl:for-each>
 		</multi_container>
 	</xsl:template>

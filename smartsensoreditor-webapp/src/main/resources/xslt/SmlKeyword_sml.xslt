@@ -20,16 +20,20 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing Names -->
-	<xsl:template match="/*/sml:keywords/sml:KeywordList/*" />
+	<xsl:template match="/*/sml:keywords/*" />
 
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:keywords/sml:KeywordList">
+	<xsl:template match="/*/sml:keywords">
 		<xsl:copy>
-			<xsl:for-each select="$beanDoc/*/SmlKeyword">
-				<sml:keyword>
-					<xsl:value-of select="keyword" />
-				</sml:keyword>
-			</xsl:for-each>
+			<xsl:if test="$beanDoc/*/SmlKeyword">
+				<sml:KeywordList>
+					<xsl:for-each select="$beanDoc/*/SmlKeyword">
+						<sml:keyword>
+							<xsl:value-of select="keyword" />
+						</sml:keyword>
+					</xsl:for-each>
+				</sml:KeywordList>
+			</xsl:if>
 		</xsl:copy>
 	</xsl:template>
 

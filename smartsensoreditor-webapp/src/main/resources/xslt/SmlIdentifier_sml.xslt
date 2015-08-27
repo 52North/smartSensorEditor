@@ -14,7 +14,7 @@
 	exclude-result-prefixes="gmd gco gml sml">
 	<!-- import base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
-	<xsl:template match="/*/gml:identifier" />
+
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<xsl:template match="/*/gml:identifier">

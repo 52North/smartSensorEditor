@@ -24,35 +24,35 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="editor" uri="http://www.52north.org/tags/editor" %>
 
-<tiles:useAttribute name="cnt" id="smlIdentification_cnt"/>
+<tiles:useAttribute name="cnt" id="smlClassification_cnt"/>
 
 <editor:fragments modelAttribute="updateMetadata">
     <table class="marginLine">
         <tr>
             <td>
-                <label for="smlIdentification_${smlIdentification_cnt}_Name" class="firstLabel">
+                <label for="smlClassification_${smlClassification_cnt}_Name" class="firstLabel">
                     <fmt:message key="element.smlTerm.name"/>
                 </label></td><td>
-                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].name" size="100"
-                            id="smlIdentification_${smlIdentification_cnt}_Name"/>
+                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].name" size="100"
+                            id="smlClassification_${smlClassification_cnt}_Name"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="smlIdentification_${smlIdentification_cnt}_Definition" class="firstLabel">
+                <label for="smlClassification_${smlClassification_cnt}_Definition" class="firstLabel">
                     <fmt:message key="element.smlTerm.definition"/>
                 </label></td><td>
-                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].definition" size="100"
-                            id="smlIdentification_${smlIdentification_cnt}_Definition"/>
+                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].definition" size="100"
+                            id="smlClassification_${smlClassification_cnt}_Definition"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="smlIdentification_${smlIdentification_cnt}_Value" class="firstLabel">
+                <label for="smlClassification_${smlClassification_cnt}_Value" class="firstLabel">
                     <fmt:message key="element.smlTerm.value"/>
                 </label></td><td>
-                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].value" size="100"
-                            id="smlIdentification_${smlIdentification_cnt}_Value"/>
+                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].value" size="100"
+                            id="smlClassification_${smlClassification_cnt}_Value"/>
             </td>
         </tr>
     </table>

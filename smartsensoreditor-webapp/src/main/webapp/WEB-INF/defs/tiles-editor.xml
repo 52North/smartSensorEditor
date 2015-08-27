@@ -74,6 +74,8 @@
 		
 	       <put-attribute name="smlIdentification" value="editor.body.smlIdentification"
 			cascade="true" />
+			<put-attribute name="smlClassification" value="editor.body.smlClassification"
+			cascade="true" />
 			 <put-attribute name="sweQuantityCharacteristic" value="editor.body.sweQuantityCharacteristic"
 			cascade="true" />
 	   <put-attribute name="smlIdentifier"

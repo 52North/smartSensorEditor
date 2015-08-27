@@ -70,6 +70,9 @@ public class BeanXsltTest {
 	@Resource(name = "multiSmlIdentification")
 	BaseBean multiSmlIdentification;
 	
+	@Resource(name = "multiSmlClassification")
+	BaseBean multiSmlClassification;
+	
 	@Resource(name = "multiSweQuantityCharacteristic")
 	BaseBean multiSweQuantityCharacteristic;
 	
@@ -125,15 +128,51 @@ public class BeanXsltTest {
 			assertThat(
 					bean,
 					hasXPath(
-							"//SmlIdentification/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
+							"//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
 							usingNamespaces));
 			assertThat(
 					bean,
-					hasXPath("//SmlIdentification/name[text()='Short name']",
+					hasXPath("//SmlTerm/name[text()='Short name']",
 							usingNamespaces));
 			assertThat(
 					bean,
-					hasXPath("//SmlIdentification/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
+					hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+	}
+
+	
+	/**
+	 * This method tests, if the test-value for smlClassification within the xml
+	 * document is copied into the bean.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSmlClassification() throws Exception {
+		// copy test-value into bean
+		BaseBean lBean = beanTransformerService.initBean(
+				multiSmlClassification, mDatasetDocument);
+		Assert.assertNotNull(lBean);
+		// transform to xml for testing
+		Document beanXML = beanTransformerService.toXML(lBean);
+		Source bean = new DOMSource(beanXML);
+		try {
+			assertThat(
+					bean,
+					hasXPath(
+							"//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlTerm/name[text()='Short name']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

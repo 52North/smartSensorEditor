@@ -24,64 +24,64 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // setup tabs
-        var $smlIdentificationTabs = $('#smlIdentificationTabs').tabs();
+        var $smlClassificationTabs = $('#smlClassificationTabs').tabs();
         // select last tab that has been added
-        $smlIdentificationTabs.tabs('select', $smlIdentificationTabs.tabs('length') - 1);
+        $smlClassificationTabs.tabs('select', $smlClassificationTabs.tabs('length') - 1);
     });
     Spring.addDecoration(new SmartEditor.AjaxEventDecoration({
-        elementId: "addsmlIdentificationButton",
+        elementId: "addsmlClassificationButton",
         event: "onclick",
         formId: "updateMetadata",
-        params: {fragments: "smlIdentification",
+        params: {fragments: "smlClassification",
             method: "add",
-            elementName: "smlIdentification",
+            elementName: "smlClassification",
             propertyPath: "items",
             type: "groovy.SmlTermBean"
         }
     }));
 </script>
 
-<div id="smlIdentification">
+<div id="smlClassification">
     <table class="verticalTop">
         <tr>
             <td>
             <span class="firstLabel width190">
-                <span class="tooltip" id="smlIdentificationLabel">
-                    <fmt:message key="element.smlIdentification.label"/><br>
+                <span class="tooltip" id="smlClassificationLabel">
+                    <fmt:message key="element.smlClassification.label"/><br>
                 </span>
-                <input type="button" class="add" id="addsmlIdentificationButton"/>
+                <input type="button" class="add" id="addsmlClassificationButton"/>
             </span>
             </td>
             <td>
-                <div style="clear:right" id="smlIdentificationTabs">
-                    <form:errors path="storage['smlIdentification'].items" cssClass="ui-state-error-text"/>
+                <div style="clear:right" id="smlClassificationTabs">
+                    <form:errors path="storage['smlClassification'].items" cssClass="ui-state-error-text"/>
                     <ul>
-                        <c:forEach items="${updateMetadata.storage['smlIdentification'].items}" varStatus="status">
+                        <c:forEach items="${updateMetadata.storage['smlClassification'].items}" varStatus="status">
                             <li>
-                                <a href="#smlIdentification-${status.count}">
+                                <a href="#smlClassification-${status.count}">
                                     <c:out value="${status.count}"/>
                                 </a>
                                 <script type="text/javascript">
                                     Spring.addDecoration(new SmartEditor.AjaxEventDecoration({
-                                        elementId: "smlIdentificationRemove_${status.count}",
+                                        elementId: "smlClassificationRemove_${status.count}",
                                         event: "onclick",
                                         formId: "updateMetadata",
-                                        params: {fragments: "smlIdentification",
+                                        params: {fragments: "smlClassification",
                                             method: "remove",
-                                            elementName: "smlIdentification",
+                                            elementName: "smlClassification",
                                             propertyPath: "items",
                                             elementIndex: ${status.count-1} }
                                     }));
                                 </script>
                             <span class="ui-icon ui-icon-close"
-                                  id="smlIdentificationRemove_${status.count}">RemoveTab</span>
+                                  id="smlClassificationRemove_${status.count}">RemoveTab</span>
                             </li>
                         </c:forEach>
                     </ul>
-                    <c:forEach items="${updateMetadata.storage['smlIdentification'].items}" var="party"
+                    <c:forEach items="${updateMetadata.storage['smlClassification'].items}" var="party"
                                varStatus="status">
-                        <div id="smlIdentification-${status.count}">
-                            <tiles:insertAttribute name="innerSmlIdentification">
+                        <div id="smlClassification-${status.count}">
+                            <tiles:insertAttribute name="innerSmlClassification">
                                 <tiles:putAttribute name="cnt" value="${status.count-1}"/>
                             </tiles:insertAttribute>
                         </div>

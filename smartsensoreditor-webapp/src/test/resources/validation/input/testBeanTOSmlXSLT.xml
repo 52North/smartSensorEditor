@@ -22,6 +22,10 @@
          </sml:identifier>
       </sml:IdentifierList>
    </sml:identification>
+   <sml:classification>
+   <sml:ClassifierList>
+   </sml:ClassifierList>
+   </sml:classification>
    <!--Time period for which the description of this hydrophone is valid-->
    <sml:validTime>
       <gml:TimePeriod gml:id="validityPeriod">

@@ -23,14 +23,14 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing identifiers -->
-	<xsl:template match="//sml:identification/*" />
+	<xsl:template match="//sml:classification/*" />
 	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:identification">
+	<xsl:template match="/*/sml:classification">
 		<xsl:copy>
 			<xsl:if test="$beanDoc/*/SmlTerm">
-				<sml:IdentifierList>
+				<sml:ClassifierList>
 					<xsl:for-each select="$beanDoc/*/SmlTerm">
-						<sml:identifier>
+						<sml:classifier>
 							<sml:Term>
 								<xsl:attribute name="definition">
 							<xsl:value-of select="definition" />
@@ -42,9 +42,9 @@
 							<xsl:value-of select="value" />
 						</sml:value>
 							</sml:Term>
-						</sml:identifier>
+						</sml:classifier>
 					</xsl:for-each>
-				</sml:IdentifierList>
+				</sml:ClassifierList>
 			</xsl:if>
 		</xsl:copy>
 	</xsl:template>
