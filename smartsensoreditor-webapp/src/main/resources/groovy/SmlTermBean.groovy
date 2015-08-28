@@ -22,7 +22,9 @@ import de.conterra.smarteditor.beans.BaseBean
 
 @XStreamAlias("SmlTerm")
 class SmlTerm extends BaseBean {
-  String name
-  String definition
+  String label
+  String codeSpace
   String value
+  String definition
+
 }

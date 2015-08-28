@@ -105,6 +105,7 @@ public class SmlXsltTest {
 		map.put("sml", "http://www.opengis.net/sensorml/2.0");
 		map.put("swe", "http://www.opengis.net/swe/2.0");
 		map.put("gml", "http://www.opengis.net/gml/3.2");
+		map.put("xlink", "http://www.w3.org/1999/xlink");
 		usingNamespaces = new SimpleNamespaceContext();
 		usingNamespaces.setBindings(map);
 	}
@@ -136,9 +137,9 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSmlIdentification() {
-	
-		BeanUtil.setProperty(smlIdentification, "name","testname");
 		BeanUtil.setProperty(smlIdentification, "definition","testdefinition");
+		BeanUtil.setProperty(smlIdentification, "label","testname");
+		BeanUtil.setProperty(smlIdentification, "codeSpace","http://testIdentifierCodeSpace");
 		BeanUtil.setProperty(smlIdentification, "value","testvalue");
 		multiSmlIdentification.getItems().add(smlIdentification);
 		Document doc = beanTransformerService.mergeToISO(multiSmlIdentification,mRefDatasetDocument);
@@ -154,6 +155,11 @@ public class SmlXsltTest {
 					hasXPath(
 							"/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='testdefinition']/sml:label[text()='testname']",
 							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='testdefinition']/sml:codeSpace[@xlink:href='http://testIdentifierCodeSpace']",
+							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -165,9 +171,9 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSmlClassification() {
-	
-		BeanUtil.setProperty(smlClassification, "name","testname");
 		BeanUtil.setProperty(smlClassification, "definition","testdefinition");
+		BeanUtil.setProperty(smlClassification, "label","testname");
+		BeanUtil.setProperty(smlClassification, "codeSpace","http://testClassifierCodeSpace");
 		BeanUtil.setProperty(smlClassification, "value","testvalue");
 		multiSmlClassification.getItems().add(smlClassification);
 		Document doc = beanTransformerService.mergeToISO(multiSmlClassification,mRefDatasetDocument);
@@ -183,6 +189,12 @@ public class SmlXsltTest {
 					hasXPath(
 							"/*/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='testdefinition']/sml:label[text()='testname']",
 							usingNamespaces));
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/*/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='testdefinition']/sml:codeSpace[@xlink:href='http://testClassifierCodeSpace']",
+							usingNamespaces));
+			
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -233,7 +245,7 @@ public class SmlXsltTest {
 
 	}
 	/**
-	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+	  This method tests, if the keywordList element is not inserted, when no keywords are inserted
 	 */
 	@Test
 	public void testSmlKeywordListNotExists() {

@@ -141,11 +141,16 @@ public class EditControllerSML extends EditController {
 			
 			String serviceUrl=backendBeanSML.getServiceURL();
 			LOG.debug("Predefined serviceUrl is set to '" + serviceUrl + "'");
-			concurrentHashMap.put("serviceURLSOS",serviceUrl);
-			
+			if(serviceUrl!=null){
+				concurrentHashMap.put("serviceURLSOS",serviceUrl);
+			}
+	
 			String serviceTokenSOS=backendBeanSML.getServiceTokenSOS();
 			LOG.debug("Predefines token is set to '" + serviceTokenSOS + "'");
-			concurrentHashMap.put("serviceTokenSOS",serviceTokenSOS);
+			if(serviceTokenSOS!=null){
+				concurrentHashMap.put("serviceTokenSOS",serviceTokenSOS);
+			}
+			
 		}
 		
 		return concurrentHashMap;

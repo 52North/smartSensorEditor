@@ -23,12 +23,15 @@
 			<xsl:for-each
 				select="/*/sml:classification/sml:ClassifierList/sml:classifier">
 				<SmlTerm>
-					<name>
-						<xsl:value-of select="./sml:Term/sml:label" />
-					</name>
 					<definition>
 						<xsl:value-of select="./sml:Term/@definition" />
 					</definition>
+					<label>
+						<xsl:value-of select="./sml:Term/sml:label" />
+					</label>
+					<codeSpace>
+						<xsl:value-of select="./sml:Term/sml:codeSpace/@xlink:href" />
+					</codeSpace>
 					<value>
 						<xsl:value-of select="./sml:Term/sml:value" />
 					</value>

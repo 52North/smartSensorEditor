@@ -27,6 +27,7 @@
          <sml:identifier>
             <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#shortName">
                <sml:label>Short name</sml:label>
+               <sml:codeSpace xlink:href="http://testIdentifierCodeSpace"/>
                <sml:value>Example Hydrophone 1</sml:value>
             </sml:Term>
          </sml:identifier>
@@ -67,6 +68,7 @@
          <sml:classifier>
             <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#UUID">
                <sml:label>UUID</sml:label>
+               <sml:codeSpace xlink:href="http://testClassifierCodeSpace"/>
                <sml:value>C41969B6-F170-0501-432E-B43D5420140B</sml:value>
             </sml:Term>
          </sml:classifier>

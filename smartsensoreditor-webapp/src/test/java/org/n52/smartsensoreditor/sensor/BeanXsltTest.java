@@ -32,12 +32,16 @@ import static org.xmlmatchers.XmlMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
+
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -80,7 +84,13 @@ public class BeanXsltTest {
 	Document mDatasetDocument = DOMUtil.createFromStream(BeanXsltTest.class
 			.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"),
 			true);
-
+	@Before
+	public void before() {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("xlink", "http://www.w3.org/1999/xlink");
+		usingNamespaces = new SimpleNamespaceContext();
+		usingNamespaces.setBindings(map);
+	}
 	/**
 	 * This method tests, if the test-value for keyword within the xml document
 	 * is copied into the bean.
@@ -132,7 +142,11 @@ public class BeanXsltTest {
 							usingNamespaces));
 			assertThat(
 					bean,
-					hasXPath("//SmlTerm/name[text()='Short name']",
+					hasXPath("//SmlTerm/label[text()='Short name']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlTerm/codeSpace[text()='http://testIdentifierCodeSpace']",
 							usingNamespaces));
 			assertThat(
 					bean,
@@ -168,7 +182,11 @@ public class BeanXsltTest {
 							usingNamespaces));
 			assertThat(
 					bean,
-					hasXPath("//SmlTerm/name[text()='Short name']",
+					hasXPath("//SmlTerm/label[text()='Short name']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlTerm/codeSpace[text()='http://testClassifierCodeSpace']",
 							usingNamespaces));
 			assertThat(
 					bean,

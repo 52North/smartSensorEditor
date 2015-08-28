@@ -36,8 +36,13 @@
 							<xsl:value-of select="definition" />
 						</xsl:attribute>
 								<sml:label>
-						<xsl:value-of select="name" />
+						<xsl:value-of select="label" />
 						</sml:label>
+								<sml:codeSpace>
+									<xsl:attribute name="xlink:href">
+							<xsl:value-of select="codeSpace" />
+						</xsl:attribute>
+								</sml:codeSpace>
 								<sml:value>
 							<xsl:value-of select="value" />
 						</sml:value>

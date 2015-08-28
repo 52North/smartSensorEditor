@@ -30,20 +30,29 @@
     <table class="marginLine">
         <tr>
             <td>
-                <label for="smlClassification_${smlClassification_cnt}_Name" class="firstLabel">
-                    <fmt:message key="element.smlTerm.name"/>
-                </label></td><td>
-                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].name" size="100"
-                            id="smlClassification_${smlClassification_cnt}_Name"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <label for="smlClassification_${smlClassification_cnt}_Definition" class="firstLabel">
                     <fmt:message key="element.smlTerm.definition"/>
                 </label></td><td>
                 <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].definition" size="100"
                             id="smlClassification_${smlClassification_cnt}_Definition"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="smlClassification_${smlClassification_cnt}_Label" class="firstLabel">
+                    <fmt:message key="element.smlTerm.label"/>
+                </label></td><td>
+                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].label" size="100"
+                            id="smlClassification_${smlClassification_cnt}_Label"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="smlClassification_${smlClassification_cnt}_CodeSpace" class="firstLabel">
+                    <fmt:message key="element.smlTerm.codeSpace"/>
+                </label></td><td>
+                <form:input path="storage['smlClassification'].items[${smlClassification_cnt}].codeSpace" size="100"
+                            id="smlClassification_${smlClassification_cnt}_CodeSpace"/>
             </td>
         </tr>
         <tr>
