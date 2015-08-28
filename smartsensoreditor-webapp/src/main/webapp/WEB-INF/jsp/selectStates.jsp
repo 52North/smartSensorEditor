@@ -88,6 +88,7 @@ select, .ui-select-menu {
 			<fmt:message key="publish.SOSService.message" />
 		</p>
 		<form:form commandName="publish" action="publish.do" id="publishForm">
+		
 			<div id="selectStatesDiv" style="margin-top: 25px ;display:none">
 				<label for="selectStates" style="width: 30em; float: left;"><fmt:message
 						key="publish.states.title.sub" />:</label> <select name="stateId"
@@ -123,7 +124,7 @@ select, .ui-select-menu {
 			<div id="serviceTokenSOSDiv" style="margin-top: 25px">
 				<label for="serviceTokenSOS" style="width: 30em; float: left;"><fmt:message
 						key="publish.serviceTokenSOS.title.sub" />:</label> <input
-					name="serviceTokenSOS" id="serviceTokenSOS" />
+					name="serviceTokenSOS" id="serviceTokenSOS" value="${stateModel.serviceTokenSOS}"/>
 			</div>
 			<br>
 			<div id="serviceURLSOSDiv" style="margin-top: 25px">
@@ -134,6 +135,7 @@ select, .ui-select-menu {
 			</div>
           
           <br>
+<!--           Further values need for insert a sensor to the SOS -->
 			<div id="swesObservablePropertiesDiv" style="margin-top: 25px">
 				<label for="swesObservableProperties" style="width: 30em; float: left;"><fmt:message
 						key="element.swesObservableProperties.label" />:</label> <textarea

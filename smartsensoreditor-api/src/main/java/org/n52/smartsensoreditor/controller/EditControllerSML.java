@@ -30,6 +30,7 @@ package org.n52.smartsensoreditor.controller;
 
 import com.jenkov.prizetags.tree.itf.ITree;
 
+import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.CodeListBean;
 import de.conterra.smarteditor.beans.IConfigOptions;
 import de.conterra.smarteditor.beans.IMapOptions;
@@ -43,6 +44,7 @@ import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.support.LocalePropertyEditorRegistrar;
 
 import org.apache.log4j.Logger;
+import org.n52.smartsensoreditor.beans.BackendBeanSML;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -129,8 +131,23 @@ public class EditControllerSML extends EditController {
 		concurrentHashMap.put("currentOperationSOSName", lOperationsSOS.getStateName());
 		concurrentHashMap.put("currentOperationSOSId", lOperationsSOS.getStateId());
         
+		//Set the predefined values 
 		concurrentHashMap.put("procedureIdSOS", getBackendService().getFileIdentifier()); //procedureId==smlIdentifier==<gml:identifier(unique identifier)
-		concurrentHashMap.put("serviceURLSOS","");
+		//Set the token and the serviceUrl within the concurrentHashMap to insert them in the selectStates.jsp file.
+		BackendBean backendBean=getBackendService().getBackend();
+		
+		if(backendBean instanceof BackendBeanSML){
+			BackendBeanSML backendBeanSML=((BackendBeanSML)backendBean);
+			
+			String serviceUrl=backendBeanSML.getServiceURL();
+			LOG.debug("Predefined serviceUrl is set to '" + serviceUrl + "'");
+			concurrentHashMap.put("serviceURLSOS",serviceUrl);
+			
+			String serviceTokenSOS=backendBeanSML.getServiceTokenSOS();
+			LOG.debug("Predefines token is set to '" + serviceTokenSOS + "'");
+			concurrentHashMap.put("serviceTokenSOS",serviceTokenSOS);
+		}
+		
 		return concurrentHashMap;
 	}
 

@@ -401,7 +401,7 @@
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
 	</bean>
-	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
+	<bean id="backendBean" class="org.n52.smartsensoreditor.beans.BackendBeanSML"
 		scope="session">
 		<aop:scoped-proxy />
 		<property name="validatorId" value="noValidator" />

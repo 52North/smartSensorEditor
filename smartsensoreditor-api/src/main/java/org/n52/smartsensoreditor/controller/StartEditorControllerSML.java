@@ -38,6 +38,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.log4j.Logger;
+import org.n52.smartsensoreditor.beans.BackendBeanSML;
 import org.n52.smartsensoreditor.beans.StartEditorBeanSML;
 import org.n52.smartsensoreditor.cswclient.facades.TransactionResponseSOS;
 import org.n52.smartsensoreditor.dao.SOSCatalogService;
@@ -54,6 +55,7 @@ import org.w3c.dom.Document;
 
 import com.sun.xml.bind.Util;
 
+import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.StartEditorBean;
 import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.controller.StartEditorController;
@@ -61,6 +63,7 @@ import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
 import de.conterra.smarteditor.dao.AbstractCatalogService;
 import de.conterra.smarteditor.dao.WebServiceDescriptionDAO;
 import de.conterra.smarteditor.dao.WebServiceDescriptionException;
+import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
@@ -172,6 +175,7 @@ public class StartEditorControllerSML extends StartEditorController {
 		}
 		//Set service URL
 		String serviceUrl=pEditorBean.getServiceUrl();
+		LOG.debug("ServiceUrl set to '" + serviceUrl + "'");
 		//Create webservice
 		if(pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE)){//serviceTypes are defined in codelist_enumeration.xml in identifier: CT_ServiceTypeExt.
 			LOG.debug("Put SOS values into webserviceDescriptionDAO");
@@ -182,7 +186,16 @@ public class StartEditorControllerSML extends StartEditorController {
 			//Set token
 			String token = editorBeanSML.getServiceTokenForSOS();
 			LOG.debug("Token is set to '" + token + "'");
-
+			
+			//Set the token and the serviceUrl within the BackendBeanSml to insert them in the selectStates.jsp file.
+			BackendBean backendBean=getBackendService().getBackend();
+			if(backendBean instanceof BackendBeanSML){
+				BackendBeanSML backendBeanSML=((BackendBeanSML)backendBean);
+				backendBeanSML.setServiceURL(serviceUrl);
+				LOG.debug("ServiceUrl is set in the BeackendBean '" + serviceUrl + "'");
+				backendBeanSML.setServiceTokenSOS(token);
+				LOG.debug("Token is set in the BackendBean '" + token + "'");
+			}
 
 			//For request
 			Document catalogRequest = null;
