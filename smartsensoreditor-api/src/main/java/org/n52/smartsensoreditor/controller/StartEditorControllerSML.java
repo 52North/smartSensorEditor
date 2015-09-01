@@ -143,7 +143,27 @@ public class StartEditorControllerSML extends StartEditorController {
 		this.mfinishView = finishView;
 	}
 
-
+    /**
+     * Start editor with new document
+     *
+     * @param pEditorBean
+     * @param pResult
+     * @return
+     */
+	@Override
+    @RequestMapping(value = "/startNew", method = RequestMethod.POST)
+    public ModelAndView startNewHandler(@ModelAttribute("startEditorBean") StartEditorBean pEditorBean,
+                                        BindingResult pResult) {
+        LOG.info("Initializing with new document");
+        ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "resourceType", "errors.resourcetype.empty");
+        getBackendService().setUpdate(false); //added
+        if (pResult.hasErrors()) {
+            // return form view
+            return new ModelAndView(getFormView(), getModelMap());
+        }
+        getBackendService().initBackend(pEditorBean.getResourceType());
+        return new ModelAndView(getSuccessView());
+    }
 	/**
 	 * Starts editor with a service description
 	 *
@@ -204,7 +224,7 @@ public class StartEditorControllerSML extends StartEditorController {
 			parameterMap.put("procedureId", procId);
 
 			SOSCatalogService sosService = getSOSCatalogServiceDAO();
-			sosService.init(serviceUrl);
+			sosService.init(serviceUrl+"/soap");
 			sosService.addRequestHeader("Authorization", token);
 
 			//When a sensor should be edited

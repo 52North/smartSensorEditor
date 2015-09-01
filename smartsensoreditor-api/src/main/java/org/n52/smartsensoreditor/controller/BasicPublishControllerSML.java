@@ -121,7 +121,7 @@ public class BasicPublishControllerSML extends BasicPublishController {
 		AbstractCatalogService service = getCatalogService();
 		if (service instanceof SOSCatalogService) {
 			SOSCatalogService sosService = (SOSCatalogService) service;
-			sosService.init(lBean.getServiceUrlSOS());
+			sosService.init(lBean.getServiceUrlSOS()+"/soap");
 			sosService.addRequestHeader("Authorization", lBean.getServiceTokenSOS());
 		}
 		

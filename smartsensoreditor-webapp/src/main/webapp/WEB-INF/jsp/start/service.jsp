@@ -26,9 +26,9 @@
 	$(document).ready(function() {
 		// trigger visibility of service Name
 		$('#serviceNameContainer').hide();
-		$('#serviceTokenForSOS').hide();
+		$('#DIVserviceTokenForSOS').hide();
 		$('#DIVserviceOperationForSOS').hide();
-		$('#serviceProcedureIDForSOS').hide();
+		$('#DIVserviceProcedureIDForSOS').hide();
 		$('#serviceType').click(function() {
 			if ($('#serviceType').attr('value') == 'ARCIMS') {
 				$('#serviceNameContainer').show();
@@ -36,21 +36,52 @@
 				$('#serviceNameContainer').hide();
 			}
 			if ($('#serviceType').attr('value') == 'SOS') {
-				$('#serviceTokenForSOS').show();
+				$('#DIVserviceTokenForSOS').show();
 				$('#DIVserviceOperationForSOS').show();
-				$('#serviceProcedureIDForSOS').show();
+				$('#DIVserviceProcedureIDForSOS').show();
 			} else {
-				$('#serviceTokenForSOS').hide();
+				$('#DIVserviceTokenForSOS').hide();
 				$('#DIVserviceOperationForSOS').hide();
-				$('#serviceProcedureIDForSOS').hide();
-				$('#serviceProcedureIDForSOS').hide();
+				$('#DIVserviceProcedureIDForSOS').hide();
 			}
 		});
+		$("#serviceUrl").blur(function() {
+			$.get($("#serviceUrl").val(), {
+				service : "SOS",
+				request : "GetCapabilities",
+				Sections : "OperationsMetadata"
+			}, setProcedureIds);
 
+		});
 	});
 	$('#showErrors').bind("DOMNodeInserted", function(e) {
-		$('#showErrors').addClass("ui-state-error ui-corner-all");	
+		$('#showErrors').addClass("ui-state-error ui-corner-all");
 	});
+	function setProcedureIds(response) {
+
+		if (response) {
+			var procedureListLength = $("#serviceProcedureIDForSOS").lenght;
+			for (var i = 1; i < procedureListLength; i++) {
+				$("#serviceProcedureIDForSOS").remove(i);
+			}
+			var elementList = $(response).find(
+					"ows\\:Parameter[name='procedure']")[0].childNodes[1].childNodes;
+			if (elementList.length) {
+				for (i = 0; i < elementList.length; i++) {
+					if (elementList[i].nodeName == "ows:Value") {
+						var id = elementList[i].firstChild.data;
+						$("#serviceProcedureIDForSOS").append($('<option>', {
+							value : id,
+							text : id
+						}));
+
+					}
+				}
+			}
+
+		}
+
+	}
 </script>
 <h2>
 	<fmt:message key="start.service.title" />
@@ -75,18 +106,18 @@
 			id="serviceName" size="100" />
 	</div>
 
-	<div id="serviceTokenForSOS" class="serviceDivSOS">
+	<div id="DIVserviceTokenForSOS" class="serviceDivSOS">
 		<label for="serviceTokenforSOS" class="firstLabel width150"><fmt:message
 				key="start.service.tokenForSOS" /></label> <input name="serviceTokenForSOS"
 			id="serviceTokenForSOS" size="100" /><br>
 		<form:errors path="serviceTokenForSOS" cssClass="ui-state-error-text" />
 	</div>
 
-	<div id="serviceProcedureIDForSOS" class="serviceDivSOS">
+	<div id="DIVserviceProcedureIDForSOS" class="serviceDivSOS">
 		<label for="serviceProcedureIDForSOS" class="firstLabel width150"><fmt:message
-				key="start.service.procedureIDForSOS" /></label> <input
-			name="serviceProcedureIDForSOS" id="serviceProcedureIDForSOS"
-			size="100" /><br>
+				key="start.service.procedureIDForSOS" /></label> <select
+			name="serviceProcedureIDForSOS" id="serviceProcedureIDForSOS"><option
+				value=""><fmt:message key="editor.general.choose" /></option></select><br>
 		<form:errors path="serviceProcedureIDForSOS"
 			cssClass="ui-state-error-text" />
 	</div>
