@@ -102,16 +102,16 @@ select, .ui-select-menu {
 			</div>
 
 			<div id="procedureIdSOSDiv" style="margin-top: 25px">
-				<label for="procedureIdSOS" style="width: 30em; float: left;"><fmt:message
-						key="publish.procedureIdSOS.title.sub" />:</label>
+				<span style="width: 30em; float: left;"><label for="procedureIdSOS" class="tooltip" style="float: left;"><fmt:message
+						key="publish.procedureIdSOS.title.sub" />:</label></span>
 				<c:out value="${stateModel.procedureIdSOS}" />
 				<input type="hidden" name="procedureIdSOS" id="procedureIdSOS"
 					value="${stateModel.procedureIdSOS}" />
 			</div>
 
 			<div id="selectOperationsSOSDiv" style="margin-top: 25px">
-				<label for="selectOperationSOS" style="width: 30em; float: left;"><fmt:message
-						key="publish.operationsSOS.title.sub" />:</label> <select
+				<span style="width: 30em; float: left;"><label for="selectOperationSOS"id="selectOperationSOSLabel" class="tooltip" style="float: left;"><fmt:message
+						key="publish.operationsSOS.title.sub" />:</label> </span><select
 					name="serviceOperationSOS" id="selectOperationSOS">
 					<c:forEach items="${stateModel.operationsSOS}" var="operationSOS">
 						<option value="${operationSOS.stateId}"
@@ -122,14 +122,14 @@ select, .ui-select-menu {
 			</div>
 
 			<div id="serviceTokenSOSDiv" style="margin-top: 25px">
-				<label for="serviceTokenSOS" style="width: 30em; float: left;"><fmt:message
-						key="publish.serviceTokenSOS.title.sub" />:</label> <input
+				<span style="width: 30em; float: left;"><label for="serviceTokenSOS" id="serviceTokenSOSLabel" class="tooltip" style="float: left;"><fmt:message
+						key="publish.serviceTokenSOS.title.sub" />:</label></span> <input
 					name="serviceTokenSOS" id="serviceTokenSOS" value="${stateModel.serviceTokenSOS}"/>
 			</div>
 			<br>
 			<div id="serviceURLSOSDiv" style="margin-top: 25px">
-				<label for="serviceURLSOS" style="width: 30em; float: left;"><fmt:message
-						key="publish.serviceURLSOS.title.sub" />:</label> <input
+				<span style="width: 30em; float: left;"><label for="serviceURLSOS" id="serviceURLSOSLabel" class="tooltip" style="float: left;"><fmt:message
+						key="publish.serviceURLSOS.title.sub" />:</label></span> <input
 					name="serviceUrlSOS" id="serviceURLSOS"
 					value="${stateModel.serviceURLSOS}" />
 			</div>
@@ -137,20 +137,20 @@ select, .ui-select-menu {
           <br>
 <!--           Further values need for insert a sensor to the SOS -->
 			<div id="swesObservablePropertiesDiv" style="margin-top: 25px">
-				<label for="swesObservableProperties" style="width: 30em; float: left;"><fmt:message
-						key="element.swesObservableProperties.label" />:</label> <textarea
+				<span style="width: 30em; float: left;"><label for="swesObservableProperties" id="swesObservablePropertiesLabel" class="tooltip" style="float: left;"><fmt:message
+						key="element.swesObservableProperties.label" />:</label></span> <textarea
 					name="swesObservableProperties" id="swesObservableProperties"></textarea>
 			</div>
 			<br>
 			<div id="SOSObservationTypesDiv" style="margin-top: 25px">
-				<label for="SOSObservationTypes" style="width: 30em; float: left;"><fmt:message
-						key="element.SOSObservationTypes.label" />:</label> <textarea
+				<span style="width: 30em; float: left;"><label for="SOSObservationTypes" id="SOSObservationTypesLabel" class="tooltip" style="float: left;"><fmt:message
+						key="element.SOSObservationTypes.label" />:</label></span> <textarea
 					name="sosObservationTypes" id="SOSObservationTypes"></textarea>
 			</div>
 			<br>
 			<div id="SOSFeatureOfInterestTypesDiv" style="margin-top: 25px">
-				<label for="SOSFeatureOfInterestTypes" style="width: 30em; float: left;"><fmt:message
-						key="element.SOSFeatureOfInterestTypes.label" />:</label> <textarea
+				<span style="width: 30em; float: left;"><label style="float: left;for="SOSFeatureOfInterestTypes" id="SOSFeatureOfInterestTypesLabel" class="tooltip" ><fmt:message
+						key="element.SOSFeatureOfInterestTypes.label" />:</label></span> <textarea
 					name="sosFeatureOfInterestTypes" id="SOSFeatureOfInterestTypes"></textarea>
 			</div>
 			<div id="stateButtons" style="margin-top: 25px">
