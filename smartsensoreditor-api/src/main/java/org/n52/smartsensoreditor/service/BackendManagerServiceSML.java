@@ -145,18 +145,13 @@ public class BackendManagerServiceSML extends BackendManagerService {
 							getMergeDocument());
 
 			if (resourceType.equals("")) {
-				resourceType = lUtil
-						.evaluateAsString(
-								"//sml:System/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='urn:ogc:def:classifier:OGC:1.0:sensorType']/sml:value",
+				String bool = lUtil
+						.evaluateAsString("boolean(//sml:PhysicalSystem)",
 								getMergeDocument());
-				if (resourceType.equals("")) {
-					String bool = lUtil
-							.evaluateAsString("boolean(//sml:identification)",
-									getMergeDocument());
-					if (bool.equals("true")) {
-						resourceType = "sensor";
-					}
+				if (bool.equals("true")) {
+					resourceType = "sensor";
 				}
+
 			}
 			return resourceType;
 		}
