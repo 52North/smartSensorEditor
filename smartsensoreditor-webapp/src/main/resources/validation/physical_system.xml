@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
+<sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" fpi="http://schemas.opengis.net/sensorML/2.0/physical_system.sch" queryBinding="xslt2">
+    <!-- 
+        SensorML is an OGC Standard.
+        Copyright (c) 2014 Open Geospatial Consortium.
+        To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
+    -->
+    <!-- Version: 2.0.0 -->
+    <sch:title>Additional validation rules for XML instances including Physical Process components</sch:title>
+    <sch:ns uri="http://www.opengis.net/sensorML/2.0" prefix="sml"/>
+    <sch:ns uri="http://www.opengis.net/swe/2.0" prefix="swe"/>
+    <sch:ns uri="http://www.opengis.net/gml/3.2" prefix="gml"/>
+    <sch:ns uri="http://www.w3.org/1999/xlink" prefix="xlink"/>
+    
+    <!-- gml:identifier property -->
+    <sch:pattern>
+        <sch:title>Req 46</sch:title>
+        <sch:rule context="/*">
+              <sch:assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.gmlIdentifier</sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    <sch:pattern>
+        <sch:title>Req 46</sch:title>
+        <sch:rule context="/*/gml:identifier">
+            <sch:assert test="@codeSpace = 'uniqueID' ">errors.validation.SML.2.0.gmlIdentifier.uniqueID</sch:assert>
+        </sch:rule>
+	</sch:pattern>
+	
+	<!-- IS THIS ALREADY COVERED BY REQUIRED PASSING OF AGGREGATEPROCESS?
+	    <sch:pattern>
+        <sch:title>Req 59</sch:title>
+        <sch:rule context="sml:component">
+            <sch:assert test="@xlink:href">
+                The "xlink:href" attribute is required for the "component" property. (Req 59)
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    <sch:pattern>
+        <sch:title>Req 59</sch:title>
+        <sch:rule context="sml:component">
+            <sch:assert test="@xlink:title">
+                The "xlink:title" attribute is required for the "component" property. (Req 59)
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern> -->
+</sch:schema>

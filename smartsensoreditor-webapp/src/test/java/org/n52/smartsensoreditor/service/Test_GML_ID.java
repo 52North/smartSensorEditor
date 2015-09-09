@@ -61,8 +61,7 @@ public class Test_GML_ID {
 	}
 
 	/**
-	 * Tests if all needed beans are used in mergeBackend. If that is true all
-	 * values "test" have to be overwritten by the beans.
+	 * 
 	 */
 	@Test
 	public void testGML_ID_copied() {

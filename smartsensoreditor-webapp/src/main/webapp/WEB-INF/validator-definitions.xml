@@ -43,11 +43,14 @@
     </bean>
     <bean id="smlValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
         <property name="id" value="smlValidator"/>
+        <property name="rulessetSystemID" value="/validation/SensorML.xslt"/>
+    </bean>
+    <bean id="smlDiscoveryValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
+        <property name="id" value="smlDiscoveryValidator"/>
         <property name="rulessetSystemID" value="/validation/SensorML_Profile_for_Discovery.xslt"/>
     </bean>
-    
-    <bean id="extendedSmlValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
-        <property name="id" value="extendedSmlValidator"/>
+    <bean id="extendedSmlDiscoveryValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
+        <property name="id" value="extendedSmlDiscoveryValidator"/>
         <property name="rulessetSystemID" value="/validation/ExtendedSensorML_Profile_for_Discovery.xslt"/>
     </bean>
       <bean id="noValidator" class="de.conterra.smarteditor.validator.SchematronValidator">

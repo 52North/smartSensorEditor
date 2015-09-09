@@ -46,7 +46,8 @@
 				<entry key="isoValidator" value-ref="isoValidator" />
 				<entry key="inspireValidator" value-ref="inspireValidator" />
 				<entry key="smlValidator" value-ref="smlValidator" />
-				<entry key="extendedSmlValidator" value-ref="extendedSmlValidator" />
+				<entry key="smlDiscoveryValidator" value-ref="smlDiscoveryValidator" />
+				<entry key="extendedSmlDiscoveryValidator" value-ref="extendedSmlDiscoveryValidator" />
 				<entry key="noValidator" value-ref="noValidator" />
 			</map>
 		</property>

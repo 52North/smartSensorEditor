@@ -1,0 +1,33 @@
+The following files are from: http://schemas.opengis.net/sensorML/ 
+   * physical_system.xml
+   * core.xml
+The following changes were done in these files:
+ 
+  1)  <sch:ns uri="http://www.opengis.net/gml/2.0" prefix="swe"/>  changed to
+      <sch:ns uri="http://www.opengis.net/gml/3.2" prefix="gml"/>
+  2)  "sml:PhysicalSystem is not included in the context/test paths anymore. Instead "/*" is used.
+      old:
+      <sch:pattern>
+        <sch:title>Req 46</sch:title>
+        <sch:rule context="sml:PhysicalSystem">
+            <sch:assert test="count(gml:identifier) = 1">
+                There shall be one and only one "gml:identifier" for any PhysicalSystem. (Req 46)
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+      new:
+    <sch:pattern>
+        <sch:title>Req 46</sch:title>
+        <sch:rule context="/*">
+            <sch:assert test="count(gml:identifier) = 1">
+                There shall be one and only one "gml:identifier" for any PhysicalSystem. (Req 46)
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    
+    3) The messages are copied to the messages_de.properties/messages.properties files. The codes are set instead. 
+       (!!! There should not be spaces between the brackets:
+       false: <sch:assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.gmlIdentifier   
+              </sch:assert>
+       right: <sch:assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.gmlIdentifier</sch:assert>
+       )
