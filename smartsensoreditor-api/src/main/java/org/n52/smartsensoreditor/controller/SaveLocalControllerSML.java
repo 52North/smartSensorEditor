@@ -84,6 +84,7 @@ public class SaveLocalControllerSML extends SaveLocalController  {
         if(lFileId.equals("")){
         	lFileId=lUtil.evaluateAsString("/*/gml:identifier/text()", lDoc);
         }
+        lFileId = lFileId.trim();
         // set response attributes
         //pResponse.setContentType("application/x-download");
         pResponse.setContentType(getContentType() == null ? "application/x-download" : getContentType());

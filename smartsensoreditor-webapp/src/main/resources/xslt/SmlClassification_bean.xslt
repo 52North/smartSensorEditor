@@ -12,7 +12,7 @@
 	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd"
 	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0"
 	xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
@@ -24,16 +24,16 @@
 				select="/*/sml:classification/sml:ClassifierList/sml:classifier">
 				<SmlTerm>
 					<definition>
-						<xsl:value-of select="./sml:Term/@definition" />
+						<xsl:value-of select="fn:normalize-space(./sml:Term/@definition)" />
 					</definition>
 					<label>
-						<xsl:value-of select="./sml:Term/sml:label" />
+						<xsl:value-of select="fn:normalize-space(./sml:Term/sml:label)" />
 					</label>
 					<codeSpace>
-						<xsl:value-of select="./sml:Term/sml:codeSpace/@xlink:href" />
+						<xsl:value-of select="fn:normalize-space(./sml:Term/sml:codeSpace/@xlink:href)" />
 					</codeSpace>
 					<value>
-						<xsl:value-of select="./sml:Term/sml:value" />
+						<xsl:value-of select="fn:normalize-space(./sml:Term/sml:value)" />
 					</value>
 				</SmlTerm>
 			</xsl:for-each>

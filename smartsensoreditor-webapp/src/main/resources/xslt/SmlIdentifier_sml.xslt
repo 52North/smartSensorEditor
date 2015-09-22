@@ -10,7 +10,7 @@
 
 <xsl:stylesheet version="2.0"
  xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	exclude-result-prefixes="gmd gco gml sml">
 	<!-- import base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
@@ -20,7 +20,7 @@
 	<xsl:template match="/*/gml:identifier">
 		<xsl:copy>
 			 <xsl:attribute name="codeSpace">uniqueID</xsl:attribute>
-				<xsl:value-of select="$beanDoc/FileIdentifier/identifier" />
+				<xsl:value-of select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
 		</xsl:copy>
  	</xsl:template>
 
