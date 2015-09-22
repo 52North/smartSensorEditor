@@ -38,11 +38,13 @@
 								<sml:label>
 						<xsl:value-of select="fn:normalize-space(label)" />
 						</sml:label>
-								<sml:codeSpace>
-									<xsl:attribute name="xlink:href">
+								<xsl:if test="fn:normalize-space(codeSpace) != ''">
+									<sml:codeSpace>
+										<xsl:attribute name="xlink:href">
 							<xsl:value-of select="fn:normalize-space(codeSpace)" />
 						</xsl:attribute>
-								</sml:codeSpace>
+									</sml:codeSpace>
+								</xsl:if>
 								<sml:value>
 							<xsl:value-of select="fn:normalize-space(value)" />
 						</sml:value>
