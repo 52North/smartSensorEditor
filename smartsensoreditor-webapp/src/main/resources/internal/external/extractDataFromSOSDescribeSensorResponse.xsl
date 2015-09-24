@@ -20,7 +20,7 @@
  <xsl:strip-space elements="*"/>
 
  <xsl:template match="/">
-  <xsl:copy-of select="//swes:data/*/."/>
+  <xsl:copy-of select="(//swes:data/*/.)[1]"/>
  </xsl:template>
 
 </xsl:stylesheet>
