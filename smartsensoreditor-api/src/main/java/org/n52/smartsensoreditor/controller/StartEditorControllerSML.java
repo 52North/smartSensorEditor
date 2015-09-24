@@ -224,8 +224,9 @@ public class StartEditorControllerSML extends StartEditorController {
 			parameterMap.put("procedureId", procId);
 
 			SOSCatalogService sosService = getSOSCatalogServiceDAO();
-			sosService.init(serviceUrl+"/soap");
+			sosService.init(serviceUrl);
 			sosService.addRequestHeader("Authorization", token);
+			sosService.addRequestHeader("Content-Type", "application/soap+xml");
 
 			//When a sensor should be edited
 			if (editorBeanSML.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DESCRIBE)) {

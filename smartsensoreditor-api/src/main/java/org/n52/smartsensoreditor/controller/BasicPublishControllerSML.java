@@ -123,6 +123,7 @@ public class BasicPublishControllerSML extends BasicPublishController {
 			SOSCatalogService sosService = (SOSCatalogService) service;
 			sosService.init(lBean.getServiceUrlSOS());
 			sosService.addRequestHeader("Authorization", lBean.getServiceTokenSOS());
+			sosService.addRequestHeader("Content-Type", "application/soap+xml");
 		}
 		
 		Document catalogResponse = getCatalogService().transaction(catalogRequest);
