@@ -78,6 +78,8 @@
 			cascade="true" />
 			 <put-attribute name="sweQuantityCharacteristic" value="editor.body.sweQuantityCharacteristic"
 			cascade="true" />
+			 <put-attribute name="smlCapabilityText" value="editor.body.smlCapabilityText"
+			cascade="true" />
 	   <put-attribute name="smlIdentifier"
 			value="/WEB-INF/jsp/elements/smlIdentifier.jsp" cascade="true" />		
 		<put-attribute name="body" value="editor.body.dataset" />

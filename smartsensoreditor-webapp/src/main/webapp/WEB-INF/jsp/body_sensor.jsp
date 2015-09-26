@@ -21,26 +21,29 @@
 <div id="metadataElementTabs">
 	<ul>
 		<li><a href="#tabs-1"><fmt:message key="section.description" /></a></li>
-<%-- 	<li><a href="#tabs-2"><fmt:message key="section.characteristics" /></a></li> --%>
-<%-- 			<li><a href="#tabs-3"><fmt:message key="section.access" /></a></li>
+		<li><a href="#tabs-2"><fmt:message
+					key="section.capabilities" /></a></li>
+		<%-- 	<li><a href="#tabs-2"><fmt:message key="section.characteristics" /></a></li> --%>
+		<%-- 			<li><a href="#tabs-3"><fmt:message key="section.access" /></a></li>
 		<li><a href="#tabs-4"><fmt:message key="section.distribution" /></a></li>
 		<li><a href="#tabs-5"><fmt:message key="section.quality" /></a></li>
 		<li><a href="#tabs-6"><fmt:message key="section.metadata" /></a></li> --%>
 	</ul>
 	<div id="tabs-1">
-	
-    <tiles:insertAttribute name="smlIdentifier" />
-	<tiles:insertAttribute name="smlKeyword" />
-	<tiles:insertAttribute name="smlIdentification" />
-	<tiles:insertAttribute name="smlClassification" />
-	
-	
+
+		<tiles:insertAttribute name="smlIdentifier" />
+		<tiles:insertAttribute name="smlKeyword" />
+		<tiles:insertAttribute name="smlIdentification" />
+		<tiles:insertAttribute name="smlClassification" />
+
+
 	</div>
-	
-<%-- 	<div id="tabs-2">
-		<tiles:insertAttribute name="sweQuantityCharacteristic" />
+
+	<div id="tabs-2">
+		<%-- 		<tiles:insertAttribute name="sweQuantityCharacteristic" /> --%>
+		<tiles:insertAttribute name="smlCapabilityText" />
 		<br>
-	</div> --%>
+	</div>
 
 </div>
 

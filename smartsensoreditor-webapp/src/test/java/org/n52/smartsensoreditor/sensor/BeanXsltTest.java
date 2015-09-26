@@ -80,6 +80,9 @@ public class BeanXsltTest {
 	@Resource(name = "multiSweQuantityCharacteristic")
 	BaseBean multiSweQuantityCharacteristic;
 	
+	@Resource(name = "multiSmlCapabilityText")
+	BaseBean multiSmlCapabilityText;
+	
 
 	Document mDatasetDocument = DOMUtil.createFromStream(BeanXsltTest.class
 			.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"),
@@ -199,7 +202,7 @@ public class BeanXsltTest {
 	}
 
 	/**
-	 * This method tests, if the test-value for smlIdentification within the xml
+	 * This method tests, if the test-value for SweQuantityCharacteristic within the xml
 	 * document is copied into the bean.
 	 * 
 	 * @throws Exception
@@ -241,6 +244,56 @@ public class BeanXsltTest {
 					bean,
 					hasXPath(
 							"//SweQuantity/identifier[text()='testIdentifierQuantity']",
+							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+	}
+	
+	/**
+	 * This method tests, if the test-value for testsmlCapabilityText within the xml
+	 * document is copied into the bean.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSmlCapabilityText() throws Exception {
+		// copy test-value into bean
+		BaseBean lBean = beanTransformerService.initBean(
+				multiSmlCapabilityText, mDatasetDocument);
+		Assert.assertNotNull(lBean);
+		// transform to xml for testing
+		Document beanXML = beanTransformerService.toXML(lBean);
+		Source bean = new DOMSource(beanXML);
+		try {
+			assertThat(
+					bean,
+					hasXPath(
+							"//SmlCapabilityText/capabilityName[text()='TestofferingID']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlCapabilityText/definition[text()='urn:ogc:def:identifier:OGC:offeringID']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath("//SmlCapabilityText/label[text()='TestofferingID']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SmlCapabilityText/constraintValue[text()='testValue1,testValue2']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SmlCapabilityText/constraintPatterns[text()='testPattern1']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
+							"//SmlCapabilityText/value[text()='Testhttp://www.52north.org/test/offering/9']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

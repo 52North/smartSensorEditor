@@ -86,6 +86,9 @@ public class SmlXsltTest {
 	@Resource(name = "sweQuantityCharacteristic")
 	BaseBean sweQuantityCharacteristic;
 	
+	@Resource(name = "smlCapabilityText")
+	BaseBean smlCapabilityText;
+	
 
 	@Resource(name = "multiSmlKeyword")
     MultipleElementBean multiSmlKeyword;
@@ -99,6 +102,10 @@ public class SmlXsltTest {
 
 	@Resource(name = "multiSweQuantityCharacteristic")
 	MultipleElementBean multiSweQuantityCharacteristic;
+	
+	@Resource(name = "multiSmlCapabilityText")
+	MultipleElementBean multiSmlCapabilityText;
+	
 	@Before
 	public void before() {
 		HashMap<String,String> map = new HashMap<String,String>();
@@ -329,6 +336,63 @@ public class SmlXsltTest {
 					beanSource,
 					hasXPath(
 							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:uom[@code='testUom']",
+							usingNamespaces));
+			
+			
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	  This method tests, if the test-value for smlCapabilityText is copied into the xml document.
+	 */
+	@Test
+	public void testSmlCapabilityText() {
+	
+		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName");
+		BeanUtil.setProperty(smlCapabilityText, "definition","testDefinition");
+		BeanUtil.setProperty(smlCapabilityText, "label","testLabel");
+		BeanUtil.setProperty(smlCapabilityText, "constraintValue","testValue1  , testValue2");
+		BeanUtil.setProperty(smlCapabilityText, "constraintPatterns","testPattern");
+		BeanUtil.setProperty(smlCapabilityText, "value","testValue");
+		
+		multiSmlCapabilityText.getItems().add(smlCapabilityText);
+		Document doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+
+			assertThat("test capabilityName",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']",
+							usingNamespaces));
+			assertThat("test definition",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']",
+							usingNamespaces));
+			assertThat("test label",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:label[text()='testLabel']",
+							usingNamespaces));
+			assertThat("test constraintValue",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:constraint/swe:AllowedTokens/swe:value[text()='testValue2']",
+							usingNamespaces));
+			assertThat("test constraintPattern",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:constraint/swe:AllowedTokens/swe:pattern[text()='testPattern']",
+							usingNamespaces));
+			assertThat("test value",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:value[text()='testValue']",
 							usingNamespaces));
 			
 			

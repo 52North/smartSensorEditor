@@ -21,28 +21,31 @@
 
 	<xsl:template match="/">
 		<multi_container>
-			<xsl:for-each
-				select="/*/sml:characteristics/sml:CharacteristicList/sml:characteristic">
-				<SweQuantity>
-					<label>
-						<xsl:value-of select="fn:normalize-space(./swe:Quantity/swe:label)" />
-					</label>
-					<definition>
-						<xsl:value-of select="fn:normalize-space(./swe:Quantity/@definition)" />
-					</definition>
-					<value>
-						<xsl:value-of select="number(fn:normalize-space(./swe:Quantity/swe:value))" />
-					</value>
-					<uom>
-						<xsl:value-of select="fn:normalize-space(./swe:Quantity/swe:uom/@code)" />
-					</uom>
-					<description>
-						<xsl:value-of select="fn:normalize-space(./swe:Quantity/swe:description)" />
-					</description>
-					<identifier>
-						<xsl:value-of select="fn:normalize-space(./swe:Quantity/swe:identifier)" />
-					</identifier>
-				</SweQuantity>
+			<xsl:for-each select="/*/sml:capabilities/sml:CapabilityList/sml:capability">
+				<xsl:if test="./swe:Text">
+					<SmlCapabilityText>
+						<capabilityName>
+							<xsl:value-of select="fn:normalize-space(./@name)" />
+						</capabilityName>
+						<definition>
+							<xsl:value-of select="fn:normalize-space(./swe:Text/@definition)" />
+						</definition>
+						<label>
+							<xsl:value-of select="fn:normalize-space(./swe:Text/swe:label)" />
+						</label>
+						<constraintValue>
+							<xsl:value-of
+								select="fn:translate(fn:string-join(./swe:Text/swe:constraint/swe:AllowedTokens/swe:value,','),' ', '')" />
+						</constraintValue>
+						<constraintPatterns>
+							<xsl:value-of
+								select="fn:normalize-space(./swe:Text/swe:constraint/swe:AllowedTokens/swe:pattern)" />
+						</constraintPatterns>
+						<value>
+							<xsl:value-of select="fn:normalize-space(./swe:Text/swe:value)" />
+						</value>
+					</SmlCapabilityText>
+				</xsl:if>
 			</xsl:for-each>
 		</multi_container>
 	</xsl:template>

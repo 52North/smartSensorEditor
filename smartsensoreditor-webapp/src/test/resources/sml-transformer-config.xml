@@ -29,6 +29,12 @@
 		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
 		<property name="bean" ref="sweQuantityCharacteristic" />
 	</bean>
+	<lang:groovy id="smlCapabilityText" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<bean id="multiSmlCapabilityText" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SmlCapabilityText_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlCapabilityText_bean.xslt" />
+		<property name="bean" ref="smlCapabilityText" />
+	</bean>
 	<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
@@ -59,6 +65,7 @@
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 				<entry key="smlClassification" value-ref="multiSmlClassification" />
+				<entry key="smlCapabilityText" value-ref="multiSmlCapabilityText" />
 				<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic" />
 			</map>
 		</property>

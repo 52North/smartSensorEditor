@@ -109,7 +109,31 @@
          </sml:classifier>
       </sml:ClassifierList>
    </sml:classification>
-   
+   <sml:capabilities name="offerings">
+                        <sml:CapabilityList>
+                            <!-- Special capabilities used to specify offerings. -->
+                            <!-- Parsed and removed during InsertSensor/UpdateSensorDescription, 
+					         added during DescribeSensor. -->
+                            <!-- Offering is generated if not specified. -->
+                            <sml:capability name="TestofferingID">
+                                <swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+                                    <swe:label>TestofferingID</swe:label>
+                                    <swe:constraint>
+                                    <swe:AllowedTokens>
+                                     <swe:value>testValue1   </swe:value>
+                                     <swe:value>testValue2</swe:value>
+                                    <swe:pattern>testPattern1  </swe:pattern>
+                                    </swe:AllowedTokens>
+                                    </swe:constraint>
+                                    <swe:value>Testhttp://www.52north.org/test/offering/9</swe:value>
+                                </swe:Text>
+                            </sml:capability>
+                            <sml:capability name="test">
+                            <swe:Quantity><swe:value>1</swe:value>
+                            </swe:Quantity>
+                            </sml:capability>
+                        </sml:CapabilityList>
+                    </sml:capabilities>
 
    <!--Time period for which the description of this hydrophone is valid-->
    <sml:validTime>
