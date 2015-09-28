@@ -30,6 +30,10 @@
 		<property name="bean" ref="sweQuantityCharacteristic" />
 	</bean>
 	<lang:groovy id="smlCapabilityText" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText2" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText3" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+		<lang:groovy id="smlCapabilityText4" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+		<lang:groovy id="smlCapabilityText5" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
 	<bean id="multiSmlCapabilityText" class="de.conterra.smarteditor.beans.MultipleElementBean">
 		<property name="transformToISO" value="/xslt/SmlCapabilityText_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlCapabilityText_bean.xslt" />

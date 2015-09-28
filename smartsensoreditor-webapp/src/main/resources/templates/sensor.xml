@@ -25,10 +25,8 @@
          </sml:classifier>
       </sml:ClassifierList>
    </sml:classification>
-   <sml:capabilities name="offerings">
+   <sml:capabilities>
    <sml:CapabilityList>
-   <sml:capability name="">
-   </sml:capability>
    </sml:CapabilityList>
    </sml:capabilities>
 </sml:PhysicalSystem>

@@ -32,6 +32,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.is;
 import static org.xmlmatchers.XmlMatchers.hasXPath;
+import static org.xmlmatchers.xpath.XpathReturnType.returningANumber;
+import static org.hamcrest.Matchers.equalTo;
+
 
 
 import java.util.HashMap;
@@ -69,43 +72,54 @@ public class SmlXsltTest {
 
 	Document mRefDatasetDocument = DOMUtil.createFromStream(
 			SmlXsltTest.class.getResourceAsStream("/validation/input/testBeanTOSmlXSLT.xml"), true);
-	
-	
+
+
 	@Resource(name = "smlKeyword")
 	BaseBean smlKeyword;
-	
+
 	@Resource(name = "smlIdentification")
-    BaseBean smlIdentification;
+	BaseBean smlIdentification;
 	@Resource(name = "smlClassification")
-    BaseBean smlClassification;
-	
+	BaseBean smlClassification;
+
 	@Resource(name = "smlIdentifier")
-    BaseBean smlIdentifier;
-	
+	BaseBean smlIdentifier;
+
 
 	@Resource(name = "sweQuantityCharacteristic")
 	BaseBean sweQuantityCharacteristic;
-	
+
 	@Resource(name = "smlCapabilityText")
 	BaseBean smlCapabilityText;
+
+	@Resource(name = "smlCapabilityText2")
+	BaseBean smlCapabilityText2;
+
+	@Resource(name = "smlCapabilityText3")
+	BaseBean smlCapabilityText3;
+
+	@Resource(name = "smlCapabilityText4")
+	BaseBean smlCapabilityText4;
 	
+	@Resource(name = "smlCapabilityText5")
+	BaseBean smlCapabilityText5;
 
 	@Resource(name = "multiSmlKeyword")
-    MultipleElementBean multiSmlKeyword;
-	
+	MultipleElementBean multiSmlKeyword;
+
 	@Resource(name = "multiSmlIdentification")
-    MultipleElementBean multiSmlIdentification;
-	
+	MultipleElementBean multiSmlIdentification;
+
 	@Resource(name = "multiSmlClassification")
-    MultipleElementBean multiSmlClassification;
-	
+	MultipleElementBean multiSmlClassification;
+
 
 	@Resource(name = "multiSweQuantityCharacteristic")
 	MultipleElementBean multiSweQuantityCharacteristic;
-	
+
 	@Resource(name = "multiSmlCapabilityText")
 	MultipleElementBean multiSmlCapabilityText;
-	
+
 	@Before
 	public void before() {
 		HashMap<String,String> map = new HashMap<String,String>();
@@ -122,7 +136,7 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testKeyword() {
-	
+
 		BeanUtil.setProperty(smlKeyword, "keyword","testkeyword");
 		multiSmlKeyword.getItems().add(smlKeyword);
 		Document doc = beanTransformerService.mergeToISO(multiSmlKeyword,mRefDatasetDocument);
@@ -139,7 +153,7 @@ public class SmlXsltTest {
 		}
 
 	}
-/**
+	/**
 	  This method tests, if the test-value for smlIdentification is copied into the xml document.
 	 */
 	@Test
@@ -201,20 +215,20 @@ public class SmlXsltTest {
 					hasXPath(
 							"/*/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='testdefinition']/sml:codeSpace[@xlink:href='http://testClassifierCodeSpace']",
 							usingNamespaces));
-			
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
 
 	}
-	
+
 	/**
 	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
 	 */
 	@Test
 	public void testSmlClassifierListNotExists() {
-	
+
 		Document doc = beanTransformerService.mergeToISO(multiSmlClassification,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
 		try {
@@ -223,7 +237,7 @@ public class SmlXsltTest {
 					is(not(hasXPath(
 							"/*/sml:classification/sml:ClassifierList",
 							usingNamespaces))));
-		
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -235,7 +249,7 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSmlIdentifierListNotExists() {
-	
+
 		Document doc = beanTransformerService.mergeToISO(multiSmlIdentification,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
 		try {
@@ -244,7 +258,7 @@ public class SmlXsltTest {
 					is(not(hasXPath(
 							"/*/sml:identification/sml:IdentifierList",
 							usingNamespaces))));
-		
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -256,7 +270,7 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSmlKeywordListNotExists() {
-	
+
 		Document doc = beanTransformerService.mergeToISO(multiSmlKeyword,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
 		try {
@@ -265,20 +279,20 @@ public class SmlXsltTest {
 					is(not(hasXPath(
 							"/*/sml:keywords/sml:KeywordList",
 							usingNamespaces))));
-		
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
 
 	}
-	
+
 	/**
 	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
 	 */
 	@Test
 	public void testSweCharacteristicListNotExists() {
-	
+
 		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
 		try {
@@ -287,7 +301,7 @@ public class SmlXsltTest {
 					is(not(hasXPath(
 							"/*/sml:characteristics/sml:CharacteristicList",
 							usingNamespaces))));
-		
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -299,14 +313,14 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSweQuantityCharacteristic() {
-	
+
 		BeanUtil.setProperty(sweQuantityCharacteristic, "identifier","testIdentifier");
 		BeanUtil.setProperty(sweQuantityCharacteristic, "label","testLabel");
 		BeanUtil.setProperty(sweQuantityCharacteristic, "description","testDescription");
 		BeanUtil.setProperty(sweQuantityCharacteristic, "uom","testUom");
 		BeanUtil.setProperty(sweQuantityCharacteristic, "value","20.2");
 		BeanUtil.setProperty(sweQuantityCharacteristic, "definition","testDefinition");
-		
+
 		multiSweQuantityCharacteristic.getItems().add(sweQuantityCharacteristic);
 		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
@@ -337,65 +351,180 @@ public class SmlXsltTest {
 					hasXPath(
 							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:uom[@code='testUom']",
 							usingNamespaces));
-			
-			
+
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
 		}
 
 	}
-	
+
+
 	/**
 	  This method tests, if the test-value for smlCapabilityText is copied into the xml document.
 	 */
 	@Test
 	public void testSmlCapabilityText() {
-	
-		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName");
-		BeanUtil.setProperty(smlCapabilityText, "definition","testDefinition");
-		BeanUtil.setProperty(smlCapabilityText, "label","testLabel");
-		BeanUtil.setProperty(smlCapabilityText, "constraintValue","testValue1  , testValue2");
-		BeanUtil.setProperty(smlCapabilityText, "constraintPatterns","testPattern");
-		BeanUtil.setProperty(smlCapabilityText, "value","testValue");
-		
+		BeanUtil.setProperty(smlCapabilityText, "capabilitiesName","TestCapabilitiesName1");
+		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName1");
+		BeanUtil.setProperty(smlCapabilityText, "definition","testDefinition1");
+		BeanUtil.setProperty(smlCapabilityText, "label","testLabel1");
+		BeanUtil.setProperty(smlCapabilityText, "constraintValue","testValue0  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText, "constraintPatterns","testPattern1");
+		BeanUtil.setProperty(smlCapabilityText, "value","testValue1");
+
 		multiSmlCapabilityText.getItems().add(smlCapabilityText);
-		Document doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+
+		BeanUtil.setProperty(smlCapabilityText2, "capabilitiesName","TestCapabilitiesName2");
+		BeanUtil.setProperty(smlCapabilityText2, "capabilityName","testName2");
+		BeanUtil.setProperty(smlCapabilityText2, "definition","testDefinition2");
+		BeanUtil.setProperty(smlCapabilityText2, "label","testLabel2");
+		BeanUtil.setProperty(smlCapabilityText2, "constraintValue","testValue00  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText2, "constraintPatterns","testPattern2");
+		BeanUtil.setProperty(smlCapabilityText2, "value","testValue2");
+
+		multiSmlCapabilityText.getItems().add(smlCapabilityText2);
+
+		BeanUtil.setProperty(smlCapabilityText3, "capabilitiesName","TestCapabilitiesName2");
+		BeanUtil.setProperty(smlCapabilityText3, "capabilityName","testName3");
+		BeanUtil.setProperty(smlCapabilityText3, "definition","testDefinition3");
+		BeanUtil.setProperty(smlCapabilityText3, "label","testLabel3");
+		BeanUtil.setProperty(smlCapabilityText3, "constraintValue","testValue00  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText3, "constraintPatterns","testPattern3");
+		BeanUtil.setProperty(smlCapabilityText3, "value","testValue3");
+
+		multiSmlCapabilityText.getItems().add(smlCapabilityText3);
+
+		BeanUtil.setProperty(smlCapabilityText4, "capabilitiesName","TestCapabilitiesName1");
+		BeanUtil.setProperty(smlCapabilityText4, "capabilityName","testName4");
+		BeanUtil.setProperty(smlCapabilityText4, "definition","testDefinition4");
+		BeanUtil.setProperty(smlCapabilityText4, "label","testLabel4");
+		BeanUtil.setProperty(smlCapabilityText4, "constraintValue","testValue00  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText4, "constraintPatterns","testPattern4");
+		BeanUtil.setProperty(smlCapabilityText4, "value","testValue4");
+
+		multiSmlCapabilityText.getItems().add(smlCapabilityText4);
+		
+		BeanUtil.setProperty(smlCapabilityText5, "capabilitiesName","Test5");
+		BeanUtil.setProperty(smlCapabilityText5, "capabilityName","testName5");
+		BeanUtil.setProperty(smlCapabilityText5, "definition","testDefinition5");
+		BeanUtil.setProperty(smlCapabilityText5, "label","testLabel5");
+		BeanUtil.setProperty(smlCapabilityText5, "constraintValue","testValue00  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText5, "constraintPatterns","testPattern5");
+		BeanUtil.setProperty(smlCapabilityText5, "value","testValue5");
+
+		multiSmlCapabilityText.getItems().add(smlCapabilityText5);
+		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+
 		Source beanSource = new DOMSource(doc);
 		try {
-
+			//test if values are inserted
 			assertThat("test capabilityName",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']",
+							"/*/sml:capabilities[@name='TestCapabilitiesName1']",
+							usingNamespaces));
+			assertThat("test capabilityName",
+					beanSource,
+					hasXPath(
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']",
 							usingNamespaces));
 			assertThat("test definition",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']",
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']/swe:Text[@definition='testDefinition1']",
 							usingNamespaces));
 			assertThat("test label",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:label[text()='testLabel']",
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']/swe:Text[@definition='testDefinition1']/swe:label[text()='testLabel1']",
 							usingNamespaces));
 			assertThat("test constraintValue",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:constraint/swe:AllowedTokens/swe:value[text()='testValue2']",
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']/swe:Text[@definition='testDefinition1']/swe:constraint/swe:AllowedTokens/swe:value[text()='testValue00']",
 							usingNamespaces));
 			assertThat("test constraintPattern",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:constraint/swe:AllowedTokens/swe:pattern[text()='testPattern']",
+							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']/swe:Text[@definition='testDefinition1']/swe:constraint/swe:AllowedTokens/swe:pattern[text()='testPattern1']",
 							usingNamespaces));
 			assertThat("test value",
 					beanSource,
 					hasXPath(
-							"/*/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName']/swe:Text[@definition='testDefinition']/swe:value[text()='testValue']",
+							"/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList/sml:capability[@name='testName1']/swe:Text[@definition='testDefinition1']/swe:value[text()='testValue1']",
 							usingNamespaces));
-			
-			
+			//test capabilities with name=TestCapabilitiesName1 exists exact 1 time.
+			assertThat("test one capability with name=TestCapabilitiesName1 ",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1'])",
+							usingNamespaces,equalTo("1")));
+
+			//test if testName3 is inserted into TestCapabilitiesName2
+			assertThat("test if testName3 is inserted into TestCapabilitiesName2",
+					beanSource,
+					hasXPath("/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName2']/sml:CapabilityList/sml:capability[@name='testName3']/swe:Text[@definition='testDefinition3']/swe:value[text()='testValue3']",
+							usingNamespaces));
+
+			//test if testName4 is inserted into TestCapabilitiesName1
+			assertThat("test if testName3 is inserted into TestCapabilitiesName1",
+					beanSource,
+					hasXPath("/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName4']/swe:Text[@definition='testDefinition4']/swe:value[text()='testValue4']",
+							usingNamespaces));
+
+			//delete all capabilities that have only text nodes
+			assertThat("delete all capabilities that have only text nodes",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='xxx'])",
+							usingNamespaces,equalTo("0")));
+			//has no empty capability Lists
+			assertThat("delete all capabilities that have no nodes",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='yyy'])",
+							usingNamespaces,equalTo("0")));
+			//has no empty capability Lists
+			assertThat("has no empty capability Lists",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList[not(*)])",
+							usingNamespaces,equalTo("0")));
+			//insert into Test5
+			assertThat("has no empty capability Lists",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='Test5']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition5']/swe:value[text()='testValue5'])",
+							usingNamespaces,equalTo("1")));
+			//Test5 has element sml:test/text()=testen
+			assertThat("has no empty capability Lists",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='Test5']/sml:CapabilityList/sml:test[text()='testen'])",
+							usingNamespaces,equalTo("1")));
+			//Test6 has element sml:test/text()=testen
+			assertThat("has no empty capability Lists",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='Test6']/sml:CapabilityList/sml:test[text()='testen'])",
+							usingNamespaces,equalTo("1")));
+
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	/**
+	  This method tests, if the SmlCapabilityText element is not inserted, when no capabilities are inserted
+	 */
+	@Test
+	public void testSmlCapabilityTextNotExists() {
+
+		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					is(not(hasXPath(
+							"/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList/sml:capability/swe:Text",
+							usingNamespaces))));
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;
@@ -408,7 +537,7 @@ public class SmlXsltTest {
 	@Test
 	public void testIdentifer() {
 		BeanUtil.setProperty(smlIdentifier, "id", "testIdentifier");
-		
+
 		Document doc = beanTransformerService.mergeToISO(smlIdentifier,
 				mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
@@ -418,6 +547,27 @@ public class SmlXsltTest {
 					hasXPath(
 							"//gml:identifier[text()='testIdentifier']",
 							usingNamespaces));
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	/**
+	  This method tests, if all not mentioned elements are copied
+	 */
+	@Test
+	public void testCopyAllNotMentionedElements() {
+
+		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat(
+					beanSource,
+					hasXPath(
+							"/sml:PhysicalSystem/sml:test",
+							usingNamespaces));
+
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;

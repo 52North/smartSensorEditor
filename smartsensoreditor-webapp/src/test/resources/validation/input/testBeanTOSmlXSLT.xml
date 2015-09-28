@@ -1,100 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--This document contains an exemplary description of specific hydrophone (instance of a type)-->
-<sml:PhysicalSystem gml:id="ExampleHydrophone1" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
-   <!--Short textual description of the hydrophone-->
-   <gml:identifier codeSpace="uid"></gml:identifier>
-   <gml:description></gml:description>
-   <!--Keywords describing the hydrophone-->
-   <sml:keywords>
-      <sml:KeywordList>
-         <sml:keyword></sml:keyword>
-      </sml:KeywordList>
-   </sml:keywords>
-   <!--Identifiers of the hydrophone-->
-   <sml:identification>
-      <sml:IdentifierList>
-         <!--UUID of the hydrophone-->
-         <sml:identifier>
-            <sml:Term definition="">
-               <sml:label></sml:label>
-               <sml:value></sml:value>
-            </sml:Term>
-         </sml:identifier>
-      </sml:IdentifierList>
-   </sml:identification>
-   <sml:classification>
-   <sml:ClassifierList>
-   </sml:ClassifierList>
-   </sml:classification>
-   <sml:capabilities name="test"></sml:capabilities>
-   
-   <!--    ##### hydrophone_Type -->
-<sml:characteristics name="ExampleHydrophone1Characteristics">
-      <sml:CharacteristicList>
-         <!--The weight of the hydrophone-->
-         <sml:characteristic name="weight">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#weight">
-               <swe:label>Weight (kg)</swe:label>
-               <swe:uom code="kg"/>
-               <swe:value>0.423</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-         <!--The length of the hydrophone-->
-         <sml:characteristic name="length">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#length">
-               <swe:label>Length (mm)</swe:label>
-               <swe:uom code="mm"/>
-               <swe:value>35</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-         <!--The width of the hydrophone-->
-         <sml:characteristic name="width">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#width">
-               <swe:label>Width (mm)</swe:label>
-               <swe:uom code="mm"/>
-               <swe:value>36</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-         <!--The height of the hydrophone-->
-         <sml:characteristic name="height">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#height">
-               <swe:label>Height (mm)</swe:label>
-               <swe:uom code="mm"/>
-               <swe:value>220</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-         <!--The material of the hydrophone-->
-         <sml:characteristic name="material">
-            <swe:Text definition="http://www.nexosproject.eu/dictionary/definitions.html#material">
-               <swe:label>Material</swe:label>
-               <swe:value>Encapsulated polymer</swe:value>
-            </swe:Text>
-         </sml:characteristic>
-         <!--The storage type of the hydrophone-->
-         <sml:characteristic name="storageType">
-            <swe:Text definition="http://www.nexosproject.eu/dictionary/definitions.html#storageType">
-               <swe:label>Storage Type</swe:label>
-               <swe:value>SSD</swe:value>
-            </swe:Text>
-         </sml:characteristic>
-         <!--The storage capacity of the hydrophone-->
-         <sml:characteristic name="storageCapacity">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#storageCapacity">
-               <swe:label>Storage Capacity (By)</swe:label>
-               <swe:uom code="By"/>
-               <swe:value>1000000000</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-         <!--The battery current of the hydrophone-->
-         <sml:characteristic name="batteryCurrent">
-            <swe:Quantity definition="http://www.nexosproject.eu/dictionary/definitions.html#batteryCurrent">
-               <swe:identifier>testIdentifierQuantity</swe:identifier>
-               <swe:label>Battery Current (mA)</swe:label>
-               <swe:description>testDescription</swe:description>
-               <swe:uom code="mA"/>
-               <swe:value>22</swe:value>
-            </swe:Quantity>
-         </sml:characteristic>
-      </sml:CharacteristicList>
-   </sml:characteristics>
+<!--This document contains an exemplary description of specific hydrophone 
+	(instance of a type) -->
+<sml:PhysicalSystem gml:id="ExampleHydrophone1"
+	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:fn="http://www.w3.org/2005/xpath-functions"
+	xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd">
+	<!--Short textual description of the hydrophone -->
+	<gml:identifier codeSpace="uid"></gml:identifier>
+	<gml:description></gml:description>
+	<!--Keywords describing the hydrophone -->
+	<sml:keywords>
+		<sml:KeywordList>
+			<sml:keyword></sml:keyword>
+		</sml:KeywordList>
+	</sml:keywords>
+	<!--Identifiers of the hydrophone -->
+	<sml:identification>
+		<sml:IdentifierList>
+			<!--UUID of the hydrophone -->
+			<sml:identifier>
+				<sml:Term definition="">
+					<sml:label></sml:label>
+					<sml:value></sml:value>
+				</sml:Term>
+			</sml:identifier>
+		</sml:IdentifierList>
+	</sml:identification>
+	<sml:classification>
+		<sml:ClassifierList>
+		</sml:ClassifierList>
+	</sml:classification>
+	<sml:capabilities name="TestCapabilitiesName2">
+		<sml:CapabilityList>
+		</sml:CapabilityList>
+	</sml:capabilities>
+	<sml:capabilities name="Test5">
+		<sml:CapabilityList>
+		<sml:test>testen</sml:test>
+		</sml:CapabilityList>
+	</sml:capabilities>
+		<sml:capabilities name="Test6">
+		<sml:CapabilityList>
+		<sml:test>testen</sml:test>
+		</sml:CapabilityList>
+	</sml:capabilities>
+	<sml:capabilities name="xxx">
+		<sml:CapabilityList>
+			<sml:capability name="yyy">
+				<swe:Text definition="mm">
+				</swe:Text>
+			</sml:capability>
+		</sml:CapabilityList>
+	</sml:capabilities>
+	<sml:capabilities name="yyy">
+		<sml:CapabilityList/>
+	</sml:capabilities>
+
+	<!-- ##### hydrophone_Type -->
+	<sml:characteristics name="ExampleHydrophone1Characteristics">
+		<sml:CharacteristicList>
+			<!--The weight of the hydrophone -->
+			<sml:characteristic name="weight">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#weight">
+					<swe:label>Weight (kg)</swe:label>
+					<swe:uom code="kg" />
+					<swe:value>0.423</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+			<!--The length of the hydrophone -->
+			<sml:characteristic name="length">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#length">
+					<swe:label>Length (mm)</swe:label>
+					<swe:uom code="mm" />
+					<swe:value>35</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+			<!--The width of the hydrophone -->
+			<sml:characteristic name="width">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#width">
+					<swe:label>Width (mm)</swe:label>
+					<swe:uom code="mm" />
+					<swe:value>36</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+			<!--The height of the hydrophone -->
+			<sml:characteristic name="height">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#height">
+					<swe:label>Height (mm)</swe:label>
+					<swe:uom code="mm" />
+					<swe:value>220</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+			<!--The material of the hydrophone -->
+			<sml:characteristic name="material">
+				<swe:Text
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#material">
+					<swe:label>Material</swe:label>
+					<swe:value>Encapsulated polymer</swe:value>
+				</swe:Text>
+			</sml:characteristic>
+			<!--The storage type of the hydrophone -->
+			<sml:characteristic name="storageType">
+				<swe:Text
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#storageType">
+					<swe:label>Storage Type</swe:label>
+					<swe:value>SSD</swe:value>
+				</swe:Text>
+			</sml:characteristic>
+			<!--The storage capacity of the hydrophone -->
+			<sml:characteristic name="storageCapacity">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#storageCapacity">
+					<swe:label>Storage Capacity (By)</swe:label>
+					<swe:uom code="By" />
+					<swe:value>1000000000</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+			<!--The battery current of the hydrophone -->
+			<sml:characteristic name="batteryCurrent">
+				<swe:Quantity
+					definition="http://www.nexosproject.eu/dictionary/definitions.html#batteryCurrent">
+					<swe:identifier>testIdentifierQuantity</swe:identifier>
+					<swe:label>Battery Current (mA)</swe:label>
+					<swe:description>testDescription</swe:description>
+					<swe:uom code="mA" />
+					<swe:value>22</swe:value>
+				</swe:Quantity>
+			</sml:characteristic>
+		</sml:CharacteristicList>
+	</sml:characteristics>
+	<sml:test>
+
+	</sml:test>
 </sml:PhysicalSystem>

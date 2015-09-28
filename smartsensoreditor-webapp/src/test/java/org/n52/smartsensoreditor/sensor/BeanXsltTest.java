@@ -270,6 +270,11 @@ public class BeanXsltTest {
 			assertThat(
 					bean,
 					hasXPath(
+							"//SmlCapabilityText/capabilitiesName[text()='TestCapabilitiesName']",
+							usingNamespaces));
+			assertThat(
+					bean,
+					hasXPath(
 							"//SmlCapabilityText/capabilityName[text()='TestofferingID']",
 							usingNamespaces));
 			assertThat(

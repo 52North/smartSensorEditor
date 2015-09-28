@@ -15,7 +15,7 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	exclude-result-prefixes="gmd gco gml sml">
+	exclude-result-prefixes="gmd gco gml sml fn swe">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"
 		indent="no" omit-xml-declaration="yes" />
 
@@ -24,6 +24,9 @@
 			<xsl:for-each select="/*/sml:capabilities/sml:CapabilityList/sml:capability">
 				<xsl:if test="./swe:Text">
 					<SmlCapabilityText>
+					    <capabilitiesName>
+							<xsl:value-of select="fn:normalize-space(../../@name)" />
+						</capabilitiesName>
 						<capabilityName>
 							<xsl:value-of select="fn:normalize-space(./@name)" />
 						</capabilityName>

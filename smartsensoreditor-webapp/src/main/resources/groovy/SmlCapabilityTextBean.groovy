@@ -91,6 +91,7 @@ Extension of:
 */
 @XStreamAlias("SmlCapabilityText")
 class SmlCapabilityText extends BaseBean {
+String capabilitiesName
 String capabilityName
 String definition
 String label

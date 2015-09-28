@@ -30,6 +30,15 @@
     <table class="marginLine">
         <tr>
             <td>
+                <label for="smlCapabilityText_${smlCapabilityText_cnt}_CapabilitiesName" class="firstLabel">
+                    <fmt:message key="element.smlCapabilityText.capabilitiesName"/>
+                </label></td><td>
+                <form:input path="storage['smlCapabilityText'].items[${smlCapabilityText_cnt}].capabilitiesName" size="100"
+                            id="smlCapabilityText_${smlCapabilityText_cnt}_CapabilitiesName"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="smlCapabilityText_${smlCapabilityText_cnt}_CapabilityName" class="firstLabel">
                     <fmt:message key="element.smlCapabilityText.capabilityName"/>
                 </label></td><td>

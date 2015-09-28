@@ -24,7 +24,8 @@
 			<xsl:apply-templates select="@*|node()" />
 		</xsl:copy>
 	</xsl:template>
-	<xsl:template match="/*" >
+	<xsl:template match="sml:PhysicalSystem/sml:contacts"/>
+	<xsl:template match="/sml:PhysicalSystem" >
 		<xsl:copy>
 			 <xsl:attribute name="gml:id">
 				<xsl:value-of select="@gml:id" />
@@ -46,4 +47,5 @@
 			<xsl:apply-templates select="sml:components" /> -->
 		</xsl:copy>
 	</xsl:template> 
+	<xsl:strip-space elements="*"/>
 </xsl:stylesheet>
