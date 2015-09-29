@@ -515,7 +515,6 @@ public class SmlXsltTest {
 	 */
 	@Test
 	public void testSmlCapabilityTextNotExists() {
-
 		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
 		Source beanSource = new DOMSource(doc);
 		try {
@@ -524,6 +523,52 @@ public class SmlXsltTest {
 					is(not(hasXPath(
 							"/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList/sml:capability/swe:Text",
 							usingNamespaces))));
+
+		} catch (NoSuchMethodError e) {
+			LOG.error("Possibly XPath is invalid with compared source", e);
+			throw e;
+		}
+
+	}
+	
+	/**
+	  This method tests, if not required empty fields are not inserted into the sml document
+	 */
+	@Test
+	public void testSmlCapabilityTextNotInsertFields() {
+		BeanUtil.setProperty(smlCapabilityText, "capabilitiesName","TestCapabilitiesName1");
+		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName1");
+		BeanUtil.setProperty(smlCapabilityText, "definition","testDefinition1");
+		BeanUtil.setProperty(smlCapabilityText, "label","");
+		BeanUtil.setProperty(smlCapabilityText, "constraintValue","");
+		BeanUtil.setProperty(smlCapabilityText, "constraintPatterns","");
+		BeanUtil.setProperty(smlCapabilityText, "value","");
+		
+		multiSmlCapabilityText.getItems().add(smlCapabilityText);
+		
+		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+		Source beanSource = new DOMSource(doc);
+		try {
+			assertThat("test label",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition1']/swe:label)",
+							usingNamespaces,equalTo("0")));
+			assertThat("test constraintValue",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition1']/swe:constraint/swe:AllowedTokens/swe:value)",
+							usingNamespaces,equalTo("0")));
+			assertThat("test constraintPattern",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition1']/swe:constraint/swe:AllowedTokens/swe:pattern)",
+							usingNamespaces,equalTo("0")));
+			assertThat("test constraintPattern",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition1']/swe:value)",
+							usingNamespaces,equalTo("0")));
+			assertThat("test constraints not inserted",
+					beanSource,
+					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName5']/swe:Text[@definition='testDefinition1']/swe:constraint)",
+							usingNamespaces,equalTo("0")));
 
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

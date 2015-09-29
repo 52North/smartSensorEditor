@@ -55,7 +55,7 @@
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()" />
 		</xsl:copy>
-	
+
 	</xsl:template>
 	<xsl:template name="noChilds"
 		match="/sml:PhysicalSystem/sml:capabilities[*/not(*)]" priority="200" />
@@ -109,11 +109,11 @@
 		match="/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList">
 		<xsl:param name="capabilitiesNameNode" select="../@name" />
 		<xsl:copy>
-			 <xsl:apply-templates select="@*|node()" />
-			 <xsl:call-template name="insertCapabilitiesInOldNode">
+			<xsl:apply-templates select="@*|node()" />
+			<xsl:call-template name="insertCapabilitiesInOldNode">
 				<xsl:with-param name="capabilitiesNameNode"
 					select="fn:normalize-space($capabilitiesNameNode)" />
-			</xsl:call-template> 
+			</xsl:call-template>
 		</xsl:copy>
 	</xsl:template>
 
@@ -143,20 +143,38 @@
 			<swe:Text>
 				<xsl:attribute name="definition"> <xsl:value-of
 					select="fn:normalize-space($capability/definition)" /> </xsl:attribute>
-				<swe:label> 
-		<xsl:value-of select="fn:normalize-space($capability/label)" /> </swe:label>
-				<swe:constraint>
-					<swe:AllowedTokens>
-						<xsl:for-each select="fn:tokenize($capability/constraintValue,',')">
-							<swe:value>
-								<xsl:value-of select="fn:normalize-space(.)" />
-							</swe:value>
-						</xsl:for-each>
-						<swe:pattern> <xsl:value-of
-							select="fn:normalize-space($capability/constraintPatterns)" /> </swe:pattern>
-					</swe:AllowedTokens>
-				</swe:constraint>
-				<swe:value> <xsl:value-of select="fn:normalize-space($capability/value)" /> </swe:value>
+				<xsl:if test="fn:normalize-space($capability/label) != ''">
+					<swe:label>
+						<xsl:value-of select="fn:normalize-space($capability/label)" />
+					</swe:label>
+				</xsl:if>
+				<xsl:if
+					test="(fn:normalize-space($capability/constraintValue[1]) != '') or (fn:normalize-space($capability/constraintPatterns) != '')">
+					<swe:constraint>
+						<swe:AllowedTokens>
+							<xsl:if
+								test="fn:normalize-space($capability/constraintValue[1]) != ''">
+								<xsl:for-each select="fn:tokenize($capability/constraintValue,',')">
+									<swe:value>
+										<xsl:value-of select="fn:normalize-space(.)" />
+									</swe:value>
+								</xsl:for-each>
+							</xsl:if>
+							<xsl:if
+								test="fn:normalize-space($capability/constraintPatterns) != ''">
+								<swe:pattern>
+									<xsl:value-of
+										select="fn:normalize-space($capability/constraintPatterns)" />
+								</swe:pattern>
+							</xsl:if>
+						</swe:AllowedTokens>
+					</swe:constraint>
+					</xsl:if>
+					<xsl:if test="fn:normalize-space($capability/value) != ''">
+						<swe:value>
+							<xsl:value-of select="fn:normalize-space($capability/value)" />
+						</swe:value>
+					</xsl:if>
 			</swe:Text>
 		</sml:capability>
 	</xsl:template>
