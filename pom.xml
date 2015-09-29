@@ -111,6 +111,10 @@
 							<version>2.18.1</version>
 						</dependency>
 					</dependencies>
+					<configuration>
+						<reuseForks>false</reuseForks>
+						<forkCount>1</forkCount>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
