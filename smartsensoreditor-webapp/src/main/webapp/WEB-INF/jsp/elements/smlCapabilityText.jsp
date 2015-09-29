@@ -58,7 +58,7 @@
         <tr>
             <td>
                 <label for="smlCapabilityText_${smlCapabilityText_cnt}_LabelElement" class="firstLabel">
-                    <fmt:message key="element.smlCapabilityText.label"/>
+                    <fmt:message key="element.smlCapabilityText.labelElement"/>
                 </label></td><td>
                 <form:input path="storage['smlCapabilityText'].items[${smlCapabilityText_cnt}].label" size="100"
                             id="smlCapabilityText_${smlCapabilityText_cnt}_LabelElement"/>

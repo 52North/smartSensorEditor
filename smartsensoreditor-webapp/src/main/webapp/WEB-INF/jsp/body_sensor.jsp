@@ -40,6 +40,9 @@
 	</div>
 
 	<div id="tabs-2">
+	 <a class="tooltip" id="smlCapabilityLabel">Capabilities</a>
+	 <p>&nbsp;</p>
+	 <p>&nbsp;</p>
 		<%-- 		<tiles:insertAttribute name="sweQuantityCharacteristic" /> --%>
 		<tiles:insertAttribute name="smlCapabilityText" />
 		<br>
