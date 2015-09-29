@@ -126,8 +126,7 @@
 			name for the instance. -->
 		<rule context="//sml:identification">
 			<assert
-				test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName
-			</assert>
+				test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
 		</rule>
 
 
@@ -210,8 +209,7 @@
 			the swe:uom element which specifies the code attribute. -->
 		<rule
 			context="//sml:capabilities/swe:DataRecord/swe:field/swe:Quantity/swe:uom">
-			<assert test="string-length(@code) > 0">errors.validation.SML.2.0.discovery.smlCapabilities.oum
-			</assert>
+			<assert test="string-length(@code) > 0">errors.validation.SML.2.0.discovery.smlCapabilities.oum</assert>
 		</rule>
 
 

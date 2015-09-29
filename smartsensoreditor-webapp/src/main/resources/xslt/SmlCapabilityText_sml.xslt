@@ -30,7 +30,7 @@
 			<xsl:attribute name="gml:id">
 				<xsl:value-of select="@gml:id" />
 				</xsl:attribute>
-			<xsl:apply-templates select="node()except(sml:*)" />
+			<xsl:apply-templates select="* except(sml:* | comment())" />
 			<xsl:apply-templates select="sml:keywords" />
 			<xsl:apply-templates select="sml:identification" />
 			<xsl:apply-templates select="sml:classification" />
