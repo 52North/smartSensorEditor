@@ -1,0 +1,130 @@
+<!--
+
+    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
+<schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+	xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/2.0"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
+	schemaVersion="ISO19757-3">
+	<ns prefix="sml" uri="http://www.opengis.net/sensorml/2.0" />
+	<ns prefix="gml" uri="http://www.opengis.net/gml/3.2" />
+	<ns prefix="swe" uri="http://www.opengis.net/swe/2.0" />
+	<ns prefix="xlink" uri="http://www.w3.org/1999/xlink" />
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- General Validation of SML core.sch -->
+	<!-- This pattern validates the parts of the SensorML document which are 
+		common for the System and the Component. This are copied rules from the SML 
+		core.sch file -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- SensorML is an OGC Standard. Copyright (c) 2014 Open Geospatial Consortium. 
+		To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ 
+		. -->
+	<!-- Version: 2.0.0 -->
+	<!-- xlink:href attribute -->
+	<pattern>
+		<title>Req 40</title>
+		<rule context="//*">
+			<assert test="@xlink:href | * | @* or (normalize-space(.) != '')">errors.validation.SML.2.0.xlink_href</assert>
+		</rule>
+	</pattern>
+
+	<!-- gml:identifier property -->
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:DescribedObject">
+			<assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.describedObject.gmlIdentifier</assert>
+		</rule>
+	</pattern>
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:DescribedObject/gml:identifier">
+			<assert test="@codeSpace = 'uniqueID' ">errors.validation.SML.2.0.describedObject.gmlIdentifier.uniqueID</assert>
+		</rule>
+	</pattern>
+
+	<!-- contact role -->
+	<pattern>
+		<title>Req 49</title>
+		<rule context="sml:ContactList/sml:member">
+			<assert test="@xlink:arcrole">errors.validation.SML.2.0.contactList.member.xlink.arcrole</assert>
+		</rule>
+	</pattern>
+
+	<!-- feature of interest role -->
+	<pattern>
+		<title>Req 51</title>
+		<rule context="sml:FeatureList/sml:member">
+			<assert test="@xlink:arcrole">errors.validation.SML.2.0.featureList.member.xlink.arcrole</assert>
+		</rule>
+	</pattern>
+
+	<!-- ObservableProperty -->
+	<pattern>
+		<title>Req 52</title>
+		<rule context="//sml:ObservableProperty">
+			<assert test="@definition">errors.validation.SML.2.0.observableProperty.definition</assert>
+		</rule>
+	</pattern>
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- General Validation of SML physical_system.sch -->
+	<!-- This pattern validates the parts of the SensorML document which are 
+		common for the PhysicalSystem. This are copied rules from the SML physical_system.sch 
+		file -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- SensorML is an OGC Standard. Copyright (c) 2014 Open Geospatial Consortium. 
+		To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ 
+		. -->
+	<!-- Version: 2.0.0 -->
+	<!-- gml:identifier property -->
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:PhysicalSystem">
+			<assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.gmlIdentifier</assert>
+		</rule>
+	</pattern>
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:PhysicalSystem/gml:identifier">
+			<assert test="@codeSpace = 'uniqueID' ">errors.validation.SML.2.0.gmlIdentifier.uniqueID</assert>
+		</rule>
+	</pattern>
+
+	<!-- IS THIS ALREADY COVERED BY REQUIRED PASSING OF AGGREGATEPROCESS? <pattern> 
+		<title>Req 59</title> <rule context="sml:component"> <assert 
+		test="@xlink:href"> The "xlink:href" attribute is required for the "component" 
+		property. (Req 59) </assert> </rule> </pattern> <pattern> 
+		<title>Req 59</title> <rule context="sml:component"> <assert 
+		test="@xlink:title"> The "xlink:title" attribute is required for the "component" 
+		property. (Req 59) </assert> </rule> </pattern> -->
+
+</schema>

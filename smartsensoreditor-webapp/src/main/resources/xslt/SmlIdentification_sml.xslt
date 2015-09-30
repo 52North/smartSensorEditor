@@ -23,7 +23,7 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing identifiers -->
-	<xsl:template match="//sml:identification/*" />
+	<xsl:template match="/*/sml:identification/*" />
 	<!-- go through citation and copy nodes -->
 	<xsl:template match="/*/sml:identification">
 		<xsl:copy>

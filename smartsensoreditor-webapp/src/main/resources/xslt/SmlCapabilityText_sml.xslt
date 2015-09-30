@@ -30,7 +30,8 @@
 			<xsl:attribute name="gml:id">
 				<xsl:value-of select="@gml:id" />
 				</xsl:attribute>
-			<xsl:apply-templates select="* except(sml:* | comment())" />
+			<xsl:apply-templates select="gml:identifier" />
+			<xsl:apply-templates select="* except(sml:* | comment()| gml:identifier)" />
 			<xsl:apply-templates select="sml:keywords" />
 			<xsl:apply-templates select="sml:identification" />
 			<xsl:apply-templates select="sml:classification" />
@@ -169,12 +170,12 @@
 							</xsl:if>
 						</swe:AllowedTokens>
 					</swe:constraint>
-					</xsl:if>
-					<xsl:if test="fn:normalize-space($capability/value) != ''">
-						<swe:value>
-							<xsl:value-of select="fn:normalize-space($capability/value)" />
-						</swe:value>
-					</xsl:if>
+				</xsl:if>
+				<xsl:if test="fn:normalize-space($capability/value) != ''">
+					<swe:value>
+						<xsl:value-of select="fn:normalize-space($capability/value)" />
+					</swe:value>
+				</xsl:if>
 			</swe:Text>
 		</sml:capability>
 	</xsl:template>
