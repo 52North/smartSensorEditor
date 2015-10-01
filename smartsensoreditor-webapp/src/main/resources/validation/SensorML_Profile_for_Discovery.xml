@@ -101,8 +101,10 @@
 		</rule>
 	</pattern>
 	<!-- IS THIS ALREADY COVERED BY REQUIRED PASSING OF AGGREGATEPROCESS? <pattern> <title>Req 59</title> <rule context="sml:component"> <assert 	test="@xlink:href"> The "xlink:href" attribute is required for the "component" 	property. (Req 59) </assert> </rule> </pattern> <pattern> <title>Req 59</title> <rule context="sml:component"> <assert 	test="@xlink:title"> The "xlink:title" attribute is required for the "component" 	property. (Req 59) </assert> </rule> </pattern> --><!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- SML Discovery -->
-	<!-- This pattern validates against the discovery framework for SML. -->
+	<!-- This pattern validates against the discovery framework for SML. !!!!Warning: Some rules for sml:PhysicalComponent are left out.-->
 	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!--~~~~~~~~~~ -->
 	<!--gml:description -->
@@ -139,32 +141,32 @@
 	<!--~~~~~~~~~~ -->
 	<!-- Each "identifier/Term" element contained in the "IdentifierList" must 	have a "definition" attribute. This attribute links to the semantics of the 	identifier. -->
 	<pattern>
-		<rule context="//sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
+		<rule context="//sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
 			<assert test="string-length(@definition) &gt; 0">errors.validation.SML.2.0.discovery.smlIdentification.definition</assert>
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#UUID". 	The value of its contained "Term" element uniquely identifies the instance. -->
 	<pattern>
-		<rule context="//sml:identification">
-			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#UUID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.UUID</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#UUID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.UUID</assert>
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#longName". 	The value of its contained "Term" element represents a short representation 	of the human understandable name for the instance. -->
 	<pattern>
-		<rule context="//sml:identification">
-			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#longName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.longName</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#longName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.longName</assert>
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#shortName". 	The value of its contained "Term" element represents a human understandable 	name for the instance. -->
 	<pattern>
-		<rule context="//sml:identification">
-			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:parentSystemUniqueID". 	The value of its contained "Term" element refers to the system that contains 	the component. -->
 	<pattern>
-		<rule context="//sml:PhysicalComponent/sml:Component/sml:identification">
-			<assert test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#parentSystemUniqueID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.parentSystemUniqueID</assert>
+		<rule context="//sml:PhysicalComponent">
+			<assert test="count(sml:Component/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#parentSystemUniqueID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.parentSystemUniqueID</assert>
 		</rule>
 	</pattern>
 	<!--~~~~~~~~~~ -->
@@ -178,26 +180,26 @@
 	</pattern>
 	<!-- A PhysicalSystem element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#sensorType. 	The value of its contained Term element states the type of the sensor" -->
 	<pattern>
-		<rule context="//sml:PhysicalSystem/sml:classification">
-			<assert test="count(sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
 		</rule>
 	</pattern>
 	<!-- A PhysicalSystem element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication -->
 	<pattern>
-		<rule context="//sml:PhysicalSystem/sml:classification">
-			<assert test="count(sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
 		</rule>
 	</pattern>
 	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#sensorType" 	The value of its contained Term element states the type of the sensor. -->
 	<pattern>
-		<rule context="//sml:PhysicalComponent/sml:classification">
-			<assert test="count(sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
+		<rule context="//sml:PhysicalComponent">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
 		</rule>
 	</pattern>
 	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication -->
 	<pattern>
-		<rule context="//sml:PhysicalComponent/sml:classification">
-			<assert test="count(sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
+		<rule context="//sml:PhysicalComponent">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
 		</rule>
 	</pattern>
 	<!--~~~~~~~~~~ -->
@@ -218,14 +220,14 @@
 	</pattern>
 	<!--The dataRecord within the capabilities section of a PhysicalSystem shall 	contain one swe:field which specifies a swe:Envelope element with the definition 	http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. It describes 	the bounding box of the area that is observed by the System or Component. 	In case of an in-situ sensor this bounding box only contains the position 	of the sensor. -->
 	<pattern>
-		<rule context="//sml:PhysicalSystem/sml:capabilities">
-			<assert test="count(swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
 		</rule>
 	</pattern>
 	<!-- The dataRecord within the capabilities section of a PhysicalComponent 	shall contain one swe:field which specifies a swe:Envelope element with the 	definition http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. 	It describes the bounding box of the area that is observed by the System 	or Component. In case of an in-situ sensor this bounding box only contains 	the position of the sensor. -->
 	<pattern>
-		<rule context="//sml:PhysicalComponent/sml:capabilities">
-			<assert test="count(swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
+		<rule context="//sml:PhysicalComponent">
+			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
 		</rule>
 	</pattern>
 </schema>

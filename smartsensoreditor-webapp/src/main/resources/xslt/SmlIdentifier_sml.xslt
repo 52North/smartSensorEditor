@@ -9,19 +9,43 @@
 	and limitations under the License. -->
 
 <xsl:stylesheet version="2.0"
- xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
+	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0"
+	xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	exclude-result-prefixes="gmd gco gml sml">
 	<!-- import base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
+	<!-- remove existing identifiers -->
+	<xsl:template match="//gml:identifier" />
 
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	<xsl:template match="/*/gml:identifier">
+	<xsl:template match="/sml:PhysicalSystem">
 		<xsl:copy>
-			 <xsl:attribute name="codeSpace">uniqueID</xsl:attribute>
-				<xsl:value-of select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
+			<xsl:attribute name="gml:id">
+				<xsl:value-of select="@gml:id" />
+				</xsl:attribute>
+			<gml:identifier codeSpace="uniqueID">
+				<xsl:value-of
+					select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
+			</gml:identifier>
+			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
+			<xsl:apply-templates select="sml:keywords" />
+			<xsl:apply-templates select="sml:identification" />
+			<xsl:apply-templates select="sml:classification" />
+			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:securityConstraints" />
+			<xsl:apply-templates select="sml:legalConstraints" />
+			<xsl:apply-templates select="sml:characteristics" />
+			<xsl:apply-templates select="sml:capabilities" />
+
+			<xsl:apply-templates
+				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
 		</xsl:copy>
- 	</xsl:template>
+
+	</xsl:template>
 
 </xsl:stylesheet>

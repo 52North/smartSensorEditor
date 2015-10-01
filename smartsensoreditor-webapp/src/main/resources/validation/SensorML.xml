@@ -28,7 +28,7 @@
     Public License for more details.
 
 -->
-<schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+<schema xmlns="http://purl.oclc.org/dsdl/schematron"
 	xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/2.0"
 	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink"

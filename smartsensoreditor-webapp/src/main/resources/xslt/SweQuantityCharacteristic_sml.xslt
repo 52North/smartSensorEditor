@@ -17,17 +17,42 @@
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
+	<!-- Warning: this class is not finished, because there are multiple different elements which can be inserted into the
+	CapabilityList. This file could be changed to the structure of SmlCapabilityText. -->
 
 	<!-- include base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing identifiers -->
-	<xsl:template match="/*/sml:characteristics/*" />
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:characteristics">
+	<xsl:template match="/*/sml:characteristics" />
+
+	<xsl:template match="/sml:PhysicalSystem">
 		<xsl:copy>
-			<xsl:if test="$beanDoc/*/SweQuantity">
+			<xsl:attribute name="gml:id">
+				<xsl:value-of select="@gml:id" />
+				</xsl:attribute>
+			<xsl:apply-templates select="gml:identifier" />
+			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
+			<xsl:apply-templates select="sml:keywords" />
+			<xsl:apply-templates select="sml:identification" />
+			<xsl:apply-templates select="sml:classification" />
+			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:securityConstraints" />
+			<xsl:apply-templates select="sml:legalConstraints" />
+			<xsl:call-template name="sml:characteristics" />
+			<xsl:apply-templates select="sml:capabilities" />
+
+			<xsl:apply-templates
+				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
+		</xsl:copy>
+
+	</xsl:template>
+	<!-- go through citation and copy nodes -->
+	<xsl:template name="/characteristics">
+
+		<xsl:if test="$beanDoc/*/SweQuantity">
+			<sml:characteristics>
 				<sml:CharacteristicList>
 					<xsl:for-each select="$beanDoc/*/SweQuantity">
 						<sml:characteristic>
@@ -57,7 +82,7 @@
 					</xsl:for-each>
 
 				</sml:CharacteristicList>
-			</xsl:if>
-		</xsl:copy>
+			</sml:characteristics>
+		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

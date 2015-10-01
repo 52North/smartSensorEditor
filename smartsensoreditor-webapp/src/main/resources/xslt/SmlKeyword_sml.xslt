@@ -20,12 +20,35 @@
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
 	<!-- remove existing Names -->
-	<xsl:template match="/*/sml:keywords/*" />
+	<xsl:template match="/*/sml:keywords" />
 
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:keywords">
+	<xsl:template match="/sml:PhysicalSystem">
 		<xsl:copy>
-			<xsl:if test="$beanDoc/*/SmlKeyword">
+			<xsl:attribute name="gml:id">
+				<xsl:value-of select="@gml:id" />
+				</xsl:attribute>
+			<xsl:apply-templates select="gml:identifier" />
+			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
+			<xsl:call-template name="keywords" />
+			<xsl:apply-templates select="sml:identification" />
+			<xsl:apply-templates select="sml:classification" />
+			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:securityConstraints" />
+			<xsl:apply-templates select="sml:legalConstraints" />
+			<xsl:apply-templates select="sml:characteristics" />
+			<xsl:apply-templates select="sml:capabilities" />
+
+			<xsl:apply-templates
+				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
+		</xsl:copy>
+
+	</xsl:template>
+	<!-- go through citation and copy nodes -->
+	
+		
+		<xsl:template name="keywords">
+		<xsl:if test="$beanDoc/*/SmlKeyword">
+			<sml:keywords>
 				<sml:KeywordList>
 					<xsl:for-each select="$beanDoc/*/SmlKeyword">
 						<sml:keyword>
@@ -33,8 +56,9 @@
 						</sml:keyword>
 					</xsl:for-each>
 				</sml:KeywordList>
-			</xsl:if>
-		</xsl:copy>
+			</sml:keywords>
+		</xsl:if>
+
 	</xsl:template>
 
 </xsl:stylesheet>

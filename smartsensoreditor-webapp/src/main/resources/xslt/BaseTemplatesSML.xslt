@@ -25,26 +25,6 @@
 		</xsl:copy>
 	</xsl:template>
 	<xsl:template match="sml:PhysicalSystem/sml:contacts" />
-	<xsl:template match="/sml:PhysicalSystem">
-		<xsl:copy>
-			<xsl:attribute name="gml:id">
-				<xsl:value-of select="@gml:id" />
-				</xsl:attribute>
-			<xsl:apply-templates select="gml:identifier" />
-			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
-			<xsl:apply-templates select="sml:keywords" />
-			<xsl:apply-templates select="sml:identification" />
-			<xsl:apply-templates select="sml:classification" />
-			<xsl:apply-templates select="sml:validTime" />
-			<xsl:apply-templates select="sml:securityConstraints" />
-			<xsl:apply-templates select="sml:legalConstraints" />
-			<xsl:apply-templates select="sml:characteristics" />
-			<xsl:apply-templates select="sml:capabilities" />
 
-			<xsl:apply-templates
-				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
-		</xsl:copy>
-
-	</xsl:template>
 	<xsl:strip-space elements="*" />
 </xsl:stylesheet>
