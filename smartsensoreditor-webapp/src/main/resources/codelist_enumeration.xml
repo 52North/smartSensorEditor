@@ -152,7 +152,7 @@
 	</list>
 	<list>
 		<identifier>MD_ScopeCode</identifier>
-		<element>
+<!-- 		<element>
 			<resourceKey>codelist.scopecode[0]</resourceKey>
 			<value>attributeType</value>
 		</element>
@@ -215,7 +215,7 @@
 		<element>
 			<resourceKey>codelist.scopecode[15]</resourceKey>
 			<value>application</value>
-		</element>
+		</element> -->
 		<element>
 			<resourceKey>codelist.scopecode[17]</resourceKey>
 			<value>sensor</value> <!-- sml -->

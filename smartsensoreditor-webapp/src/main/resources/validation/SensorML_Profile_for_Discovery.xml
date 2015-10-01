@@ -160,7 +160,7 @@
 	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#shortName". 	The value of its contained "Term" element represents a human understandable 	name for the instance. -->
 	<pattern>
 		<rule context="//sml:PhysicalSystem">
-			<assert test="count(/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:parentSystemUniqueID". 	The value of its contained "Term" element refers to the system that contains 	the component. -->
@@ -218,16 +218,16 @@
 			<assert test="string-length(@code) &gt; 0">errors.validation.SML.2.0.discovery.smlCapabilities.oum</assert>
 		</rule>
 	</pattern>
-	<!--The dataRecord within the capabilities section of a PhysicalSystem shall 	contain one swe:field which specifies a swe:Envelope element with the definition 	http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. It describes 	the bounding box of the area that is observed by the System or Component. 	In case of an in-situ sensor this bounding box only contains the position 	of the sensor. -->
-	<pattern>
-		<rule context="//sml:PhysicalSystem">
-			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
-		</rule>
-	</pattern>
-	<!-- The dataRecord within the capabilities section of a PhysicalComponent 	shall contain one swe:field which specifies a swe:Envelope element with the 	definition http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. 	It describes the bounding box of the area that is observed by the System 	or Component. In case of an in-situ sensor this bounding box only contains 	the position of the sensor. -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert>
-		</rule>
-	</pattern>
+<!--The dataRecord within the capabilities section of a PhysicalSystem shall 	contain one swe:field which specifies a swe:Envelope element with the definition 	http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. It describes 	the bounding box of the area that is observed by the System or Component. 	In case of an in-situ sensor this bounding box only contains the position 	of the sensor. --> 
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalSystem"> -->
+<!-- 			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!-- The dataRecord within the capabilities section of a PhysicalComponent 	shall contain one swe:field which specifies a swe:Envelope element with the 	definition http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. 	It describes the bounding box of the area that is observed by the System 	or Component. In case of an in-situ sensor this bounding box only contains 	the position of the sensor. --> 
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 </schema>
