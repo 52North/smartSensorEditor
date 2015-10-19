@@ -18,34 +18,15 @@
 	exclude-result-prefixes="gmd gco gml sml">
 	<!-- import base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
-	<!-- remove existing identifiers -->
-	<xsl:template match="//gml:identifier" />
 
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	<xsl:template match="/sml:PhysicalSystem">
+	<xsl:template match="/sml:PhysicalSystem/gml:identifier">
 		<xsl:copy>
-			<xsl:attribute name="gml:id">
-				<xsl:value-of select="@gml:id" />
-				</xsl:attribute>
-			<gml:identifier codeSpace="uniqueID">
-				<xsl:value-of
-					select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
-			</gml:identifier>
-			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
-			<xsl:apply-templates select="sml:keywords" />
-			<xsl:apply-templates select="sml:identification" />
-			<xsl:apply-templates select="sml:classification" />
-			<xsl:apply-templates select="sml:validTime" />
-			<xsl:apply-templates select="sml:securityConstraints" />
-			<xsl:apply-templates select="sml:legalConstraints" />
-			<xsl:apply-templates select="sml:characteristics" />
-			<xsl:apply-templates select="sml:capabilities" />
-
-			<xsl:apply-templates
-				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
+			<xsl:attribute name="codeSpace">uniqueID</xsl:attribute>
+			<xsl:value-of
+				select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
 		</xsl:copy>
-
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -24,32 +24,48 @@
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	<!-- remove existing identifiers -->
-	<xsl:template match="/*/sml:characteristics" />
 
-	<xsl:template match="/sml:PhysicalSystem">
-		<xsl:copy>
+<xsl:template match="/sml:PhysicalSystem" priority="200">
+<xsl:copy>
 			<xsl:attribute name="gml:id">
 				<xsl:value-of select="@gml:id" />
 				</xsl:attribute>
+			<xsl:apply-templates select="gml:description" />
+			<xsl:apply-templates select="gml:name" />
 			<xsl:apply-templates select="gml:identifier" />
-			<xsl:apply-templates select="* except(sml:* | comment() | gml:identifier)" />
 			<xsl:apply-templates select="sml:keywords" />
 			<xsl:apply-templates select="sml:identification" />
 			<xsl:apply-templates select="sml:classification" />
 			<xsl:apply-templates select="sml:validTime" />
 			<xsl:apply-templates select="sml:securityConstraints" />
 			<xsl:apply-templates select="sml:legalConstraints" />
-			<xsl:call-template name="sml:characteristics" />
+			<xsl:apply-templates select="sml:characteristics" />
+			<xsl:call-template name="characteristics" />
 			<xsl:apply-templates select="sml:capabilities" />
-
-			<xsl:apply-templates
-				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
+		    <xsl:apply-templates select="sml:contacts" />
+		    <xsl:apply-templates select="sml:documentation" />
+		    <xsl:apply-templates select="sml:history" />
+		    <xsl:apply-templates select="sml:definition" />
+		    <xsl:apply-templates select="sml:typeOf" />
+		    <xsl:apply-templates select="sml:configuration" />
+		    <xsl:apply-templates select="sml:featureOfInterest" />
+		    <xsl:apply-templates select="sml:inputs" />
+		    <xsl:apply-templates select="sml:outputs" />
+		    <xsl:apply-templates select="sml:parameters" />
+		    <xsl:apply-templates select="sml:modes" />
+		    <xsl:apply-templates select="sml:attachedTo" />
+		    <xsl:apply-templates select="sml:localReferenceFrame" />
+		    <xsl:apply-templates select="sml:localTimeFrame" />
+		    <xsl:apply-templates select="sml:position" />
+		    <xsl:apply-templates select="sml:timePosition" />
+		    <xsl:apply-templates select="sml:components" />
+		    <xsl:apply-templates select="sml:connections" />
 		</xsl:copy>
+
 
 	</xsl:template>
 	<!-- go through citation and copy nodes -->
-	<xsl:template name="/characteristics">
+	<xsl:template name="characteristics">
 
 		<xsl:if test="$beanDoc/*/SweQuantity">
 			<sml:characteristics>

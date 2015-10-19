@@ -135,7 +135,4 @@
 			</sml:characteristic>
 		</sml:CharacteristicList>
 	</sml:characteristics>
-	<sml:test>
-
-	</sml:test>
 </sml:PhysicalSystem>

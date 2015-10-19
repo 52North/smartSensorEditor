@@ -140,6 +140,7 @@ public class SmlXsltTest {
 		BeanUtil.setProperty(smlKeyword, "keyword","testkeyword");
 		multiSmlKeyword.getItems().add(smlKeyword);
 		Document doc = beanTransformerService.mergeToISO(multiSmlKeyword,mRefDatasetDocument);
+		multiSmlKeyword.getItems().remove(smlKeyword);
 		Source beanSource = new DOMSource(doc);
 		try {
 			assertThat(
@@ -164,6 +165,7 @@ public class SmlXsltTest {
 		BeanUtil.setProperty(smlIdentification, "value","testvalue");
 		multiSmlIdentification.getItems().add(smlIdentification);
 		Document doc = beanTransformerService.mergeToISO(multiSmlIdentification,mRefDatasetDocument);
+		multiSmlIdentification.getItems().remove(smlIdentification);
 		Source beanSource = new DOMSource(doc);
 		try {
 			assertThat(
@@ -198,6 +200,7 @@ public class SmlXsltTest {
 		BeanUtil.setProperty(smlClassification, "value","testvalue");
 		multiSmlClassification.getItems().add(smlClassification);
 		Document doc = beanTransformerService.mergeToISO(multiSmlClassification,mRefDatasetDocument);
+		multiSmlClassification.getItems().remove(smlClassification);
 		Source beanSource = new DOMSource(doc);
 		try {
 			assertThat(
@@ -287,78 +290,79 @@ public class SmlXsltTest {
 
 	}
 
-	/**
-	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
-	 */
-	@Test
-	public void testSweCharacteristicListNotExists() {
-
-		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					is(not(hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList",
-							usingNamespaces))));
-
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	/**
-	  This method tests, if the test-value for smlIdentification is copied into the xml document.
-	 */
-	@Test
-	public void testSweQuantityCharacteristic() {
-
-		BeanUtil.setProperty(sweQuantityCharacteristic, "identifier","testIdentifier");
-		BeanUtil.setProperty(sweQuantityCharacteristic, "label","testLabel");
-		BeanUtil.setProperty(sweQuantityCharacteristic, "description","testDescription");
-		BeanUtil.setProperty(sweQuantityCharacteristic, "uom","testUom");
-		BeanUtil.setProperty(sweQuantityCharacteristic, "value","20.2");
-		BeanUtil.setProperty(sweQuantityCharacteristic, "definition","testDefinition");
-
-		multiSweQuantityCharacteristic.getItems().add(sweQuantityCharacteristic);
-		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity[@definition='testDefinition']/swe:identifier[text()='testIdentifier']",
-							usingNamespaces));
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:label[text()='testLabel']",
-							usingNamespaces));
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:description[text()='testDescription']",
-							usingNamespaces));
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:value[text()='20.2']",
-							usingNamespaces));
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:uom[@code='testUom']",
-							usingNamespaces));
-
-
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
+//	/**
+//	  This method tests, if the classifierList element is not inserted, when no classifiers are inserted
+//	 */
+//	@Test
+//	public void testSweCharacteristicListNotExists() {
+//
+//		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
+//		Source beanSource = new DOMSource(doc);
+//		try {
+//			assertThat(
+//					beanSource,
+//					is(not(hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList",
+//							usingNamespaces))));
+//
+//		} catch (NoSuchMethodError e) {
+//			LOG.error("Possibly XPath is invalid with compared source", e);
+//			throw e;
+//		}
+//
+//	}
+//	/**
+//	  This method tests, if the test-value for smlIdentification is copied into the xml document.
+//	 */
+//	@Test
+//	public void testSweQuantityCharacteristic() {
+//
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "identifier","testIdentifier");
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "label","testLabel");
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "description","testDescription");
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "uom","testUom");
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "value","20.2");
+//		BeanUtil.setProperty(sweQuantityCharacteristic, "definition","testDefinition");
+//
+//		multiSweQuantityCharacteristic.getItems().add(sweQuantityCharacteristic);
+//		Document doc = beanTransformerService.mergeToISO(multiSweQuantityCharacteristic,mRefDatasetDocument);
+//		multiSweQuantityCharacteristic.getItems().remove(sweQuantityCharacteristic);	
+//		Source beanSource = new DOMSource(doc);
+//		try {
+//
+//			assertThat(
+//					beanSource,
+//					hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity[@definition='testDefinition']/swe:identifier[text()='testIdentifier']",
+//							usingNamespaces));
+//			assertThat(
+//					beanSource,
+//					hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:label[text()='testLabel']",
+//							usingNamespaces));
+//			assertThat(
+//					beanSource,
+//					hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:description[text()='testDescription']",
+//							usingNamespaces));
+//			assertThat(
+//					beanSource,
+//					hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:value[text()='20.2']",
+//							usingNamespaces));
+//			assertThat(
+//					beanSource,
+//					hasXPath(
+//							"/*/sml:characteristics/sml:CharacteristicList/sml:characteristic/swe:Quantity/swe:uom[@code='testUom']",
+//							usingNamespaces));
+//
+//
+//		} catch (NoSuchMethodError e) {
+//			LOG.error("Possibly XPath is invalid with compared source", e);
+//			throw e;
+//		}
+//
+//	}
 
 
 	/**
@@ -416,7 +420,11 @@ public class SmlXsltTest {
 
 		multiSmlCapabilityText.getItems().add(smlCapabilityText5);
 		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
-
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText2);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText3);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText4);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText5);
 		Source beanSource = new DOMSource(doc);
 		try {
 			//test if values are inserted
@@ -547,6 +555,7 @@ public class SmlXsltTest {
 		multiSmlCapabilityText.getItems().add(smlCapabilityText);
 		
 		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText);
 		Source beanSource = new DOMSource(doc);
 		try {
 			assertThat("test label",
@@ -592,27 +601,6 @@ public class SmlXsltTest {
 					hasXPath(
 							"//gml:identifier[text()='testIdentifier']",
 							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-
-	}
-	/**
-	  This method tests, if all not mentioned elements are copied
-	 */
-	@Test
-	public void testCopyAllNotMentionedElements() {
-
-		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
-		Source beanSource = new DOMSource(doc);
-		try {
-			assertThat(
-					beanSource,
-					hasXPath(
-							"/sml:PhysicalSystem/sml:test",
-							usingNamespaces));
-
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
 			throw e;

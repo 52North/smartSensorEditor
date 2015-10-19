@@ -26,12 +26,13 @@
 		match="/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList/sml:capability/swe:Text" />
 	<!-- go through citation and copy nodes -->
 	<xsl:template match="/sml:PhysicalSystem" priority="200">
-		<xsl:copy>
+<xsl:copy>
 			<xsl:attribute name="gml:id">
 				<xsl:value-of select="@gml:id" />
 				</xsl:attribute>
+			<xsl:apply-templates select="gml:description" />
+			<xsl:apply-templates select="gml:name" />
 			<xsl:apply-templates select="gml:identifier" />
-			<xsl:apply-templates select="* except(sml:* | comment()| gml:identifier)" />
 			<xsl:apply-templates select="sml:keywords" />
 			<xsl:apply-templates select="sml:identification" />
 			<xsl:apply-templates select="sml:classification" />
@@ -41,12 +42,29 @@
 			<xsl:apply-templates select="sml:characteristics" />
 			<xsl:apply-templates select="sml:capabilities" />
 			<xsl:call-template name="insertCapabilities" />
-
-			<xsl:apply-templates
-				select="node() except(*[not(namespace-uri()='http://www.opengis.net/sensorml/2.0')]| sml:keywords | sml:identification | sml:classification | sml:validTime | sml:securityConstraint | sml:legalConstraints | sml:characteristics | sml:capabilities |  comment())" />
+		    <xsl:apply-templates select="sml:contacts" />
+		    <xsl:apply-templates select="sml:documentation" />
+		    <xsl:apply-templates select="sml:history" />
+		    <xsl:apply-templates select="sml:definition" />
+		    <xsl:apply-templates select="sml:typeOf" />
+		    <xsl:apply-templates select="sml:configuration" />
+		    <xsl:apply-templates select="sml:featureOfInterest" />
+		    <xsl:apply-templates select="sml:inputs" />
+		    <xsl:apply-templates select="sml:outputs" />
+		    <xsl:apply-templates select="sml:parameters" />
+		    <xsl:apply-templates select="sml:modes" />
+		    <xsl:apply-templates select="sml:attachedTo" />
+		    <xsl:apply-templates select="sml:localReferenceFrame" />
+		    <xsl:apply-templates select="sml:localTimeFrame" />
+		    <xsl:apply-templates select="sml:position" />
+		    <xsl:apply-templates select="sml:timePosition" />
+		    <xsl:apply-templates select="sml:components" />
+		    <xsl:apply-templates select="sml:connections" />
 		</xsl:copy>
 
+
 	</xsl:template>
+	
 	<xsl:template name="onlyTextNodes"
 		match="/sml:PhysicalSystem/sml:capabilities[*/sml:capability/*[count(not(name(.) = 'swe:Text'))>0]]"
 		priority="100" />
@@ -109,7 +127,7 @@
 	<xsl:template name="list"
 		match="/sml:PhysicalSystem/sml:capabilities/sml:CapabilityList">
 		<xsl:param name="capabilitiesNameNode" select="../@name" />
-		<xsl:copy>
+		<xsl:copy> 
 			<xsl:apply-templates select="@*|node()" />
 			<xsl:call-template name="insertCapabilitiesInOldNode">
 				<xsl:with-param name="capabilitiesNameNode"
