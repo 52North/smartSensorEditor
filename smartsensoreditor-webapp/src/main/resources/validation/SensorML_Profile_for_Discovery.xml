@@ -109,18 +109,18 @@
 	<!--~~~~~~~~~~ -->
 	<!--gml:description -->
 	<!--~~~~~~~~~~ -->
-	<!-- These rules ensure that for every PhysicalSystem a gml:description 	is provided.. -->
+	<!-- These rules ensure that for every PhysicalSystem a gml:description is provided.. -->
 	<pattern>
 		<rule context="//sml:PhysicalSystem">
 			<assert test="gml:description">errors.validation.SML.2.0.discovery.gmlDescription</assert>
 		</rule>
 	</pattern>
 	<!-- These rules ensure that for every PhysicalComponent a gml:description 	is provided.. -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="gml:description">errors.validation.SML.2.0.discovery.gmlDescription</assert>
-		</rule>
-	</pattern>
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="gml:description">errors.validation.SML.2.0.discovery.gmlDescription</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 	<!--~~~~~~~~~~ -->
 	<!--sml:keywords -->
 	<!--~~~~~~~~~~ -->
@@ -131,11 +131,11 @@
 		</rule>
 	</pattern>
 	<!-- In order to make sure that a list of keywords describing the sensor 	is provided. -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="sml:keywords/sml:KeywordList">errors.validation.SML.2.0.discovery.smlKeywordList</assert>
-		</rule>
-	</pattern>
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="sml:keywords/sml:KeywordList">errors.validation.SML.2.0.discovery.smlKeywordList</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 	<!--~~~~~~~~~~ -->
 	<!--Identification -->
 	<!--~~~~~~~~~~ -->
@@ -164,11 +164,11 @@
 		</rule>
 	</pattern>
 	<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:parentSystemUniqueID". 	The value of its contained "Term" element refers to the system that contains 	the component. -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="count(sml:Component/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#parentSystemUniqueID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.parentSystemUniqueID</assert>
-		</rule>
-	</pattern>
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:Component/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#parentSystemUniqueID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.parentSystemUniqueID</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 	<!--~~~~~~~~~~ -->
 	<!--Classification -->
 	<!--~~~~~~~~~~ -->
@@ -191,28 +191,30 @@
 		</rule>
 	</pattern>
 	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#sensorType" 	The value of its contained Term element states the type of the sensor. -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
-		</rule>
-	</pattern>
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication -->
-	<pattern>
-		<rule context="//sml:PhysicalComponent">
-			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
-		</rule>
-	</pattern>
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
 	<!--~~~~~~~~~~ -->
 	<!--Capabilities -->
 	<!--~~~~~~~~~~ -->
 	<!-- To ease the usage of the capabilities element it is defined that a 	swe:DataRecord containing a number of swe:field elements shall be used to 	specify the capabilities of a System or Component. -->
 	<!--The child element of each swe:Field element shall contain a definition 	attribute so that a client is able to look up the semantics of the capability. -->
+	<!-- !!!!Not tested in the TestValidation.java class -->
 	<pattern>
 		<rule context="//sml:capabilities/swe:DataRecord/swe:field">
 			<assert test="string-length(child::node()[@definition]) &gt; 0">errors.validation.SML.2.0.discovery.smlCapabilities.definition</assert>
 		</rule>
 	</pattern>
 	<!-- If the child-element of the swe:Field is a swe:Quantity it shall contain 	the swe:uom element which specifies the code attribute. -->
+	<!-- !!!!Not tested in the TestValidation.java class -->
 	<pattern>
 		<rule context="//sml:capabilities/swe:DataRecord/swe:field/swe:Quantity/swe:uom">
 			<assert test="string-length(@code) &gt; 0">errors.validation.SML.2.0.discovery.smlCapabilities.oum</assert>
