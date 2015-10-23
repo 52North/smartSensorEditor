@@ -13,18 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+<complexType name="TermType">
+<complexContent>
+<extension base="swe:AbstractSWEType">
+<sequence>
+<element name="label" type="string"/>
+<element name="codeSpace" type="swe:Reference" minOccurs="0" maxOccurs="1"/>
+<element name="value" type="string"/>
+</sequence>
+<attribute name="definition" type="anyURI" use="optional"/>
+</extension>
+</complexContent>
+</complexType>
 
+ **/
 package groovy;
 
 
 import com.thoughtworks.xstream.annotations.XStreamAlias
 import de.conterra.smarteditor.beans.BaseBean
+/**
+<complexType name="TermType">
+<complexContent>
+<extension base="swe:AbstractSWEType">
+<sequence>
+<element name="label" type="string"/>
+<element name="codeSpace" type="swe:Reference" minOccurs="0" maxOccurs="1"/>
+<element name="value" type="string"/>
+</sequence>
+<attribute name="definition" type="anyURI" use="optional"/>
+</extension>
+</complexContent>
+</complexType>
 
+ */
 @XStreamAlias("SmlTerm")
 class SmlTerm extends BaseBean {
-  String label
-  String codeSpace
-  String value
-  String definition
+	String label      //exact 1
+	String codeSpace  //min 0
+	String value      //exact 1
+	String definition //min 0
 
 }
