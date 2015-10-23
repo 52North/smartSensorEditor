@@ -22,18 +22,18 @@
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	
+
 	<!-- go through citation and copy nodes -->
 	<xsl:template match="/sml:PhysicalSystem/sml:identification">
-			<xsl:if test="$beanDoc/*/SmlTerm">
+		<xsl:if test="$beanDoc/*/SmlTerm">
 			<sml:identification>
 				<sml:IdentifierList>
 					<xsl:for-each select="$beanDoc/*/SmlTerm">
 						<sml:identifier>
 							<sml:Term>
-								<xsl:attribute name="definition">
-							<xsl:value-of select="fn:normalize-space(definition)" />
-						</xsl:attribute>
+								<xsl:if test="fn:normalize-space(definition) != ''">
+									<xsl:attribute definition="fn:normalize-space(definition)"/>
+								</xsl:if>
 								<sml:label>
 						<xsl:value-of select="fn:normalize-space(label)" />
 						</sml:label>
@@ -51,8 +51,8 @@
 						</sml:identifier>
 					</xsl:for-each>
 				</sml:IdentifierList>
-				</sml:identification>
-			</xsl:if>
+			</sml:identification>
+		</xsl:if>
 
 	</xsl:template>
 </xsl:stylesheet>

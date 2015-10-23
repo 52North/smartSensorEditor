@@ -32,9 +32,10 @@
 					<xsl:for-each select="$beanDoc/*/SmlTerm">
 						<sml:classifier>
 							<sml:Term>
-								<xsl:attribute name="definition">
-							<xsl:value-of select="fn:normalize-space(definition)" />
-						</xsl:attribute>
+								<xsl:if test="fn:normalize-space(definition) != ''">
+									<xsl:attribute definition="fn:normalize-space(definition)"/>
+		
+								</xsl:if>
 								<sml:label>
 						<xsl:value-of select="label" />
 						</sml:label>
