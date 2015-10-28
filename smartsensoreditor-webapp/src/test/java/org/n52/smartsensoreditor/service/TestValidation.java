@@ -81,7 +81,7 @@ public class TestValidation {
 	private static DocumentBuilder documentBuilder;
 
 	private static final String rulesetSystemID = "/validation/SensorML_Profile_for_Discovery.xslt";
-	private static final String sensorXML="/templates/sensor.xml";
+
 
 
 	@BeforeClass
@@ -228,6 +228,14 @@ public class TestValidation {
 				containsString("errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication"));
 
 
+	}
+	@Test
+	public void testGmlIdentifierEqualUniqueID() throws SAXException, IOException {
+		String resultString = validateResource("/validation/input/errors_gmlIdentiferEqualUniqueID.xml");
+		assertThat(
+				"Validation incorrect: gml_identifier and sml:identifier are not the same, so an error should be thrown which is not the case.",
+				resultString,
+				containsString("errors.validation.sml.2.0.gmlidentifierEqualUniqueID"));
 	}
 
 	

@@ -24,8 +24,8 @@
 	<xsl:template match="/sml:PhysicalSystem/gml:identifier">
 		<xsl:copy>
 			<xsl:attribute name="codeSpace">uniqueID</xsl:attribute>
-			<xsl:value-of
-				select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
+				<xsl:value-of
+					select="fn:normalize-space($beanDoc/FileIdentifier/identifier)" />
 		</xsl:copy>
 	</xsl:template>
 

@@ -32,7 +32,9 @@
 						<sml:identifier>
 							<sml:Term>
 								<xsl:if test="fn:normalize-space(definition) != ''">
-									<xsl:attribute definition="fn:normalize-space(definition)"/>
+									<xsl:attribute name="definition">
+							<xsl:value-of select="fn:normalize-space(definition)" />
+						</xsl:attribute>
 								</xsl:if>
 								<sml:label>
 						<xsl:value-of select="fn:normalize-space(label)" />

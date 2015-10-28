@@ -7,7 +7,7 @@
                     xmlns:swe="http://www.opengis.net/swe/2.0"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                     gml:id="system">
-   <gml:identifier codeSpace="uniqueID">value_UID</gml:identifier>
+   <gml:identifier codeSpace="uniqueID">308fd68d-b083-4f4e-8215-f251c01f07e3</gml:identifier>
    <gml:description>descriptionOfSensor</gml:description>
    <sml:keywords xmlns:fn="http://www.w3.org/2005/xpath-functions">
       <sml:KeywordList>
