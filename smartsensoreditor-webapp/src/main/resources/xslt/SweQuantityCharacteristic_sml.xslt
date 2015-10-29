@@ -17,8 +17,8 @@
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
-	<!-- Warning: this class is not finished, because there are multiple different elements which can be inserted into the
-	CapabilityList. This file could be changed to the structure of SmlCapabilityText. -->
+	<!-- !!!! Warning: this class is not finished, because there are multiple different elements which can be inserted into the
+	CapabilityList. This file could be changed to the structure like the xslt file: SmlCapabilityText. -->
 
 	<!-- include base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />

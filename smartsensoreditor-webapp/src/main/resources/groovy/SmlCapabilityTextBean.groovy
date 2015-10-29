@@ -38,8 +38,8 @@ import de.conterra.smarteditor.beans.BaseBean
   <complexContent> 
     <extension base="swe:AbstractSWEType"> 
       <sequence> 
-        <element name="value" type="string" minOccurs="0" maxOccurs="unbounded"/>                                          IMPLEMENTED
-        <element name="pattern" type="string" minOccurs="0"/>                                                              IMPLEMENTED
+        <element name="value" type="string" minOccurs="0" maxOccurs="unbounded"/>                       IMPLEMENTED
+        <element name="pattern" type="string" minOccurs="0"/>                                           IMPLEMENTED
       </sequence> 
     </extension> 
   </complexContent> 
@@ -62,7 +62,7 @@ Extension of:
 <complexType name="AbstractDataComponentType" abstract="true"> 
   <complexContent> 
     <extension base="swe:AbstractSWEIdentifiableType"> 
-      <attribute name="definition" type="anyURI" use="required"/>                                                         IMPLEMENTED
+      <attribute name="definition" type="anyURI" use="required"/>                                      IMPLEMENTED
       <attribute name="updatable" type="boolean" use="optional"/> 
       <attribute name="optional" type="boolean" use="optional" default="false"/> 
     </extension> 
@@ -75,7 +75,7 @@ Extension of:
     <extension base="swe:AbstractSWEType"> 
       <sequence> 
         <element name="identifier" type="anyURI" minOccurs="0"/> 
-        <element name="label" type="string" minOccurs="0"/>                                                                IMPLEMENTED 
+        <element name="label" type="string" minOccurs="0"/>                                            IMPLEMENTED 
         <element name="description" type="string" minOccurs="0"/> 
       </sequence> 
     </extension> 

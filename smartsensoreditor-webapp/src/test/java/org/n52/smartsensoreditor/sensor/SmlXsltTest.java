@@ -599,7 +599,7 @@ public class SmlXsltTest {
 			assertThat(
 					beanSource,
 					hasXPath(
-							"//gml:identifier[text()='testIdentifier']",
+							"/sml:PhysicalSystem/gml:identifier[text()='testIdentifier']",
 							usingNamespaces));
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);

@@ -232,4 +232,22 @@
 <!-- 			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert> -->
 <!-- 		</rule> -->
 <!-- 	</pattern> -->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Addtional rules -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- This rule was created to make sure that the gml:identifier is always the same as the sml:identifier with the definition:'http://www.nexosproject.eu/dictionary/definitions.html#UUID'
+	     The rule has to be checked because of the following situation:
+	     If a new sensor description should be inserted, then the SOS will take the value from the sml:identifier for the procedureId and not the value from the gml:identifier.
+	     The gml:identifier will then set to the value of the sml:identifier. Both elements have then the same value.
+	     When a sensor should be updated, then the SOS does not check the value of the sml:identifier with the definition:'http://www.nexosproject.eu/dictionary/definitions.html#UUID'. 
+	     So then is is possible that both elements will have different values. To make sure that both elements always have the same values this rule has been created.
+	 -->
+	<pattern>
+		<title>gml:idtentifier== identification/identifier/uniqueID/value </title>
+		<rule context="sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='http://www.nexosproject.eu/dictionary/definitions.html#UUID']">
+		<assert test="sml:value = /sml:PhysicalSystem/gml:identifier">errors.validation.sml.2.0.gmlidentifierEqualUniqueID</assert>
+		</rule>
+	</pattern>
+
 </schema>

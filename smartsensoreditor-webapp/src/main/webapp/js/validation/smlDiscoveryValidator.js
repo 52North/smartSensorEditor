@@ -9,6 +9,7 @@ $("select").parent().filter('.highlightSelectWrapper').find('select').unwrap();
 /**
  * Add new highlights
  */
+$("input[id^=smlIdentifier]").addClass('highlight');
 $("input[id^=smlIdentification][id$=Definition]").addClass('highlight');
 $("input[id^=smlIdentification][id$=Label]").addClass('highlight');
 $("input[id^=smlIdentification][id$=Value]").addClass('highlight');
@@ -19,7 +20,7 @@ $("input[id^=smlCapabilityText][id$=CapabilitiesName]").addClass('highlight');
 $("input[id^=smlCapabilityText][id$=CapabilityName]").addClass('highlight');
 $("input[id^=smlCapabilityText][id$=Definition]").addClass('highlight');
 
-$("input[id^=smlKeyword_0]").addClass('highlight');
+$("input[id^=smlKeyword_]").addClass('highlight');
 
 
 
