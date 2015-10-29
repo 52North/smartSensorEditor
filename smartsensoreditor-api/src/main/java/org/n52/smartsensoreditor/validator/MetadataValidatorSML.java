@@ -45,7 +45,6 @@ import javax.xml.xpath.XPathConstants;
  * Main validator class for validation
  * <p/>
  * 
- * @author kse Date: 27.02.2010 Time: 18:05:46
  */
 public class MetadataValidatorSML extends MetadataValidator {
 

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
+
+
+
+     <bean id="xsltTransformerService" class="de.conterra.smarteditor.service.XSLTTransformerService" init-method="init">
+        <property name="transformerFactoryClassName" value="net.sf.saxon.TransformerFactoryImpl"/>
+        <property name="outputKeys">
+            <map>
+                <entry key="encoding" value="UTF-8"/>
+                <entry key="omit-xml-declaration" value="yes"/>
+                <entry key="indent" value="no"/>
+            </map>
+        </property>
+    </bean>
+   <bean id="requestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+		<property name="availableRequests">
+			<map>
+			    <entry key="get" value="/requests/GetSOS_Request.xslt" />
+				<entry key="insert" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="update" value="/requests/UpdateSOS_Request.xslt" />
+				<entry key="delete" value="/requests/DeleteSOS_Request.xslt" />
+			</map>
+		</property>
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
+</beans>

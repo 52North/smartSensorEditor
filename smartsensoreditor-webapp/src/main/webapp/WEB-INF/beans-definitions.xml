@@ -376,12 +376,20 @@
 
 
 	<lang:groovy id="smlIdentification"
-		script-source="classpath:groovy/SmlIdentificationBean.groovy" scope="session" />
+		script-source="classpath:groovy/SmlTermBean.groovy" scope="session" />
 	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean"
 		scope="session">
 		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
 		<property name="bean" ref="smlIdentification" />
+	</bean>
+		<lang:groovy id="smlClassification"
+		script-source="classpath:groovy/SmlTermBean.groovy" scope="session" />
+	<bean id="multiSmlClassification" class="de.conterra.smarteditor.beans.MultipleElementBean"
+		scope="session">
+		<property name="transformToISO" value="/xslt/SmlClassification_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlClassification_bean.xslt" />
+		<property name="bean" ref="smlClassification" />
 	</bean>
 	<lang:groovy id="sweQuantityCharacteristic" script-source="classpath:groovy/SweQuantityBean.groovy" />
 	<bean id="multiSweQuantityCharacteristic" class="de.conterra.smarteditor.beans.MultipleElementBean">
@@ -389,14 +397,20 @@
 		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
 		<property name="bean" ref="sweQuantityCharacteristic" />
 	</bean>
+	<lang:groovy id="smlCapabilityText" script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<bean id="multiSmlCapabilityText" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SmlCapabilityText_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlCapabilityText_bean.xslt" />
+		<property name="bean" ref="smlCapabilityText" />
+	</bean>
 	<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
 	</bean>
-	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean"
+	<bean id="backendBean" class="org.n52.smartsensoreditor.beans.BackendBeanSML"
 		scope="session">
 		<aop:scoped-proxy />
-		<property name="validatorId" value="smlValidator" />
+		<property name="validatorId" value="noValidator" />
 		<property name="stickyErrorMessages" value="false" />
 		<!-- default validator id -->
 		<property name="storage">
@@ -443,7 +457,9 @@
 				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
-				<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic" />
+				<entry key="smlClassification" value-ref="multiSmlClassification" />
+		<!-- 		<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic" /> -->
+				<entry key="smlCapabilityText" value-ref="multiSmlCapabilityText" /> 
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
 			</map>
 		</property>

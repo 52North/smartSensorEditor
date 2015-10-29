@@ -65,11 +65,6 @@ import de.conterra.smarteditor.xml.EditorContext;
  * Service manages any access to and modification of the backend storage
  * <p/>
  *
- * @author kse
- * @author extended by Jana
- *         <p/>
- *         <p/>
- *         Date: 16.02.2010 Time: 15:19:00
  */
 public class BackendManagerServiceSML extends BackendManagerService {
 
@@ -150,18 +145,13 @@ public class BackendManagerServiceSML extends BackendManagerService {
 							getMergeDocument());
 
 			if (resourceType.equals("")) {
-				resourceType = lUtil
-						.evaluateAsString(
-								"//sml:System/sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition='urn:ogc:def:classifier:OGC:1.0:sensorType']/sml:value",
+				String bool = lUtil
+						.evaluateAsString("boolean(//sml:PhysicalSystem)",
 								getMergeDocument());
-				if (resourceType.equals("")) {
-					String bool = lUtil
-							.evaluateAsString("boolean(//sml:identification)",
-									getMergeDocument());
-					if (bool.equals("true")) {
-						resourceType = "sensor";
-					}
+				if (bool.equals("true")) {
+					resourceType = "sensor";
 				}
+
 			}
 			return resourceType;
 		}

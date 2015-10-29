@@ -48,9 +48,6 @@ import javax.servlet.http.HttpServletResponse;
  * Controller to save a metadata document on the local hard disk
  * <p/>
  *
- * @author kse
- *         Date: 17.03.2010
- *         Time: 09:29:08
  */
 public class SaveTemplateControllerSML extends SaveTemplateController {
 

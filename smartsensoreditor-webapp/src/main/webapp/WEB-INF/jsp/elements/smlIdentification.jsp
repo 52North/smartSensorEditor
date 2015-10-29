@@ -30,17 +30,8 @@
     <table class="marginLine">
         <tr>
             <td>
-                <label for="smlIdentification_${smlIdentification_cnt}_Name" class="firstLabel">
-                    <fmt:message key="element.smlIdentification.name"/>
-                </label></td><td>
-                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].name" size="100"
-                            id="smlIdentification_${smlIdentification_cnt}_Name"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <label for="smlIdentification_${smlIdentification_cnt}_Definition" class="firstLabel">
-                    <fmt:message key="element.smlIdentification.definition"/>
+                    <fmt:message key="element.smlTerm.definition"/>
                 </label></td><td>
                 <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].definition" size="100"
                             id="smlIdentification_${smlIdentification_cnt}_Definition"/>
@@ -48,8 +39,26 @@
         </tr>
         <tr>
             <td>
+                <label for="smlIdentification_${smlIdentification_cnt}_Label" class="firstLabel">
+                    <fmt:message key="element.smlTerm.label"/>
+                </label></td><td>
+                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].label" size="100"
+                            id="smlIdentification_${smlIdentification_cnt}_Label"/>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <label for="smlIdentification_${smlIdentification_cnt}_CodeSpace" class="firstLabel">
+                    <fmt:message key="element.smlTerm.codeSpace"/>
+                </label></td><td>
+                <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].codeSpace" size="100"
+                            id="smlIdentification_${smlIdentification_cnt}_CodeSpace"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="smlIdentification_${smlIdentification_cnt}_Value" class="firstLabel">
-                    <fmt:message key="element.smlIdentification.value"/>
+                    <fmt:message key="element.smlTerm.value"/>
                 </label></td><td>
                 <form:input path="storage['smlIdentification'].items[${smlIdentification_cnt}].value" size="100"
                             id="smlIdentification_${smlIdentification_cnt}_Value"/>

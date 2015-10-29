@@ -47,4 +47,4 @@ local.properties
 /target/
 # Configuration
 **/build.properties
-
+.tern-project

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="${logging.log4j.appender.console.level}"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-5p] %d [%t] %c - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="LOGFILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${logging.log4j.appender.file.path}/${logging.log4j.appender.file.name}.log"/>
+        <param name="Threshold" value="${logging.log4j.appender.file.level}"/>
+        <param name="MaxFileSize" value="5000KB"/>
+        <param name="MaxBackupIndex" value="3"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-5p] %d{ISO8601} [%t] %c - %m%n"/>
+        </layout>
+    </appender>
+    <logger name="de.conterra">
+        <level value="${logging.log4j.logger.app.level}"/>
+    </logger>
+    <logger name="org.n52.smartsensoreditor">
+        <level value="${logging.log4j.logger.app.level}"/>
+    </logger>
+    <logger name="org.springframework">
+        <level value="${logging.log4j.logger.root.level}"/>
+    </logger>
+    <root>
+        <level value="${logging.log4j.logger.root.level}"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGFILE"/>
+    </root>
+</log4j:configuration>

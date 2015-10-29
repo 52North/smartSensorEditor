@@ -30,268 +30,335 @@
 
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                http://www.springframework.org/schema/tx
                http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                http://www.springframework.org/schema/aop
                http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <import resource="service-definitions.xml"/>
-    <import resource="static-definitions.xml"/>
+	<import resource="service-definitions.xml" />
+	<import resource="static-definitions.xml" />
 
-    <bean id="dictionary" class="de.conterra.smarteditor.common.codelist.ISODictionary" init-method="init">
-        <property name="defaultLocale" value="${locale.default}"/>
-        <property name="resource" value="${dictionary.resource.xml}"/>
-        <property name="resourceBundleName" value="${dictionary.resource.messages}"/>
-    </bean>
+	<bean id="dictionary" class="de.conterra.smarteditor.common.codelist.ISODictionary"
+		init-method="init">
+		<property name="defaultLocale" value="${locale.default}" />
+		<property name="resource" value="${dictionary.resource.xml}" />
+		<property name="resourceBundleName" value="${dictionary.resource.messages}" />
+	</bean>
 
-    <bean id="configBean" class="de.conterra.smarteditor.beans.SpringConfigBean">
-        <property name="cswEndpoints">
-            <map>
-                <entry key="discovery" value="${csw.discovery}"/>
-                <entry key="transaction" value="${csw.manager}"/>
-            </map>
-        </property>
-        <property name="stylesheetImportDir" value="${import.xslt.dir}"/>
-        <property name="stylesheetExternalDir" value="${external.xslt.dir}"/>
-        <property name="codeListIds">
-            <list>
-                <value>sensorSMLProfile</value>
-                <value>MD_ScopeCode</value>
-                <value>MD_ClassificationCode</value>
-                <value>MD_TopicCategoryCode</value>
-                <value>MD_KeywordTypeCode</value>
-                <value>MD_CharacterSetCode</value>
-                <value>MD_RestrictionCode</value>
-                <value>MD_SpatialRepresentationTypeCode</value>
-                <value>MD_MaintenanceFrequencyCode</value>
-                <value>CT_ServiceTypeExt</value>
-                <value>CT_EPSGCode</value>
-                <value>CT_ServiceType</value>
-                <value>CT_UOM_ISO</value>
-                <value>CT_UOM_EPSG</value>
-                <value>CT_INSPIRE_Service</value>
-                <value>CT_MD_Standard</value>
-                <value>CT_ConformanceResult</value>
-                <value>CT_ServiceOperations</value>
-                <value>CI_DateTypeCode</value>
-                <value>CI_OnLineFunctionCode</value>
-                <value>CI_RoleCode</value>
-                <value>SV_DCPList</value>
-                <value>SV_CouplingType</value>
-                <value>Language</value>
-            </list>
-        </property>
-        <property name="draftSupported" value="${csw.draft.supported}"/>
-    </bean>
+	<bean id="configBean" class="de.conterra.smarteditor.beans.SpringConfigBean">
+		<property name="cswEndpoints">
+			<map>
+				<entry key="discovery" value="${csw.discovery}" />
+				<entry key="transaction" value="${csw.manager}" />
+			</map>
+		</property>
+		<property name="stylesheetImportDir" value="${import.xslt.dir}" />
+		<property name="stylesheetExternalDir" value="${external.xslt.dir}" />
+		<property name="codeListIds">
+			<list>
+				<value>MD_ScopeCode</value>
+				<value>MD_ClassificationCode</value>
+				<value>MD_TopicCategoryCode</value>
+				<value>MD_KeywordTypeCode</value>
+				<value>MD_CharacterSetCode</value>
+				<value>MD_RestrictionCode</value>
+				<value>MD_SpatialRepresentationTypeCode</value>
+				<value>MD_MaintenanceFrequencyCode</value>
+				<value>CT_ServiceTypeExt</value>
+				<value>CT_EPSGCode</value>
+				<value>CT_ServiceType</value>
+				<value>CT_UOM_ISO</value>
+				<value>CT_UOM_EPSG</value>
+				<value>CT_INSPIRE_Service</value>
+				<value>CT_MD_Standard</value>
+				<value>CT_ConformanceResult</value>
+				<value>CT_ServiceOperations</value>
+				<value>CI_DateTypeCode</value>
+				<value>CI_OnLineFunctionCode</value>
+				<value>CI_RoleCode</value>
+				<value>SV_DCPList</value>
+				<value>SV_CouplingType</value>
+				<value>Language</value>
+				<value>sensorSMLProfile</value>
+				<value>SOS_Operations</value>
+			</list>
+		</property>
+		<property name="draftSupported" value="${csw.draft.supported}" />
+	</bean>
 
-    <bean id="statePublished" class="de.conterra.smarteditor.common.workflow.WorkflowState">
-        <property name="protectionLevel" value="public"/>
-        <property name="stateId" value="published"/>
-        <property name="stateName" value="Published"/>
-    </bean>
+	<bean id="statePublished" class="de.conterra.smarteditor.common.workflow.WorkflowState">
+		<property name="protectionLevel" value="public" />
+		<property name="stateId" value="published" />
+		<property name="stateName" value="Published" />
+	</bean>
 
-    <bean id="genericManager" class="de.conterra.smarteditor.common.workflow.GenericWorkflowManager">
-        <property name="states">
-            <ref local="statePublished"/>
-        </property>
-        <property name="defaultState" ref="statePublished"/>
-    </bean>
+	<bean id="genericManager"
+		class="de.conterra.smarteditor.common.workflow.GenericWorkflowManager">
+		<property name="states">
+			<list>
+				<ref local="statePublished" />
+			</list>
+		</property>
+		<property name="defaultState" ref="statePublished" />
+	</bean>
+	<!-- SOS operation states for the selectStates.jsp BEGIN -->
+	<!-- !!The stateId values need to be the same like the keys in availableRequests 
+		in the RequestFactory Bean. Therefore global properties are created in application.properties -->
+	<bean id="operationSOSUpdated" class="de.conterra.smarteditor.common.workflow.WorkflowState">
+		<property name="protectionLevel" value="public" />
+		<property name="stateId" value="${updateSensorOperation}" />
+		<property name="stateName" value="Update" />
+	</bean>
+	<bean id="operationSOSInserted" class="de.conterra.smarteditor.common.workflow.WorkflowState">
+		<property name="protectionLevel" value="public" />
+		<property name="stateId" value="${insertSensorOperation}" />
+		<property name="stateName" value="Insert" />
+	</bean>
+	<bean id="operationSOSManager"
+		class="de.conterra.smarteditor.common.workflow.GenericWorkflowManager">
+		<property name="states">
+			<list>
+				<ref local="operationSOSInserted" />
+				<ref local="operationSOSUpdated" />
+			</list>
+		</property>
+		<property name="defaultState" ref="operationSOSInserted" />
+	</bean>
 
-    <bean id="lockingDAO" class="de.conterra.smarteditor.dao.NulledLockManager"/>
+	<!-- SOS operation states for the selectStates.jsp END -->
+	<bean id="lockingDAO" class="de.conterra.smarteditor.dao.NulledLockManager" />
 
-    <bean id="catalogServiceDAO" class="de.conterra.smarteditor.dao.CatalogServiceDAO">
-        <property name="maxNumberOfDrafts" value="50"/>
-        <property name="outputSchema" value="http://www.isotc211.org/2005/gmd"/>
-        <property name="config" ref="configBean"/>
-        <property name="userInfo" ref="userInfoBean"/>
-        <property name="manager" ref="genericManager"/>
-    </bean>
+	<bean id="catalogServiceDAO" class="de.conterra.smarteditor.dao.CatalogServiceDAO">
+		<property name="maxNumberOfDrafts" value="50" />
+		<property name="outputSchema" value="http://www.isotc211.org/2005/gmd" />
+		<property name="config" ref="configBean" />
+		<property name="userInfo" ref="userInfoBean" />
+		<property name="manager" ref="genericManager" />
+	</bean>
+<!-- SOS catalog service bean -->
+	<bean id="SOSCatalogServiceDAO" class="org.n52.smartsensoreditor.dao.SOSCatalogService">
+		<!-- <property name="config" ref="configBean" /> <property name="userInfo" 
+			ref="userInfoBean" /> <property name="manager" ref="genericManager" /> -->
+		<!-- <property name="endpoints"> <map> <entry key="discovery" value="${csw.discovery}" 
+			/> <entry key="transaction" value="${csw.manager}" /> </map> </property> -->
+		<property name="clientId" value="HTTP_SOAP" />
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
 
-    <bean id="fileSystemDAO" class="de.conterra.smarteditor.dao.FileSystemDAO">
-        <property name="dictionary" ref="dictionary"/>
-    </bean>
+	<bean id="fileSystemDAO" class="de.conterra.smarteditor.dao.FileSystemDAO">
+		<property name="dictionary" ref="dictionary" />
+	</bean>
 
-    <bean id="userInfoBean" class="de.conterra.smarteditor.beans.UserInfoBean" scope="session">
-        <aop:scoped-proxy/>
-    </bean>
+	<bean id="userInfoBean" class="de.conterra.smarteditor.beans.UserInfoBean"
+		scope="session">
+		<aop:scoped-proxy />
+	</bean>
 
-    <!-- Thematic tree config -->
-    <bean id="jenkovProvider" class="de.conterra.smarteditor.common.hierarchy.JenkovTreeNodeProvider">
-        <property name="fileBase" value="/jenkov_tree"/>
-        <property name="fileSuffix" value=".xml"/>
-        <property name="defaultOptions">
-            <map>
-                <entry key="nodetype" value="basic"/>
-            </map>
-        </property>
-    </bean>
+	<!-- Thematic tree config -->
+	<bean id="jenkovProvider"
+		class="de.conterra.smarteditor.common.hierarchy.JenkovTreeNodeProvider">
+		<property name="fileBase" value="/jenkov_tree" />
+		<property name="fileSuffix" value=".xml" />
+		<property name="defaultOptions">
+			<map>
+				<entry key="nodetype" value="basic" />
+			</map>
+		</property>
+	</bean>
 
-    <!-- hierarchy level name tree objects -->
-    <bean id="treeBuilder" class="de.conterra.smarteditor.common.hierarchy.CachingTreeBuilder">
-        <property name="treeNodeProviders">
-            <list>
-                <ref local="jenkovProvider"/>
-            </list>
-        </property>
-    </bean>
+	<!-- hierarchy level name tree objects -->
+	<bean id="treeBuilder"
+		class="de.conterra.smarteditor.common.hierarchy.CachingTreeBuilder">
+		<property name="treeNodeProviders">
+			<list>
+				<ref local="jenkovProvider" />
+			</list>
+		</property>
+	</bean>
 
-    <bean id="thematicTreeDAO" class="de.conterra.smarteditor.dao.ThematicTreeDAO" scope="session">
-        <aop:scoped-proxy/>
-        <property name="builder" ref="treeBuilder"/>
-    </bean>
+	<bean id="thematicTreeDAO" class="de.conterra.smarteditor.dao.ThematicTreeDAO"
+		scope="session">
+		<aop:scoped-proxy />
+		<property name="builder" ref="treeBuilder" />
+	</bean>
 
-    <bean id="hierarchyLevelNamePropertyEditorRegistrar" class="de.conterra.smarteditor.support.HierarchyLevelNamePropertyEditorRegistrar">
-        <property name="treeBuilder" ref="treeBuilder"/>
-    </bean>
+	<bean id="hierarchyLevelNamePropertyEditorRegistrar"
+		class="de.conterra.smarteditor.support.HierarchyLevelNamePropertyEditorRegistrar">
+		<property name="treeBuilder" ref="treeBuilder" />
+	</bean>
 
-    <bean id="datePropertyEditorRegistrar" class="de.conterra.smarteditor.support.DatePropertyEditorRegistrar">
-    </bean>
+	<bean id="datePropertyEditorRegistrar"
+		class="de.conterra.smarteditor.support.DatePropertyEditorRegistrar">
+	</bean>
 
-    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="propertyEditorRegistrars">
-            <list>
-                <ref bean="hierarchyLevelNamePropertyEditorRegistrar"/>
-            </list>
-        </property>
-    </bean>
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<list>
+				<ref bean="hierarchyLevelNamePropertyEditorRegistrar" />
+			</list>
+		</property>
+	</bean>
 
-    <bean id="webServiceFactory" class="de.conterra.smarteditor.dao.WebServiceDescriptionFactory">
-        <property name="registerDescriptionDAO">
-            <map>
-                <entry key="wms" value-ref="ogcWebServiceDAO"/>
-                <entry key="wfs" value-ref="ogcWebServiceDAO"/>
-                <entry key="view" value-ref="inspireWebServiceDAO"/>
-                <entry key="discovery" value-ref="inspireWebServiceDAO"/>
-                <entry key="arcims" value-ref="arcimsWebServiceDAO"/>
-            </map>
-        </property>
-    </bean>
+	<bean id="webServiceFactory"
+		class="de.conterra.smarteditor.dao.WebServiceDescriptionFactory">
+		<property name="registerDescriptionDAO">
+			<map>
+				<entry key="wms" value-ref="ogcWebServiceDAO" />
+				<entry key="wfs" value-ref="ogcWebServiceDAO" />
+				<entry key="view" value-ref="inspireWebServiceDAO" />
+				<entry key="discovery" value-ref="inspireWebServiceDAO" />
+				<entry key="arcims" value-ref="arcimsWebServiceDAO" />
+			</map>
+		</property>
+	</bean>
 
-    <bean id="webServiceDAO" class="org.n52.smartsensoreditor.dao.WebServiceDescriptionDAOSML" abstract="true">
-        <property name="xsltTransformer" ref="xsltTransformerService"/>
-    </bean>
+	<bean id="webServiceDAO" class="de.conterra.smarteditor.dao.WebServiceDescriptionDAO"
+		abstract="true">
+		<property name="xsltTransformer" ref="xsltTransformerService" />
+	</bean>
+	<bean id="ogcWebServiceDAO" class="de.conterra.smarteditor.dao.OgcWebServiceDescriptionDAO"
+		parent="webServiceDAO">
+		<property name="transformerFiles">
+			<map>
+				<entry key="wms" value="${external.xslt.dir}/WMS2isoap.xsl" />
+				<entry key="wfs" value="${external.xslt.dir}/WFS2isoap.xsl" />
+			</map>
+		</property>
+	</bean>
 
-    <bean id="ogcWebServiceDAO" class="de.conterra.smarteditor.dao.OgcWebServiceDescriptionDAO" parent="webServiceDAO">
-        <property name="transformerFiles">
-            <map>
-                <entry key="wms" value="${external.xslt.dir}/WMS2isoap.xsl"/>
-                <entry key="wfs" value="${external.xslt.dir}/WFS2isoap.xsl"/>
-            </map>
-        </property>
-    </bean>
+	<bean id="inspireWebServiceDAO"
+		class="de.conterra.smarteditor.dao.InspireWebServiceDescriptionDAO"
+		parent="ogcWebServiceDAO">
+		<property name="transformerFiles">
+			<map>
+				<entry key="view" value="${external.xslt.dir}/VIEW_3.0.xsl" />
+				<entry key="discovery" value="${external.xslt.dir}/DISCOVERY_3.0.xsl" />
+			</map>
+		</property>
+	</bean>
 
-    <bean id="inspireWebServiceDAO" class="de.conterra.smarteditor.dao.InspireWebServiceDescriptionDAO" parent="ogcWebServiceDAO">
-        <property name="transformerFiles">
-            <map>
-                <entry key="view" value="${external.xslt.dir}/VIEW_3.0.xsl"/>
-                <entry key="discovery" value="${external.xslt.dir}/DISCOVERY_3.0.xsl"/>
-            </map>
-        </property>
-    </bean>
+	<bean id="arcimsWebServiceDAO"
+		class="de.conterra.smarteditor.dao.ArcImsWebServiceDescriptionDAO"
+		parent="webServiceDAO">
+		<property name="encode" value="True" />
+		<property name="clientVersion" value="3.1" />
+		<property name="form" value="False" />
+		<property name="contentType" value="application/xml; charset=utf-8" />
+		<property name="templateName" value="${external.xslt.dir}/ArcIMS2isoap.xsl" />
+	</bean>
 
-    <bean id="arcimsWebServiceDAO" class="de.conterra.smarteditor.dao.ArcImsWebServiceDescriptionDAO" parent="webServiceDAO">
-        <property name="encode" value="True"/>
-        <property name="clientVersion" value="3.1"/>
-        <property name="form" value="False"/>
-        <property name="contentType" value="application/xml; charset=utf-8"/>
-        <property name="templateName" value="${external.xslt.dir}/ArcIMS2isoap.xsl"/>
-    </bean>
+	<!-- INTERNAL TEMPLATING AND LOCKING DATASOURCE -->
+	<bean id="templateManager" class="de.conterra.smarteditor.admin.DbTemplateManager">
+		<property name="templateDAO">
+			<bean class="de.conterra.smarteditor.admin.HibernateTemplateDAO"
+				p:sessionFactory-ref="smartEditorSessionFactory" />
+		</property>
+	</bean>
 
-    <!-- INTERNAL TEMPLATING AND LOCKING DATASOURCE -->
-    <bean id="templateManager" class="de.conterra.smarteditor.admin.DbTemplateManager">
-        <property name="templateDAO">
-            <bean class="de.conterra.smarteditor.admin.HibernateTemplateDAO"
-                  p:sessionFactory-ref="smartEditorSessionFactory"/>
-        </property>
-    </bean>
+	<bean id="lockingManager" class="de.conterra.smarteditor.admin.DbLockingManager">
+		<property name="lockingDAO">
+			<bean class="de.conterra.smarteditor.admin.HibernateLockingDAO"
+				p:sessionFactory-ref="smartEditorSessionFactory" />
+		</property>
+	</bean>
 
-    <bean id="lockingManager" class="de.conterra.smarteditor.admin.DbLockingManager">
-        <property name="lockingDAO">
-            <bean class="de.conterra.smarteditor.admin.HibernateLockingDAO"
-                  p:sessionFactory-ref="smartEditorSessionFactory"/>
-        </property>
-    </bean>
+	<!-- set up the celan up thread -->
+	<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- wait 10 seconds before starting repeated execution -->
+		<property name="delay" value="10000" />
+		<!-- run every 60 seconds -->
+		<property name="period" value="60000" />
+		<property name="timerTask" ref="cleanUpInvoker" />
+	</bean>
 
-    <!-- set up the celan up thread -->
-    <bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
-        <!-- wait 10 seconds before starting repeated execution -->
-        <property name="delay" value="10000"/>
-        <!-- run every 60 seconds -->
-        <property name="period" value="60000"/>
-        <property name="timerTask" ref="cleanUpInvoker"/>
-    </bean>
+	<bean id="cleanUpInvoker"
+		class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+		<property name="targetObject" ref="lockingManager" />
+		<property name="targetMethod" value="cleanUp" />
+	</bean>
 
-    <bean id="cleanUpInvoker" class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
-        <property name="targetObject" ref="lockingManager"/>
-        <property name="targetMethod" value="cleanUp"/>
-    </bean>
+	<bean lazy-init="true" id="dataSourcejndi"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="${db.jndi.name}" />
+	</bean>
 
-    <bean lazy-init="true" id="dataSourcejndi" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="${db.jndi.name}"/>
-    </bean>
+	<!-- <bean lazy-init="true" id="dataSourcejdbc" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close" p:driverClassName="${db.jdbc.driver}" p:url="${db.jdbc.url}" 
+		p:username="${db.jdbc.username}" p:password="${db.jdbc.password}" p:defaultAutoCommit="false" 
+		p:maxActive="${db.jdbc.maxActiveConnections}" p:minIdle="0"/> -->
 
-    <!--
-   <bean lazy-init="true" id="dataSourcejdbc" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-         p:driverClassName="${db.jdbc.driver}" p:url="${db.jdbc.url}" p:username="${db.jdbc.username}"
-         p:password="${db.jdbc.password}" p:defaultAutoCommit="false" p:maxActive="${db.jdbc.maxActiveConnections}"
-         p:minIdle="0"/>
-    -->
+	<bean id="smartEditorSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSourcejndi" />
+		<property name="schemaUpdate" value="${db.hibernate.schemaUpdate}" />
+		<property name="mappingLocations">
+			<list>
+				<value>classpath:/de/conterra/smarteditor/admin/pojo/Templates.hbm.xml
+				</value>
+				<value>classpath:/de/conterra/smarteditor/admin/pojo/Locking.hbm.xml
+				</value>
+				<!-- Uncomment this line if smartEditor is running with MS SQL Server 
+					(and remove the line above accordingly) <value>classpath:/de/conterra/smarteditor/admin/pojo/Locking.SqlServer.hbm.xml</value> -->
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${db.hibernate.dialect}</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.show_sql">${db.hibernate.showSQL}</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+				<prop key="hibernate.jdbc.batch_size">0</prop>
+			</props>
+		</property>
+	</bean>
 
-    <bean id="smartEditorSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSourcejndi"/>
-        <property name="schemaUpdate" value="${db.hibernate.schemaUpdate}"/>
-        <property name="mappingLocations">
-            <list>
-                <value>classpath:/de/conterra/smarteditor/admin/pojo/Templates.hbm.xml</value>
-                <value>classpath:/de/conterra/smarteditor/admin/pojo/Locking.hbm.xml</value>
-                <!--
-                Uncomment this line if smartEditor is running with MS SQL Server
-                (and remove the line above accordingly)
-                <value>classpath:/de/conterra/smarteditor/admin/pojo/Locking.SqlServer.hbm.xml</value>
-                -->
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${db.hibernate.dialect}</prop>
-                <prop key="hibernate.connection.autocommit">false</prop>
-                <prop key="hibernate.show_sql">${db.hibernate.showSQL}</prop>
-                <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
-                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
-                <prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
-                <prop key="hibernate.jdbc.batch_size">0</prop>
-            </props>
-        </property>
-    </bean>
+	<bean id="smartEditorHibernateTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="smartEditorSessionFactory" />
 
-    <bean id="smartEditorHibernateTransactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager"
-          p:sessionFactory-ref="smartEditorSessionFactory"/>
+	<aop:config>
+		<aop:pointcut id="templateDaoMethods"
+			expression="execution(* de.conterra.smarteditor.admin.TemplateDAO.*(..))" />
+		<aop:advisor advice-ref="txSmartEditorServiceAdvice"
+			pointcut-ref="templateDaoMethods" />
+	</aop:config>
 
-    <aop:config>
-        <aop:pointcut id="templateDaoMethods"
-                      expression="execution(* de.conterra.smarteditor.admin.TemplateDAO.*(..))"/>
-        <aop:advisor advice-ref="txSmartEditorServiceAdvice" pointcut-ref="templateDaoMethods"/>
-    </aop:config>
+	<!-- shared advice referenced by different transaction definitions -->
+	<tx:advice id="txSmartEditorServiceAdvice"
+		transaction-manager="smartEditorHibernateTransactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="activate*" propagation="REQUIRED" />
+			<tx:method name="persist*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
 
-    <!--  shared advice referenced by different transaction definitions -->
-    <tx:advice id="txSmartEditorServiceAdvice" transaction-manager="smartEditorHibernateTransactionManager">
-        <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="activate*" propagation="REQUIRED"/>
-            <tx:method name="persist*" propagation="REQUIRED"/>
-            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
-
+	<!-- Added RequestFactory Bean for Using the BasicPublishControllerSML.java and StartEditorControllerSML.java, 
+		SOS,SML Implementation Test classes in de.conterra.smarteditor.clients.RequestFactoryTest 
+		and de.conterra.smarteditor.dao.TerraCatalogServiceDAOTest 
+		!!The keys and ${insertSensorOperation} ${updateSensorOperation} in available Requests need to be the same like in operationSOSManager Bean the statedIdand 
+		in the referenced States. (See operationSOSUpdated stateID for example) Therefore 
+		global properties are created in application.properties. -->
+	<bean id="requestFactory" class="de.conterra.smarteditor.clients.RequestFactory">
+		<property name="availableRequests">
+			<map>
+			    <entry key="get" value="/requests/GetSOS_Request.xslt" />
+				<entry key="${insertSensorOperation}" value="/requests/InsertSOS_Request.xslt" />
+				<entry key="${updateSensorOperation}" value="/requests/UpdateSOS_Request.xslt" />
+				<entry key="delete" value="/requests/DeleteSOS_Request.xslt" />
+			</map>
+		</property>
+		<property name="transformerService" ref="xsltTransformerService" />
+	</bean>
 
 </beans>

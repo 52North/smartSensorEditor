@@ -13,46 +13,92 @@
 	xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd"
 	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sml="http://www.opengis.net/sensorml/2.0"
 	xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="gmd gco gml sml">
+	<!-- !!!! Warning: this class is not finished, because there are multiple different elements which can be inserted into the
+	CapabilityList. This file could be changed to the structure like the xslt file: SmlCapabilityText. -->
 
 	<!-- include base template -->
 	<xsl:include href="/xslt/BaseTemplatesSML.xslt" />
 	<!-- parameter handed over by transformer -->
 	<xsl:param name="beanDoc" />
-	<!-- remove existing identifiers -->
-	<xsl:template match="/*/sml:characteristics/sml:CharacteristicList/*" />
-	<!-- go through citation and copy nodes -->
-	<xsl:template match="/*/sml:characteristics/sml:CharacteristicList">
-		<xsl:copy>
-			<xsl:for-each select="$beanDoc/*/SweQuantity">
-				<sml:characteristic>
-					<swe:Quantity>
-						<xsl:attribute name="definition">
-							<xsl:value-of select="definition" />
-						</xsl:attribute>
-						<swe:identifier>
-							<xsl:value-of select="identifier" />
-						</swe:identifier>
-						<swe:label>
-							<xsl:value-of select="label" />
-						</swe:label>
-						<swe:description>
-							<xsl:value-of select="description" />
-						</swe:description>
-						<swe:uom>
-							<xsl:attribute name="code">
-							<xsl:value-of select="uom" />
-						</xsl:attribute>
-						</swe:uom>
-						<swe:value>
-							<xsl:value-of select="value" />
-						</swe:value>
-					</swe:Quantity>
-				</sml:characteristic>
-			</xsl:for-each>
+
+<xsl:template match="/sml:PhysicalSystem" priority="200">
+<xsl:copy>
+			<xsl:attribute name="gml:id">
+				<xsl:value-of select="@gml:id" />
+				</xsl:attribute>
+			<xsl:apply-templates select="gml:description" />
+			<xsl:apply-templates select="gml:name" />
+			<xsl:apply-templates select="gml:identifier" />
+			<xsl:apply-templates select="sml:keywords" />
+			<xsl:apply-templates select="sml:identification" />
+			<xsl:apply-templates select="sml:classification" />
+			<xsl:apply-templates select="sml:validTime" />
+			<xsl:apply-templates select="sml:securityConstraints" />
+			<xsl:apply-templates select="sml:legalConstraints" />
+			<xsl:apply-templates select="sml:characteristics" />
+			<xsl:call-template name="characteristics" />
+			<xsl:apply-templates select="sml:capabilities" />
+		    <xsl:apply-templates select="sml:contacts" />
+		    <xsl:apply-templates select="sml:documentation" />
+		    <xsl:apply-templates select="sml:history" />
+		    <xsl:apply-templates select="sml:definition" />
+		    <xsl:apply-templates select="sml:typeOf" />
+		    <xsl:apply-templates select="sml:configuration" />
+		    <xsl:apply-templates select="sml:featureOfInterest" />
+		    <xsl:apply-templates select="sml:inputs" />
+		    <xsl:apply-templates select="sml:outputs" />
+		    <xsl:apply-templates select="sml:parameters" />
+		    <xsl:apply-templates select="sml:modes" />
+		    <xsl:apply-templates select="sml:attachedTo" />
+		    <xsl:apply-templates select="sml:localReferenceFrame" />
+		    <xsl:apply-templates select="sml:localTimeFrame" />
+		    <xsl:apply-templates select="sml:position" />
+		    <xsl:apply-templates select="sml:timePosition" />
+		    <xsl:apply-templates select="sml:components" />
+		    <xsl:apply-templates select="sml:connections" />
 		</xsl:copy>
+
+
+	</xsl:template>
+	<!-- go through citation and copy nodes -->
+	<xsl:template name="characteristics">
+
+		<xsl:if test="$beanDoc/*/SweQuantity">
+			<sml:characteristics>
+				<sml:CharacteristicList>
+					<xsl:for-each select="$beanDoc/*/SweQuantity">
+						<sml:characteristic>
+							<swe:Quantity>
+								<xsl:attribute name="definition">
+							<xsl:value-of select="fn:normalize-space(definition)" />
+						</xsl:attribute>
+								<swe:identifier>
+									<xsl:value-of select="fn:normalize-space(identifier)" />
+								</swe:identifier>
+								<swe:label>
+							<xsl:value-of select="fn:normalize-space(label)" />
+						</swe:label>
+								<swe:description>
+							<xsl:value-of select="fn:normalize-space(description)" />
+						</swe:description>
+								<swe:uom>
+									<xsl:attribute name="code">
+							<xsl:value-of select="fn:normalize-space(uom)" />
+						</xsl:attribute>
+								</swe:uom>
+								<swe:value>
+									<xsl:value-of select="fn:normalize-space(value)" />
+								</swe:value>
+							</swe:Quantity>
+						</sml:characteristic>
+					</xsl:for-each>
+
+				</sml:CharacteristicList>
+			</sml:characteristics>
+		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

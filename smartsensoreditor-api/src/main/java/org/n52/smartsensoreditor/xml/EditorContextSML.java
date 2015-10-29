@@ -37,9 +37,6 @@ import java.util.Iterator;
 
 /**
  * Context namespace required by ISO 19139 and schematron
- * @author kse
- * Date: 28.02.2010
- * Time: 13:19:20
  * 
  * TODO: make the EditorContext configurable
  */

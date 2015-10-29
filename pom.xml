@@ -5,17 +5,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.metadata</groupId>
 	<artifactId>smartsensoreditor</artifactId>
-        <name>smartSensorEditor</name>
-        <version>0.0.1-SNAPSHOT</version>
+	<name>smartSensorEditor</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<url>https://github.com/52North/smartSensorEditor</url>
-        <inceptionYear>2014</inceptionYear>
-        
+	<inceptionYear>2014</inceptionYear>
+
 	<modules>
 		<module>smartsensoreditor-api</module>
 		<module>smartsensoreditor-webapp</module>
 	</modules>
-        
+
 	<licenses>
 		<license>
 			<name>Apache Software License 2.0</name>
@@ -23,41 +23,41 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-        
-        <organization>
-            <name>52°North Initiative for Geospatial Open Source Software GmbH</name>
-            <url>http://52north.org</url>
-        </organization>
-        <mailingLists>
-            <mailingList>
-                <name>Metadata Management Community Mailing List</name>
-                <subscribe>http://list.52north.org/mailman/listinfo/metadata</subscribe>
-                <unsubscribe>http://list.52north.org/mailman/listinfo/metadata</unsubscribe>
-                <post>swe@52north.org</post>
-                <archive>http://list.52north.org/pipermail/metadata</archive>
-                <otherArchives>
-                    <otherArchive>http://metadata.forum.52north.org</otherArchive>
-                </otherArchives>
-            </mailingList>
-        </mailingLists>
-        <developers>
-            <developer>
-                <name>Jana Klemp</name>
-                <email>j.klemp@52north.org</email>
-                <organization>${project.organization.name}</organization>
-                <organizationUrl>${project.organization.url}</organizationUrl>
-                <timezone>GMT+1</timezone>
-                <id>janaGit</id>
-            </developer>
-            <developer>
-                <name>Daniel Nüst</name>
-                <email>d.nuest@52north.org</email>
-                <organization>${project.organization.name}</organization>
-                <organizationUrl>${project.organization.url}</organizationUrl>
-                <timezone>GMT+1</timezone>
-                <id>nuest</id>
-            </developer>
-        </developers>
+
+	<organization>
+		<name>52°North Initiative for Geospatial Open Source Software GmbH</name>
+		<url>http://52north.org</url>
+	</organization>
+	<mailingLists>
+		<mailingList>
+			<name>Metadata Management Community Mailing List</name>
+			<subscribe>http://list.52north.org/mailman/listinfo/metadata</subscribe>
+			<unsubscribe>http://list.52north.org/mailman/listinfo/metadata</unsubscribe>
+			<post>swe@52north.org</post>
+			<archive>http://list.52north.org/pipermail/metadata</archive>
+			<otherArchives>
+				<otherArchive>http://metadata.forum.52north.org</otherArchive>
+			</otherArchives>
+		</mailingList>
+	</mailingLists>
+	<developers>
+		<developer>
+			<name>Jana Klemp</name>
+			<email>j.klemp@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+			<id>janaGit</id>
+		</developer>
+		<developer>
+			<name>Daniel Nüst</name>
+			<email>d.nuest@52north.org</email>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<timezone>GMT+1</timezone>
+			<id>nuest</id>
+		</developer>
+	</developers>
 
 	<properties>
 		<spring.version>3.0.6.RELEASE</spring.version>
@@ -66,7 +66,7 @@
 		<currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-        
+
 	<repositories>
 		<repository>
 			<id>n52-releases</id>
@@ -88,91 +88,106 @@
 			<url>http://repository.springsource.com/maven/bundles/external/</url>
 		</repository>
 	</repositories>
-        <build>
-            <pluginManagement>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.1</version>
-                        <configuration>
-                            <source>1.7</source>
-                            <target>1.7</target>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.18.1</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.maven.surefire</groupId>
-                                <artifactId>surefire-junit47</artifactId>
-                                <version>2.18.1</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </pluginManagement>
-            
-            <plugins>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>2.8</version>
-                    <!--<inherited>false</inherited>-->
-                    <configuration>
-                        <header>misc/license_header.txt</header>
-                        <aggregate>true</aggregate>
-                        <properties>
-                            <inceptionYear>${project.inceptionYear}</inceptionYear>
-                            <latestYearOfContribution>${currentYear}</latestYearOfContribution>
-                        </properties>
-                        <includes>
-                            <include>src/**/*.java</include>
-                            <include>src/**/*.xml</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/logback.xml</exclude>
-                            <exclude>**/logback-test.xml</exclude>
-                            <exclude>**/src/test/resources/**</exclude>
-                        </excludes>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>check-license</id>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.jasig.maven</groupId>
-                    <artifactId>maven-notice-plugin</artifactId>
-                    <version>1.0.6.1</version>
-                    <configuration>
-                        <noticeTemplate>misc/NOTICE.template</noticeTemplate>
-                        <licenseMapping>
-                            <param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
-                            <param>https://source.jasig.org/licenses/license-mappings.xml</param>
-                            <param>misc/license-mappings.xml</param>
-                        </licenseMapping>
-                        <generateChildNotices>false</generateChildNotices>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>check-license</id>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.18.1</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.surefire</groupId>
+							<artifactId>surefire-junit47</artifactId>
+							<version>2.18.1</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<reuseForks>false</reuseForks>
+						<forkCount>1</forkCount>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>6.1.26</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.15</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>2.8</version>
+				<!--<inherited>false</inherited> -->
+				<configuration>
+					<header>misc/license_header.txt</header>
+					<aggregate>true</aggregate>
+					<properties>
+						<inceptionYear>${project.inceptionYear}</inceptionYear>
+						<latestYearOfContribution>${currentYear}</latestYearOfContribution>
+					</properties>
+					<includes>
+						<include>src/**/*.java</include>
+						<include>src/**/*.xml</include>
+					</includes>
+					<excludes>
+						<exclude>**/logback.xml</exclude>
+						<exclude>**/logback-test.xml</exclude>
+						<exclude>**/src/test/resources/**</exclude>
+						<exclude>**/src/main/resources/templates/</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>check-license</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<version>1.0.6.1</version>
+				<configuration>
+					<noticeTemplate>misc/NOTICE.template</noticeTemplate>
+					<licenseMapping>
+						<param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
+						<param>https://source.jasig.org/licenses/license-mappings.xml</param>
+						<param>misc/license-mappings.xml</param>
+					</licenseMapping>
+					<generateChildNotices>false</generateChildNotices>
+				</configuration>
+				<executions>
+					<execution>
+						<id>check-license</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<dependencyManagement>
 		<dependencies>

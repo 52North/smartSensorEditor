@@ -152,7 +152,7 @@
 	</list>
 	<list>
 		<identifier>MD_ScopeCode</identifier>
-		<element>
+<!-- 		<element>
 			<resourceKey>codelist.scopecode[0]</resourceKey>
 			<value>attributeType</value>
 		</element>
@@ -215,7 +215,7 @@
 		<element>
 			<resourceKey>codelist.scopecode[15]</resourceKey>
 			<value>application</value>
-		</element>
+		</element> -->
 		<element>
 			<resourceKey>codelist.scopecode[17]</resourceKey>
 			<value>sensor</value> <!-- sml -->
@@ -392,7 +392,7 @@
 		</element>
 	</list>
 	<list>
-		<identifier>CT_ServiceTypeExt</identifier>
+		<identifier>CT_ServiceTypeExt</identifier> <!-- needs to be the same like the keys in need to be the same like in WEB-INF/dao-definitions.xml in the bean with id="webServiceFactory". -->
 		<element>
 			<resourceKey>enumeration.servicetype[0]</resourceKey>
 			<value>WMS</value>
@@ -414,8 +414,8 @@
 			<value>ARCIMS</value>
 		</element>
 		<element>
-			<resourceKey>enumeration.servicetype[27]</resourceKey>
-			<value>SOS</value>
+			<resourceKey>enumeration.servicetype[9]</resourceKey>
+			<value>SOS</value> <!-- Is needed for StartEditorControllerSML.java -->
 		</element>
 	</list>
 	<list>
@@ -2267,25 +2267,16 @@
 	</list>
 	
 <!-- SML -->
+<!-- The values are needed in the class StartEditorControllerSML.java, -->
 	<list>
-		<identifier>SOS_Operations</identifier>
+		<identifier>SOS_Operations</identifier> 
 		<element>
 			<resourceKey>enumeration.SOS_Operation[0]</resourceKey>
-			<value>INSERT</value>
+			<value>DescribeSensor</value><!-- Is needed for StartEditorControllerSML.java -->
 		</element>
 		<element>
 			<resourceKey>enumeration.SOS_Operation[1]</resourceKey>
-			<value>UPDATE</value>
+			<value>DeleteSensor</value>
 		</element>
-		<element>
-			<resourceKey>enumeration.SOS_Operation[2]</resourceKey>
-			<value>DELETE</value>
-		</element>
-		<element>
-			<resourceKey>enumeration.SOS_Operation[3]</resourceKey>
-			<value>DESCRIBE</value>
-		</element>
-
-
 	</list>
 </ISODictionary>

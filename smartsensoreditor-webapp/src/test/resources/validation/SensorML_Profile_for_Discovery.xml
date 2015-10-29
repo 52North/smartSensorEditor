@@ -1,98 +1,253 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) ${inceptionYear}-2014 52°North Initiative for Geospatial 
-	Open Source Software GmbH This program is free software; you can redistribute 
-	it and/or modify it under the terms of the GNU General Public License version 
-	2 as published by the Free Software Foundation. If the program is linked 
-	with libraries which are licensed under one of the following licenses, the 
-	combination of the program with the linked library is not considered a "derivative 
-	work" of the program: - Apache License, version 2.0 - Apache Software License, 
-	version 1.0 - GNU Lesser General Public License, version 3 - Mozilla Public 
-	License, versions 1.0, 1.1 and 2.0 - Common Development and Distribution 
-	License (CDDL), version 1.0 Therefore the distribution of the program linked 
-	with libraries licensed under the aforementioned licenses, is permitted by 
-	the copyright holders if the distribution is compliant with both the GNU 
-	General Public License version 2 and the aforementioned licenses. This program 
-	is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
-	PURPOSE. See the GNU General Public License for more details. -->
-<!-- ========================================================================== 
-	SensorML Profile for Discovery of Sensor Platforms A Schematron (ISO 19757-3) 
-	Schema For SensorML 1.0.1 Version 0.1 =========================================================================== 
-	DESCRIPTION: This file comprises a Schematron[1] schema for the Sensor Model 
-	Language (SensorML) [2] defined by the OGC [3]. This profile can be considered 
-	as a means to create SensorML documents for the discovery of sensor platforms 
-	(e.g. weather stations). The platform is modelled as a 'System' while its 
-	attached sensors are described as 'Components'. The profile is especially 
-	intended to be applied to SensorML documents returned by the DescribeSensor 
-	operation of a Sensor Observation Service [4]. The flexible structure of 
-	SensorML is reduced by this profile. It restricts the SensorML schema to 
-	a sufficient subset which can be used to model sensor platforms with intention 
-	to be discoverable. It defines several "optional" elements and attributes 
-	as "required" for the definition of stations. So, the profile definition 
-	eases the use of SensorML on the client-side. If services comply to the profile 
-	restrictions the clients can refer to them. A client which has to make use 
-	of SensorML descriptions of stations doesn't have to support the whole SensorML 
-	schema, but just the restricted one defined by the profile. Please provide 
-	any comments or feedback on this validator to Daniel Nüst (d.nuest@52north.org). 
-	REFERENCES: [1] http://www.schematron.com/iso/Schematron.html [2] http://www.opengeospatial.org/standards/sensorml 
-	[3] http://www.opengeospatial.org [4] http://www.opengeospatial.org/standards/sos -->
-<sch:schema xmlns="http://purl.oclc.org/dsdl/schematron"
-	xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:gml="http://www.opengis.net/gml"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	xsi:schemaLocation="http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd"
-	schemaVersion="ISO19757-3" xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-	queryBinding="xslt2">
-	<ns prefix="sml" uri="http://www.opengis.net/sensorML/1.0.1" />
-	<ns prefix="gml" uri="http://www.opengis.net/gml" />
-	<ns prefix="swe" uri="http://www.opengis.net/swe/1.0.1" />
-	<ns prefix="xlink" uri="http://www.w3.org/1999/xlink" />
-	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<!-- System Validation -->
-	<!-- This pattern validates the parts of the SensorML document which are 
-		specific for a System. -->
-	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<sch:pattern id="SystemValidation">
-		<!-- A SensorML document contains one "member" element. Each "member" contains 
-			a "Process" instance (either a "Component" or a "System") which shall be 
-			discoverable. -->
-		<sch:rule context="/">
-			<sch:assert test="count(//sml:member) = 1">errors.validation.SML.member</sch:assert>
-			<sch:assert test="count(//sml:member/sml:System) = 1">errors.validation.SML.system</sch:assert>
-		</sch:rule>
-	</sch:pattern>
-	<sch:pattern id="GeneralValidation">
-		<sch:rule context="//sml:System">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
-		</sch:rule>
-		<sch:rule context="//sml:Component">
-			<sch:assert test="sml:keywords/sml:KeywordList">errors.validation.SML.KeywordList
-			</sch:assert>
-		</sch:rule>
-		<!-- Each "identifier/Term" element contained in the "IdentifierList" must 
-			have a "definition" attribute. This attribute links to the semantics of the 
-			identifier. -->
-		<sch:rule
-			context="//sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
-			<sch:assert test="string-length(@definition) > 0">errors.validation.SML.identification.definition
-			</sch:assert>
-		</sch:rule>
-		<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:uniqueID". 
-			The value of its contained "Term" element uniquely identifies the instance. 
-			One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:longName". 
-			The value of its contained "Term" element represents a human understandable 
-			name for the instance. One identifier has to contain the definition "urn:ogc:def:identifier:OGC:1.0:shortName". 
-			The value of its contained "Term" element represents a short representation 
-			of the human understandable name for the instance. -->
-		<sch:rule context="//sml:identification">
-			<sch:assert
-				test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:uniqueID']) = 1">errors.validation.SML.identification.uniqueID</sch:assert>
-			<sch:assert
-				test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:longName']) = 1">errors.validation.SML.identification.longName</sch:assert>
-			<sch:assert
-				test="count(sml:IdentifierList/sml:identifier/sml:Term[@definition = 'urn:ogc:def:identifier:OGC:1.0:shortName']) = 1">errors.validation.SML.identification.shortName</sch:assert>
-		</sch:rule>
+<!--
 
-	</sch:pattern>
-</sch:schema>
+    Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License version 2 as published
+    by the Free Software Foundation.
+
+    If the program is linked with libraries which are licensed under one of
+    the following licenses, the combination of the program with the linked
+    library is not considered a "derivative work" of the program:
+
+        - Apache License, version 2.0
+        - Apache Software License, version 1.0
+        - GNU Lesser General Public License, version 3
+        - Mozilla Public License, versions 1.0, 1.1 and 2.0
+        - Common Development and Distribution License (CDDL), version 1.0
+
+    Therefore the distribution of the program linked with libraries licensed
+    under the aforementioned licenses, is permitted by the copyright holders
+    if the distribution is compliant with both the GNU General Public
+    License version 2 and the aforementioned licenses.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+-->
+<!-- Copyright (C) 2014-2015 52°North Initiative for Geospatial Open Source  	Software GmbH This program is free software; you can redistribute it and/or  	modify it under the terms of the GNU General Public License version 2 as  	published by the Free Software Foundation. If the program is linked with  	libraries which are licensed under one of the following licenses, the combination  	of the program with the linked library is not considered a "derivative work"  	of the program: - Apache License, version 2.0 - Apache Software License,  	version 1.0 - GNU Lesser General Public License, version 3 - Mozilla Public  	License, versions 1.0, 1.1 and 2.0 - Common Development and Distribution  	License (CDDL), version 1.0 Therefore the distribution of the program linked  	with libraries licensed under the aforementioned licenses, is permitted by  	the copyright holders if the distribution is compliant with both the GNU  	General Public License version 2 and the aforementioned licenses. This program  	is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;  	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR  	PURPOSE. See the GNU General Public License for more details. -->
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:sml="http://www.opengis.net/sensorml/2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd" schemaVersion="ISO19757-3">
+	<ns prefix="sml" uri="http://www.opengis.net/sensorml/2.0"/>
+	<ns prefix="gml" uri="http://www.opengis.net/gml/3.2"/>
+	<ns prefix="swe" uri="http://www.opengis.net/swe/2.0"/>
+	<ns prefix="xlink" uri="http://www.w3.org/1999/xlink"/>
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- General Validation of SML core.sch -->
+	<!-- This pattern validates the parts of the SensorML document which are 	common for the System and the Component. This are copied rules from the SML 	core.sch file -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- SensorML is an OGC Standard. Copyright (c) 2014 Open Geospatial Consortium. 	To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ 	. -->
+	<!-- Version: 2.0.0 -->
+	<!-- xlink:href attribute -->
+	<pattern>
+		<title>Req 40</title>
+		<rule context="//*">
+			<assert test="@xlink:href | * | @* or (normalize-space(.) != '')">errors.validation.SML.2.0.xlink_href</assert>
+		</rule>
+	</pattern>
+	<!-- gml:identifier property -->
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:DescribedObject">
+			<assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.describedObject.gmlIdentifier</assert>
+		</rule>
+	</pattern>
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:DescribedObject/gml:identifier">
+			<assert test="@codeSpace = 'uniqueID' ">errors.validation.SML.2.0.describedObject.gmlIdentifier.uniqueID</assert>
+		</rule>
+	</pattern>
+	<!-- contact role -->
+	<pattern>
+		<title>Req 49</title>
+		<rule context="sml:ContactList/sml:member">
+			<assert test="@xlink:arcrole">errors.validation.SML.2.0.contactList.member.xlink.arcrole</assert>
+		</rule>
+	</pattern>
+	<!-- feature of interest role -->
+	<pattern>
+		<title>Req 51</title>
+		<rule context="sml:FeatureList/sml:member">
+			<assert test="@xlink:arcrole">errors.validation.SML.2.0.featureList.member.xlink.arcrole</assert>
+		</rule>
+	</pattern>
+	<!-- ObservableProperty -->
+	<pattern>
+		<title>Req 52</title>
+		<rule context="//sml:ObservableProperty">
+			<assert test="@definition">errors.validation.SML.2.0.observableProperty.definition</assert>
+		</rule>
+	</pattern>
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- General Validation of SML physical_system.sch -->
+	<!-- This pattern validates the parts of the SensorML document which are 	common for the PhysicalSystem. This are copied rules from the SML physical_system.sch 	file -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- SensorML is an OGC Standard. Copyright (c) 2014 Open Geospatial Consortium. 	To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ 	. -->
+	<!-- Version: 2.0.0 -->
+	<!-- gml:identifier property -->
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:PhysicalSystem">
+			<assert test="count(gml:identifier) = 1">errors.validation.SML.2.0.gmlIdentifier</assert>
+		</rule>
+	</pattern>
+	<pattern>
+		<title>Req 46</title>
+		<rule context="sml:PhysicalSystem/gml:identifier">
+			<assert test="@codeSpace = 'uniqueID' ">errors.validation.SML.2.0.gmlIdentifier.uniqueID</assert>
+		</rule>
+	</pattern>
+	<!-- IS THIS ALREADY COVERED BY REQUIRED PASSING OF AGGREGATEPROCESS? <pattern> <title>Req 59</title> <rule context="sml:component"> <assert 	test="@xlink:href"> The "xlink:href" attribute is required for the "component" 	property. (Req 59) </assert> </rule> </pattern> <pattern> <title>Req 59</title> <rule context="sml:component"> <assert 	test="@xlink:title"> The "xlink:title" attribute is required for the "component" 	property. (Req 59) </assert> </rule> </pattern> --><!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- SML Discovery -->
+	<!-- This pattern validates against the discovery framework for SML. !!!!Warning: Some rules for sml:PhysicalComponent are left out.-->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!--~~~~~~~~~~ -->
+	<!--gml:description -->
+	<!--~~~~~~~~~~ -->
+	<!-- These rules ensure that for every PhysicalSystem a gml:description is provided.. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="gml:description">errors.validation.SML.2.0.discovery.gmlDescription</assert>
+		</rule>
+	</pattern>
+	<!-- These rules ensure that for every PhysicalComponent a gml:description 	is provided.. -->
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="gml:description">errors.validation.SML.2.0.discovery.gmlDescription</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!--~~~~~~~~~~ -->
+	<!--sml:keywords -->
+	<!--~~~~~~~~~~ -->
+	<!-- In order to make sure that a list of keywords describing the sensor 	is provided. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="sml:keywords/sml:KeywordList">errors.validation.SML.2.0.discovery.smlKeywordList</assert>
+		</rule>
+	</pattern>
+	<!-- In order to make sure that a list of keywords describing the sensor 	is provided. -->
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="sml:keywords/sml:KeywordList">errors.validation.SML.2.0.discovery.smlKeywordList</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!--~~~~~~~~~~ -->
+	<!--Identification -->
+	<!--~~~~~~~~~~ -->
+	<!-- Each "identifier/Term" element contained in the "IdentifierList" must 	have a "definition" attribute. This attribute links to the semantics of the 	identifier. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term">
+			<assert test="string-length(@definition) &gt; 0">errors.validation.SML.2.0.discovery.smlIdentification.definition</assert>
+		</rule>
+	</pattern>
+	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#UUID". 	The value of its contained "Term" element uniquely identifies the instance. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#UUID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.UUID</assert>
+		</rule>
+	</pattern>
+	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#longName". 	The value of its contained "Term" element represents a short representation 	of the human understandable name for the instance. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#longName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.longName</assert>
+		</rule>
+	</pattern>
+	<!-- One identifier has to contain the definition "http://www.nexosproject.eu/dictionary/definitions.html#shortName". 	The value of its contained "Term" element represents a human understandable 	name for the instance. -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#shortName']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.shortName</assert>
+		</rule>
+	</pattern>
+	<!-- One identifier has to contain the definition "urn:ogc:def:identifier:OGC:parentSystemUniqueID". 	The value of its contained "Term" element refers to the system that contains 	the component. -->
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:Component/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition = 'http://www.nexosproject.eu/dictionary/definitions.html#parentSystemUniqueID']) = 1">errors.validation.SML.2.0.discovery.smlIdentification.parentSystemUniqueID</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!--~~~~~~~~~~ -->
+	<!--Classification -->
+	<!--~~~~~~~~~~ -->
+	<!-- Each "classifier/Term" element contained in the "ClassifierList" must 	have a "definition" attribute. This attribute links to the semantics of the 	identifier. -->
+	<pattern>
+		<rule context="//sml:classification/sml:ClassifierList/sml:classifier/sml:Term">
+			<assert test="string-length(@definition) &gt; 0">errors.validation.SML.2.0.discovery.smlClassification.definition</assert>
+		</rule>
+	</pattern>
+	<!-- A PhysicalSystem element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#sensorType. 	The value of its contained Term element states the type of the sensor" -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert>
+		</rule>
+	</pattern>
+	<!-- A PhysicalSystem element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication -->
+	<pattern>
+		<rule context="//sml:PhysicalSystem">
+			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert>
+		</rule>
+	</pattern>
+	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#sensorType" 	The value of its contained Term element states the type of the sensor. -->
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#sensorType']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.sensorType</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!-- A PhysicalComponent element shall contain at least one classifier with 	the definition "http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication -->
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:classification/sml:ClassifierList/sml:classifier/sml:Term[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#intendedApplication']) &gt;= 1">errors.validation.SML.2.0.discovery.smlClassification.definition.intendedApplication</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!--~~~~~~~~~~ -->
+	<!--Capabilities -->
+	<!--~~~~~~~~~~ -->
+	<!-- To ease the usage of the capabilities element it is defined that a 	swe:DataRecord containing a number of swe:field elements shall be used to 	specify the capabilities of a System or Component. -->
+	<!--The child element of each swe:Field element shall contain a definition 	attribute so that a client is able to look up the semantics of the capability. -->
+	<!-- !!!!Not tested in the TestValidation.java class -->
+	<pattern>
+		<rule context="//sml:capabilities/swe:DataRecord/swe:field">
+			<assert test="string-length(child::node()[@definition]) &gt; 0">errors.validation.SML.2.0.discovery.smlCapabilities.definition</assert>
+		</rule>
+	</pattern>
+	<!-- If the child-element of the swe:Field is a swe:Quantity it shall contain 	the swe:uom element which specifies the code attribute. -->
+	<!-- !!!!Not tested in the TestValidation.java class -->
+	<pattern>
+		<rule context="//sml:capabilities/swe:DataRecord/swe:field/swe:Quantity/swe:uom">
+			<assert test="string-length(@code) &gt; 0">errors.validation.SML.2.0.discovery.smlCapabilities.oum</assert>
+		</rule>
+	</pattern>
+<!--The dataRecord within the capabilities section of a PhysicalSystem shall 	contain one swe:field which specifies a swe:Envelope element with the definition 	http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. It describes 	the bounding box of the area that is observed by the System or Component. 	In case of an in-situ sensor this bounding box only contains the position 	of the sensor. --> 
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalSystem"> -->
+<!-- 			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+	<!-- The dataRecord within the capabilities section of a PhysicalComponent 	shall contain one swe:field which specifies a swe:Envelope element with the 	definition http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX. 	It describes the bounding box of the area that is observed by the System 	or Component. In case of an in-situ sensor this bounding box only contains 	the position of the sensor. --> 
+<!-- 	<pattern> -->
+<!-- 		<rule context="//sml:PhysicalComponent"> -->
+<!-- 			<assert test="count(sml:capabilities/swe:DataRecord/swe:field/swe:Envelope[@definition =  'http://www.nexosproject.eu/dictionary/definitions.html#observedBBOX']) = 1">errors.validation.SML.2.0.discovery.smlCapabilities.envelope.definition.observedBBOX</assert> -->
+<!-- 		</rule> -->
+<!-- 	</pattern> -->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- Addtional rules -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<!-- This rule was created to make sure that the gml:identifier is always the same as the sml:identifier with the definition:'http://www.nexosproject.eu/dictionary/definitions.html#UUID'
+	     The rule has to be checked because of the following situation:
+	     If a new sensor description should be inserted, then the SOS will take the value from the sml:identifier for the procedureId and not the value from the gml:identifier.
+	     The gml:identifier will then set to the value of the sml:identifier. Both elements have then the same value.
+	     When a sensor should be updated, then the SOS does not check the value of the sml:identifier with the definition:'http://www.nexosproject.eu/dictionary/definitions.html#UUID'. 
+	     So then is is possible that both elements will have different values. To make sure that both elements always have the same values this rule has been created.
+	 -->
+	<pattern>
+		<title>gml:idtentifier== identification/identifier/uniqueID/value </title>
+		<rule context="sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term[@definition='http://www.nexosproject.eu/dictionary/definitions.html#UUID']">
+		<assert test="sml:value = /sml:PhysicalSystem/gml:identifier">errors.validation.sml.2.0.gmlidentifierEqualUniqueID</assert>
+		</rule>
+	</pattern>
+
+</schema>

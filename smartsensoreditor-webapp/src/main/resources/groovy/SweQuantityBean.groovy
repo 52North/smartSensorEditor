@@ -30,6 +30,9 @@ import de.conterra.smarteditor.beans.BaseBean
 				<swe:constraint></swe:constraint> not implemented because it is a complex type
 				<swe:value>20</swe:value>
 			one	attribute: definition
+			!!! Not used, so red boxes are not set in 
+			/smartsensoreditor-webapp/src/main/webapp/js/validation/smlValidator.js
+			/smartsensoreditor-webapp/src/main/webapp/js/validation/smlDiscoveryValidator.js
 */
 @XStreamAlias("SweQuantity")
 class SweQuantity extends BaseBean {

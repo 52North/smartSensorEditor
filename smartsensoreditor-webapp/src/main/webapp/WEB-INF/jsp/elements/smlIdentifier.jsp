@@ -16,24 +16,24 @@
 
 --%>
 
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	language="java"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <table class="verticalTop">
-    <tr>
-        <td>
-            <label for="smlIdentifier" id="smlIdentifierLabel" class="firstLabel width190 tooltip">
-                <fmt:message key="element.smlIdentifier.label"/>
-            </label>
-        </td>
-        <td>
-            <b><c:out value="${updateMetadata.storage['smlIdentifier'].id}"/></b>
-            <form:hidden path="storage['smlIdentifier'].id" id="smlIdentifier"/>
-        </td>
-    </tr>
+	<tr>
+		<td><label for="smlIdentifier" id="smlIdentifierLabel"
+			class="firstLabel width190 tooltip"> <fmt:message
+					key="element.smlIdentifier.label" />
+		</label></td>
+		<td><form:input htmlEscape="true"
+				path="storage['smlIdentifier'].id" size="100" id="smlIdentifier" /><br>
+			<form:errors path="storage['smlIdentifier'].id"
+				cssClass="ui-state-error-text" /></td>
+	</tr>
 </table>
 
 

@@ -36,7 +36,7 @@
             method: "add",
             elementName: "smlIdentification",
             propertyPath: "items",
-            type: "groovy.SmlIdentificationBean"
+            type: "groovy.SmlTermBean"
         }
     }));
 </script>

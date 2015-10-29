@@ -26,9 +26,9 @@
 	$(document).ready(function() {
 		// trigger visibility of service Name
 		$('#serviceNameContainer').hide();
-		$('#serviceTokenForSOS').hide();
+		$('#DIVserviceTokenForSOS').hide();
 		$('#DIVserviceOperationForSOS').hide();
-		$('#serviceProcedureIDForSOS').hide();
+		$('#DIVserviceProcedureIDForSOS').hide();
 		$('#serviceType').click(function() {
 			if ($('#serviceType').attr('value') == 'ARCIMS') {
 				$('#serviceNameContainer').show();
@@ -36,26 +36,53 @@
 				$('#serviceNameContainer').hide();
 			}
 			if ($('#serviceType').attr('value') == 'SOS') {
-				$('#serviceTokenForSOS').show();
+				$('#DIVserviceTokenForSOS').show();
 				$('#DIVserviceOperationForSOS').show();
+				$('#DIVserviceProcedureIDForSOS').show();
 			} else {
-				$('#serviceTokenForSOS').hide();
+				$('#DIVserviceTokenForSOS').hide();
 				$('#DIVserviceOperationForSOS').hide();
-				$('#serviceProcedureIDForSOS').hide();
+				$('#DIVserviceProcedureIDForSOS').hide();
 			}
 		});
-		$('#serviceOperationForSOS').click(function() {
-			if ($('#serviceOperationForSOS').attr('value').match(/^(UPDATE|DELETE|DESCRIBE)$/)) {
-				$('#serviceProcedureIDForSOS').show();
-			} else {
-				$('#serviceProcedureIDForSOS').hide();
-			}
-		});
-		
-	});
-	
-</script>
+		$("#serviceUrl").blur(function() {
+			$.get($("#serviceUrl").val(), {
+				service : "SOS",
+				request : "GetCapabilities",
+				Sections : "OperationsMetadata"
+			}, setProcedureIds);
 
+		});
+	});
+	$('#showErrors').bind("DOMNodeInserted", function(e) {
+		$('#showErrors').addClass("ui-state-error ui-corner-all");
+	});
+	function setProcedureIds(response) {
+
+		if (response) {
+			var procedureListLength = $("#serviceProcedureIDForSOS").lenght;
+			for (var i = 1; i < procedureListLength; i++) {
+				$("#serviceProcedureIDForSOS").remove(i);
+			}
+			var elementList = $(response).find(
+					"ows\\:Parameter[name='procedure']")[0].childNodes[1].childNodes;
+			if (elementList.length) {
+				for (i = 0; i < elementList.length; i++) {
+					if (elementList[i].nodeName == "ows:Value") {
+						var id = elementList[i].firstChild.data;
+						$("#serviceProcedureIDForSOS").append($('<option>', {
+							value : id,
+							text : id
+						}));
+
+					}
+				}
+			}
+
+		}
+
+	}
+</script>
 <h2>
 	<fmt:message key="start.service.title" />
 </h2>
@@ -65,37 +92,38 @@
 </span>
 
 <p>&nbsp;</p>
-<form:form action="startService.do" commandName="startEditorBean"
+<form:form action="startServiceSOS.do" commandName="startEditorBeanSML"
 	method="Post">
-
-	<label for="serviceUrl" class="firstLabel width150"><fmt:message
-			key="start.service.url" /></label>
-	<input name="serviceUrl" id="serviceUrl" size="100" />
-	<br>
-	<form:errors path="serviceUrl" cssClass="ui-state-error-text" />
-	<br>
-	<div id="serviceNameContainer" class="serviceDivSOS" >
+	<div id="serviceUrlContainer" class="serviceDivSOS">
+		<label for="serviceUrl" class="firstLabel width150"><fmt:message
+				key="start.service.url" /></label> <input name="serviceUrl" id="serviceUrl"
+			size="100" /> <br>
+		<form:errors path="serviceUrl" cssClass="ui-state-error-text" />
+	</div>
+	<div id="serviceNameContainer" class="serviceDivSOS">
 		<label for="serviceName" class="firstLabel width150"><fmt:message
 				key="start.service.name" /></label> <input name="serviceName"
 			id="serviceName" size="100" />
-			
 	</div>
-	
-	<div id="serviceTokenForSOS"  class="serviceDivSOS">
+
+	<div id="DIVserviceTokenForSOS" class="serviceDivSOS">
 		<label for="serviceTokenforSOS" class="firstLabel width150"><fmt:message
 				key="start.service.tokenForSOS" /></label> <input name="serviceTokenForSOS"
-			id="serviceTokenForSOS" size="100"/>
-			
+			id="serviceTokenForSOS" size="100" /><br>
+		<form:errors path="serviceTokenForSOS" cssClass="ui-state-error-text" />
 	</div>
-	
-	<div id="serviceProcedureIDForSOS"  class="serviceDivSOS">
+
+	<div id="DIVserviceProcedureIDForSOS" class="serviceDivSOS">
 		<label for="serviceProcedureIDForSOS" class="firstLabel width150"><fmt:message
-				key="start.service.procedureIDForSOS" /></label> <input name="serviceProcedureIDForSOS"
-			id="serviceProcedureIDForSOS" size="100" />
-			
+				key="start.service.procedureIDForSOS" /></label> <select
+			name="serviceProcedureIDForSOS" id="serviceProcedureIDForSOS"><option
+				value=""><fmt:message key="editor.general.choose" /></option></select><br>
+		<form:errors path="serviceProcedureIDForSOS"
+			cssClass="ui-state-error-text" />
 	</div>
-	
-	<div id="DIVserviceOperationForSOS"  class="serviceDivSOS">
+
+
+	<div id="DIVserviceOperationForSOS" class="serviceDivSOS">
 		<label for="serviceOperationForSOS" class="firstLabel width150"><fmt:message
 				key="start.service.operationForSOS" /></label> <select
 			id="serviceOperationForSOS" name="serviceOperationForSOS">
@@ -103,12 +131,13 @@
 			<c:forEach items="${SOS_Operations.nvp}" var="entry">
 				<option value="${entry.value}">${entry.name}</option>
 			</c:forEach>
-		</select>
-			
+		</select><br>
+		<form:errors path="serviceOperationForSOS"
+			cssClass="ui-state-error-text" />
 	</div>
-	
 
-	<div id="DIVserviceType"  class="serviceDivSOS">
+
+	<div id="DIVserviceType" class="serviceDivSOS">
 		<label for="serviceType" class="firstLabel width150"><fmt:message
 				key="start.service.type" /></label> <select id="serviceType"
 			name="serviceType">
@@ -116,11 +145,17 @@
 			<c:forEach items="${CT_ServiceTypeExt.nvp}" var="entry">
 				<option value="${entry.value}">${entry.name}</option>
 			</c:forEach>
-		</select>
-		
+		</select><br>
+		<form:errors path="serviceType" cssClass="ui-state-error-text" />
 	</div>
-	
-	<form:errors path="serviceType" cssClass="ui-state-error-text" />
+
+	<c:set var="err">
+		<form:errors path="*" element="div" id="err"
+			cssClass="hidden ui-icon-alert" />
+	</c:set>
+	<script>
+		$('#showErrors').append('${err}');
+	</script>
 	<br>
 
 	<p>&nbsp;</p>

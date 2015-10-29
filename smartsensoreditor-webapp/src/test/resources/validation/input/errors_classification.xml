@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sml:PhysicalSystem xmlns:sml="http://www.opengis.net/sensorml/2.0"
+                    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                    xmlns:gco="http://www.isotc211.org/2005/gco"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:gml="http://www.opengis.net/gml/3.2"
+                    xmlns:swe="http://www.opengis.net/swe/2.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    gml:id="system">
+   <gml:identifier codeSpace="uniqueID">308fd68d-b083-4f4e-8215-f251c01f07e3</gml:identifier>
+   <gml:description>descriptionOfSensor</gml:description>
+   <sml:keywords xmlns:fn="http://www.w3.org/2005/xpath-functions">
+      <sml:KeywordList>
+         <sml:keyword>testkey</sml:keyword>
+      </sml:KeywordList>
+   </sml:keywords>
+   <sml:identification xmlns:fn="http://www.w3.org/2005/xpath-functions">
+      <sml:IdentifierList>
+         <sml:identifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#UUID">
+               <sml:label>label_UID</sml:label>
+               <sml:value>value_UID</sml:value>
+            </sml:Term>
+         </sml:identifier>
+         <sml:identifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#longName">
+               <sml:label>label_longName</sml:label>
+               <sml:value>value_longName</sml:value>
+            </sml:Term>
+         </sml:identifier>
+         <sml:identifier>
+            <sml:Term definition="http://www.nexosproject.eu/dictionary/definitions.html#shortName">
+               <sml:label>label_shortName</sml:label>
+               <sml:value>value_shortName</sml:value>
+            </sml:Term>
+         </sml:identifier>
+      </sml:IdentifierList>
+   </sml:identification>
+   <sml:classification xmlns:fn="http://www.w3.org/2005/xpath-functions">
+      <sml:ClassifierList>
+         <sml:classifier>
+         <!-- definition attribute length == 0 -->
+            <sml:Term definition="">
+               <sml:label>label_sensorType</sml:label>
+               <sml:value>value_sensorType</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <sml:classifier>
+         <!-- no definition attribute -->
+            <sml:Term >
+               <sml:label>label_intendedApplication</sml:label>
+               <sml:value>value_intendedApplication</sml:value>
+            </sml:Term>
+         </sml:classifier>
+         <!-- definition= http://www.nexosproject.eu/dictionary/definitions.html#sensorType; ...intendetApplication missing -->
+      </sml:ClassifierList>
+   </sml:classification>
+   <sml:capabilities name="capabilitiesName_value">
+      <sml:CapabilityList>
+         <sml:capability name="capabilityName_value">
+            <swe:Text definition="definition_value"/>
+         </sml:capability>
+      </sml:CapabilityList>
+   </sml:capabilities>
+</sml:PhysicalSystem>

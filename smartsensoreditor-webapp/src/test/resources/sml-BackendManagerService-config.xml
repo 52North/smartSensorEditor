@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="
+	 xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation=" http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
-        http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd">
 
 
 	<bean id="beanTransformerService" class="de.conterra.smarteditor.service.BeanTransformerService">
@@ -25,29 +23,31 @@
 			</map>
 		</property>
 	</bean>
-	<bean id="smlValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
-		<property name="id" value="smlValidator" />
-		<property name="rulessetSystemID"
-			value="/validation/SensorML_Profile_for_Discovery.xslt" />
-	</bean>
+   <bean id="smlDiscoveryValidator" class="de.conterra.smarteditor.validator.SchematronValidator">
+        <property name="id" value="smlDiscoveryValidator"/>
+        <property name="rulessetSystemID" value="/validation/SensorML_Profile_for_Discovery.xslt"/>
+    </bean>
 	<bean id="validationService" class="de.conterra.smarteditor.service.ValidatorService"
 		init-method="compile">
 		<property name="path" value="/validation" />
 		<property name="svrlFilename" value="iso_svrl_for_xslt2.xsl" />
 		<property name="xsltService" ref="xsltTransformerService" />
 	</bean>
-	<bean id="backendSetupService" class="org.n52.smartsensoreditor.service.BackendManagerServiceSML">
+	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
+	<bean id="backendSetupService"
+		class="org.n52.smartsensoreditor.service.BackendManagerServiceSML">
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>
-				<entry key="smlValidator" value-ref="smlValidator" />
+				<entry key="smlDiscoveryValidator" value-ref="smlDiscoveryValidator" />
+				<!-- <entry key="extendedSmlDiscoveryValidator" value-ref="extendedSmlDiscoveryValidator" 
+					/> -->
 			</map>
 		</property>
 		<property name="backend" ref="backendBean" />
 		<property name="beanTransformer" ref="beanTransformerService" />
 		<property name="xsltTransformer" ref="xsltTransformerService" />
 		<property name="editorContext" ref="EditorContext"/>
-		<!-- <property name="activeBeanNamesRegex" ref="sensor_"/> -->
 		<property name="activeBeanNamesRegex">
 			<props>
 				<prop key="sensor">(sml\w+)|(\w+sml)|(swe\w+)|(\w+swe)</prop>
@@ -58,33 +58,23 @@
 	</bean>
 
 	<!-- beans from beans-definitions -->
-	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
-	<bean id="metadataValidator" class="org.n52.smartsensoreditor.validator.MetadataValidatorSML">
-		<property name="service" ref="backendSetupService" />
-		<property name="editorContext" ref="EditorContext"/>
-	</bean>
-
-	<lang:groovy id="alternateTitle"
-		script-source="classpath:groovy/AlternateTitleBean.groovy" />
-	<bean id="multiAlternateTitle" class="de.conterra.smarteditor.beans.MultipleElementBean">
-		<property name="transformToISO" value="/xslt/AlternateTitle_iso.xslt" />
-		<property name="transformToBean" value="/xslt/AlternateTitle_bean.xslt" />
-		<property name="bean" ref="alternateTitle" />
-	</bean>
-
 	<lang:groovy id="smlKeyword" script-source="classpath:groovy/SmlKeywordBean.groovy" />
 	<bean id="multiSmlKeyword" class="de.conterra.smarteditor.beans.MultipleElementBean">
 		<property name="transformToISO" value="/xslt/SmlKeyword_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlKeyword_bean.xslt" />
 		<property name="bean" ref="smlKeyword" />
 	</bean>
-
-	<lang:groovy id="smlIdentification"
-		script-source="classpath:groovy/SmlIdentificationBean.groovy" />
+	<lang:groovy id="smlIdentification" script-source="classpath:groovy/SmlTermBean.groovy" />
 	<bean id="multiSmlIdentification" class="de.conterra.smarteditor.beans.MultipleElementBean">
 		<property name="transformToISO" value="/xslt/SmlIdentification_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentification_bean.xslt" />
 		<property name="bean" ref="smlIdentification" />
+	</bean>
+	<lang:groovy id="smlClassification" script-source="classpath:groovy/SmlTermBean.groovy" />
+	<bean id="multiSmlClassification" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SmlClassification_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlClassification_bean.xslt" />
+		<property name="bean" ref="smlClassification" />
 	</bean>
 	<lang:groovy id="sweQuantityCharacteristic" script-source="classpath:groovy/SweQuantityBean.groovy" />
 	<bean id="multiSweQuantityCharacteristic" class="de.conterra.smarteditor.beans.MultipleElementBean">
@@ -92,21 +82,38 @@
 		<property name="transformToBean" value="/xslt/SweQuantityCharacteristic_bean.xslt" />
 		<property name="bean" ref="sweQuantityCharacteristic" />
 	</bean>
+	<lang:groovy id="smlCapabilityText"
+		script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText2"
+		script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText3"
+		script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText4"
+		script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<lang:groovy id="smlCapabilityText5"
+		script-source="classpath:groovy/SmlCapabilityTextBean.groovy" />
+	<bean id="multiSmlCapabilityText" class="de.conterra.smarteditor.beans.MultipleElementBean">
+		<property name="transformToISO" value="/xslt/SmlCapabilityText_sml.xslt" />
+		<property name="transformToBean" value="/xslt/SmlCapabilityText_bean.xslt" />
+		<property name="bean" ref="smlCapabilityText" />
+	</bean>
 	<bean id="smlIdentifier" class="de.conterra.smarteditor.beans.FileIdentifierBean">
 		<property name="transformToISO" value="/xslt/SmlIdentifier_sml.xslt" />
 		<property name="transformToBean" value="/xslt/SmlIdentifier_bean.xslt" />
 	</bean>
+
+
 	<bean id="backendBean" class="de.conterra.smarteditor.beans.BackendBean">
-		<aop:scoped-proxy />
 		<property name="validatorId" value="smlValidator" />
 		<property name="stickyErrorMessages" value="false" />
 		<!-- default validator id -->
 		<property name="storage">
 			<map>
-				<entry key="alternateTitle" value-ref="multiAlternateTitle" />
 				<entry key="smlKeyword" value-ref="multiSmlKeyword" />
 				<entry key="smlIdentification" value-ref="multiSmlIdentification" />
 				<entry key="smlIdentifier" value-ref="smlIdentifier" />
+				<entry key="smlClassification" value-ref="multiSmlClassification" />
+				<entry key="smlCapabilityText" value-ref="multiSmlCapabilityText" />
 				<entry key="sweQuantityCharacteristic" value-ref="multiSweQuantityCharacteristic" />
 			</map>
 		</property>
