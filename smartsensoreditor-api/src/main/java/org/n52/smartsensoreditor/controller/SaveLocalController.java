@@ -49,8 +49,8 @@ import java.util.Map;
 
 /**
  * Controller to save a metadata document on the local hard disk
- * <p/>
  *
+ * @author Jana Klemp
  */
 public class SaveLocalController extends de.conterra.smarteditor.controller.SaveLocalController {
 
@@ -92,7 +92,9 @@ public class SaveLocalController extends de.conterra.smarteditor.controller.Save
             String evalFileId = lUtil.evaluateAsString(xpath, lDoc).trim();
             if (evalFileId != null) {
                 lFileId = evalFileId;
-                LOG.debug(String.format("Derived file id %s using XPath %s", evalFileId, xpath));
+                if(LOG.isDebugEnabled()) {
+                    LOG.debug(String.format("Derived file id %s using XPath %s", evalFileId, xpath));
+                }
                 break;
             }
         }

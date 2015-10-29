@@ -28,17 +28,13 @@
  */
 package org.n52.smartsensoreditor.controller;
 
-import de.conterra.smarteditor.admin.TemplateManager;
-import de.conterra.smarteditor.beans.UserInfoBean;
-import de.conterra.smarteditor.controller.SaveTemplateController;
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import de.conterra.smarteditor.util.XPathUtil;
 import de.conterra.smarteditor.xml.EditorContext;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,11 +45,17 @@ import javax.servlet.http.HttpServletResponse;
  * <p/>
  *
  */
-public class SaveTemplateControllerSML extends SaveTemplateController {
+public class SaveTemplateController extends de.conterra.smarteditor.controller.SaveTemplateController {
 
-	private static Logger LOG = Logger.getLogger(SaveTemplateControllerSML.class);
+	private static Logger LOG = Logger.getLogger(SaveTemplateController.class);
 
 	private EditorContext editorContext;
+        
+        private List<String> titleXpath;
+
+        public void setTitleXpath(List<String> titleXpath) {
+            this.titleXpath = titleXpath;
+        }
 
 	public EditorContext getEditorContext() {
 		return editorContext;
@@ -63,22 +65,26 @@ public class SaveTemplateControllerSML extends SaveTemplateController {
 		this.editorContext = editorContext;
 	}
 
-	/**
-	 * @param request
-	 * @param pResponse
-	 * @return
-	 * @throws Exception
-	 */
+        @Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse pResponse) throws Exception {
 		// get backend document
 		Document lMerge = getBackendService().mergeBackend();
 		XPathUtil lUtil = new XPathUtil();
 		lUtil.setContext(editorContext);
-		String lTitle = lUtil.evaluateAsString("//gmd:title/*/text()", lMerge);
-		if (lTitle.equals("")) {
-			lTitle = lUtil.evaluateAsString("/*/gml:identifier/text()", lMerge);
-		}
+                
+                String lTitle = "title";
+                for (String xpath : titleXpath) {
+                    String evalFileId = lUtil.evaluateAsString(xpath, lMerge).trim();
+                    if (evalFileId != null) {
+                        lTitle = evalFileId;
+                        if(LOG.isDebugEnabled()) {
+                            LOG.debug(String.format("Derived title %s using XPath %s", evalFileId, xpath));
+                        }
+                        break;
+                    }
+                }
+                
 		try {
 			getTemplateManager().saveTemplate(lTitle, "MD_Metadata", getUserInfo()
 					.getUserId() != null ? getUserInfo().getUserId() : "",

@@ -180,11 +180,17 @@
 
 
 	<bean id="saveTemplateController"
-		class="org.n52.smartsensoreditor.controller.SaveTemplateControllerSML">
+		class="org.n52.smartsensoreditor.controller.SaveTemplateController">
 		<property name="backendService" ref="backendSetupService" />
 		<property name="templateManager" ref="templateManager" />
 		<property name="userInfo" ref="userInfoBean" />
 		<property name="editorContext" ref="EditorContext" />
+		<property name="titleXpath">
+                        <list>
+                                <value>//gmd:title/*/text()</value>
+                                <value>/*/gml:identifier/text()</value>
+                        </list>
+                </property>
 	</bean>
 
 	<!-- <bean id="publishController" class="de.conterra.smarteditor.controller.PublishController"> 
