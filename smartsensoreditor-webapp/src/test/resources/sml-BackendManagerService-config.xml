@@ -35,7 +35,7 @@
 	</bean>
 	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML"/>
 	<bean id="backendSetupService"
-		class="org.n52.smartsensoreditor.service.BackendManagerServiceSML">
+		class="org.n52.smartsensoreditor.service.BackendManagerService">
 		<aop:scoped-proxy />
 		<property name="validators">
 			<map>
@@ -55,6 +55,14 @@
 				<prop key="service">^((?!sml).)*$</prop>
 			</props>
 		</property>
+		<property name="resourceTypeXPaths">
+			<list>
+                            <value>//gmd:hierarchyLevel/*/@codeListValue</value>
+                            <!-- http://stackoverflow.com/questions/7045151/return-a-string-value-based-on-xpath-condition -->
+                            <value>substring('sensor', 1 div boolean(//sml:PhysicalSystem))</value>
+			</list>
+		</property>
+                <property name="identifierStorageName" value="smlIdentifier" />
 	</bean>
 
 	<!-- beans from beans-definitions -->

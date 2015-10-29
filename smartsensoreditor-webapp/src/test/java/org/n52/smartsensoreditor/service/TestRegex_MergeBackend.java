@@ -82,7 +82,7 @@ public class TestRegex_MergeBackend {
 		for (Map.Entry<String, BaseBean> lEntry : backendManagerService
 				.getBackend().getStorage().entrySet()) {
 			// check if bean should be merged
-			if (((BackendManagerServiceSML)backendManagerService).isBeanActive(lEntry.getKey())) {
+			if (((BackendManagerService)backendManagerService).isBeanActive(lEntry.getKey())) {
 				assertThat(lEntry.getKey(),either(containsString("sml")).or(containsString("swe")));
 			}
 		}
@@ -96,7 +96,7 @@ public class TestRegex_MergeBackend {
 		for (Map.Entry<String, BaseBean> lEntry : backendManagerService
 				.getBackend().getStorage().entrySet()) {
 			// check if bean should be merged
-			if (((BackendManagerServiceSML)backendManagerService).isBeanActive(lEntry.getKey())) {
+			if (((BackendManagerService)backendManagerService).isBeanActive(lEntry.getKey())) {
 				assertThat(lEntry.getKey(), not(containsString("sml")));
 			}
 		}
