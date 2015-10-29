@@ -103,6 +103,8 @@ public class SmlXsltTest {
 	
 	@Resource(name = "smlCapabilityText5")
 	BaseBean smlCapabilityText5;
+	@Resource(name = "smlCapabilityText6")
+	BaseBean smlCapabilityText6;
 
 	@Resource(name = "multiSmlKeyword")
 	MultipleElementBean multiSmlKeyword;
@@ -419,16 +421,28 @@ public class SmlXsltTest {
 		BeanUtil.setProperty(smlCapabilityText5, "value","testValue5");
 
 		multiSmlCapabilityText.getItems().add(smlCapabilityText5);
+		
+		BeanUtil.setProperty(smlCapabilityText6, "capabilitiesName","TestCapabilitiesName1");
+		BeanUtil.setProperty(smlCapabilityText6, "capabilityName","testName6");
+		BeanUtil.setProperty(smlCapabilityText6, "definition","testDefinition6");
+		BeanUtil.setProperty(smlCapabilityText6, "label","testLabel6");
+		BeanUtil.setProperty(smlCapabilityText6, "constraintValue","testValue00  , testValue00");
+		BeanUtil.setProperty(smlCapabilityText6, "constraintPatterns","testPattern6");
+		BeanUtil.setProperty(smlCapabilityText6, "value","testValue6");
+
+		multiSmlCapabilityText.getItems().add(smlCapabilityText6);
+		
 		Document  doc = beanTransformerService.mergeToISO(multiSmlCapabilityText,mRefDatasetDocument);
 		multiSmlCapabilityText.getItems().remove(smlCapabilityText);
 		multiSmlCapabilityText.getItems().remove(smlCapabilityText2);
 		multiSmlCapabilityText.getItems().remove(smlCapabilityText3);
 		multiSmlCapabilityText.getItems().remove(smlCapabilityText4);
 		multiSmlCapabilityText.getItems().remove(smlCapabilityText5);
+		multiSmlCapabilityText.getItems().remove(smlCapabilityText6);
 		Source beanSource = new DOMSource(doc);
 		try {
 			//test if values are inserted
-			assertThat("test capabilityName",
+			assertThat("test capabilitiesName",
 					beanSource,
 					hasXPath(
 							"/*/sml:capabilities[@name='TestCapabilitiesName1']",
@@ -511,6 +525,14 @@ public class SmlXsltTest {
 					beanSource,
 					hasXPath("count(/sml:PhysicalSystem/sml:capabilities[@name='Test6']/sml:CapabilityList/sml:test[text()='testen'])",
 							usingNamespaces,equalTo("1")));
+			
+			
+			//Test if multiple capabilities can be inserted into one capabilityList within one procedure
+
+			assertThat("multiple capabilities can be inserted into one capabilityList within one procedure",
+					beanSource,
+					hasXPath("/sml:PhysicalSystem/sml:capabilities[@name='TestCapabilitiesName1']/sml:CapabilityList/sml:capability[@name='testName6']/swe:Text[@definition='testDefinition6']/swe:value[text()='testValue6']",
+							usingNamespaces));
 
 		} catch (NoSuchMethodError e) {
 			LOG.error("Possibly XPath is invalid with compared source", e);
@@ -545,7 +567,7 @@ public class SmlXsltTest {
 	@Test
 	public void testSmlCapabilityTextNotInsertFields() {
 		BeanUtil.setProperty(smlCapabilityText, "capabilitiesName","TestCapabilitiesName1");
-		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName1");
+		BeanUtil.setProperty(smlCapabilityText, "capabilityName","testName5");
 		BeanUtil.setProperty(smlCapabilityText, "definition","testDefinition1");
 		BeanUtil.setProperty(smlCapabilityText, "label","");
 		BeanUtil.setProperty(smlCapabilityText, "constraintValue","");
