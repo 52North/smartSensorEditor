@@ -32,7 +32,7 @@
 		<logging.log4j.appender.file.level>INFO</logging.log4j.appender.file.level>
 		<logging.log4j.appender.file.path>${catalina.base}/logs</logging.log4j.appender.file.path>
 		<logging.log4j.appender.file.name>${project.artifactId}</logging.log4j.appender.file.name>
-		<!-- from application.properties -->
+		<!-- for application.properties -->
 		<csw.discovery>http://www.sdisuite.de/soapServices/services/CSWDiscovery</csw.discovery>
 		<csw.manager>http://www.sdisuite.de/soapServices/services/CSWManager</csw.manager>
 		<db.jndi.name>java:comp/env/jdbc/editor</db.jndi.name>
