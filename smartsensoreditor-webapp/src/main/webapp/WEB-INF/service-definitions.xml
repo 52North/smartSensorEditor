@@ -63,8 +63,9 @@
 			</props>
 		</property>
 	</bean>
+        
 	<!--SML -->
-	<bean id="EditorContext" class="org.n52.smartsensoreditor.xml.EditorContextSML" />
+	<bean id="editorContext" class="org.n52.smartsensoreditor.xml.EditorContext" />
 	<bean id="metadataValidator"
 		class="org.n52.smartsensoreditor.validator.MetadataValidatorSML">
 		<property name="service" ref="backendSetupService" />
