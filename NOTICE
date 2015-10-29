@@ -54,6 +54,7 @@ This project includes:
   com.springsource.org.aopalliance under Public Domain
   com.springsource.org.apache.commons.logging under The Apache Software License, Version 2.0
   Commons BeanUtils under The Apache Software License, Version 2.0
+  Commons Chain under The Apache Software License, Version 2.0
   Commons Collections under The Apache Software License, Version 2.0
   Commons Compress under The Apache Software License, Version 2.0
   Commons DBCP under The Apache Software License, Version 2.0
@@ -117,6 +118,7 @@ This project includes:
   org.springframework.web under The Apache Software License, Version 2.0
   org.springframework.web.servlet under The Apache Software License, Version 2.0
   org.springframework.webflow under Apache License, Version 2.0
+  oro under The Apache Software License, Version 1.1
   PostgreSQL JDBC Driver under BSD License
   prizetags under The Apache Software License, Version 2.0
   ROME, RSS and atOM utilitiEs for Java under The Apache Software License, Version 2.0
@@ -133,12 +135,15 @@ This project includes:
   StAX under Apache License, Version 2.0
   StAX API under The Apache Software License, Version 2.0
   Streaming API for XML (STAX API 1.0) under The Apache Software License, Version 2.0
+  Struts Core under The Apache Software License, Version 2.0
+  Struts Taglib under The Apache Software License, Version 2.0
   support-net under GNU GENERAL PUBLIC LICENSE Version 2, June 1991
   TagSoup under Apache License 2.0
   The NetCDF-Java Library under (MIT-style) netCDF C library license.
   Tiles - API under The Apache Software License, Version 2.0
   Tiles - Core Library under The Apache Software License, Version 2.0
   Tiles - Servlet support under The Apache Software License, Version 2.0
+  Validator under The Apache Software License, Version 2.0
   xalan under The Apache Software License, Version 2.0
   Xalan Java under The Apache Software License, Version 2.0
   Xalan Java Serializer under The Apache Software License, Version 2.0
