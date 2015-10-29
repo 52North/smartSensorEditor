@@ -51,7 +51,8 @@ import java.util.List;
 public class TransactionResponseSOS extends TransactionResponse {
 
 	private static Logger LOG = Logger.getLogger(TransactionResponseSOS.class);
-	protected final static CSWContextSOS cswContextSOS = new CSWContextSOS();
+	
+        protected final static SOSContext context = new SOSContext();
 
 	private String insertedProcedure;
 	private String updatedProcedure;
@@ -172,6 +173,6 @@ public class TransactionResponseSOS extends TransactionResponse {
 
 	@Override
 	protected NamespaceContext getNamespaceContext() {
-		return cswContextSOS;
+		return context;
 	}
 }

@@ -28,21 +28,18 @@
  */
 package org.n52.smartsensoreditor.cswclient.util;
 
-import de.conterra.smarteditor.cswclient.util.Defaults;
-
 /**
  * Default values used by the catalogue client api
  *
- * @author Kristian Senkler
- * @version 2.3
- * @since version 2.2
+ * @author Jana Klemp
+ *
  */
-public class DefaultsSOS extends Defaults{
+public class DefaultsSOS {
 
-	public static final String NAMESPACE_SWES = "http://www.opengis.net/swes/2.0";
-	public static final String NAMESPACE_SOAP = "http://www.w3.org/2003/05/soap-envelope";
+    public static final String NAMESPACE_SWES = "http://www.opengis.net/swes/2.0";
+    
+    public static final String NAMESPACE_SOAP = "http://www.w3.org/2003/05/soap-envelope";
 
-
+    public static final String NAMESPACE_SOS_20 = "http://www.opengis.net/sos/2.0";
+  
 }
-
-
