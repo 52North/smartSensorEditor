@@ -92,7 +92,7 @@
 </span>
 
 <p>&nbsp;</p>
-<form:form action="startServiceSOS.do" commandName="startEditorBeanSML"
+<form:form action="startService.do" commandName="startEditorBeanSML"
 	method="Post">
 	<div id="serviceUrlContainer" class="serviceDivSOS">
 		<label for="serviceUrl" class="firstLabel width150"><fmt:message

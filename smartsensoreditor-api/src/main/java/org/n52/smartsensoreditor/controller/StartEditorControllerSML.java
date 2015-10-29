@@ -56,8 +56,6 @@ import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.StartEditorBean;
 import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.controller.StartEditorController;
-import de.conterra.smarteditor.dao.WebServiceDescriptionDAO;
-import de.conterra.smarteditor.dao.WebServiceDescriptionException;
 import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
@@ -165,7 +163,7 @@ public class StartEditorControllerSML extends StartEditorController {
 	 * @param pResult
 	 * @return
 	 */
-	@RequestMapping(value = "/startServiceSOS", method = RequestMethod.POST)
+	@RequestMapping(value = "/startService", method = RequestMethod.POST)
 	public ModelAndView startServiceHandler(@ModelAttribute("startEditorBeanSML") StartEditorBeanSML pEditorBean,
 			BindingResult pResult) {
 		//Error handling
@@ -187,6 +185,7 @@ public class StartEditorControllerSML extends StartEditorController {
 			// return form view
 			return new ModelAndView(getFormView(), getModelMap());
 		}
+                
 		//Set service URL
 		String serviceUrl=pEditorBean.getServiceUrl();
 		LOG.debug("ServiceUrl set to '" + serviceUrl + "'");
@@ -267,30 +266,7 @@ public class StartEditorControllerSML extends StartEditorController {
 				return new ModelAndView(getFinishView(), lModel);
 			}
 		}else{
-			WebServiceDescriptionDAO dao =  getServiceFactory().getDescriptionDAO(pEditorBean.getServiceType().toLowerCase());
-			dao.setUrl(serviceUrl);
-			LOG.trace("Current dao: " + dao);
-			if (!"".equals(pEditorBean.getServiceName())) {
-				dao.setServiceName(pEditorBean.getServiceName());
-			}
-			try {
-				Document lDoc = dao.getDescription();
-				if (LOG.isTraceEnabled()) {
-					String docString = DOMUtil.convertToString(lDoc, true);
-					LOG.trace("Retrieved document from DAO: " + docString);
-				}
-				if (lDoc != null) {
-					getBackendService().setUpdate(true);
-
-					getBackendService().initBackend(lDoc);
-					return new ModelAndView(getSuccessView());
-				}
-			} catch (WebServiceDescriptionException e) {
-				pResult.rejectValue("serviceUrl", "errors.service.connect", new Object[]{e.getMessage()}, "Capabilities error");
-				return new ModelAndView(getFormView(), getModelMap());
-			}
-
-
+                    return super.startServiceHandler(pEditorBean, pResult);
 		}
 		return new ModelAndView(getFormView());
 
