@@ -83,7 +83,9 @@ smartEditor uses the [Spring Framework](http://projects.spring.io/spring-framewo
 
 The following files of the smartEditor-api sub project are modified:
 
-//* ``de.conterra.smarteditor.controller.SaveLocalController.java``:
+* ``de.conterra.smarteditor.controller.SaveLocalController.java``
+  * make XPath to generate the file id configurable
+  * could go into smartEditor easily
 * ``de.conterra.smarteditor.service.BackendManagerService.java``
   * method ``public String getResourceType()`` adapted to get to know if the resource type is sensor.
   * new method ``public boolean isBeanActive(String beanName)`` created to get sure that only the needed beans are merged with the document based on a [regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) in the field ``activeBeanNamesRegex``

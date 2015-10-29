@@ -159,7 +159,7 @@
 	</bean>
 
 	<bean id="saveLocalController"
-		class="org.n52.smartsensoreditor.controller.SaveLocalControllerSML">
+		class="org.n52.smartsensoreditor.controller.SaveLocalController">
 		<property name="backendService" ref="backendSetupService" />
 		<property name="contentType" value="application/x-download" />
 		<property name="setHeader">
@@ -170,6 +170,12 @@
 			</map>
 		</property>
 		<property name="editorContext" ref="EditorContext" />
+		<property name="fileIdXpath">
+                        <list>
+                                <value>//gmd:fileIdentifier/gco:CharacterString/text()</value>
+                                <value>/*/gml:identifier/text()</value>
+                        </list>
+                </property>
 	</bean>
 
 

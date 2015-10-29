@@ -28,14 +28,12 @@
  */
 package org.n52.smartsensoreditor.controller;
 
-import de.conterra.smarteditor.controller.SaveLocalController;
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.XPathUtil;
 import de.conterra.smarteditor.xml.EditorContext;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 import org.w3c.dom.Document;
 
 import javax.servlet.ServletOutputStream;
@@ -54,18 +52,26 @@ import java.util.Map;
  * <p/>
  *
  */
-public class SaveLocalControllerSML extends SaveLocalController  {
+public class SaveLocalController extends de.conterra.smarteditor.controller.SaveLocalController {
 
-    private static Logger LOG = Logger.getLogger(SaveLocalControllerSML.class);
-	private EditorContext editorContext;
+    private static Logger LOG = Logger.getLogger(SaveLocalController.class);
 
-	public EditorContext getEditorContext() {
-		return editorContext;
-	}
+    private EditorContext editorContext;
 
-	public void setEditorContext(EditorContext editorContext) {
-		this.editorContext = editorContext;
-	}
+    private List<String> fileIdXpath;
+
+    public void setFileIdXpath(List<String> fileIdXpath) {
+        this.fileIdXpath = fileIdXpath;
+    }
+
+    public EditorContext getEditorContext() {
+        return editorContext;
+    }
+
+    public void setEditorContext(EditorContext editorContext) {
+        this.editorContext = editorContext;
+    }
+
     /**
      * Hanlde user request
      *
@@ -75,16 +81,21 @@ public class SaveLocalControllerSML extends SaveLocalController  {
      * @throws Exception
      */
     public ModelAndView handleRequest(HttpServletRequest request,
-                                      HttpServletResponse pResponse) throws Exception {
+            HttpServletResponse pResponse) throws Exception {
         // get document stored in backenservice
         Document lDoc = mBackendService.mergeBackend();
         XPathUtil lUtil = new XPathUtil();
         lUtil.setContext(editorContext);
-        String lFileId = lUtil.evaluateAsString("//gmd:fileIdentifier/gco:CharacterString/text()", lDoc);
-        if(lFileId.equals("")){
-        	lFileId=lUtil.evaluateAsString("/*/gml:identifier/text()", lDoc);
+
+        String lFileId = "document";
+        for (String xpath : fileIdXpath) {
+            String evalFileId = lUtil.evaluateAsString(xpath, lDoc).trim();
+            if (evalFileId != null) {
+                lFileId = evalFileId;
+                LOG.debug(String.format("Derived file id %s using XPath %s", evalFileId, xpath));
+                break;
+            }
         }
-        lFileId = lFileId.trim();
         // set response attributes
         //pResponse.setContentType("application/x-download");
         pResponse.setContentType(getContentType() == null ? "application/x-download" : getContentType());
@@ -101,8 +112,9 @@ public class SaveLocalControllerSML extends SaveLocalController  {
             }
         }
         pResponse.setHeader("Content-disposition", "attachment; filename=" + lFileId + ".xml");
-        if (LOG.isDebugEnabled())
+        if (LOG.isDebugEnabled()) {
             LOG.debug("Preparing download for document with id: " + lFileId);
+        }
         ServletOutputStream lOutputStream = pResponse.getOutputStream();
         try {
             // write document to servlet response
