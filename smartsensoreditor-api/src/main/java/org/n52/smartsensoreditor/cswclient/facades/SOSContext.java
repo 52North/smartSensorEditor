@@ -48,6 +48,7 @@ public class SOSContext implements NamespaceContext {
      * @param prefix A namespace prefix to test
      * @return the according uri
      */
+    @Override
     public String getNamespaceURI(String prefix) {
         if (prefix.equals("ogc")) {
             return Defaults.NAMESPACE_OGC;
@@ -72,6 +73,7 @@ public class SOSContext implements NamespaceContext {
      * @param namespace a namespace uri
      * @return the according prefix
      */
+    @Override
     public String getPrefix(String namespace) {
         if (namespace.equals(Defaults.NAMESPACE_OGC)) {
             return "ogc";
@@ -94,6 +96,7 @@ public class SOSContext implements NamespaceContext {
      * @param namespace identifier
      * @return null
      */
+    @Override
     public Iterator getPrefixes(String namespace) {
         return null;
     }

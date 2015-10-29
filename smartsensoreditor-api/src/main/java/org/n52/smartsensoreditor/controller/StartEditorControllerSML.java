@@ -42,8 +42,6 @@ import org.n52.smartsensoreditor.beans.BackendBeanSML;
 import org.n52.smartsensoreditor.beans.StartEditorBeanSML;
 import org.n52.smartsensoreditor.cswclient.facades.TransactionResponseSOS;
 import org.n52.smartsensoreditor.dao.SOSCatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -53,17 +51,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 
-import com.sun.xml.bind.Util;
 
 import de.conterra.smarteditor.beans.BackendBean;
 import de.conterra.smarteditor.beans.StartEditorBean;
 import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.controller.StartEditorController;
-import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
-import de.conterra.smarteditor.dao.AbstractCatalogService;
 import de.conterra.smarteditor.dao.WebServiceDescriptionDAO;
 import de.conterra.smarteditor.dao.WebServiceDescriptionException;
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.service.XSLTTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 

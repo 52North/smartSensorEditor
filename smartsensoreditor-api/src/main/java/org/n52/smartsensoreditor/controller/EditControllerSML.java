@@ -28,36 +28,18 @@
  */
 package org.n52.smartsensoreditor.controller;
 
-import com.jenkov.prizetags.tree.itf.ITree;
 
 import de.conterra.smarteditor.beans.BackendBean;
-import de.conterra.smarteditor.beans.CodeListBean;
-import de.conterra.smarteditor.beans.IConfigOptions;
-import de.conterra.smarteditor.beans.IMapOptions;
-import de.conterra.smarteditor.beans.UserInfoBean;
 import de.conterra.smarteditor.common.workflow.IState;
 import de.conterra.smarteditor.common.workflow.IWorkflowManager;
 import de.conterra.smarteditor.controller.EditController;
-import de.conterra.smarteditor.dao.FileSystemDAO;
-import de.conterra.smarteditor.dao.ThematicTreeDAO;
-import de.conterra.smarteditor.service.BackendManagerService;
-import de.conterra.smarteditor.support.LocalePropertyEditorRegistrar;
 
 import org.apache.log4j.Logger;
 import org.n52.smartsensoreditor.beans.BackendBeanSML;
-import org.springframework.validation.BindException;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

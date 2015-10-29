@@ -28,19 +28,11 @@
  */
 package org.n52.smartsensoreditor.controller;
 
-import de.conterra.smarteditor.beans.IConfigOptions;
-import de.conterra.smarteditor.beans.PublishBean;
-import de.conterra.smarteditor.beans.UserInfoBean;
-import de.conterra.smarteditor.clients.RequestFactory;
-import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.common.workflow.GenericWorkflowManager;
 import de.conterra.smarteditor.common.workflow.IState;
 import de.conterra.smarteditor.controller.BasicPublishController;
 import de.conterra.smarteditor.cswclient.facades.TransactionResponse;
 import de.conterra.smarteditor.dao.AbstractCatalogService;
-import de.conterra.smarteditor.dao.CatalogServiceDAO;
-import de.conterra.smarteditor.dao.LockManager;
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 import org.apache.log4j.Logger;
@@ -49,7 +41,6 @@ import org.n52.smartsensoreditor.cswclient.facades.TransactionResponseSOS;
 import org.n52.smartsensoreditor.dao.SOSCatalogService;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.w3c.dom.Document;
 
 import javax.servlet.http.HttpServletRequest;

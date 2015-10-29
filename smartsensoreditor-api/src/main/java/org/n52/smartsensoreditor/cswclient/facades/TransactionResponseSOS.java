@@ -83,7 +83,7 @@ public class TransactionResponseSOS extends TransactionResponse {
 	 */
 	@Override
 	public List getIdentifiers() {
-		List<String> lResult = new ArrayList<String>();
+		List<String> lResult = new ArrayList<>();
 		if(getDocument()!=null){
 			if (!insertedProcedure.equals("")){
 				//assigned Procedure
@@ -109,6 +109,7 @@ public class TransactionResponseSOS extends TransactionResponse {
 		return lResult;
 	}
 
+        @Override
 	public String getRequestId() {
 		if (!insertedProcedure.equals("")){
 			return insertedProcedure;

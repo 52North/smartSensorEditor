@@ -36,9 +36,6 @@ import de.conterra.smarteditor.clients.SoapClient;
 import de.conterra.smarteditor.dao.CatalogServiceException;
 import de.conterra.smarteditor.dao.GenericCatalogService;
 import de.conterra.smarteditor.service.XSLTTransformerService;
-import de.conterra.smarteditor.util.DOMUtil;
-
-import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.w3c.dom.Document;
 
 /**
