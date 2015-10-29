@@ -30,7 +30,10 @@ This project includes:
   AntLR under Public Domain
   Apache Axis JAXRPC 1.4 under The Apache Software License, Version 2.0
   Apache Axis SAAJ 1.4 under The Apache Software License, Version 2.0
+  Apache Commons Codec under The Apache Software License, Version 2.0
   Apache FontBox under The Apache Software License, Version 2.0
+  Apache HttpClient under Apache License, Version 2.0
+  Apache HttpCore under Apache License, Version 2.0
   Apache JAMES Mime4j (Core) under Apache License, Version 2.0
   Apache JAMES Mime4j (DOM) under Apache License, Version 2.0
   Apache JempBox under The Apache Software License, Version 2.0
@@ -48,7 +51,6 @@ This project includes:
   Bouncy Castle CMS and S/MIME API under Bouncy Castle Licence
   Bouncy Castle Provider under Bouncy Castle Licence
   Code Generation Library under ASF 2.0
-  Codec under The Apache Software License, Version 2.0
   com.springsource.org.aopalliance under Public Domain
   com.springsource.org.apache.commons.logging under The Apache Software License, Version 2.0
   Commons BeanUtils under The Apache Software License, Version 2.0
@@ -56,11 +58,12 @@ This project includes:
   Commons Compress under The Apache Software License, Version 2.0
   Commons DBCP under The Apache Software License, Version 2.0
   Commons Digester under The Apache Software License, Version 2.0
+  Commons Discovery under The Apache Software License, Version 2.0
   Commons FileUpload under The Apache Software License, Version 2.0
   Commons IO under The Apache Software License, Version 2.0
   Commons Pool under The Apache Software License, Version 2.0
+  core under GNU GENERAL PUBLIC LICENSE Version 2, June 1991
   Data Mapper for Jackson under The Apache Software License, Version 2.0
-  Discovery under The Apache Software License, Version 2.0
   dom4j under DOM4J license, http://dom4j.sourceforge.net/dom4j-1.6.1/license.html (BSD style)
   ezmorph under The Apache Software License, Version 2.0
   Groovy under Apache License, Version 2.0
@@ -109,6 +112,7 @@ This project includes:
   org.springframework.js under Apache License, Version 2.0
   org.springframework.js.resources under The Apache Software License, Version 2.0
   org.springframework.orm under The Apache Software License, Version 2.0
+  org.springframework.oxm under The Apache Software License, Version 2.0
   org.springframework.transaction under The Apache Software License, Version 2.0
   org.springframework.web under The Apache Software License, Version 2.0
   org.springframework.web.servlet under The Apache Software License, Version 2.0
@@ -116,9 +120,6 @@ This project includes:
   PostgreSQL JDBC Driver under BSD License
   prizetags under The Apache Software License, Version 2.0
   ROME, RSS and atOM utilitiEs for Java under The Apache Software License, Version 2.0
-  Saxon under Mozilla Public License Version 1.0
-  Saxon DOM under Mozilla Public License Version 1.0
-  Saxon XPath under Mozilla Public License Version 1.0
   Saxon-HE under Mozilla Public License Version 1.0
   servlet-api under CDDL 1.1 or GPL2 w/ CPE
   SLF4J API Module under MIT License
@@ -132,11 +133,15 @@ This project includes:
   StAX under Apache License, Version 2.0
   StAX API under The Apache Software License, Version 2.0
   Streaming API for XML (STAX API 1.0) under The Apache Software License, Version 2.0
+  support-net under GNU GENERAL PUBLIC LICENSE Version 2, June 1991
   TagSoup under Apache License 2.0
   The NetCDF-Java Library under (MIT-style) netCDF C library license.
   Tiles - API under The Apache Software License, Version 2.0
   Tiles - Core Library under The Apache Software License, Version 2.0
+  Tiles - Servlet support under The Apache Software License, Version 2.0
   xalan under The Apache Software License, Version 2.0
+  Xalan Java under The Apache Software License, Version 2.0
+  Xalan Java Serializer under The Apache Software License, Version 2.0
   Xerces2 Java Parser under The Apache Software License, Version 2.0
   XML Commons External Components XML APIs under The Apache Software License, Version 2.0
   XML Commons Resolver Component under The Apache Software License, Version 2.0

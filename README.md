@@ -4,6 +4,7 @@ smartSensorEditor is an extension on the [smartEditor](http://52north.org/commun
 
 smartSensorEditor extends these functionalities to to edit metadata based on SensorML v. 2.0. Although the original smartEditor was not designed to handle any other metadata standards, it was suitable to be extended to reuse aspects such as server-side validation with Schematron, user interface and styling, and drafts and template management.
 
+
 ## Version Notes
 
 This project was tested with the following versions:
@@ -12,6 +13,11 @@ This project was tested with the following versions:
 * Apache Maven: `3.2.3`
 * Apache Tomcat: `7.0.x`
 * smartEditor: `2.1.6`
+
+
+## Prepare Postgres Database for smartEditor
+
+See https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation
 
 
 ## Install Sensor Editor
@@ -24,9 +30,10 @@ Clone source code repository:
 git clone https://github.com/52North/smartSensorEditor.git
 ```
 
-Build api and webapp modules:
+To build api and webapp modules, go to the project directory (by default ``smartSensorEditor``) and invoke the Maven build command:
 
 ```
+cd smartSensorEditor
 mvn clean install
 ```
 
@@ -34,15 +41,18 @@ Next you have to make sure that the needed runtime environment (Java and Tomcat)
 
 The form for SensorML can be opened by clicking on the button "Sensor".
 
+
 ## Documentation
 
 User and developer documentation for smartEditor can be found [in the 52North wiki](https://wiki.52north.org/bin/view/Metadata/SmartEditor).
 
 Documentation specific to smartSensorEditor is in this document.
 
+
 ## Support
 
 You can [report bugs on GitHub](https://github.com/52North/smartSensorEditor/issues) and ask for help on the [Metadata Management community mailing list](http://metadata.forum.52north.org/) (after looking at the [guidelines](http://52north.org/resources/mailing-list-and-forums/mailinglist-guidelines)).
+
 
 ## Develop
 
@@ -53,6 +63,7 @@ You can [report bugs on GitHub](https://github.com/52North/smartSensorEditor/iss
 
 To contribute to this project you must sign the [52°North CLA](http://52north.org/about/licensing/).
 
+
 ### Collaboration Model
 
 We follow the fork & pull development model: https://help.github.com/articles/using-pull-requests
@@ -61,10 +72,11 @@ We follow the fork & pull development model: https://help.github.com/articles/us
 
 smartSensorEditor is a Maven overlay of the original smartEditor webapp. It consists of two modules:
 
-* ``smartSensorEditor-api``: Java classes, partially overwriting classes from the smartEditor-api module using the [maven-shade-plugin](http://maven.apache.org/plugins/maven-shade-plugin/).
-* ``smartSensorEditor-webapp``: the web application, building on smartEditor-webapp. The [maven-war-plugin](http://maven.apache.org/plugins/maven-war-plugin/) with its [overlay functionality](http://maven.apache.org/plugins/maven-war-plugin/overlays.html) is used.
+* ``smartSensorEditor-api``: Java classes
+* ``smartSensorEditor-webapp``: the web application, building on smartEditor-webapp. The [maven-war-plugin](http://maven.apache.org/plugins/maven-war-plugin/) with its [overlay functionality](http://maven.apache.org/plugins/maven-war-plugin/overlays.html) is used to replace and add new files.
 
 smartEditor uses the [Spring Framework](http://projects.spring.io/spring-framework/) and all configuration happens via Spring Beans in XML files. For processing of XML documents, smartEditor uses a combination of XSLT and Groovy. For the front end Java Server Pages (jsp) are used. Therefore files of all of the above types were added to adjust smartEditor for SensorML and unit tests were written to ensure working code.
+
 
 #### Changes to smartEditor
 
@@ -100,6 +112,7 @@ The following files of the smartEditor-webapp sub project are needed to be modif
 * adapt ``webapp/WEB-INF/service-definitions.xml`` to declare the validator and set the ``activeBeanNamesRegex``
 * adapt ``webapp/WEB-INF/validator-definitions.xml`` to define new validator
 
+
 ### Build sub modules of the project
 
 If only one of the sub modules should be build with maven, then go to the main folder of the whole project. With the attribute -pl a specific modul can be selected:
@@ -113,16 +126,20 @@ With the following command all dependencies of the module are build as well ([de
 ```
 mvn clean package -pl smartsensoreditor-webapp -am
 ```
+
+
 ### How to start the integration tests?
 
-By default no integration tests are executed during the command "clean install". If you would like to execute them, go to the main folder of the whole project. With the attribute -P a specific Profile can be chosen. 
+By default no integration tests are executed during the command "clean install". If you would like to execute them, go to the main folder of the whole project. With the attribute -P a specific profile can be chosen.
+
 Use the following command to start the integration tests for the SmartSensorEditor:
+
 ```
 mvn -P itestsos clean install
 ```
 
 
-### How to create my own form?
+### How can I adjust the editor?
 
 Please see the [smartEditor developer documentation](https://wiki.52north.org/bin/view/Metadata/SmartEditorDeveloperDocumentation). 
 
