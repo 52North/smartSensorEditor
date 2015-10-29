@@ -83,16 +83,22 @@ smartEditor uses the [Spring Framework](http://projects.spring.io/spring-framewo
 
 The following files of the smartEditor-api sub project are modified:
 
-* ``de.conterra.smarteditor.controller.SaveLocalController.java``
+* ``de.conterra.smarteditor.controller.SaveLocalController``
   * make XPath to generate the file id configurable
   * could go into smartEditor easily
-* ``de.conterra.smarteditor.service.BackendManagerService.java``
+* ``de.conterra.smarteditor.service.BackendManagerService``
   * method ``public String getResourceType()`` adapted to get to know if the resource type is sensor.
   * new method ``public boolean isBeanActive(String beanName)`` created to get sure that only the needed beans are merged with the document based on a [regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) in the field ``activeBeanNamesRegex``
 //  * method ``public String getFileIdentifier()`` adapted to get the Id from the BaseBean "smlUniqueID" when the sensorML     form is used.
 //  * method ``public void newMetadataIdentifier()`` to set the new ID for the smlUniqueID bean.
-* ``de.conterra.smarteditor.xml.EditorContext.java``
+* ``de.conterra.smarteditor.xml.EditorContext``
   * method ``public String getNamespaceURI(String prefix)`` and method ``public String getPrefix(String namespace)`` adopted for SensorML namespace
+* ``org.n52.smartsensoreditor.beans.BackendBeanSML``
+  * TODO
+* ``org.n52.smartsensoreditor.beans.PublishBeanSML``
+  * TODO
+* ``org.n52.smartsensoreditor.controller.StartEditorController``
+  * TODO
 
 The following files of the smartEditor-webapp sub project are needed to be modified or were created:
 
