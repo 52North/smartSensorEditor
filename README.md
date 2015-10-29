@@ -29,10 +29,12 @@ Build api and webapp modules:
 ```
 mvn clean install
 ```
+If the feature for storing templates should be available, then additionally a database has to be created. For more information please take a look at the following link: https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation
 
 Next you have to make sure that the needed runtime environment (Java and Tomcat) are properly installed and deploy the file ``<your workspace>/target/sensorSmartEditor.war``, start Tomcat, and open the browser at http://localhost:8080/smartSensorEditor.
 
 The form for SensorML can be opened by clicking on the button "Sensor".
+
 
 ## Documentation
 
