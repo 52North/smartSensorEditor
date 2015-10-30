@@ -117,7 +117,15 @@ mvn clean package -pl smartsensoreditor-webapp -am
 ```
 ### How to start the integration tests?
 
-By default no integration tests are executed during the command "clean install". If you would like to execute them, go to the main folder of the whole project. With the attribute -P a specific Profile can be chosen. 
+By default no integration tests are executed during the command "clean install". The integration test checks the communication between the SmartSensorEditor and the SOS. The following operations are checked:
+<p>get/insert/update/delete sensor description.</p>
+If you would like to execute them, then you need to create a build.properties file. You have to define the service url and the authorization token of the SOS. It should look like that:
+<p>
+IT_serviceURL:http://localhost:XX/XX/service </br>
+IT_authorizationToken:XXX 
+</p>
+This propwerty file should be put into your home folder (/home/person for linux).
+To build the maven project and execute the integration test go to the main folder of the SmartSensorEditor project. With the attribute -P a specific Profile can be chosen. 
 Use the following command to start the integration tests for the SmartSensorEditor:
 ```
 mvn -P itestsos clean install
