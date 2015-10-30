@@ -51,8 +51,9 @@
 	REFERENCES: [1] http://www.schematron.com/iso/Schematron.html [2] http://www.opengeospatial.org/standards/sensorml 
 	[3] http://www.opengeospatial.org [4] http://www.opengeospatial.org/standards/sos -->
 	
-	
-	<!-- !!! not changed for SensorML 2.0 -->
+<!-- !!! not changed for SensorML 2.0 
+This file is for SensorML 1.0
+-->
 <sch:schema xmlns="http://purl.oclc.org/dsdl/schematron"
 	xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:gml="http://www.opengis.net/gml"

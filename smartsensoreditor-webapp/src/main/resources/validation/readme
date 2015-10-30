@@ -3,7 +3,7 @@ The following files are from: http://schemas.opengis.net/sensorML/
    * core.xml
 The following changes were done in these files:
  
-  1)  <sch:ns uri="http://www.opengis.net/gml/2.0" prefix="swe"/>  changed to
+    1)  <sch:ns uri="http://www.opengis.net/gml/2.0" prefix="swe"/>  changed to
       <sch:ns uri="http://www.opengis.net/gml/3.2" prefix="gml"/>
     
     2) The messages are copied to the messages_de.properties/messages.properties files. The codes are set instead. 
