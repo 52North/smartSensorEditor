@@ -25,14 +25,31 @@ git clone https://github.com/52North/smartSensorEditor.git
 ```
 
 Build api and webapp modules:
-
+Because of the maven notice plugin the following command needs an internet connection to check the license of the third party software.
 ```
 mvn clean install
 ```
-If the feature for storing templates should be available, then additionally a database has to be created. For more information please take a look at the following link: https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation
+The created war file ``sensorSmartEditor.war`` can then be found in: "SmartSensorEditor/smartsensoreditor-webapp/target".
 
-Next you have to make sure that the needed runtime environment (Java and Tomcat) are properly installed and deploy the file ``<your workspace>/target/sensorSmartEditor.war``, start Tomcat, and open the browser at http://localhost:8080/smartSensorEditor.
+Configure Tomcat: </br>
+Next you have to make sure that the needed runtime environment (Java and Tomcat) are properly installed.
+To make sure that the right java version is used (for linux, windoes is similar):</br>
+Create a file setenv.sh (for linux) and write the following: </br>
+JAVA_HOME=<Path to Java>/jdk1.7.YYYY </br>
+JRE_HOME=<Path to Java>/jdk1.7.YYYY/jre </br>
+If another program should run on the tomcat then the an additional line in setenv.sh has to be added: </br>
+export JAVA_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=256m -server" </br>
 
+Quick start: </br>
+Put the file ``sensorSmartEditor.war`` into the webapp folder of Tomcat and start Tomcat. 
+
+Start with all features: </br>
+If the feature for storing templates should be available, then additionally a database has to be created. For more information please take a look at the following link:</br> https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation </br>
+The database URL, username, the password and the database driver have to be accessible for Tomcat. The instructions can be found at this link: </br>
+https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Servlet_container_configuration
+
+
+Then open the browser at http://localhost:8080/smartSensorEditor.
 The form for SensorML can be opened by clicking on the button "Sensor".
 
 
