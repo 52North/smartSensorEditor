@@ -28,49 +28,35 @@
  */
 package org.n52.smartsensoreditor.beans;
 
-import groovy.lang.GroovyClassLoader;
-import jodd.bean.BeanUtil;
-
-import org.apache.log4j.Logger;
 
 import de.conterra.smarteditor.beans.BackendBean;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Container Bean that stores any bean that save the metadata value and
  * user input accordingly
- * <p/>
- *
- * @author kse
- *         Date: 16.01.2010
- *         Time: 22:07:01
  */
 public class BackendBeanSML extends BackendBean {
 
-    private static Logger LOG = Logger.getLogger(BackendBeanSML.class);
+    private static final long serialVersionUID = 5226328640238851759L;
 
     private String serviceURL;
+
     private String serviceTokenSOS;
-    
-	public String getServiceURL() {
-		return serviceURL;
-	}
-	public void setServiceURL(String serviceURL) {
-		this.serviceURL = serviceURL;
-	}
-	public String getServiceTokenSOS() {
-		return serviceTokenSOS;
-	}
-	public void setServiceTokenSOS(String serviceTokenSOS) {
-		this.serviceTokenSOS = serviceTokenSOS;
-	}
-    
-    
-    
+
+    public String getServiceURL() {
+        return serviceURL;
+    }
+
+    public void setServiceURL(String serviceURL) {
+        this.serviceURL = serviceURL;
+    }
+
+    public String getServiceTokenSOS() {
+        return serviceTokenSOS;
+    }
+
+    public void setServiceTokenSOS(String serviceTokenSOS) {
+        this.serviceTokenSOS = serviceTokenSOS;
+    }
+
 }

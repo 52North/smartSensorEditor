@@ -31,8 +31,6 @@ package org.n52.smartsensoreditor.sensor;
 import static org.xmlmatchers.XmlMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
-
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -55,279 +53,275 @@ import de.conterra.smarteditor.service.BeanTransformerService;
 import de.conterra.smarteditor.util.DOMUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({ "/sml-transformer-config.xml"})
+@ContextConfiguration({"/sml-transformer-config.xml"})
 public class BeanXsltTest {
-	SimpleNamespaceContext usingNamespaces;
-	static private Logger LOG = Logger.getRootLogger();
 
-	@Resource(name = "beanTransformerService")
-	BeanTransformerService beanTransformerService;
+    SimpleNamespaceContext usingNamespaces;
+    static private Logger LOG = Logger.getRootLogger();
 
-	
-	@Resource(name = "smlIdentifier")
-	BaseBean smlIdentifier;
+    @Resource(name = "beanTransformerService")
+    BeanTransformerService beanTransformerService;
 
+    @Resource(name = "smlIdentifier")
+    BaseBean smlIdentifier;
 
-	@Resource(name = "multiSmlKeyword")
-	BaseBean multiSmlKeyword;
+    @Resource(name = "multiSmlKeyword")
+    BaseBean multiSmlKeyword;
 
-	@Resource(name = "multiSmlIdentification")
-	BaseBean multiSmlIdentification;
-	
-	@Resource(name = "multiSmlClassification")
-	BaseBean multiSmlClassification;
-	
-	@Resource(name = "multiSweQuantityCharacteristic")
-	BaseBean multiSweQuantityCharacteristic;
-	
-	@Resource(name = "multiSmlCapabilityText")
-	BaseBean multiSmlCapabilityText;
-	
+    @Resource(name = "multiSmlIdentification")
+    BaseBean multiSmlIdentification;
 
-	Document mDatasetDocument = DOMUtil.createFromStream(BeanXsltTest.class
-			.getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"),
-			true);
-	@Before
-	public void before() {
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("xlink", "http://www.w3.org/1999/xlink");
-		usingNamespaces = new SimpleNamespaceContext();
-		usingNamespaces.setBindings(map);
-	}
-	/**
-	 * This method tests, if the test-value for keyword within the xml document
-	 * is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testKeyword() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(multiSmlKeyword,
-				mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("//SmlKeyword/keyword[text()='Ocean Acoustics']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
+    @Resource(name = "multiSmlClassification")
+    BaseBean multiSmlClassification;
 
+    @Resource(name = "multiSweQuantityCharacteristic")
+    BaseBean multiSweQuantityCharacteristic;
 
+    @Resource(name = "multiSmlCapabilityText")
+    BaseBean multiSmlCapabilityText;
 
-	/**
-	 * This method tests, if the test-value for smlIdentification within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testSmlIdentification() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				multiSmlIdentification, mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/label[text()='Short name']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/codeSpace[text()='http://testIdentifierCodeSpace']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
+    Document mDatasetDocument = DOMUtil.createFromStream(BeanXsltTest.class
+            .getResourceAsStream("/validation/input/testSmlToBeanXSLT.xml"),
+            true);
 
-	
-	/**
-	 * This method tests, if the test-value for smlClassification within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testSmlClassification() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				multiSmlClassification, mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/label[text()='Short name']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/codeSpace[text()='http://testClassifierCodeSpace']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
+    @Before
+    public void before() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("xlink", "http://www.w3.org/1999/xlink");
+        usingNamespaces = new SimpleNamespaceContext();
+        usingNamespaces.setBindings(map);
+    }
 
-	/**
-	 * This method tests, if the test-value for SweQuantityCharacteristic within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testSweQuantityCharacteristic() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				multiSweQuantityCharacteristic, mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath(
-							"//SweQuantity/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#weight']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SweQuantity/label[text()='Length (mm)']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SweQuantity/value[text()='36.0']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SweQuantity/uom[text()='mm']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SweQuantity/description[text()='testDescription']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SweQuantity/identifier[text()='testIdentifierQuantity']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-	
-	/**
-	 * This method tests, if the test-value for testsmlCapabilityText within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testSmlCapabilityText() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(
-				multiSmlCapabilityText, mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlCapabilityText/capabilitiesName[text()='TestCapabilitiesName']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlCapabilityText/capabilityName[text()='TestofferingID']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlCapabilityText/definition[text()='urn:ogc:def:identifier:OGC:offeringID']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath("//SmlCapabilityText/label[text()='TestofferingID']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlCapabilityText/constraintValue[text()='testValue1,testValue2']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlCapabilityText/constraintPatterns[text()='testPattern1']",
-							usingNamespaces));
-			assertThat(
-					bean,
-					hasXPath(
-							"//SmlCapabilityText/value[text()='Testhttp://www.52north.org/test/offering/9']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
-	/**
-	 * This method tests, if the test-value for smlIdentifier within the xml
-	 * document is copied into the bean.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testIdentifier() throws Exception {
-		// copy test-value into bean
-		BaseBean lBean = beanTransformerService.initBean(smlIdentifier,
-				mDatasetDocument);
-		Assert.assertNotNull(lBean);
-		// transform to xml for testing
-		Document beanXML = beanTransformerService.toXML(lBean);
-		Source bean = new DOMSource(beanXML);
-		try {
-			assertThat(
-					bean,
-					hasXPath("/FileIdentifier/identifier[text()='testIdentifier']",
-							usingNamespaces));
-		} catch (NoSuchMethodError e) {
-			LOG.error("Possibly XPath is invalid with compared source", e);
-			throw e;
-		}
-	}
+    /**
+     * This method tests, if the test-value for keyword within the xml document
+     * is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testKeyword() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(multiSmlKeyword,
+                mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath("//SmlKeyword/keyword[text()='Ocean Acoustics']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method tests, if the test-value for smlIdentification within the xml
+     * document is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSmlIdentification() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(
+                multiSmlIdentification, mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/label[text()='Short name']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/codeSpace[text()='http://testIdentifierCodeSpace']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method tests, if the test-value for smlClassification within the xml
+     * document is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSmlClassification() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(
+                multiSmlClassification, mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#longName']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/label[text()='Short name']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/codeSpace[text()='http://testClassifierCodeSpace']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlTerm/value[text()='C41969B6-F170-0501-432E-B43D5420140B']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method tests, if the test-value for SweQuantityCharacteristic within the xml
+     * document is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSweQuantityCharacteristic() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(
+                multiSweQuantityCharacteristic, mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SweQuantity/definition[text()='http://www.nexosproject.eu/dictionary/definitions.html#weight']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SweQuantity/label[text()='Length (mm)']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SweQuantity/value[text()='36.0']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SweQuantity/uom[text()='mm']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SweQuantity/description[text()='testDescription']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SweQuantity/identifier[text()='testIdentifierQuantity']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method tests, if the test-value for testsmlCapabilityText within the xml
+     * document is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSmlCapabilityText() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(
+                multiSmlCapabilityText, mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SmlCapabilityText/capabilitiesName[text()='TestCapabilitiesName']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SmlCapabilityText/capabilityName[text()='TestofferingID']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlCapabilityText/definition[text()='urn:ogc:def:identifier:OGC:offeringID']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath("//SmlCapabilityText/label[text()='TestofferingID']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SmlCapabilityText/constraintValue[text()='testValue1,testValue2']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SmlCapabilityText/constraintPatterns[text()='testPattern1']",
+                            usingNamespaces));
+            assertThat(
+                    bean,
+                    hasXPath(
+                            "//SmlCapabilityText/value[text()='Testhttp://www.52north.org/test/offering/9']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method tests, if the test-value for smlIdentifier within the xml
+     * document is copied into the bean.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testIdentifier() throws Exception {
+        // copy test-value into bean
+        BaseBean lBean = beanTransformerService.initBean(smlIdentifier,
+                mDatasetDocument);
+        Assert.assertNotNull(lBean);
+        // transform to xml for testing
+        Document beanXML = beanTransformerService.toXML(lBean);
+        Source bean = new DOMSource(beanXML);
+        try {
+            assertThat(
+                    bean,
+                    hasXPath("/FileIdentifier/identifier[text()='testIdentifier']",
+                            usingNamespaces));
+        } catch (NoSuchMethodError e) {
+            LOG.error("Possibly XPath is invalid with compared source", e);
+            throw e;
+        }
+    }
 }

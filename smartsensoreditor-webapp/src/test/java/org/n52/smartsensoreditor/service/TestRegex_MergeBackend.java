@@ -40,7 +40,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertThat;
 import de.conterra.smarteditor.beans.BaseBean;
-import de.conterra.smarteditor.service.BackendManagerService;
 import de.conterra.smarteditor.util.DOMUtil;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.junit.matchers.JUnitMatchers.either;

@@ -53,7 +53,6 @@ import org.w3c.dom.Document;
 
 
 import de.conterra.smarteditor.beans.BackendBean;
-import de.conterra.smarteditor.beans.StartEditorBean;
 import de.conterra.smarteditor.clients.RequestFactory;
 import de.conterra.smarteditor.controller.StartEditorController;
 import de.conterra.smarteditor.service.XSLTTransformerService;
@@ -84,7 +83,7 @@ public class StartEditorControllerSML extends StartEditorController {
 
 	private static final String SOS_SERVICE_TYPE = "SOS";  //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.servicetype[9]"
 	private static final String SOS_Operation_DESCRIBE="DescribeSensor"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[0]"
-	private static final String SOS_Operation_DELETE="DeleteSensor"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[1]"
+	private static final String SOS_OPERATION_DELETE="DeleteSensor"; //Test if in the GUI was chosen this value, see codelist_enumeration.xml "enumeration.SOS_Operation[1]"
 	private String mfinishView = "editor.finished";
 
 	public RequestFactory getRequestFactory() {
@@ -135,27 +134,6 @@ public class StartEditorControllerSML extends StartEditorController {
 		this.mfinishView = finishView;
 	}
 
-    /**
-     * Start editor with new document
-     *
-     * @param pEditorBean
-     * @param pResult
-     * @return
-     */
-	@Override
-    @RequestMapping(value = "/startNew", method = RequestMethod.POST)
-    public ModelAndView startNewHandler(@ModelAttribute("startEditorBean") StartEditorBean pEditorBean,
-                                        BindingResult pResult) {
-        LOG.info("Initializing with new document");
-        ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "resourceType", "errors.resourcetype.empty");
-        getBackendService().setUpdate(false); //added
-        if (pResult.hasErrors()) {
-            // return form view
-            return new ModelAndView(getFormView(), getModelMap());
-        }
-        getBackendService().initBackend(pEditorBean.getResourceType());
-        return new ModelAndView(getSuccessView());
-    }
 	/**
 	 * Starts editor with a service description
 	 *
@@ -169,10 +147,6 @@ public class StartEditorControllerSML extends StartEditorController {
 		//Error handling
 		ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceUrl", "errors.service.url.empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceType", "errors.service.type.empty");
-
-		if (pEditorBean.getServiceType().equalsIgnoreCase("ARCIMS")) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceName", "errors.service.name.empty");
-		}
 
 		if (pEditorBean.getServiceType().equalsIgnoreCase(SOS_SERVICE_TYPE)) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(pResult, "serviceTokenForSOS", "errors.service.tokenForSOS.empty");
@@ -251,7 +225,7 @@ public class StartEditorControllerSML extends StartEditorController {
 
 			}
 			//When a sensor should be deleted
-			if (editorBeanSML.getServiceOperationForSOS().equalsIgnoreCase(SOS_Operation_DELETE)) {
+			if (editorBeanSML.getServiceOperationForSOS().equalsIgnoreCase(SOS_OPERATION_DELETE)) {
 				catalogRequest = getRequestFactory().createRequest("delete" , parameterMap);
 				catalogResponse = sosService.transaction(catalogRequest);
 				Map<String, Object> lModel = new HashMap<String, Object>();
