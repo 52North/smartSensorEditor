@@ -16,7 +16,7 @@
 	xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	xsi:schemaLocation="http://www.opengis.net/sensorml/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/swe/2.0 http://schemas.opengis.net/sweCommon/2.0/swe.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	exclude-result-prefixes="gmd gco gml sml">
+	exclude-result-prefixes="gmd gco gml sml fn swe">
 	<!-- !!!! Warning: this class is not finished, because there are multiple different elements which can be inserted into the
 	CapabilityList. This file could be changed to the structure like the xslt file: SmlCapabilityText. -->
 

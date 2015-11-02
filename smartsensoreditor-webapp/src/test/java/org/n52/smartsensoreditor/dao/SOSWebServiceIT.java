@@ -89,9 +89,8 @@ public class SOSWebServiceIT {
 	private Map<String, String> transformerFiles;
 
 	private String sensorId = "http://www.52north.org/test/procedure/9";
-	private String serviceURL="http://localhost:8081/52n-sos-webapp/service";
-	private String endpoint = serviceURL+"/soap";
-	private String authorizationToken="test123";
+	private String serviceURL="";
+	private String authorizationToken="";
 	Map parameterMap =null;
 	@Before
 	public void before()  {
@@ -110,14 +109,11 @@ public class SOSWebServiceIT {
 				authorizationToken=properties.getProperty("IT_authorizationToken");
 			}
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		sosWebServiceDAO.init(endpoint);
-
-		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
 		parameterMap = new HashMap();
 		parameterMap.put("procedureId", sensorId);
 
@@ -140,7 +136,9 @@ public class SOSWebServiceIT {
 		return sensorML;
 	}
 	public String getSensor(){
-		sosWebServiceDAO.init(endpoint);
+		sosWebServiceDAO.init(serviceURL);
+		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
+		sosWebServiceDAO.addRequestHeader("Content-Type", "application/soap+xml");
 
 		Document catalogRequest = requestFactory.createRequest("get" , parameterMap);
 		Document catalogResponse = sosWebServiceDAO.transaction(catalogRequest);
@@ -157,8 +155,9 @@ public class SOSWebServiceIT {
 	}
 	//Concept from de.conterra.smarteditor.clients.SoapClientTest
 	public String insertSensor() {
-		sosWebServiceDAO.init(endpoint);
-
+		sosWebServiceDAO.init(serviceURL);
+		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
+		sosWebServiceDAO.addRequestHeader("Content-Type", "application/soap+xml");
 		//get the test sensor data
 		URL url = getClass().getResource("/requests/insertTestSensorSoap.xml");
 		File xmlFile = new File(url.getPath());
@@ -199,7 +198,9 @@ public class SOSWebServiceIT {
 	}
 	//Concept from de.conterra.smarteditor.clients.SoapClientTest
 	public String updateSensor()  {
-		sosWebServiceDAO.init(endpoint);
+		sosWebServiceDAO.init(serviceURL);
+		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
+		sosWebServiceDAO.addRequestHeader("Content-Type", "application/soap+xml");
 		//get the test sensor data
 		URL url = getClass().getResource("/requests/updateTestSensorSoap.xml");
 		File xmlFile = new File(url.getPath());
@@ -236,7 +237,10 @@ public class SOSWebServiceIT {
 
 	public String deleteSensor(){
 		String docString="";
-		sosWebServiceDAO.init(endpoint);
+		sosWebServiceDAO.init(serviceURL);
+		sosWebServiceDAO.addRequestHeader("Authorization", authorizationToken);
+		sosWebServiceDAO.addRequestHeader("Content-Type", "application/soap+xml");
+		
 		//create Request and send to SOS
 		Document catalogRequest = requestFactory.createRequest("delete" , parameterMap);
 		Document catalogResponse = sosWebServiceDAO.transaction(catalogRequest);

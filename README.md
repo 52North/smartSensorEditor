@@ -31,15 +31,32 @@ git clone https://github.com/52North/smartSensorEditor.git
 ```
 
 To build api and webapp modules, go to the project directory (by default ``smartSensorEditor``) and invoke the Maven build command:
-
+Because of the maven notice plugin the following command needs an internet connection to check the license of the third party software.
 ```
 cd smartSensorEditor
 mvn clean install
 ```
-If the feature for storing templates should be available, then additionally a database has to be created. For more information please take a look at the following link: https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation
+The created war file ``sensorSmartEditor.war`` can then be found in: "SmartSensorEditor/smartsensoreditor-webapp/target".
 
-Next you have to make sure that the needed runtime environment (Java and Tomcat) are properly installed and deploy the file ``<your workspace>/target/sensorSmartEditor.war``, start Tomcat, and open the browser at http://localhost:8080/smartSensorEditor.
+Configure Tomcat: </br>
+Next you have to make sure that the needed runtime environment (Java and Tomcat) are properly installed.
+To make sure that the right java version is used (for linux, windoes is similar):</br>
+Create a file setenv.sh (for linux) and write the following: </br>
+JAVA_HOME=<Path to Java>/jdk1.7.YYYY </br>
+JRE_HOME=<Path to Java>/jdk1.7.YYYY/jre </br>
+If another program should run on the tomcat then the an additional line in setenv.sh has to be added: </br>
+export JAVA_OPTS="-Xms128m -Xmx1024m -XX:MaxPermSize=256m -server" </br>
 
+Quick start: </br>
+Put the file ``sensorSmartEditor.war`` into the webapp folder of Tomcat and start Tomcat. 
+
+Start with all features: </br>
+If the feature for storing templates should be available, then additionally a database has to be created. For more information please take a look at the following link:</br> https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Database_preparation </br>
+The database URL, username, the password and the database driver have to be accessible for Tomcat. The instructions can be found at this link: </br>
+https://wiki.52north.org/bin/view/Metadata/SmartEditorInstallationGuide#Servlet_container_configuration
+
+
+Then open the browser at http://localhost:8080/smartSensorEditor.
 The form for SensorML can be opened by clicking on the button "Sensor".
 
 
@@ -83,43 +100,84 @@ smartEditor uses the [Spring Framework](http://projects.spring.io/spring-framewo
 
 The following files of the smartEditor-api sub project are modified:
 
-* ``de.conterra.smarteditor.controller.SaveLocalController``
-  * make XPath to generate the file id configurable
-  * could go into smartEditor easily
-* ``de.conterra.smarteditor.service.BackendManagerService``
-  * method ``public String getResourceType()`` adapted to get to know if the resource type is sensor.
-  * new method ``public boolean isBeanActive(String beanName)`` created to get sure that only the needed beans are merged with the document based on a [regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) in the field ``activeBeanNamesRegex``
-//  * method ``public String getFileIdentifier()`` adapted to get the Id from the BaseBean "smlUniqueID" when the sensorML     form is used.
-//  * method ``public void newMetadataIdentifier()`` to set the new ID for the smlUniqueID bean.
-* ``de.conterra.smarteditor.xml.EditorContext``
-  * method ``public String getNamespaceURI(String prefix)`` and method ``public String getPrefix(String namespace)`` adopted for SensorML namespace
-* ``org.n52.smartsensoreditor.beans.BackendBeanSML``
-  * TODO
-* ``org.n52.smartsensoreditor.beans.PublishBeanSML``
-  * TODO
-* ``org.n52.smartsensoreditor.controller.StartEditorController``
-  * TODO
+* org.n52.smartsensoreditor.beans
+  * BackendBeanSML.java </br>
+    original file: de.conterra.smarteditor.beans.BackendBean.java
+  * PublishBeanSML.java </br>
+    original file: de.conterra.smarteditor.beans.PublishBean.java
+  * StartEditorBeanSML.java </br>
+    original file: de.conterra.smarteditor.beans.StartEditorBean.java
+* org.n52.smartsensoreditor.controller
+  * BasicPublishControllerSML.java </br>
+    original file: de.conterra.smarteditor.controller.BasicPublishController.java
+  * EditControllerSML.java </br>
+    original file: de.conterra.smarteditor.controller.EditController.java
+  * SaveLocalControllerSML.java </br>
+    original file: de.conterra.smarteditor.controller.SaveLocalController.java
+  * SaveTemplateControllerSML.java </br>
+    original file: de.conterra.smarteditor.controller.SaveTemplateController.java
+  * StartEditorControllerSML.java </br>
+    original file: de.conterra.smarteditor.controller.StartEditorController.java
+* org.n52.smartsensoreditor.cswclient.facades
+  * CSWContextSOS.java </br>
+    original file: de.conterra.smarteditor.cswclient.facades.CSWContext.java
+  * TransactionResponseSOS.java </br>
+    original file: de.conterra.smarteditor.cswclient.facades.TransactionResponse.java
+* org.n52.smartsensoreditor.cswclient.util
+  * DefaultsSOS.java </br>
+    original file: de.conterra.smarteditor.cswclient.util.Defaults.java
+* org.n52.smartsensoreditor.dao
+  * EditorAwareCatalogServiceDAO.java </br>
+    original file: de.conterra.smarteditor.dao.CatalogServiceDAO.java
+  * SOSCatalogService.java </br>
+    original file: de.conterra.smarteditor.dao.GenericCatalogService.java
+* org.n52.smartsensoreditor.service
+  * BackendManagerServiceSML.java </br>
+   original file: de.conterra.smarteditor.service.BackendManagerService.java
+* org.n52.smartsensoreditor.validator
+  * MetadataValidatorSML.java </br>
+    original file: de.conterra.smarteditor.validator.MetadataValidator.java
+* org.n52.smartsensoreditor.xml
+  * EditorContextSML.java </br>
+    original file: de.conterra.smarteditor.xml.EditorContext.java
 
-The following files of the smartEditor-webapp sub project are needed to be modified or were created:
-
+The following files of the smartEditor-webapp sub project are needed to be modified or were created: </br>
+resources folder:
 * new groovy beans in ``resources/groovy``
-* new file ``resources/internal/SimpleCopy.xslt``
-* new template sensor.xml in ``resources/templates``
-* new XML file for validation in ``resources/validation``
+* new xsl file extractDataFromSOSDescribeSensorResponse.xsl for tansformation of incoming SOS data in ``resources/internal/external``
+* new xslt files for creating SOAP requests in ``resources/requests`
+* new template files in ``resources/templates``
+* new XML files for validation in ``resources/validation``
 * new XSLT files to transform between bean and document in ``resources/xslt``
 * adapt ``resources/codelist_enumeration.xml``, ``resources/isolist.properties``, and ``resources/isolist_de.properties`` for a new sensor button 
-* adapt ``resources/messages.properties`` and ``resources/messages_de.properties`` for error messages, element labels and text about validation in 
-* new JavaScript file for highlighting the form fields in ``webapp/js/validation``
-//* create build.properties to declare the database connection in webapp/META-INF
-//* create file log4j.xml to define the logging variables in webapp/WEB-INF/classes
-* adapt ``webapp/WEB-INF/defs/tiles-editor.xml`` and ``body_sensor.jsp`` to declare the .jsp files for each form element
+* adapt ``resources/messages.properties`` and ``resources/messages_de.properties`` for error messages, element labels and validation errors
+* adapt ``resources/application.properties`` to define SOS Operations needed for the RequestFactory and the operationSOSManager states Beans
+* adapt ``resources/log4j.xml`` to add a smartSensorEditor logger
+
+webapp folder:
+* new images for the tootips in ``webapp/images``
+* new JavaScript files for highlighting the form fields in ``webapp/js/validation``
+* adapt the standard.css in ``webapp/styles`` for the SOS extension
+* new tooltip files in ``webapp/tooltips``
+
+webapp/WEB-INF folder:
+* adapt ``webapp/WEB-INF/defs/tiles-editor.xml`` to declare the .jsp files for each form element
 * adapt ``webapp/WEB-INF/defs/tiles-elements.xml`` to define the .jsp files for multi form elements
-* new jsp-files for the different form elements in ``webapp/WEB-INF/jsp/elements``
-* new ``webapp/WEB-INF/jsp/body_sensor.jsp`` to define which elements should contain the form in 
-* adapt ``webapp/WEB-INF/jsp/menu.jsp`` to show the right error message
 * adapt ``webapp/WEB-INF/beans-definitions.xml`` to define the beans of the form elements and declare them in the ``backendBean``
-* adapt ``webapp/WEB-INF/service-definitions.xml`` to declare the validator and set the ``activeBeanNamesRegex``
-* adapt ``webapp/WEB-INF/validator-definitions.xml`` to define new validator
+* adapt ``webapp/WEB-INF/dao-definitions.xml`` for the SOS extension
+* adapt ``webapp/WEB-INF/dispatcher-servlet.xml`` to change the bean declarations
+* adapt ``webapp/WEB-INF/service-definitions.xml`` to declare the validators and set the ``activeBeanNamesRegex``
+* adapt ``webapp/WEB-INF/util-config-definitions.xml`` to define additional information for the SmartSensorEditor separate
+* adapt ``webapp/WEB-INF/validator-definitions.xml`` to define the new validators
+
+
+webapp/WEB-INF/jsp folder:
+* new jsp-files for the different form elements in ``webapp/WEB-INF/jsp/elements``
+* adapt the tabs of the start page in ``webapp/WEB-INF/jsp/start``
+* new ``webapp/WEB-INF/jsp/body_sensor.jsp`` and ``webapp/WEB-INF/jsp/body_acousticSensor.jsp`` to define which elements should contain the form
+* adapt `webapp/WEB-INF/jsp/finished.jsp`` for the error message and the case that the page is shown after the "web- service" start tab
+* adapt ``webapp/WEB-INF/jsp/menu.jsp`` to show the right error message
+* adapt ``webapp/WEB-INF/jsp/selectStates.jsp`` for updating and inserting the sensor description at the SOS
 
 
 ### Build sub modules of the project
@@ -139,8 +197,15 @@ mvn clean package -pl smartsensoreditor-webapp -am
 
 ### How to start the integration tests?
 
-By default no integration tests are executed during the command "clean install". If you would like to execute them, go to the main folder of the whole project. With the attribute -P a specific profile can be chosen.
-
+By default no integration tests are executed during the command "clean install". The integration test checks the communication between the SmartSensorEditor and the SOS. The following operations are checked:
+<p>get/insert/update/delete sensor description.</p>
+If you would like to execute them, then you need to create a build.properties file. You have to define the service url and the authorization token of the SOS. It should look like that:
+<p>
+IT_serviceURL:http://localhost:XX/XX/service </br>
+IT_authorizationToken:XXX 
+</p>
+This propwerty file should be put into your home folder (/home/person for linux).
+To build the maven project and execute the integration test go to the main folder of the SmartSensorEditor project. With the attribute -P a specific Profile can be chosen. 
 Use the following command to start the integration tests for the SmartSensorEditor:
 
 ```
