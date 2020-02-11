@@ -71,7 +71,7 @@
 		<repository>
 			<id>n52-releases</id>
 			<name>52n Releases</name>
-			<url>http://52north.org/maven/repo/releases</url>
+			<url>https://52north.org/maven/repo/releases</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -81,11 +81,11 @@
 		</repository>
 		<repository>
 			<id>springsource-release</id>
-			<url>http://repository.springsource.com/maven/bundles/release/</url>
+			<url>https://repository.springsource.com/maven/bundles/release/</url>
 		</repository>
 		<repository>
 			<id>springsource-external</id>
-			<url>http://repository.springsource.com/maven/bundles/external/</url>
+			<url>https://repository.springsource.com/maven/bundles/external/</url>
 		</repository>
 	</repositories>
 	<build>
