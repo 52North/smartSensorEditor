@@ -1,3 +1,5 @@
+This repository is no longer maintained and has therefore been archived. Feel free to use and extend the code, but we are aware that it might have security leaks, no longer supported dependencies or might not work at all. 
+
 # smartSensorEditor
 
 smartSensorEditor is an extension on the [smartEditor](http://52north.org/communities/metadata-management/smarteditor). The smartEditor provides a form-based user interface to easily edit ISO 19139 and INSPIRE metadata documents, with support for templates and validation, including error highlighting. Also the data can be uploaded to an OGC CSW 2.02 endpoint to communicate with a metadata management system.
